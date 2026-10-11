@@ -37713,9 +37713,10 @@ void main() {
       bowls.push(food);
     }
     label("\u5BA0\u7269\u98DF\u76C6", -1.5, 1.7, "pet-home");
-    const animals = [];
+    const animals = [], puffs = [];
+    let stockInitialized = false;
     label("\u5BA0\u7269\u966A\u4F34\u533A", -0.75, 0.5, "pet-home");
-    room.userData.petHome = { animals, bowls };
+    room.userData.petHome = { animals, bowls, puffs };
     room.userData.syncPets = (state) => {
       const stock = state?.stock || [];
       for (let i2 = 0; i2 < 2; i2++) {
@@ -37748,22 +37749,58 @@ void main() {
         room.add(holder);
         clickable.push(holder);
         animals[i2] = holder;
+        if (stockInitialized && old?.userData.petId !== pet.id) {
+          holder.userData.spawnTime = 0;
+          for (let j = 0; j < 12; j++) {
+            const puff = new Mesh(new SphereGeometry(0.13, 6, 4), new MeshBasicMaterial({ color: 16772827, transparent: true, opacity: 0.8, depthWrite: false }));
+            puff.position.copy(holder.position);
+            puff.position.y = 0.15;
+            room.add(puff);
+            puffs.push({ mesh: puff, holder, age: 0, angle: j * Math.PI / 6 });
+          }
+        }
       }
+      stockInitialized = true;
     };
     room.userData.playPetAction = (action) => animals.forEach((a) => {
       if (!a?.visible) return;
       animatePet(a, action === "feed" ? "eat" : "gesture-positive");
       a.userData.playFor = 3;
     });
-    room.userData.tickPets = (dt) => animals.forEach((a) => {
-      if (!a) return;
-      const data = a.userData;
-      data.mixer?.update(dt);
-      if (data.playFor > 0) {
-        data.playFor -= dt;
-        if (data.playFor <= 0) animatePet(a, "idle");
+    room.userData.tickPets = (dt) => {
+      for (let i2 = puffs.length - 1; i2 >= 0; i2--) {
+        const p = puffs[i2];
+        if (!p.holder.userData.loaded && !p.holder.userData.loadError) continue;
+        p.age += dt;
+        p.mesh.position.x += Math.cos(p.angle) * dt * 0.7;
+        p.mesh.position.z += Math.sin(p.angle) * dt * 0.7;
+        p.mesh.position.y += dt * 0.35;
+        p.mesh.scale.setScalar(1 + p.age * 2);
+        p.mesh.material.opacity = Math.max(0, 0.8 * (1 - p.age / 0.8));
+        if (p.age >= 0.8) {
+          room.remove(p.mesh);
+          p.mesh.geometry.dispose();
+          p.mesh.material.dispose();
+          puffs.splice(i2, 1);
+        }
       }
-    });
+      animals.forEach((a) => {
+        if (!a) return;
+        const data = a.userData;
+        if (data.spawnTime !== void 0 && data.loaded) {
+          data.spawnTime += dt;
+          const t = Math.min(1, data.spawnTime / 0.7);
+          a.position.y = Math.sin(t * Math.PI) * 0.35;
+          a.scale.setScalar(0.65 + 0.35 * t);
+          if (t === 1) delete data.spawnTime;
+        }
+        data.mixer?.update(dt);
+        if (data.playFor > 0) {
+          data.playFor -= dt;
+          if (data.playFor <= 0) animatePet(a, "idle");
+        }
+      });
+    };
   }
 
   // src/town-cottage-interior.js
@@ -37857,8 +37894,8 @@ void main() {
     return plazaSeatBlocks(x2 - plaza[1], z - plaza[2]) || destinations.some((d) => {
       if (d[0] === "\u4E2D\u5FC3\u5E7F\u573A" || d[0] === ignoreName) return false;
       if (d[0] === "\u8DD1\u8F6E\u516C\u56ED") {
-        const dx2 = x2 - d[1], dz2 = z - d[2], r = Math.hypot(dx2, dz2);
-        return Math.abs(r - 2.19) < 0.12 && !(Math.abs(dx2) < 0.4 && dz2 > 0);
+        const a2 = facing(d[0]), dx2 = x2 - d[1], dz2 = z - d[2], r = Math.hypot(dx2, dz2), lx = dx2 * Math.cos(a2) - dz2 * Math.sin(a2), lz = dx2 * Math.sin(a2) + dz2 * Math.cos(a2);
+        return Math.abs(r - 2.19) < 0.12 && !(Math.abs(lx) < 0.4 && lz > 0);
       }
       const a = facing(d[0]), dx = x2 - d[1], dz = z - d[2];
       if (d[0] === "\u5893\u5730") {
@@ -37926,6 +37963,12 @@ void main() {
       return true;
     }
     function plan(actor) {
+      if (actor.outing && !actor.forcedSleep) {
+        actor.destination = actor.outing.place;
+        actor.action = "\u7ED3\u4F34\u6E38\u73A9";
+        go(actor, entrance(actor.destination), "arrived");
+        return;
+      }
       actor.cycle++;
       actor.speech = "";
       actor.partner = null;
@@ -38127,7 +38170,7 @@ void main() {
           } else if (d[3]) {
             actor.inside = actor.destination;
             actor.position = point(0, 2.6);
-            const stations = actor.familyPartner ? actor.familyStation : actor.action === "\u4F4F\u9662" ? [-1.15, -0.8] : actor.action === "\u7761\u89C9" ? cottageFurniture.bed : actor.action === "\u996E\u6C34" ? cottageFurniture.water : actor.action === "\u8FDB\u98DF" ? cottageFurniture.bowl : d[5];
+            const stations = actor.outing ? [actor.id === "main" ? -0.5 : 0.5, 2] : actor.familyPartner ? actor.familyStation : actor.action === "\u4F4F\u9662" ? [-1.15, -0.8] : actor.action === "\u7761\u89C9" ? cottageFurniture.bed : actor.action === "\u996E\u6C34" ? cottageFurniture.water : actor.action === "\u8FDB\u98DF" ? cottageFurniture.bowl : d[5];
             go(actor, point(...stations), "using", true);
           } else if (actor.action === "\u793E\u4EA4") {
             actor.phase = "meeting";
@@ -38195,6 +38238,15 @@ void main() {
           const other = actors.get(actor.familyPartner);
           if (other?.inside === actor.inside) actor.heading = Math.atan2(other.position.x - actor.position.x, other.position.z - actor.position.z);
         } else if (actor.phase === "activity") {
+          if (actor.outing && !actor.forcedSleep) {
+            const other = actors.get(actor.id === "main" ? actor.outing.npcId : "main");
+            actor.speech = "\u4E00\u8D77\u73A9\u4E00\u4F1A\u513F";
+            if (other?.place === actor.outing.place && other.phase === "activity" && !actor.outingReported) {
+              actor.outingReported = true;
+              onEvent({ id: "main", type: "outing-ready", outingId: actor.outing.id });
+            }
+            continue;
+          }
           if (actor.forcedSleep && ["\u7761\u89C9", "\u4F4F\u9662"].includes(actor.action)) continue;
           actor.wait -= dt;
           if (actor.wait <= 0) complete(actor);
@@ -38344,7 +38396,21 @@ void main() {
         }
       }
     }
-    return { actors, add, tick, setPetInvitations, setFamilyPlans, setResting, setCelebration, plazaSeatAvailable, releasePlazaSeat, remove: (id) => actors.delete(id), inspect: () => ({ elapsed, conversations, actors: [...actors.values()].map((a) => ({ ...a, entryPortal: void 0, path: void 0, visited: [...a.visited] })) }) };
+    function setOuting(outing) {
+      for (const actor of actors.values()) {
+        const next = outing && ["main", outing.npcId].includes(actor.id) ? outing : null;
+        if ((actor.outing?.id || null) === (next?.id || null)) continue;
+        actor.outing = next;
+        actor.outingReported = false;
+        actor.controlled = false;
+        actor.partner = null;
+        releasePlazaSeat(actor);
+        actor.path = [];
+        actor.phase = actor.inside ? "exit-room" : "idle";
+        actor.wait = 0;
+      }
+    }
+    return { setOuting, actors, add, tick, setPetInvitations, setFamilyPlans, setResting, setCelebration, plazaSeatAvailable, releasePlazaSeat, remove: (id) => actors.delete(id), inspect: () => ({ elapsed, conversations, actors: [...actors.values()].map((a) => ({ ...a, entryPortal: void 0, path: void 0, visited: [...a.visited] })) }) };
   }
 
   // src/town-player.js
@@ -38694,7 +38760,7 @@ void main() {
         rig.scale.setScalar(0.25);
         scene.add(rig);
         clickable.push(rig);
-        pets.set(pet.id, { id: pet.id, ownerId: pet.ownerId, inside, position, heading: 0, rig, path: [], replan: 0, petCompanion: true });
+        pets.set(pet.id, { id: pet.id, ownerId: pet.ownerId, spawnNearOwner: !!pet.ownerId, inside, position, heading: 0, rig, path: [], replan: 0, petCompanion: true });
       }
       initialized = true;
     }
@@ -38739,9 +38805,16 @@ void main() {
       let index = 0;
       for (const actor of pets.values()) {
         const owner = actor.ownerId ? actors.get(actor.ownerId) : leader;
+        if (actor.spawnNearOwner && owner) {
+          actor.inside = owner.inside;
+          actor.position = { ...owner.position };
+          prepare(actor, state);
+          actor.position = followingPoint(actor, owner, 0);
+          actor.spawnNearOwner = false;
+        }
         prepare(actor, state);
         actor.moving = false;
-        const follow = (actor.ownerId ? !!owner : state.petHome?.follow) && (actor.ownerId || state.alive !== false) && owner && !owner.forcedSleep && !owner.frozen, wanted = follow ? owner.inside || null : actor.ownerId && !owner ? "\u5BA0\u7269\u4E4B\u5BB6" : "\u9F20\u9F20\u5C0F\u5C4B";
+        const follow = (actor.ownerId ? !!owner && state.petHome?.npcPets.find((p2) => p2.id === actor.id)?.follow !== false : state.petHome?.follow) && (actor.ownerId || state.alive !== false) && owner && !owner.forcedSleep && !owner.frozen, wanted = follow ? owner.inside || null : actor.ownerId && !owner ? "\u5BA0\u7269\u4E4B\u5BB6" : "\u9F20\u9F20\u5C0F\u5C4B";
         if (actor.exiting) {
           const portal = actor.exiting, gate = localDoor(portal), p2 = worldPoint(portal.name, gate.x, petOutsideZ(portal));
           actor.entryPortal = portal;
@@ -45992,6 +46065,7 @@ void main() {
       syncResidents();
       syncPups();
       syncLife();
+      life.setOuting(next.outing);
       if (window.TownSimulation.mainSleeping({ ...next, currentActivity: next.activity }) && firstPerson) stopFirstPerson();
       life.setResting(next.sleepRequested || next.autoSleep, !!next.hospitalized);
       life.setCelebration(next.celebration || null);
@@ -46035,7 +46109,7 @@ void main() {
     }, focusCompanion, focusDisplayPet, setMemorialPage: (page) => placeModels.get("\u5893\u5730").userData.setMemorialPage(page), sayToNpc, residentPortraits, setLookSensitivity, toggleHallSeat, toggleClinicSeat, toggleRestaurantSeat, toggleSchoolSeat, enterHall, focusExhibit, resetHallView, sayAsMain, startFirstPerson, stopFirstPerson, playerInteract, resize, enterPlace, leavePlace, returnToTown, focusPup, focusResident, focusPet, clearFocus, sayToResident, applyWorld, inspect: () => ({ portals: [...placeModels.values()].filter((m) => m.userData.portal).map((m) => ({ name: m.userData.portal.name, angle: m.userData.portal.angle, open: !!m.userData.portal.target, gate: localDoor(m.userData.portal), position: portalPoint(m.userData.portal).toArray() })), sharedRooms: roomCache.size, petCompanions: petCompanions.inspect().map((p) => {
       const v = new Vector3(...p.worldPosition).add(new Vector3(0, 0.1, 0)).project(camera), r = canvas.getBoundingClientRect();
       return { ...p, screenPoint: { x: r.left + (v.x + 1) * r.width / 2, y: r.top + (1 - v.y) * r.height / 2 } };
-    }), petHome: { position: placeModels.get("\u5BA0\u7269\u4E4B\u5BB6").position.toArray(), animals: roomCache.get("\u5BA0\u7269\u4E4B\u5BB6").userData.petHome.animals.filter(Boolean).map((a) => ({ species: a.name, custom: !!a.userData.stockKey?.includes("texture"), loaded: !!a.userData.loaded, error: !!a.userData.loadError, animations: a.userData.animationNames || [] })) }, lookSensitivity, focusedExhibit, hallPosition: destinations.find((d) => d[0] === "Mariah Carey\u540D\u4EBA\u5802").slice(1, 3), hall: activePlace === "Mariah Carey\u540D\u4EBA\u5802" ? { albums: room.userData.albumCount, photos: room.userData.photoCount, standeeLoaded: !!room.userData.hallClickable.at(-1).material.userData.loaded, exhibitPoints: room.userData.hallClickable.map((o) => {
+    }), petHome: { spawnEffects: roomCache.get("\u5BA0\u7269\u4E4B\u5BB6").userData.petHome.puffs.length, position: placeModels.get("\u5BA0\u7269\u4E4B\u5BB6").position.toArray(), animals: roomCache.get("\u5BA0\u7269\u4E4B\u5BB6").userData.petHome.animals.filter(Boolean).map((a) => ({ species: a.name, custom: !!a.userData.stockKey?.includes("texture"), loaded: !!a.userData.loaded, error: !!a.userData.loadError, animations: a.userData.animationNames || [] })) }, lookSensitivity, focusedExhibit, hallPosition: destinations.find((d) => d[0] === "Mariah Carey\u540D\u4EBA\u5802").slice(1, 3), hall: activePlace === "Mariah Carey\u540D\u4EBA\u5802" ? { albums: room.userData.albumCount, photos: room.userData.photoCount, standeeLoaded: !!room.userData.hallClickable.at(-1).material.userData.loaded, exhibitPoints: room.userData.hallClickable.map((o) => {
       const v = new Box3().setFromObject(o).getCenter(new Vector3()).project(camera), r = canvas.getBoundingClientRect();
       return { x: r.left + (v.x + 1) * r.width / 2, y: r.top + (1 - v.y) * r.height / 2 };
     }), loaded: room.userData.hallExhibits.filter((o) => o.material.userData.loaded).length, fallback: room.userData.hallExhibits.filter((o) => o.material.userData.fallback).length } : null, life: life.inspect(), firstPerson, playerCamera: { yaw: playerYaw, pitch: playerPitch, jumpHeight, eyeHeight: camera.position.y }, seated: !!life.actors.get("main")?.seated, petY: pet.position.y, cemeteryView: activePlace === "\u5893\u5730", cemeteryMemorialNames: placeModels.get("\u5893\u5730").userData.memorialNames, memorialWall: { page: placeModels.get("\u5893\u5730").userData.wallPage, pages: placeModels.get("\u5893\u5730").userData.wallPages, names: placeModels.get("\u5893\u5730").userData.wallNames }, townRadius: 18, cottageModel: true, plazaArea: placeModels.get("\u4E2D\u5FC3\u5E7F\u573A").userData.footprint, gardenArea: placeModels.get("\u5C0F\u83DC\u56ED").userData.footprint, celebration: worldState.celebration || null, cakeVisible: placeModels.get("\u4E2D\u5FC3\u5E7F\u573A").userData.cake.visible, birthdayHats: [["main", pet], ...residents.map((n) => [n.lifeId, n.rig]), ...[...pups.values()].map((p) => [p.data.id, p.rig])].filter(([id, rig]) => rig.userData.birthdayHat?.visible).map(([id]) => id), pups: [...pups.values()].map((p) => ({ id: p.data.id, scale: p.rig.scale.x, visible: p.rig.visible, loaded: !!p.rig.userData.loaded })), activePlace, focusedResident, focusedPup, trackedSubject, interiorVisible: room.visible, petVisible: pet.visible, visibleResidentCount: residents.filter((n) => n.rig.visible).length, streetLampCount: lampBulbs.length, litStreetLampCount: lampBulbs.filter((item) => item.light.intensity > 0).length, lampPositions, furniture: roomLabels.map((x2) => x2.button.textContent), camera: { yaw, pitch, distance: distance3, target: target.toArray() }, npcCount: residents.filter((n) => n.rig.userData.loaded).length, petLoaded: !!pet.userData.loaded, jointCount: pet.userData.joints?.length || 0, gaitBoneCount: Object.keys(pet.userData.bones || {}).filter((name) => /Arm|Leg|Hand|Foot|Spine|Neck|Head/.test(name)).length, armTucked: pet.userData.armTucked, forepawSpan: pet.userData.forepawSpan, gaitSample: pet.userData.gaitSample, petHeight: new Box3().setFromObject(pet).getSize(new Vector3()).y, positions: residents.map((n) => n.rig.position.toArray()) }) };

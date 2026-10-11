@@ -32,13 +32,13 @@ assert.equal(canWalk({inside:'纪念馆'},-2.35,.65),true,'memorial standing poi
 for(const x of [-1,1.4])for(const z of [.1,1.8]){assert.equal(canWalk({inside:'鼠鼠学校'},x,z),false,'classroom chair is solid');assert.equal(canWalk({inside:'鼠鼠学校'},x+(x<0?.75:-.75),z),true,'classroom standing point is clear')}
 for(let z=.2;z<2.8;z+=.1)assert.equal(canWalk({inside:'鼠鼠学校'},.2,z),true,'classroom entrance aisle remains open');
 
-const park=destinations.find(d=>d[0]==='跑轮公园');
+const park=destinations.find(d=>d[0]==='跑轮公园'),parkAngle=facing(park[0]),parkPoint=(x,z)=>({x:park[1]+x*Math.cos(parkAngle)+z*Math.sin(parkAngle),z:park[2]-x*Math.sin(parkAngle)+z*Math.cos(parkAngle)});
 for(const phase of ['controlled','activity']){
- const walker={position:{x:park[1],z:park[2]+2.7},inside:null,phase};
- assert.equal(movePlayer(walker,0,-2.5),true,'park gate permits entry');
- assert.ok(Math.abs(walker.position.z-park[2]-.2)<1e-8,'park interior can be reached');
- assert.equal(movePlayer(walker,0,2.5),true,'hamster can leave the running position');
- assert.ok(Math.abs(walker.position.z-park[2]-2.7)<1e-8,'park gate permits exit');
- assert.equal(canWalk(walker,park[1]+2.19,park[2]),false,'side fence remains solid');
+ const walker={position:parkPoint(0,2.7),inside:null,phase};
+ assert.equal(movePlayer(walker,-Math.sin(parkAngle)*2.5,-Math.cos(parkAngle)*2.5),true,'park gate permits entry');
+ assert.ok(Math.hypot(walker.position.x-parkPoint(0,.2).x,walker.position.z-parkPoint(0,.2).z)<1e-8,'park interior can be reached');
+ assert.equal(movePlayer(walker,Math.sin(parkAngle)*2.5,Math.cos(parkAngle)*2.5),true,'hamster can leave the running position');
+ assert.ok(Math.hypot(walker.position.x-parkPoint(0,2.7).x,walker.position.z-parkPoint(0,2.7).z)<1e-8,'park gate permits exit');
+ const fence=parkPoint(2.19,0);assert.equal(canWalk(walker,fence.x,fence.z),false,'side fence remains solid');
 }
-console.log('Wheel park entry, player takeover, exit and fence collisions passed');
+console.log('Rotated wheel park entry, player takeover, exit and fence collisions passed');
