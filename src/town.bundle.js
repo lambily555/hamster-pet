@@ -38135,6 +38135,13 @@ void main() {
           }
         }
         actor.moving = false;
+        if (actor.controlled && actor.outing) {
+          const other = actors.get(actor.outing.npcId), d = byName.get(actor.outing.place), near = actor.inside ? actor.inside === actor.outing.place : !d[3] && distance(actor.position, point(d[1], d[2])) < 2.7;
+          if (near && other?.place === actor.outing.place && other.phase === "activity" && !actor.outingReported) {
+            actor.outingReported = true;
+            onEvent({ id: "main", type: "outing-ready", outingId: actor.outing.id });
+          }
+        }
         if (actor.frozen || actor.controlled) continue;
         if (actor.phase === "moving") {
           let budget = dt * (actor.child ? 0.48 : 0.72) * (actor.aging?.movement ?? 1) * (actor.energyMovement ?? 1);
@@ -38402,11 +38409,11 @@ void main() {
         if ((actor.outing?.id || null) === (next?.id || null)) continue;
         actor.outing = next;
         actor.outingReported = false;
-        actor.controlled = false;
+        const controlled = actor.id === "main" && actor.controlled;
         actor.partner = null;
         releasePlazaSeat(actor);
         actor.path = [];
-        actor.phase = actor.inside ? "exit-room" : "idle";
+        actor.phase = controlled ? "controlled" : actor.inside ? "exit-room" : "idle";
         actor.wait = 0;
       }
     }
@@ -38753,6 +38760,16 @@ void main() {
     let initialized = false;
     const worldPoint = (name, x2, z) => rooms.get(name).localToWorld(new Vector3(x2, 0, z));
     function sync(state) {
+      const active = new Set([...state.petHome?.pets || [], ...state.petHome?.npcPets || []].map((p) => p.id));
+      for (const [id, actor] of pets) if (!active.has(id)) {
+        actor.rig.userData.retired = true;
+        actor.rig.userData.mixer?.stopAllAction();
+        actor.rig.userData.customMap?.dispose();
+        scene.remove(actor.rig);
+        const index = clickable.indexOf(actor.rig);
+        if (index >= 0) clickable.splice(index, 1);
+        pets.delete(id);
+      }
       for (const [index, pet] of [...state.petHome?.pets || [], ...state.petHome?.npcPets || []].entries()) if (!pets.has(pet.id)) {
         const newlyAdopted = initialized && (state.petHome.follow || pet.ownerId), inside = newlyAdopted ? "\u5BA0\u7269\u4E4B\u5BB6" : "\u9F20\u9F20\u5C0F\u5C4B", position = newlyAdopted ? { x: (pet.adoptedSlot ?? (pet.id === "cat" ? 0 : 1)) === 0 ? -1.85 : 0.3, z: 1.4 } : { x: restPoints[index % restPoints.length][0], z: restPoints[index % restPoints.length][1] }, rig = createPetAnimal(pet.species || pet.id, pet.texture);
         rig.userData.roomAction = "owned-pet";
@@ -44152,6 +44169,15 @@ void main() {
     mainTag.onclick = () => focusPet();
     host.appendChild(mainTag);
     const lifeBubbles = /* @__PURE__ */ new Map();
+    const outingMarker = document.createElement("button");
+    outingMarker.className = "town-outing-marker";
+    outingMarker.textContent = "?";
+    outingMarker.hidden = true;
+    outingMarker.title = "\u70B9\u51FB\u67E5\u770B\u7ED3\u4F34\u6545\u4E8B";
+    host.appendChild(outingMarker);
+    outingMarker.onclick = () => {
+      if (!firstPerson) window.dispatchEvent(new CustomEvent("town-outing-open"));
+    };
     function syncLife() {
       const ids = /* @__PURE__ */ new Set();
       if (worldState.alive !== false || worldState.pendingFarewell?.phase === "resting") {
@@ -44953,6 +44979,12 @@ void main() {
     }
     returnButton.onclick = returnToTown;
     document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && document.body.dataset.townDialogue === "active") {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        window.dispatchEvent(new CustomEvent("town-dialogue-close"));
+        return;
+      }
       if (e.key === "Escape" && (activePlace || trackedSubject || firstPerson) && document.body.dataset.currentPanel === "town") {
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -45041,6 +45073,26 @@ void main() {
     crosshair.hidden = true;
     crosshair.textContent = "+";
     host.appendChild(crosshair);
+    function actorWorldPoint(actor) {
+      const point2 = new Vector3(actor.position.x, 0, actor.position.z);
+      if (actor.inside) roomCache.get(actor.inside).localToWorld(point2);
+      return point2;
+    }
+    function focusOuting() {
+      if (firstPerson) return;
+      const a = life.actors.get("main"), b = life.actors.get(worldState.outing?.npcId);
+      if (!a || !b) return;
+      if (b.inside) enterPlace(b.inside, true);
+      else if (activePlace) leavePlace(true);
+      trackedSubject = { type: "outing", id: b.id };
+      yaw = (b.inside ? facing(b.inside) : 0) + 0.25;
+      pitch = 0.6;
+      distance3 = b.inside ? 2.4 : 4;
+      target.copy(actorWorldPoint(a).add(actorWorldPoint(b)).multiplyScalar(0.5));
+      target.y += 0.25;
+      positionCamera();
+      returnButton.hidden = false;
+    }
     function startFirstPerson() {
       if (window.TownSimulation.mainSleeping({ ...worldState, currentActivity: worldState.activity })) return false;
       if (firstPerson) return true;
@@ -45086,7 +45138,8 @@ void main() {
       document.exitPointerLock?.();
       if (actor) {
         actor.controlled = !!actor.inside || !!actor.clinicSeat || !!actor.memorialSeat || actor.plazaSeat !== void 0;
-        actor.phase = actor.controlled ? "controlled" : "idle";
+        if (worldState.outing) actor.controlled = false;
+        actor.phase = actor.controlled ? "controlled" : actor.inside ? "exit-room" : "idle";
         actor.wait = 1;
         actor.moving = false;
         delete actor.entryPortal;
@@ -45167,6 +45220,7 @@ void main() {
       actor.cottageTableSlot = worldState.furniture?.table?.slot;
       actor.petFacilities = { ...worldState.petHome?.facilities, pets: worldState.petHome?.pets, food: worldState.petHome?.food, hasPets: !!worldState.petHome?.pets.length };
       let forward = (playerKeys.has("KeyW") || playerKeys.has("ArrowUp") ? 1 : 0) - (playerKeys.has("KeyS") || playerKeys.has("ArrowDown") ? 1 : 0), right = (playerKeys.has("KeyD") || playerKeys.has("ArrowRight") ? 1 : 0) - (playerKeys.has("KeyA") || playerKeys.has("ArrowLeft") ? 1 : 0);
+      if (document.body.dataset.townDialogue === "active") forward = right = 0;
       const speed = playerKeys.has("ShiftLeft") || playerKeys.has("ShiftRight") ? 1.3 : 0.75, norm = Math.hypot(forward, right) || 1;
       forward /= norm;
       right /= norm;
@@ -45225,6 +45279,14 @@ void main() {
       camera.updateMatrixWorld();
     }
     function playerInteract(source = "keyboard") {
+      if (document.body.dataset.townDialogue === "active") return;
+      if (source === "keyboard" && worldState.outing?.status === "ready") {
+        const a = life.actors.get("main"), b = life.actors.get(worldState.outing.npcId);
+        if (a && b && a.inside === b.inside && Math.hypot(a.position.x - b.position.x, a.position.z - b.position.z) * (a.inside ? room.scale.x : 1) < 1.5) {
+          window.dispatchEvent(new CustomEvent("town-outing-open"));
+          return;
+        }
+      }
       if (window.TownSimulation.mainSleeping({ ...worldState, currentActivity: worldState.activity })) return false;
       if (source === "mouse") {
         const ray2 = new Raycaster();
@@ -45350,7 +45412,7 @@ void main() {
           return;
         }
         if (node?.userData.pupId) {
-          window.dispatchEvent(new CustomEvent("town-pup-select", { detail: { id: node.userData.pupId } }));
+          window.dispatchEvent(new CustomEvent("town-player-action", { detail: { action: "social", npcId: node.userData.pupId } }));
           return;
         }
         if (["owned-pet", "pet-roster"].includes(node?.userData.roomAction)) {
@@ -45414,7 +45476,7 @@ void main() {
       sayAsMain("\u518D\u9760\u8FD1\u4E00\u70B9\uFF0C\u5C31\u53EF\u4EE5\u4E92\u52A8\u5566\u3002");
     }
     document.addEventListener("keydown", (e) => {
-      if (!firstPerson || /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+      if (!firstPerson || document.body.dataset.townDialogue === "active" || /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
       if (e.code === "Escape") {
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -45740,6 +45802,7 @@ void main() {
     }
     canvas.addEventListener("contextmenu", (e) => e.preventDefault());
     canvas.addEventListener("pointerdown", (e) => {
+      if (document.body.dataset.townDialogue === "active") return;
       if (firstPerson) {
         if (document.pointerLockElement === canvas) playerInteract("mouse");
         else canvas.requestPointerLock?.();
@@ -45847,8 +45910,8 @@ void main() {
         }
         const anchor = tag.hidden ? { top: parseFloat(tag.style.top) - 20 } : bounds(tag), width = bubble.offsetWidth, height = bubble.offsetHeight;
         const x2 = Math.max(width / 2 + 6, Math.min(host.clientWidth - width / 2 - 6, parseFloat(tag.style.left)));
-        let bottom = anchor.top - 8;
-        for (let i2 = 0; i2 <= occupied.length; i2++) {
+        let bottom = firstPerson ? anchor.top + 48 : anchor.top - 8;
+        for (let i2 = 0; !firstPerson && i2 <= occupied.length; i2++) {
           const hits = occupied.filter((r) => x2 + width / 2 > r.left - 6 && x2 - width / 2 < r.right + 6 && bottom > r.top - 6 && bottom - height < r.bottom + 6);
           if (!hits.length) break;
           bottom = Math.min(...hits.map((r) => r.top)) - 8;
@@ -45981,7 +46044,16 @@ void main() {
         renderActor(item.rig, life.actors.get(item.data.id), t);
         placeLabel(item.tag, item.rig.position.clone().add(new Vector3(0, 0.75 * item.rig.scale.x, 0)), occupied, !item.rig.visible || (firstPerson ? Math.hypot(item.rig.position.x - camera.position.x, item.rig.position.z - camera.position.z) > 2.8 : focusedResident !== -1 ? focusedPup !== item.data.id : hoveredActor !== item.data.id), true);
       });
-      if (trackedSubject && !firstPerson) {
+      if (trackedSubject?.type === "outing" && !firstPerson) {
+        const a = life.actors.get("main"), b = life.actors.get(trackedSubject.id);
+        if (a && b) {
+          const point2 = actorWorldPoint(a).add(actorWorldPoint(b)).multiplyScalar(0.5);
+          point2.y += 0.25;
+          target.lerp(point2, 1 - Math.exp(-12 * dt));
+          positionCamera();
+        }
+      }
+      if (trackedSubject && trackedSubject.type !== "outing" && !firstPerson) {
         const selected = trackedSubject.type === "companion" ? petCompanions.inspect().find((p) => p.id === trackedSubject.id) : null, rig = trackedSubject.type === "main" ? pet : trackedSubject.type === "npc" ? residents[trackedSubject.id]?.rig : trackedSubject.type === "pup" ? pups.get(trackedSubject.id)?.rig : trackedSubject.type === "display" ? roomCache.get("\u5BA0\u7269\u4E4B\u5BB6").userData.petHome.animals.find((p) => p?.userData.petId === trackedSubject.id) : null;
         if (selected || rig) {
           const point2 = selected ? new Vector3(...selected.worldPosition) : trackedSubject.type === "display" ? rig.getWorldPosition(new Vector3()) : rig.position.clone();
@@ -45990,6 +46062,18 @@ void main() {
           target.lerp(point2, 1 - Math.exp(-12 * dt));
           positionCamera();
         } else clearFocus();
+      }
+      const outingNpc = worldState.outing?.status === "ready" ? life.actors.get(worldState.outing.npcId) : null;
+      outingMarker.hidden = !outingNpc || document.body.dataset.townDialogue === "active";
+      if (outingNpc) {
+        const point2 = actorWorldPoint(outingNpc);
+        point2.y += 0.62;
+        const projected = point2.clone().project(camera);
+        outingMarker.hidden = outingMarker.hidden || projected.z > 1 || projected.z < -1 || Math.abs(projected.x) > 1 || Math.abs(projected.y) > 1;
+        if (!outingMarker.hidden) {
+          outingMarker.style.left = (projected.x + 1) * host.clientWidth / 2 + "px";
+          outingMarker.style.top = (1 - projected.y) * host.clientHeight / 2 + "px";
+        }
       }
       roomLabels.forEach(({ button, point: point2 }) => placeLabel(button, point2, occupied, true));
       layoutSpeech();
@@ -46103,7 +46187,7 @@ void main() {
         buildRoom(activePlace);
       }
     }
-    window.TownApp = { petInteraction: (action, petId) => {
+    window.TownApp = { focusOuting, petInteraction: (action, petId) => {
       if (!petId) roomCache.get("\u5BA0\u7269\u4E4B\u5BB6").userData.playPetAction(action);
       petCompanions.interact(action, petId);
     }, focusCompanion, focusDisplayPet, setMemorialPage: (page) => placeModels.get("\u5893\u5730").userData.setMemorialPage(page), sayToNpc, residentPortraits, setLookSensitivity, toggleHallSeat, toggleClinicSeat, toggleRestaurantSeat, toggleSchoolSeat, enterHall, focusExhibit, resetHallView, sayAsMain, startFirstPerson, stopFirstPerson, playerInteract, resize, enterPlace, leavePlace, returnToTown, focusPup, focusResident, focusPet, clearFocus, sayToResident, applyWorld, inspect: () => ({ portals: [...placeModels.values()].filter((m) => m.userData.portal).map((m) => ({ name: m.userData.portal.name, angle: m.userData.portal.angle, open: !!m.userData.portal.target, gate: localDoor(m.userData.portal), position: portalPoint(m.userData.portal).toArray() })), sharedRooms: roomCache.size, petCompanions: petCompanions.inspect().map((p) => {
