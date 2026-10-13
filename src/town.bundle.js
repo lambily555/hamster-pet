@@ -44364,7 +44364,7 @@ void main() {
         lifeBubbles.set(actor.id, bubble);
       }
       bubble.classList.toggle("town-outing-speech", actor.id === "main" || actor.id === worldState.outing?.npcId);
-      bubble.textContent = actor.speech;
+      if (bubble.textContent !== actor.speech) bubble.textContent = actor.speech;
       bubble.hidden = !rig.visible || !actor.speech || firstPerson && actor.id === "main";
     }
     const returnButton = document.createElement("button");
@@ -45876,8 +45876,11 @@ void main() {
       distance3 = Math.max(focusedExhibit !== null ? 0.6 : activePlace ? 5 : 14, Math.min(activePlace ? 20 : 38, distance3 + e.deltaY * 0.015));
       positionCamera();
     }, { passive: false });
+    let viewWidth = host.clientWidth, viewHeight = host.clientHeight;
     function resize() {
       const w = host.clientWidth, h = host.clientHeight;
+      viewWidth = w;
+      viewHeight = h;
       if (!w || !h) return;
       renderer.setSize(w, h, false);
       camera.aspect = w / h;
@@ -45887,7 +45890,7 @@ void main() {
     resize();
     function placeLabel(button, point2, occupied, hidden = false, anchored = false) {
       const p = point2.clone().project(camera);
-      let x2 = (p.x + 1) * host.clientWidth / 2, y = (-p.y + 1) * host.clientHeight / 2;
+      let x2 = (p.x + 1) * viewWidth / 2, y = (-p.y + 1) * viewHeight / 2;
       button.hidden = hidden || p.z > 1;
       if (button.hidden) {
         button.style.left = x2 + "px";
@@ -45901,7 +45904,11 @@ void main() {
     }
     function layoutSpeech() {
       const tags = [mainTag, ...residents.map((n) => n.tag), ...[...pups.values()].map((p) => p.tag), ...labels.map((l) => l.button), ...roomLabels.map((l) => l.button)];
-      const bounds = (el) => ({ left: el.offsetLeft - el.offsetWidth / 2, right: el.offsetLeft + el.offsetWidth / 2, top: el.offsetTop - el.offsetHeight, bottom: el.offsetTop });
+      const sizes = new Map([...tags, ...lifeBubbles.values(), speech].filter((el) => !el.hidden).map((el) => [el, { width: el.offsetWidth, height: el.offsetHeight }]));
+      const bounds = (el) => {
+        const size = sizes.get(el) || { width: 0, height: 0 }, x2 = parseFloat(el.style.left) || 0, y = parseFloat(el.style.top) || 0;
+        return { left: x2 - size.width / 2, right: x2 + size.width / 2, top: y - size.height, bottom: y };
+      };
       const occupied = tags.filter((tag) => !tag.hidden).map(bounds);
       function above(bubble, tag) {
         if (bubble.hidden) return;
@@ -45909,8 +45916,8 @@ void main() {
           bubble.hidden = true;
           return;
         }
-        const anchor = tag.hidden ? { top: parseFloat(tag.style.top) - 20 } : bounds(tag), width = bubble.offsetWidth, height = bubble.offsetHeight;
-        const x2 = Math.max(width / 2 + 6, Math.min(host.clientWidth - width / 2 - 6, parseFloat(tag.style.left)));
+        const anchor = tag.hidden ? { top: parseFloat(tag.style.top) - 20 } : bounds(tag), width = sizes.get(bubble)?.width || 0, height = sizes.get(bubble)?.height || 0;
+        const x2 = Math.max(width / 2 + 6, Math.min(viewWidth - width / 2 - 6, parseFloat(tag.style.left)));
         let bottom = firstPerson ? anchor.top + 48 : anchor.top - 8;
         for (let i2 = 0; !firstPerson && i2 <= occupied.length; i2++) {
           const hits = occupied.filter((r) => x2 + width / 2 > r.left - 6 && x2 - width / 2 < r.right + 6 && bottom > r.top - 6 && bottom - height < r.bottom + 6);
@@ -46005,7 +46012,7 @@ void main() {
         let nearest = 32;
         for (const [id, rig] of [["main", pet], ...residents.map((n) => [n.lifeId, n.rig]), ...[...pups.values()].map((p) => [p.data.id, p.rig])]) {
           if (!rig.visible) continue;
-          const p = rig.position.clone().add(new Vector3(0, 0.4 * rig.scale.x, 0)).project(camera), d = Math.hypot((p.x + 1) * host.clientWidth / 2 - hoverPointer.x, (-p.y + 1) * host.clientHeight / 2 - hoverPointer.y);
+          const p = rig.position.clone().add(new Vector3(0, 0.4 * rig.scale.x, 0)).project(camera), d = Math.hypot((p.x + 1) * viewWidth / 2 - hoverPointer.x, (-p.y + 1) * viewHeight / 2 - hoverPointer.y);
           if (id === hoveredActor && d < 48) {
             candidate = id;
             break;
@@ -46025,20 +46032,33 @@ void main() {
       if (firstPerson && main) updateFirstContext(main.inside || main.place);
       viewArea.setFromProjectionMatrix(viewMatrix.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse));
       roomCache.forEach((indoor, name) => {
-        indoor.visible = activePlace === name || (firstPerson || name === "\u5BA0\u7269\u4E4B\u5BB6" || name === "\u9F20\u9F20\u5C0F\u5C4B") && viewArea.intersectsBox(roomBounds.get(name));
+        indoor.visible = activePlace === name || (firstPerson || name === "\u5BA0\u7269\u4E4B\u5BB6" || name === "\u9F20\u9F20\u5C0F\u5C4B" || name === "Mariah Carey\u540D\u4EBA\u5802") && viewArea.intersectsBox(roomBounds.get(name));
       });
       petCompanions.tick(dt, main, worldState, activePlace, firstPerson, life.actors);
-      mainTag.textContent = worldState.mainName || "\u9F20\u9F20";
+      if (mainTag.textContent !== (worldState.mainName || "\u9F20\u9F20")) mainTag.textContent = worldState.mainName || "\u9F20\u9F20";
       placeLabel(mainTag, pet.position.clone().add(new Vector3(0, 0.8, 0)), occupied, firstPerson || !pet.visible || focusedResident !== -1 && focusedResident !== -2, true);
-      if (main) document.querySelector("#townActivity").textContent = "\u9F20\u9F20" + (main.phase === "moving" ? "\u6B63\u5728\u524D\u5F80" + main.destination : "\u6B63\u5728" + main.place + main.action) + "\u3002";
-      weatherFx.rotation.y = t * 0.025;
-      if (weatherFx.children[0]) weatherFx.children[0].position.y = -(t * 2) % 4;
+      if (main) {
+        const el = document.querySelector("#townActivity"), text = "\u9F20\u9F20" + (main.phase === "moving" ? "\u6B63\u5728\u524D\u5F80" + main.destination : "\u6B63\u5728" + main.place + main.action) + "\u3002";
+        if (el.textContent !== text) el.textContent = text;
+      }
+      const rain = weatherFx.children[0];
+      if (rain) {
+        const position = rain.geometry.attributes.position;
+        for (let i2 = 0; i2 < position.count; i2 += 2) {
+          let y = position.getY(i2) - dt * 5;
+          if (y < 0.35) y += 12;
+          position.setY(i2, y);
+          position.setY(i2 + 1, y - 0.3);
+        }
+        position.needsUpdate = true;
+      }
       outdoorActions.forEach(({ button, point: point2, place }) => placeLabel(button, point2, occupied, true));
       labels.forEach(({ button, point: point2 }) => placeLabel(button, point2, occupied, firstPerson || !!activePlace || focusedResident !== -1));
       residents.forEach((npc, index) => {
         const actor = life.actors.get(npc.lifeId);
         renderActor(npc.rig, actor, t);
-        npc.tag.textContent = (worldState.npcs?.[index]?.name || roles[index]) + " " + (worldState.npcs?.[index]?.sex === "male" ? "\u2642" : "\u2640");
+        const text = (worldState.npcs?.[index]?.name || roles[index]) + " " + (worldState.npcs?.[index]?.sex === "male" ? "\u2642" : "\u2640");
+        if (npc.tag.textContent !== text) npc.tag.textContent = text;
         placeLabel(npc.tag, npc.rig.position.clone().add(new Vector3(0, 0.8, 0)), occupied, !npc.rig.visible || (firstPerson ? Math.hypot(npc.rig.position.x - camera.position.x, npc.rig.position.z - camera.position.z) > 2.8 : focusedResident !== -1 ? focusedResident !== index : hoveredActor !== npc.lifeId), true);
       });
       pups.forEach((item) => {
@@ -46073,8 +46093,8 @@ void main() {
         const projected = point2.clone().project(camera);
         outingMarker.hidden = outingMarker.hidden || projected.z > 1 || projected.z < -1 || Math.abs(projected.x) > 1 || Math.abs(projected.y) > 1;
         if (!outingMarker.hidden) {
-          outingMarker.style.left = (projected.x + 1) * host.clientWidth / 2 + "px";
-          outingMarker.style.top = (1 - projected.y) * host.clientHeight / 2 + "px";
+          outingMarker.style.left = (projected.x + 1) * viewWidth / 2 + "px";
+          outingMarker.style.top = (1 - projected.y) * viewHeight / 2 + "px";
         }
       }
       roomLabels.forEach(({ button, point: point2 }) => placeLabel(button, point2, occupied, true));
@@ -46121,7 +46141,7 @@ void main() {
       return result;
     }
     function applyWorld(next = {}) {
-      const oldBoard = worldState.schoolBoard;
+      const oldWeather = worldState.weather?.name, oldBoard = worldState.schoolBoard;
       worldState = next;
       roomCache.get("\u5BA0\u7269\u4E4B\u5BB6")?.userData.syncPets(next.petHome);
       roomCache.get("\u9F20\u9F20\u5C0F\u5C4B")?.userData.syncPets(next.petHome);
@@ -46167,18 +46187,23 @@ void main() {
         resident.rig.visible = data?.alive !== false && (!inside || data?.place === activePlace);
         resident.tag.textContent = data ? `${data.name} ${data.sex === "male" ? "\u2642" : "\u2640"}` : roles[i2];
       });
-      while (weatherFx.children.length) {
-        const child = weatherFx.children[0];
-        child.geometry.dispose();
-        child.material.dispose();
-        weatherFx.remove(child);
-      }
-      if (next.weather?.name === "\u5C0F\u96E8") {
-        const points = [];
-        for (let i2 = 0; i2 < 260; i2++) points.push((Math.random() - 0.5) * 25, Math.random() * 12, (Math.random() - 0.5) * 25);
-        const geometry = new BufferGeometry();
-        geometry.setAttribute("position", new Float32BufferAttribute(points, 3));
-        weatherFx.add(new Points(geometry, new PointsMaterial({ color: 14216688, size: 0.055, transparent: true, opacity: 0.72 })));
+      if (oldWeather !== next.weather?.name) {
+        while (weatherFx.children.length) {
+          const child = weatherFx.children[0];
+          child.geometry.dispose();
+          child.material.dispose();
+          weatherFx.remove(child);
+        }
+        if (next.weather?.name === "\u5C0F\u96E8") {
+          const points = [];
+          for (let i2 = 0; i2 < 520; i2++) {
+            const x2 = (Math.random() - 0.5) * 36, y = 0.35 + Math.random() * 12, z = (Math.random() - 0.5) * 36;
+            points.push(x2, y, z, x2 + 0.025, y - 0.3, z);
+          }
+          const geometry = new BufferGeometry();
+          geometry.setAttribute("position", new Float32BufferAttribute(points, 3));
+          weatherFx.add(new LineSegments(geometry, new LineBasicMaterial({ color: 12508138, transparent: true, opacity: 0.85, depthWrite: false })));
+        }
       }
       placeModels.get("\u5893\u5730").userData.setMemorials(next.memorials || []);
       const location = places.find((p) => p[0] === next.place);
@@ -46192,7 +46217,7 @@ void main() {
     window.TownApp = { focusOuting, petInteraction: (action, petId) => {
       if (!petId) roomCache.get("\u5BA0\u7269\u4E4B\u5BB6").userData.playPetAction(action);
       petCompanions.interact(action, petId);
-    }, focusCompanion, focusDisplayPet, setMemorialPage: (page) => placeModels.get("\u5893\u5730").userData.setMemorialPage(page), sayToNpc, residentPortraits, setLookSensitivity, toggleHallSeat, toggleClinicSeat, toggleRestaurantSeat, toggleSchoolSeat, enterHall, focusExhibit, resetHallView, sayAsMain, startFirstPerson, stopFirstPerson, playerInteract, resize, enterPlace, leavePlace, returnToTown, focusPup, focusResident, focusPet, clearFocus, sayToResident, applyWorld, inspect: () => ({ portals: [...placeModels.values()].filter((m) => m.userData.portal).map((m) => ({ name: m.userData.portal.name, angle: m.userData.portal.angle, open: !!m.userData.portal.target, gate: localDoor(m.userData.portal), position: portalPoint(m.userData.portal).toArray() })), sharedRooms: roomCache.size, petCompanions: petCompanions.inspect().map((p) => {
+    }, focusCompanion, focusDisplayPet, setMemorialPage: (page) => placeModels.get("\u5893\u5730").userData.setMemorialPage(page), sayToNpc, residentPortraits, setLookSensitivity, toggleHallSeat, toggleClinicSeat, toggleRestaurantSeat, toggleSchoolSeat, enterHall, focusExhibit, resetHallView, sayAsMain, startFirstPerson, stopFirstPerson, playerInteract, resize, enterPlace, leavePlace, returnToTown, focusPup, focusResident, focusPet, clearFocus, sayToResident, applyWorld, inspect: () => ({ performance: { calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, visibleRooms: [...roomCache].filter(([, r]) => r.visible).map(([name]) => name), rainGeometry: weatherFx.children[0]?.geometry.id, rain: { type: weatherFx.children[0]?.type, count: (weatherFx.children[0]?.geometry.attributes.position.count || 0) / 2, y: weatherFx.children[0]?.geometry.attributes.position.getY(0) } }, portals: [...placeModels.values()].filter((m) => m.userData.portal).map((m) => ({ name: m.userData.portal.name, angle: m.userData.portal.angle, open: !!m.userData.portal.target, gate: localDoor(m.userData.portal), position: portalPoint(m.userData.portal).toArray() })), sharedRooms: roomCache.size, petCompanions: petCompanions.inspect().map((p) => {
       const v = new Vector3(...p.worldPosition).add(new Vector3(0, 0.1, 0)).project(camera), r = canvas.getBoundingClientRect();
       return { ...p, screenPoint: { x: r.left + (v.x + 1) * r.width / 2, y: r.top + (1 - v.y) * r.height / 2 } };
     }), petHome: { spawnEffects: roomCache.get("\u5BA0\u7269\u4E4B\u5BB6").userData.petHome.puffs.length, position: placeModels.get("\u5BA0\u7269\u4E4B\u5BB6").position.toArray(), animals: roomCache.get("\u5BA0\u7269\u4E4B\u5BB6").userData.petHome.animals.filter(Boolean).map((a) => ({ species: a.name, custom: !!a.userData.stockKey?.includes("texture"), loaded: !!a.userData.loaded, error: !!a.userData.loadError, animations: a.userData.animationNames || [] })) }, lookSensitivity, focusedExhibit, hallPosition: destinations.find((d) => d[0] === "Mariah Carey\u540D\u4EBA\u5802").slice(1, 3), hall: activePlace === "Mariah Carey\u540D\u4EBA\u5802" ? { albums: room.userData.albumCount, photos: room.userData.photoCount, standeeLoaded: !!room.userData.hallClickable.at(-1).material.userData.loaded, exhibitPoints: room.userData.hallClickable.map((o) => {

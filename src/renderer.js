@@ -205,7 +205,7 @@ function isOpaquePoint(x,y){
 }
 let mousePassthrough, hoverUiTimer;
 window.addEventListener('mousemove',event=>{
-  if(movingPetWindow){mousePassthrough=false;window.petAPI.setMousePassthrough(false);return;}
+  if(movingPetWindow){if(mousePassthrough!==false){mousePassthrough=false;window.petAPI.setMousePassthrough(false)}return;}
   const dragHandle=document.querySelector('#dragHandle'),overActor=isOpaquePoint(event.clientX,event.clientY),overClose=pointInElement(event.clientX,event.clientY,closeButton,5),overDrag=pointInElement(event.clientX,event.clientY,dragHandle,6),overUi=overActor||overClose||overDrag;
   if(overUi){clearTimeout(hoverUiTimer);pet.classList.add('pointer-over')}else if(pet.classList.contains('pointer-over')&&!hoverUiTimer){hoverUiTimer=setTimeout(()=>{pet.classList.remove('pointer-over');hoverUiTimer=null},1000)}
   const interactive=overUi||pet.classList.contains('pointer-over');
@@ -217,18 +217,18 @@ const dragHandle=document.querySelector('#dragHandle');
 let movingPetWindow=false;
 dragHandle.addEventListener('pointerdown',event=>{
   if(event.button!==0)return;
-  event.preventDefault();event.stopPropagation();movingPetWindow=true;
+  event.preventDefault();event.stopPropagation();movingPetWindow=true;pet.classList.add('dragging');
   window.petAPI.setMousePassthrough(false);window.petAPI.dragStart();
   try{dragHandle.setPointerCapture(event.pointerId)}catch{}
 });
 const finishPetWindowMove=event=>{
   if(!movingPetWindow)return;
-  movingPetWindow=false;window.petAPI.dragEnd();
+  movingPetWindow=false;pet.classList.remove('dragging');window.petAPI.dragEnd();
   try{if(event&&dragHandle.hasPointerCapture(event.pointerId))dragHandle.releasePointerCapture(event.pointerId)}catch{}
 };
 dragHandle.addEventListener('pointerup',finishPetWindowMove);
 dragHandle.addEventListener('pointercancel',finishPetWindowMove);
-window.addEventListener('blur',()=>{if(movingPetWindow){movingPetWindow=false;window.petAPI.dragEnd()}});
+window.addEventListener('blur',()=>{if(movingPetWindow){movingPetWindow=false;pet.classList.remove('dragging');window.petAPI.dragEnd()}});
 
 function setState(next, duration = 0) {
   state = next; pet.className = `pet ${next}`; clearTimeout(actionTimer);
