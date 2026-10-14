@@ -30,7 +30,7 @@
     ['cemetery-flower','墓地','纪念墙','献花纪念',{seeds:-2,mood:3},'记录对小镇故友的纪念',[0,-1.1]]
   ].map(([id,place,object,title,effects,note='',point])=>({id,place,object,title,effects,note,point}));
   const names={stamina:'体力',mood:'心情',health:'健康',fullness:'饱腹',seeds:'瓜子',food:'粮食',vegetables:'蔬菜',bedding:'垫料',knowledge:'知识'};
-  function description(a){return Object.entries(a.effects).map(([k,v])=>names[k]+' '+(v>0?'+':'')+v).join('，')+'；每个小镇日一次'+(a.note?'。'+a.note:'')}
+  function description(a){if(['restaurant-soup','restaurant-meal','restaurant-platter'].includes(a.id))return '吃完自动排队，收银成功扣'+(-a.effects.seeds)+'瓜子；每个小镇日一次';return Object.entries(a.effects).map(([k,v])=>names[k]+' '+(v>0?'+':'')+v).join('，')+'；每个小镇日一次'+(a.note?'。'+a.note:'')}
   function perform(input,id,time=Date.now(),message=''){
     const a=actions.find(a=>a.id===id);if(!a)return {state:input,ok:false,message:'未找到这个互动。'};
     const state=JSON.parse(JSON.stringify(input)),date=new Date(state.calendarTime).toISOString().slice(0,10);
@@ -39,6 +39,7 @@
     if(id==='clinic-emergency'&&state.health>=60)return {state:input,ok:false,message:'健康达到60以上，无需急诊，可选择检查或普通诊疗。'};
     if(!state.alive)return {state:input,ok:false,message:'请先选择新的鼠鼠伙伴。'};
     if(state.placeInteractions?.[id]===date)return {state:input,ok:false,message:'今天已经完成过了，明天再来吧。'};
+    if(['restaurant-soup','restaurant-meal','restaurant-platter'].includes(id))return root.TownSimulation.beginRestaurantMeal(input,'main',id,time);
     const inventory=state.plaza?.inventory||{};
     const value=k=>k==='vegetables'||k==='bedding'?inventory[k]||0:k==='knowledge'?state.school?.knowledge||0:state[k]||0;
     for(const [k,v] of Object.entries(a.effects))if(v<0&&value(k)<-v)return {state:input,ok:false,message:names[k]+'不足，需要 '+(-v)+'。'};

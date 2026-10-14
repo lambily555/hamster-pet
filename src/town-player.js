@@ -1,3 +1,4 @@
+import {restaurantTables} from './town-restaurant-layout.js';
 import {cottageFloor,cottageFurniture} from './town-cottage-interior.js';
 import {blocked,destinations,facing} from './town-life.js';
 import {cottagePetFurniture} from './town-pet-layout.js';
@@ -11,7 +12,7 @@ const obstacles={
  'Mariah Carey名人堂':[[-2.1,-.5,.9,.4],[1.1,-.5,.9,.4],[2.7,1.2,.7,.45],[3,-1.4,.35,.2],[0,-1.7,.65,.65],[.3,1.6,.8,.35]],
  '鼠鼠小屋':[[...cottageFurniture.bed,.98,.65],[...cottageFurniture.table,.55,.43],[...cottageFurniture.shelf,.82,.32],[...cottageFurniture.water,.23,.23],[...cottageFurniture.bowl,.4,.4],...cottagePetFurniture.beds.map(([x,z])=>[x,z,.38,.38]),cottagePetFurniture.grain,cottagePetFurniture.toy],
  '诊所':[[-1.9,-.8,.98,.65],[1.6,-2.4,.82,.32],[1.9,1.2,.75,.45]],
- '鼠鼠饭馆':[[0,-2.3,3.3,.45],[3.35,1.4,.35,.75],[-2,-.5,.65,.4],[1.4,-.5,.65,.4],[1.4,1.55,.65,.4]],
+ '鼠鼠饭馆':[[0,-2.3,3.3,.45],[-3.35,1.35,.4,.75],...restaurantTables.map(([x,z])=>[x,z,.65,.4])],
  '零食铺':[[-2.2,-2.4,.82,.32],[.5,-2.4,.82,.32],[.5,1.3,1.55,.48]],
  '纪念馆':[[-2.2,-1.4,.75,.45],[0,-1.4,.75,.45],[2.2,-1.4,.75,.45],[-3.1,.65,.4,1.05]],
  '鼠鼠学校':[[-2,-1.7,.82,.32],[-1,-.6,.65,.4],[1.4,-.6,.65,.4],[-1,1.1,.65,.4],[1.4,1.1,.65,.4],[-1,.1,.325,.3],[1.4,.1,.325,.3],[-1,1.8,.325,.3],[1.4,1.8,.325,.3]],

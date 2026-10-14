@@ -1,4 +1,9 @@
 (() => {
+  // src/town-restaurant-layout.js
+  var restaurantTables = [[0.35, -1], [2.35, -1], [0.35, 1], [2.35, 1]];
+  var restaurantSeats = restaurantTables.flatMap(([x2, z]) => [-0.6, 0.6].map((dz) => ({ x: x2, z: z + dz, heading: dz < 0 ? 0 : Math.PI })));
+  var restaurantQueuePoint = (index) => ({ x: -1.8, z: 1.65 - index * 0.45 });
+
   // node_modules/.pnpm/three@0.185.1/node_modules/three/build/three.core.js
   var REVISION = "185";
   var CullFaceNone = 0;
@@ -34834,6 +34839,164 @@ void main() {
     }
   };
 
+  // src/town-restaurant-register.js
+  function createRestaurantRegister(room) {
+    const register = new Group();
+    register.position.set(-3.35, 0.92, 1.35);
+    register.rotation.y = Math.PI / 2;
+    room.add(register);
+    const mint = new MeshStandardMaterial({ color: 11131077, roughness: 0.65 }), cream = new MeshStandardMaterial({ color: 16050632, roughness: 0.8 }), dark = new MeshStandardMaterial({ color: 5530460, roughness: 0.8 });
+    function box3(w, h, d, x2, y, z, material3 = mint, parent = register) {
+      const mesh = new Mesh(new BoxGeometry(w, h, d), material3);
+      mesh.position.set(x2, y, z);
+      mesh.castShadow = true;
+      parent.add(mesh);
+      return mesh;
+    }
+    box3(0.52, 0.17, 0.48, 0, 0.085, 0);
+    const body = box3(0.5, 0.25, 0.32, 0, 0.26, -0.075);
+    body.rotation.x = -0.18;
+    box3(0.55, 0.04, 0.51, 0, 0.025, 0, dark);
+    const drawer = box3(0.43, 0.09, 0.09, 0, 0.085, 0.255, cream);
+    box3(0.12, 0.015, 0.015, 0, 0.08, 0.305, dark, register);
+    box3(0.22, 0.13, 0.035, -0.105, 0.29, 0.105, dark);
+    const canvas = document.createElement("canvas");
+    canvas.width = 256;
+    canvas.height = 128;
+    const ctx = canvas.getContext("2d"), texture2 = new CanvasTexture(canvas);
+    texture2.colorSpace = SRGBColorSpace;
+    const screen = box3(0.18, 0.09, 6e-3, -0.105, 0.29, 0.128, new MeshBasicMaterial({ map: texture2 }));
+    function screenAmount(amount) {
+      ctx.fillStyle = "#d7ebbc";
+      ctx.fillRect(0, 0, 256, 128);
+      ctx.fillStyle = "#375347";
+      ctx.font = "bold 70px monospace";
+      ctx.textAlign = "center";
+      ctx.fillText(String(amount), 128, 88);
+      texture2.needsUpdate = true;
+    }
+    screenAmount(0);
+    box3(0.14, 0.07, 0.035, 0.145, 0.29, 0.12, cream);
+    const slot = box3(0.1, 0.013, 8e-3, 0.145, 0.29, 0.142, dark);
+    const top = box3(0.25, 0.035, 0.14, 0, 0.41, -0.085, cream);
+    box3(0.15, 0.13, 0.08, 0, 0.45, -0.085, cream);
+    box3(0.14, 6e-3, 0.16, 0, 0.52, -0.025, cream);
+    for (let row = 0; row < 4; row++) for (let col = 0; col < 4; col++) box3(0.045, 0.015, 0.044, -0.025 + col * 0.058, 0.195, 0.09 + row * 0.052, col === 3 ? cream : mint);
+    const halo = new Mesh(new TorusGeometry(0.085, 9e-3, 6, 24), new MeshBasicMaterial({ color: 16766838, transparent: true, opacity: 0, depthWrite: false }));
+    halo.position.set(0.145, 0.29, 0.152);
+    register.add(halo);
+    const star = new Shape();
+    for (let i2 = 0; i2 < 10; i2++) {
+      const a = i2 * Math.PI / 5, r = i2 % 2 ? 0.012 : 0.028;
+      const x2 = Math.sin(a) * r, y = Math.cos(a) * r;
+      if (!i2) star.moveTo(x2, y);
+      else star.lineTo(x2, y);
+    }
+    star.closePath();
+    const effects = [];
+    let audio;
+    function ding() {
+      try {
+        audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+        audio.resume();
+        for (const [frequency, offset] of [[1320, 0], [1760, 0.065]]) {
+          const oscillator = audio.createOscillator(), gain = audio.createGain(), time = audio.currentTime + offset;
+          oscillator.frequency.value = frequency;
+          gain.gain.setValueAtTime(0.06, time);
+          gain.gain.exponentialRampToValueAtTime(1e-3, time + 0.3);
+          oscillator.connect(gain);
+          gain.connect(audio.destination);
+          oscillator.start(time);
+          oscillator.stop(time + 0.31);
+        }
+      } catch {
+      }
+    }
+    function pay(point2, amount) {
+      const group = new Group();
+      room.add(group);
+      const seed = new Mesh(new SphereGeometry(0.045, 8, 6), new MeshStandardMaterial({ color: 13872485, roughness: 0.6 }));
+      seed.scale.set(0.55, 1.5, 0.55);
+      group.add(seed);
+      const start = new Vector3(point2.x, 0.6, point2.z), end = room.worldToLocal(slot.getWorldPosition(new Vector3()));
+      const c = document.createElement("canvas");
+      c.width = 256;
+      c.height = 128;
+      const g = c.getContext("2d");
+      g.font = "bold 40px Microsoft YaHei";
+      g.fillStyle = "#ffdb76";
+      g.strokeStyle = "#705335";
+      g.lineWidth = 3;
+      g.textAlign = "center";
+      g.strokeText("+" + amount + "\u74DC\u5B50", 128, 70);
+      g.fillText("+" + amount + "\u74DC\u5B50", 128, 70);
+      const map = new CanvasTexture(c);
+      map.colorSpace = SRGBColorSpace;
+      const text = new Sprite(new SpriteMaterial({ map, transparent: true, depthTest: true }));
+      text.visible = false;
+      group.add(text);
+      const dots = [];
+      for (let i2 = 0; i2 < 10; i2++) {
+        const dot = i2 % 3 === 0 ? new Mesh(new ShapeGeometry(star), new MeshBasicMaterial({ color: 16766053, transparent: true })) : new Mesh(new SphereGeometry(0.018, 6, 4), new MeshBasicMaterial({ color: 16771236, transparent: true }));
+        if (i2 % 3 === 1) dot.scale.set(0.5, 1.6, 0.5);
+        dot.visible = false;
+        group.add(dot);
+        dots.push(dot);
+      }
+      effects.push({ group, seed, start, end, text, dots, amount, t: 0, rung: false });
+    }
+    function tick(dt) {
+      for (let i2 = effects.length - 1; i2 >= 0; i2--) {
+        const e = effects[i2];
+        e.t += dt;
+        const f = Math.min(1, e.t / 0.65);
+        e.seed.position.lerpVectors(e.start, e.end, f);
+        e.seed.position.y += Math.sin(f * Math.PI) * 0.6;
+        e.seed.rotation.set(e.t * 13, e.t * 17, e.t * 9);
+        if (e.t >= 0.65) {
+          e.seed.visible = false;
+          if (!e.rung) {
+            e.rung = true;
+            screenAmount(e.amount);
+            ding();
+          }
+          const age = e.t - 0.65;
+          e.text.visible = true;
+          e.text.position.copy(e.end).add(new Vector3(0, 0.4 + age * 0.16, 0));
+          const pop = 1 + Math.sin(Math.min(1, age / 0.4) * Math.PI) * 0.18;
+          e.text.scale.set(0.8 * pop, 0.4 * pop, 1);
+          e.text.material.opacity = Math.min(1, (1.7 - age) * 2);
+          halo.material.opacity = Math.max(0, 1 - age * 2);
+          halo.scale.setScalar(1 + age * 0.5);
+          screen.scale.setScalar(1 + Math.sin(Math.min(age / 0.25, 1) * Math.PI) * 0.08);
+          drawer.position.z = 0.255 + Math.sin(Math.min(age / 0.6, 1) * Math.PI) * 0.09;
+          e.dots.forEach((dot, j) => {
+            dot.visible = true;
+            const a = j * Math.PI * 2 / e.dots.length;
+            dot.position.copy(e.end).add(new Vector3(Math.cos(a) * age * 0.22, 0.15 + Math.sin(a) * age * 0.18, Math.sin(a) * age * 0.22));
+            dot.rotation.y = age * 5;
+            dot.material.opacity = Math.max(0, 1 - age);
+          });
+        }
+        if (e.t > 2.4) {
+          room.remove(e.group);
+          e.group.traverse((o) => {
+            o.geometry?.dispose();
+            if (o.material) {
+              o.material.map?.dispose();
+              o.material.dispose();
+            }
+          });
+          effects.splice(i2, 1);
+          halo.material.opacity = 0;
+          drawer.position.z = 0.255;
+          screen.scale.setScalar(1);
+        }
+      }
+    }
+    return { pay, tick, inspect: () => ({ effects: effects.length, mint: mint.color.getHexString(), drawer: drawer.position.z }) };
+  }
+
   // src/town-fur.js
   var palettes = { silver: [13488341, 16776695], pudding: [13738062, 16775913], "three-line": [4277581, 14868953], violet: [7828878, 15526384] };
   var texture;
@@ -38116,10 +38279,164 @@ void main() {
       onEvent({ id: actor.id, type: "pet-npc-adopt", place: "\u5BA0\u7269\u4E4B\u5BB6" });
       return true;
     }
+    const restaurantQueue = [];
+    function restaurantSeat(actor) {
+      const index = restaurantSeats.findIndex((_, i2) => ![...actors.values()].some((a) => a.id !== actor.id && a.restaurantSeat === i2));
+      if (index < 0) {
+        actor.phase = "restaurant-seat-wait";
+        return;
+      }
+      const seat = restaurantSeats[index];
+      actor.restaurantSeat = index;
+      actor.seated = false;
+      actor.controlled = false;
+      actor.wait = 8;
+      actor.path = [point(-1.2, actor.position.z), point(-1.2, seat.z), point(seat.x, seat.z)];
+      actor.arrival = "restaurant-dining";
+      actor.phase = "moving";
+      actor.action = "\u7528\u9910";
+    }
+    function setRestaurantBills(bills) {
+      for (const actor of actors.values()) {
+        if (actor.mealBill && actor.mealBill.id !== bills[actor.id]?.id) {
+          const index = restaurantQueue.indexOf(actor.id);
+          if (index >= 0) restaurantQueue.splice(index, 1);
+          delete actor.mealBill;
+          delete actor.restaurantSeat;
+          actor.seated = false;
+          actor.controlled = false;
+          actor.phase = actor.inside ? "exit-room" : "idle";
+        }
+      }
+      for (const [id, bill] of Object.entries(bills)) {
+        const actor = actors.get(id);
+        if (!actor || actor.mealBill || actor.frozen) continue;
+        actor.mealBill = { ...bill };
+        actor.controlled = false;
+        actor.partner = null;
+        actor.destination = "\u9F20\u9F20\u996D\u9986";
+        actor.action = "\u7528\u9910";
+        actor.speech = "\u53BB\u9910\u684C\u7528\u9910\uFF0C\u5403\u5B8C\u518D\u4ED8\u6B3E";
+        if (actor.inside === "\u9F20\u9F20\u996D\u9986") restaurantSeat(actor);
+        else if (actor.inside) actor.phase = "exit-room";
+        else go(actor, entrance("\u9F20\u9F20\u996D\u9986"), "arrived");
+      }
+    }
+    function restaurantStep(actor, dt) {
+      if (!actor.mealBill) {
+        if (actor.inside === "\u9F20\u9F20\u996D\u9986" && actor.action === "\u7528\u9910" && actor.phase === "using") {
+          onEvent({ id: actor.id, type: "restaurant-order", place: "\u9F20\u9F20\u996D\u9986" });
+          if (!actor.mealBill) {
+            actor.speech = "\u74DC\u5B50\u4E0D\u591F\uFF0C\u4E0B\u6B21\u518D\u6765";
+            actor.action = "\u79BB\u5F00\u996D\u9986";
+            complete(actor);
+          }
+          return true;
+        }
+        return false;
+      }
+      if (actor.forcedSleep || actor.frozen) {
+        const index = restaurantQueue.indexOf(actor.id);
+        if (index >= 0) restaurantQueue.splice(index, 1);
+        return false;
+      }
+      if (actor.inside !== "\u9F20\u9F20\u996D\u9986") {
+        if (!["moving", "exit-room", "outside", "arrived"].includes(actor.phase)) {
+          actor.controlled = false;
+          actor.destination = "\u9F20\u9F20\u996D\u9986";
+          actor.action = "\u7528\u9910";
+          if (actor.inside) actor.phase = "exit-room";
+          else go(actor, entrance("\u9F20\u9F20\u996D\u9986"), "arrived");
+        }
+        return false;
+      }
+      if (actor.phase === "using") {
+        restaurantSeat(actor);
+        return true;
+      }
+      if (actor.phase === "restaurant-seat-wait") {
+        restaurantSeat(actor);
+        return true;
+      }
+      if (actor.phase === "restaurant-dining") {
+        actor.seated = true;
+        actor.heading = restaurantSeats[actor.restaurantSeat].heading;
+        actor.moving = false;
+        actor.speech = "\u56BC\u56BC\uFF0C\u597D\u9999\u5440";
+        actor.wait -= dt;
+        if (actor.wait <= 0) {
+          actor.seated = false;
+          delete actor.restaurantSeat;
+          if (!restaurantQueue.includes(actor.id)) restaurantQueue.push(actor.id);
+          actor.speech = "\u5403\u597D\u4E86\uFF0C\u53BB\u6536\u94F6\u53F0\u6392\u961F";
+          actor.path = [point(-1.2, actor.position.z), restaurantQueuePoint(restaurantQueue.indexOf(actor.id))];
+          actor.phase = "moving";
+          actor.arrival = "restaurant-queue";
+          actor.wait = 1.2;
+        }
+        return true;
+      }
+      if (actor.phase === "restaurant-queue") {
+        const index = restaurantQueue.indexOf(actor.id), target = restaurantQueuePoint(index);
+        if (index < 0) return true;
+        if (distance(actor.position, target) > 0.04) {
+          go(actor, target, "restaurant-queue", true);
+          actor.wait = 1.2;
+          return true;
+        }
+        actor.heading = -Math.PI / 2;
+        actor.speech = index ? "\u7B49\u524D\u9762\u7684\u670B\u53CB\u4ED8\u5B8C\u6B3E" : "\u8BF7\u6536\u4E0B\u6211\u7684\u74DC\u5B50";
+        if (!index) {
+          actor.wait -= dt;
+          if (actor.wait <= 0) {
+            actor.phase = "restaurant-payment-wait";
+            onEvent({ id: actor.id, type: "restaurant-payment", billId: actor.mealBill.id, place: "\u9F20\u9F20\u996D\u9986" });
+          }
+        }
+        return true;
+      }
+      if (actor.phase === "restaurant-payment-retry") {
+        actor.wait -= dt;
+        if (actor.wait <= 0) {
+          if (!restaurantQueue.includes(actor.id)) restaurantQueue.push(actor.id);
+          go(actor, restaurantQueuePoint(restaurantQueue.indexOf(actor.id)), "restaurant-queue", true);
+          actor.wait = 1.2;
+        }
+        return true;
+      }
+      if (actor.phase === "restaurant-payment-wait") return true;
+      return false;
+    }
+    function finishRestaurantPayment(id, ok, controlled = false) {
+      const actor = actors.get(id);
+      if (!actor?.mealBill) return;
+      if (!ok) {
+        const index = restaurantQueue.indexOf(id);
+        if (index >= 0) restaurantQueue.splice(index, 1);
+        actor.speech = "\u74DC\u5B50\u4E0D\u8DB3\uFF0C\u5148\u8BA9\u5176\u4ED6\u670B\u53CB\u4ED8\u6B3E";
+        go(actor, point(-1.2, 1.65), "restaurant-payment-retry", true);
+        actor.wait = 3;
+        return;
+      }
+      restaurantQueue.splice(restaurantQueue.indexOf(id), 1);
+      delete actor.mealBill;
+      actor.speech = "\u8C22\u8C22\u62DB\u5F85\uFF0C\u652F\u4ED8\u5B8C\u6210\uFF01";
+      actor.seated = false;
+      delete actor.restaurantSeat;
+      if (controlled) {
+        actor.controlled = true;
+        actor.phase = "controlled";
+        actor.action = "\u53C2\u89C2";
+      } else {
+        actor.controlled = false;
+        complete(actor);
+      }
+    }
     function tick(dt, isDay = day) {
       day = isDay;
       dt = Math.max(0, Math.min(dt, 1));
       elapsed += dt;
+      for (let i2 = restaurantQueue.length - 1; i2 >= 0; i2--) if (!actors.has(restaurantQueue[i2])) restaurantQueue.splice(i2, 1);
       for (const actor of actors.values()) {
         if (petVisit(actor, dt)) {
           actor.moving = false;
@@ -38142,6 +38459,7 @@ void main() {
             onEvent({ id: "main", type: "outing-ready", outingId: actor.outing.id });
           }
         }
+        if (restaurantStep(actor, dt)) continue;
         if (actor.frozen || actor.controlled) continue;
         if (actor.phase === "moving") {
           let budget = dt * (actor.child ? 0.48 : 0.72) * (actor.aging?.movement ?? 1) * (actor.energyMovement ?? 1);
@@ -38417,7 +38735,7 @@ void main() {
         actor.wait = 0;
       }
     }
-    return { setOuting, actors, add, tick, setPetInvitations, setFamilyPlans, setResting, setCelebration, plazaSeatAvailable, releasePlazaSeat, remove: (id) => actors.delete(id), inspect: () => ({ elapsed, conversations, actors: [...actors.values()].map((a) => ({ ...a, entryPortal: void 0, path: void 0, visited: [...a.visited] })) }) };
+    return { setRestaurantBills, finishRestaurantPayment, setOuting, actors, add, tick, setPetInvitations, setFamilyPlans, setResting, setCelebration, plazaSeatAvailable, releasePlazaSeat, remove: (id) => actors.delete(id), inspect: () => ({ elapsed, conversations, actors: [...actors.values()].map((a) => ({ ...a, entryPortal: void 0, path: void 0, visited: [...a.visited] })) }) };
   }
 
   // src/town-player.js
@@ -38440,7 +38758,7 @@ void main() {
     "Mariah Carey\u540D\u4EBA\u5802": [[-2.1, -0.5, 0.9, 0.4], [1.1, -0.5, 0.9, 0.4], [2.7, 1.2, 0.7, 0.45], [3, -1.4, 0.35, 0.2], [0, -1.7, 0.65, 0.65], [0.3, 1.6, 0.8, 0.35]],
     "\u9F20\u9F20\u5C0F\u5C4B": [[...cottageFurniture.bed, 0.98, 0.65], [...cottageFurniture.table, 0.55, 0.43], [...cottageFurniture.shelf, 0.82, 0.32], [...cottageFurniture.water, 0.23, 0.23], [...cottageFurniture.bowl, 0.4, 0.4], ...cottagePetFurniture.beds.map(([x2, z]) => [x2, z, 0.38, 0.38]), cottagePetFurniture.grain, cottagePetFurniture.toy],
     "\u8BCA\u6240": [[-1.9, -0.8, 0.98, 0.65], [1.6, -2.4, 0.82, 0.32], [1.9, 1.2, 0.75, 0.45]],
-    "\u9F20\u9F20\u996D\u9986": [[0, -2.3, 3.3, 0.45], [3.35, 1.4, 0.35, 0.75], [-2, -0.5, 0.65, 0.4], [1.4, -0.5, 0.65, 0.4], [1.4, 1.55, 0.65, 0.4]],
+    "\u9F20\u9F20\u996D\u9986": [[0, -2.3, 3.3, 0.45], [-3.35, 1.35, 0.4, 0.75], ...restaurantTables.map(([x2, z]) => [x2, z, 0.65, 0.4])],
     "\u96F6\u98DF\u94FA": [[-2.2, -2.4, 0.82, 0.32], [0.5, -2.4, 0.82, 0.32], [0.5, 1.3, 1.55, 0.48]],
     "\u7EAA\u5FF5\u9986": [[-2.2, -1.4, 0.75, 0.45], [0, -1.4, 0.75, 0.45], [2.2, -1.4, 0.75, 0.45], [-3.1, 0.65, 0.4, 1.05]],
     "\u9F20\u9F20\u5B66\u6821": [[-2, -1.7, 0.82, 0.32], [-1, -0.6, 0.65, 0.4], [1.4, -0.6, 0.65, 0.4], [-1, 1.1, 0.65, 0.4], [1.4, 1.1, 0.65, 0.4], [-1, 0.1, 0.325, 0.3], [1.4, 0.1, 0.325, 0.3], [-1, 1.8, 0.325, 0.3], [1.4, 1.8, 0.325, 0.3]],
@@ -44633,13 +44951,14 @@ void main() {
           cylinder(x2, 1.08, -2.3, 0.2, 0.16, 12821364);
           for (let i2 = 0; i2 < 5; i2++) oval(x2 + Math.cos(i2 * 1.3) * 0.1, 1.17, -2.3 + Math.sin(i2 * 1.3) * 0.1, 0.055, 0.025, 0.04, 14269817);
         }
-        add(0.55, 0.85, 1.45, 3.35, 0.42, 1.4, 6641478);
-        add(0.65, 0.08, 1.55, 3.35, 0.88, 1.4, 12429704);
-        label("\u70B9\u9910\u67DC\u53F0", 3.35, 1.4);
+        add(0.65, 0.85, 1.4, -3.35, 0.42, 1.35, 6641478);
+        add(0.75, 0.08, 1.5, -3.35, 0.88, 1.35, 12429704);
+        label("\u70B9\u9910\u67DC\u53F0 \xB7 \u7528\u9910\u540E\u6536\u94F6", -3.35, 1.35);
+        room.userData.register = createRestaurantRegister(room);
         room.userData.restaurantSeats = [];
-        for (const [x2, z] of [[-2, -0.5], [1.4, -0.5], [1.4, 1.55]]) {
+        for (const [x2, z] of restaurantTables) {
           table(x2, z, 1.3, 0.8, 9992532);
-          for (const dz of [-0.68, 0.68]) {
+          for (const dz of [-0.6, 0.6]) {
             const seat = cylinder(x2, 0.44, z + dz, 0.28, 0.09, 12429704);
             cylinder(x2, 0.21, z + dz, 0.15, 0.38, 8547409);
             const index = room.userData.restaurantSeats.push({ x: x2, z: z + dz, heading: dz < 0 ? 0 : Math.PI }) - 1;
@@ -44650,7 +44969,7 @@ void main() {
           cylinder(x2, 0.66, z, 0.2, 0.035, 15657177);
           for (let i2 = 0; i2 < 6; i2++) oval(x2 + Math.cos(i2) * 0.11, 0.7, z + Math.sin(i2) * 0.11, 0.055, 0.04, 0.04, i2 % 2 ? 8626268 : 14003302);
         }
-        label("\u7528\u9910\u533A", -2, -0.5);
+        label("\u7528\u9910\u533A", 1.35, 0);
       } else if (name === "\u96F6\u98DF\u94FA") {
         shelf(-2.2, -2.4, "\u7CAE\u98DF\u8D27\u67B6");
         shelf(0.5, -2.4, "\u96F6\u98DF\u8D27\u67B6");
@@ -45105,10 +45424,12 @@ void main() {
       firstPerson = true;
       pet.visible = false;
       if (pet.userData.model) pet.userData.model.visible = false;
-      actor.controlled = true;
-      actor.path = [];
-      actor.partner = null;
-      actor.phase = "controlled";
+      if (!actor.mealBill) {
+        actor.controlled = true;
+        actor.path = [];
+        actor.partner = null;
+        actor.phase = "controlled";
+      }
       actor.speech = "";
       playerYaw = actor.heading + Math.PI + (actor.inside ? facing(actor.inside) : 0);
       playerPitch = 0;
@@ -45137,7 +45458,7 @@ void main() {
       jumpVelocity = 0;
       playerKeys.clear();
       document.exitPointerLock?.();
-      if (actor) {
+      if (actor && !actor.mealBill) {
         actor.controlled = !!actor.inside || !!actor.clinicSeat || !!actor.memorialSeat || actor.plazaSeat !== void 0;
         if (worldState.outing) actor.controlled = false;
         actor.phase = actor.controlled ? "controlled" : actor.inside ? "exit-room" : "idle";
@@ -45218,10 +45539,12 @@ void main() {
       if (!firstPerson) return;
       const actor = life.actors.get("main");
       if (!actor) return;
+      if (actor.mealBill && actor.inside && activePlace !== actor.inside) enterPlace(actor.inside, true);
+      else if (actor.mealBill && !actor.inside && activePlace) leavePlace(true);
       actor.cottageTableSlot = worldState.furniture?.table?.slot;
       actor.petFacilities = { ...worldState.petHome?.facilities, pets: worldState.petHome?.pets, food: worldState.petHome?.food, hasPets: !!worldState.petHome?.pets.length };
       let forward = (playerKeys.has("KeyW") || playerKeys.has("ArrowUp") ? 1 : 0) - (playerKeys.has("KeyS") || playerKeys.has("ArrowDown") ? 1 : 0), right = (playerKeys.has("KeyD") || playerKeys.has("ArrowRight") ? 1 : 0) - (playerKeys.has("KeyA") || playerKeys.has("ArrowLeft") ? 1 : 0);
-      if (document.body.dataset.townDialogue === "active") forward = right = 0;
+      if (document.body.dataset.townDialogue === "active" || actor.mealBill) forward = right = 0;
       const speed = playerKeys.has("ShiftLeft") || playerKeys.has("ShiftRight") ? 1.3 : 0.75, norm = Math.hypot(forward, right) || 1;
       forward /= norm;
       right /= norm;
@@ -45234,7 +45557,7 @@ void main() {
         dz = (dx * sn + dz * c) / room.scale.z;
         dx = x2 / room.scale.x;
       }
-      if (!actor.seated) {
+      if (!actor.seated && !actor.mealBill) {
         actor.platformHeight = jumpHeight;
         movePlayer(actor, dx, dz);
       }
@@ -45255,7 +45578,7 @@ void main() {
           if (portal.name === "Mariah Carey\u540D\u4EBA\u5802") window.dispatchEvent(new CustomEvent("town-hall-arrival"));
         }
       }
-      if (!actor.seated) actor.heading = playerYaw + Math.PI - (actor.inside ? facing(actor.inside) : 0);
+      if (!actor.seated && !actor.mealBill) actor.heading = playerYaw + Math.PI - (actor.inside ? facing(actor.inside) : 0);
       const surface = actor.inside ? 0 : schoolPlatformHeightAt(actor.position.x, actor.position.z), previousHeight = jumpHeight;
       if (jumpHeight > 0 || jumpVelocity > 0) {
         jumpVelocity -= dt * 4;
@@ -45654,6 +45977,7 @@ void main() {
     function toggleRestaurantSeat(index) {
       if (window.TownSimulation.mainSleeping({ ...worldState, currentActivity: worldState.activity })) return false;
       const actor = life.actors.get("main"), seats = roomCache.get("\u9F20\u9F20\u996D\u9986")?.userData.restaurantSeats;
+      if (actor?.mealBill) return false;
       if (!actor || actor.frozen || actor.forcedSleep || !seats?.[index] || activePlace !== "\u9F20\u9F20\u996D\u9986") return false;
       if (actor.restaurantSeat !== void 0) {
         const seat2 = seats[actor.restaurantSeat];
@@ -45984,6 +46308,7 @@ void main() {
       const t = clock.getElapsedTime(), dt = Math.min(0.1, t - previousTime);
       previousTime = t;
       if (document.body.dataset.currentPanel !== "town") return;
+      roomCache.get("\u9F20\u9F20\u996D\u9986").userData.register.tick(dt);
       roomCache.get("\u5BA0\u7269\u4E4B\u5BB6").userData.tickPets(dt);
       placeModels.get("\u8DD1\u8F6E\u516C\u56ED").userData.setRunning(dt, [...life.actors.values()].some((a) => a.place === "\u8DD1\u8F6E\u516C\u56ED" && a.phase === "activity" && a.action === "\u8DD1\u8F6E"));
       life.tick(dt, worldState.part === "\u767D\u5929");
@@ -46172,6 +46497,7 @@ void main() {
       syncPups();
       syncLife();
       life.setOuting(next.outing);
+      life.setRestaurantBills(next.restaurant?.bills || {});
       if (window.TownSimulation.mainSleeping({ ...next, currentActivity: next.activity }) && firstPerson) stopFirstPerson();
       life.setResting(next.sleepRequested || next.autoSleep, !!next.hospitalized);
       life.setCelebration(next.celebration || null);
@@ -46214,10 +46540,20 @@ void main() {
         buildRoom(activePlace);
       }
     }
-    window.TownApp = { focusOuting, petInteraction: (action, petId) => {
+    window.TownApp = { finishRestaurantPayment: (id, result) => {
+      const actor = life.actors.get(id);
+      if (result.ok && actor) {
+        if (firstPerson && id === "main") {
+          playerYaw = facing("\u9F20\u9F20\u996D\u9986") + Math.atan2(-3.3 - actor.position.x, 1.35 - actor.position.z) + Math.PI;
+          playerPitch = 0.18;
+        }
+        roomCache.get("\u9F20\u9F20\u996D\u9986").userData.register.pay(actor.position, result.amount);
+      }
+      life.finishRestaurantPayment(id, result.ok, firstPerson && id === "main");
+    }, focusOuting, petInteraction: (action, petId) => {
       if (!petId) roomCache.get("\u5BA0\u7269\u4E4B\u5BB6").userData.playPetAction(action);
       petCompanions.interact(action, petId);
-    }, focusCompanion, focusDisplayPet, setMemorialPage: (page) => placeModels.get("\u5893\u5730").userData.setMemorialPage(page), sayToNpc, residentPortraits, setLookSensitivity, toggleHallSeat, toggleClinicSeat, toggleRestaurantSeat, toggleSchoolSeat, enterHall, focusExhibit, resetHallView, sayAsMain, startFirstPerson, stopFirstPerson, playerInteract, resize, enterPlace, leavePlace, returnToTown, focusPup, focusResident, focusPet, clearFocus, sayToResident, applyWorld, inspect: () => ({ performance: { calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, visibleRooms: [...roomCache].filter(([, r]) => r.visible).map(([name]) => name), rainGeometry: weatherFx.children[0]?.geometry.id, rain: { type: weatherFx.children[0]?.type, count: (weatherFx.children[0]?.geometry.attributes.position.count || 0) / 2, y: weatherFx.children[0]?.geometry.attributes.position.getY(0) } }, portals: [...placeModels.values()].filter((m) => m.userData.portal).map((m) => ({ name: m.userData.portal.name, angle: m.userData.portal.angle, open: !!m.userData.portal.target, gate: localDoor(m.userData.portal), position: portalPoint(m.userData.portal).toArray() })), sharedRooms: roomCache.size, petCompanions: petCompanions.inspect().map((p) => {
+    }, focusCompanion, focusDisplayPet, setMemorialPage: (page) => placeModels.get("\u5893\u5730").userData.setMemorialPage(page), sayToNpc, residentPortraits, setLookSensitivity, toggleHallSeat, toggleClinicSeat, toggleRestaurantSeat, toggleSchoolSeat, enterHall, focusExhibit, resetHallView, sayAsMain, startFirstPerson, stopFirstPerson, playerInteract, resize, enterPlace, leavePlace, returnToTown, focusPup, focusResident, focusPet, clearFocus, sayToResident, applyWorld, inspect: () => ({ restaurant: { tables: restaurantTables, seats: roomCache.get("\u9F20\u9F20\u996D\u9986").userData.restaurantSeats, register: roomCache.get("\u9F20\u9F20\u996D\u9986").userData.register.inspect() }, performance: { calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, visibleRooms: [...roomCache].filter(([, r]) => r.visible).map(([name]) => name), rainGeometry: weatherFx.children[0]?.geometry.id, rain: { type: weatherFx.children[0]?.type, count: (weatherFx.children[0]?.geometry.attributes.position.count || 0) / 2, y: weatherFx.children[0]?.geometry.attributes.position.getY(0) } }, portals: [...placeModels.values()].filter((m) => m.userData.portal).map((m) => ({ name: m.userData.portal.name, angle: m.userData.portal.angle, open: !!m.userData.portal.target, gate: localDoor(m.userData.portal), position: portalPoint(m.userData.portal).toArray() })), sharedRooms: roomCache.size, petCompanions: petCompanions.inspect().map((p) => {
       const v = new Vector3(...p.worldPosition).add(new Vector3(0, 0.1, 0)).project(camera), r = canvas.getBoundingClientRect();
       return { ...p, screenPoint: { x: r.left + (v.x + 1) * r.width / 2, y: r.top + (1 - v.y) * r.height / 2 } };
     }), petHome: { spawnEffects: roomCache.get("\u5BA0\u7269\u4E4B\u5BB6").userData.petHome.puffs.length, position: placeModels.get("\u5BA0\u7269\u4E4B\u5BB6").position.toArray(), animals: roomCache.get("\u5BA0\u7269\u4E4B\u5BB6").userData.petHome.animals.filter(Boolean).map((a) => ({ species: a.name, custom: !!a.userData.stockKey?.includes("texture"), loaded: !!a.userData.loaded, error: !!a.userData.loadError, animations: a.userData.animationNames || [] })) }, lookSensitivity, focusedExhibit, hallPosition: destinations.find((d) => d[0] === "Mariah Carey\u540D\u4EBA\u5802").slice(1, 3), hall: activePlace === "Mariah Carey\u540D\u4EBA\u5802" ? { albums: room.userData.albumCount, photos: room.userData.photoCount, standeeLoaded: !!room.userData.hallClickable.at(-1).material.userData.loaded, exhibitPoints: room.userData.hallClickable.map((o) => {
