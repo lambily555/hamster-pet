@@ -37876,6 +37876,11 @@ void main() {
       bowls.push(food);
     }
     label("\u5BA0\u7269\u98DF\u76C6", -1.5, 1.7, "pet-home");
+    const freeSign = sign2(room, "\u514D\u8D39\u9886\u517B", 1.35, 0.38, -3.05, 1.05, -0.15);
+    box(room, 0.06, 0.9, 0.06, -3.05, 0.45, -0.16, wood);
+    freeSign.userData.roomAction = "pet-home";
+    clickable.push(freeSign);
+    label("\u514D\u8D39\u9886\u517B \xB7 \u6301\u7EED\u7167\u987E", -3.05, -0.15, "pet-home");
     const animals = [], puffs = [];
     let stockInitialized = false;
     label("\u5BA0\u7269\u966A\u4F34\u533A", -0.75, 0.5, "pet-home");
@@ -39097,6 +39102,17 @@ void main() {
         clickable.push(rig);
         pets.set(pet.id, { id: pet.id, ownerId: pet.ownerId, spawnNearOwner: !!pet.ownerId, inside, position, heading: 0, rig, path: [], replan: 0, petCompanion: true });
       }
+      for (const pet of [...state.petHome?.pets || [], ...state.petHome?.npcPets || []]) {
+        const actor = pets.get(pet.id);
+        if (actor.ownerId !== pet.ownerId) {
+          actor.ownerId = pet.ownerId;
+          actor.path = [];
+          actor.goal = null;
+          actor.replan = 0;
+          actor.spawnNearOwner = true;
+        }
+        actor.fostered = !!pet.fostered;
+      }
       initialized = true;
     }
     function prepare(actor, state) {
@@ -39149,7 +39165,7 @@ void main() {
         }
         prepare(actor, state);
         actor.moving = false;
-        const follow = (actor.ownerId ? !!owner && state.petHome?.npcPets.find((p2) => p2.id === actor.id)?.follow !== false : state.petHome?.follow) && (actor.ownerId || state.alive !== false) && owner && !owner.forcedSleep && !owner.frozen, wanted = follow ? owner.inside || null : actor.ownerId && !owner ? "\u5BA0\u7269\u4E4B\u5BB6" : "\u9F20\u9F20\u5C0F\u5C4B";
+        const follow = (actor.ownerId ? !!owner && state.petHome?.npcPets.find((p2) => p2.id === actor.id)?.follow !== false : state.petHome?.follow) && (actor.ownerId || state.alive !== false) && owner && !owner.forcedSleep && !owner.frozen, wanted = follow ? owner.inside || null : actor.fostered || actor.ownerId && !owner ? "\u5BA0\u7269\u4E4B\u5BB6" : "\u9F20\u9F20\u5C0F\u5C4B";
         if (actor.exiting) {
           const portal = actor.exiting, gate = localDoor(portal), p2 = worldPoint(portal.name, gate.x, petOutsideZ(portal));
           actor.entryPortal = portal;
@@ -39203,7 +39219,7 @@ void main() {
           }
         } else {
           actor.entryPortal = null;
-          const homePoint = restPoints[index % restPoints.length], target = follow ? followingPoint(actor, owner, actor.ownerId ? 0 : index) : { x: homePoint[0], z: homePoint[1] };
+          const homePoint = actor.fostered ? { x: -3.15 + index % 3 * 0.45, z: 1.25 + Math.floor(index / 3) % 3 * 0.4 } : restPoints[index % restPoints.length], target = follow ? followingPoint(actor, owner, actor.ownerId ? 0 : index) : { x: homePoint[0], z: homePoint[1] };
           walkTo(actor, target, dt);
         }
         const p = new Vector3(actor.position.x, 0, actor.position.z);
