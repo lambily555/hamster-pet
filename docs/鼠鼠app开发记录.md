@@ -744,3 +744,4 @@ NPC 新增银狐白、布丁黄白、三线灰黑和紫仓灰紫四种毛色。�
 - GitHub仓库由lambily555/shushu-desktop-pet改为lambily555/hamster-pet，仓库ID保持1346978077。同步发布checkout的origin、项目维护指引和公开README标题，保留已有提交历史与本地目录。
 - 验证：GitHub API确认新名称与仓库ID，使用新地址拉取成功；隔离Electron检查亮、暗及中灰背景下信息文字的显示。
 - 发布状态：仓库改名已完成，界面修改正在同步便携版与公开目录；提交结果随后确认。
+- 发布确认：功能提交f1709d5已成功推送至hamster-pet/main；便携版与公开目录同步完成。亮、暗、中灰背景截图验证通过。
