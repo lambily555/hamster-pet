@@ -99,10 +99,16 @@ function togglePet() {
   else { petHiddenByUser = false; win.show(); win.focus(); }
 }
 
-function showPetCommand(command) {
+function showPet() {
   petHiddenByUser=false;
-  win?.show();
-  win?.focus();
+  if(!win||win.isDestroyed())return;
+  if(win.isMinimized())win.restore();
+  win.show();
+  win.focus();
+}
+
+function showPetCommand(command) {
+  showPet();
   win?.webContents.send('pet-command',command);
 }
 
@@ -235,10 +241,12 @@ function createWindow() {
     hasShadow: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
+      backgroundThrottling: false,
       contextIsolation: true,
       nodeIntegration: false
     }
   });
+  win.setContentProtection(false);
   win.setAlwaysOnTop(true, 'floating');
   win.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
   win.loadFile(path.join(__dirname, process.env.PET_CAPTURE_PAGE || 'index.html'));
@@ -272,7 +280,7 @@ function createTray() {
   tray.setToolTip('鼠鼠桌面小宠');
   const menu = Menu.buildFromTemplate([
     { label: '打开鼠鼠控制中心', click: showControl },
-    { label: '叫鼠鼠回来', click: () => { win?.show(); win?.focus(); } },
+    { label: '叫鼠鼠回来', click: showPet },
     { label: '始终置顶', type: 'checkbox', checked: true, click: (item) => win?.setAlwaysOnTop(item.checked, 'floating') },
     { label: '开机启动', type: 'checkbox', checked: app.getLoginItemSettings().openAtLogin, click: (item) => app.setLoginItemSettings({ openAtLogin: item.checked }) },
     { type: 'separator' },
@@ -280,7 +288,7 @@ function createTray() {
   ]);
   tray.setContextMenu(menu);
   tray.on('click', togglePet);
-  tray.on('double-click', () => { win?.show(); win?.focus(); });
+  tray.on('double-click', showPet);
 }
 
 function watchKeyboardActivity() {

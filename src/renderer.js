@@ -626,6 +626,9 @@ window.petAPI.onPetCommand(command=>{
   }
 });
 let closeArmedAt=0;
+// Screenshot overlays can interrupt a press and deliver its release after focus returns.
+window.addEventListener('blur',()=>{closeArmedAt=0});
+closeButton.addEventListener('pointercancel',()=>{closeArmedAt=0});
 closeButton.addEventListener('pointerdown',()=>{if(document.hasFocus())closeArmedAt=Date.now()});
 closeButton.addEventListener('click', (event) => { event.stopPropagation();if(document.hasFocus()&&Date.now()-closeArmedAt<900)window.petAPI.hide();closeArmedAt=0; });
 window.petAPI.setScale(scale);
