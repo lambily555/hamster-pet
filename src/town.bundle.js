@@ -1,4 +1,50 @@
 (() => {
+  // src/town-speech.js
+  function createSpeechDirector() {
+    const states = /* @__PURE__ */ new Map();
+    let gaze = null, gazeSince = 0;
+    const hash = (id) => [...id].reduce((n, c) => n * 31 + c.charCodeAt(0) >>> 0, 0);
+    const overlaps = (a, b) => a.left < b.right + 8 && a.right > b.left - 8 && a.top < b.bottom + 8 && a.bottom > b.top - 8;
+    return { update(candidates, { now, firstPerson = false, limit = firstPerson ? 3 : 4, gazeId = null } = {}) {
+      if (gazeId !== gaze) {
+        gaze = gazeId;
+        gazeSince = now;
+      }
+      const ids = new Set(candidates.map((c) => c.id));
+      for (const id of states.keys()) if (!ids.has(id)) states.delete(id);
+      for (const c of candidates) {
+        let s = states.get(c.id);
+        if (!s) {
+          s = { text: c.text, until: 0, ready: now + hash(c.id) % 1500 / 1e3, last: -Infinity };
+          states.set(c.id, s);
+        }
+        if (s.text !== c.text) {
+          s.text = c.text;
+          s.until = 0;
+          s.ready = now + hash(c.id) % 700 / 1e3;
+        }
+      }
+      const looking = gaze && now - gazeSince >= 0.45 ? gaze : null, rank = (c) => c.urgent ? 3 : c.id === looking ? 2 : states.get(c.id).until > now ? 1 : 0;
+      const ordered = [...candidates].sort((a, b) => rank(b) - rank(a) || states.get(a.id).last - states.get(b.id).last || a.distance - b.distance || hash(a.id) - hash(b.id));
+      const full = /* @__PURE__ */ new Set(), occupied = [], texts = /* @__PURE__ */ new Set();
+      for (const c of ordered) {
+        const s = states.get(c.id), priority = c.urgent || c.id === looking;
+        if (full.size >= limit || !c.rect || c.rect.top < 8 || c.rect.bottom > c.viewHeight - 8 || c.rect.left < 8 || c.rect.right > c.viewWidth - 8) continue;
+        if (!priority && (now < s.ready && s.until <= now || firstPerson && c.distance > 5 || texts.has(c.text))) continue;
+        if (occupied.some((r) => overlaps(c.rect, r))) continue;
+        full.add(c.id);
+        occupied.push(c.rect);
+        texts.add(c.text);
+        if (s.until <= now) {
+          s.until = now + 3.6;
+          s.ready = s.until + 6 + hash(c.id) % 3e3 / 1e3;
+          s.last = now;
+        }
+      }
+      return candidates.map((c) => ({ id: c.id, mode: full.has(c.id) ? "full" : "hint", text: full.has(c.id) ? c.text : "\xB7\xB7\xB7" }));
+    } };
+  }
+
   // src/town-restaurant-layout.js
   var restaurantTables = [[0.35, -1], [2.35, -1], [0.35, 1], [2.35, 1]];
   var restaurantSeats = restaurantTables.flatMap(([x2, z]) => [-0.6, 0.6].map((dz) => ({ x: x2, z: z + dz, heading: dz < 0 ? 0 : Math.PI })));
@@ -38546,7 +38592,7 @@ void main() {
           complete(actor);
         } else if (actor.phase === "celebrating") {
           actor.heading = Math.atan2(-actor.position.x, -1.3 - actor.position.z);
-          actor.speech = celebration ? celebration.birthdays.includes(actor.id) ? "\u8C22\u8C22\u5927\u5BB6\u966A\u6211\u8FC7\u751F\u65E5\uFF01" : celebration.birthdays.length ? "\u751F\u65E5\u5FEB\u4E50\uFF01\u4E00\u8D77\u5206\u4EAB\u5C0F\u86CB\u7CD5\u5427\uFF01" : "\u4ED3\u9F20\u670B\u53CB\u4EEC\uFF0C\u8282\u65E5\u5FEB\u4E50\uFF01" : "";
+          actor.speech = celebration ? celebration.birthdays.includes(actor.id) ? "\u8C22\u8C22\u5927\u5BB6\u966A\u6211\u8FC7\u751F\u65E5\uFF01" : celebration.birthdays.length ? ["\u751F\u65E5\u5FEB\u4E50\uFF01", "\u86CB\u7CD5\u5DF2\u7ECF\u51C6\u5907\u597D\u5566\uFF01", "\u4ECA\u5929\u4E5F\u8981\u5F00\u5F00\u5FC3\u5FC3\uFF01", "\u4E00\u8D77\u5206\u4EAB\u5C0F\u86CB\u7CD5\u5427\uFF01", "\u5927\u5BB6\u4E00\u8D77\u5E86\u795D\u5427\uFF01"][[...actors.keys()].indexOf(actor.id) % 5] : ["\u8282\u65E5\u5FEB\u4E50\uFF01", "\u4ECA\u5929\u5E7F\u573A\u771F\u70ED\u95F9\uFF01", "\u548C\u5927\u5BB6\u5728\u4E00\u8D77\u771F\u5F00\u5FC3\u3002", "\u6765\u4E00\u8D77\u5E86\u795D\u5427\uFF01"][[...actors.keys()].indexOf(actor.id) % 4] : "";
           if (!celebration) {
             actor.phase = "idle";
             actor.wait = 1;
@@ -38624,7 +38670,8 @@ void main() {
         } else if (actor.phase === "talking") {
           actor.wait -= dt;
           const other = actors.get(actor.partner);
-          actor.speech = actor.wait > 6 ? `\u4F60\u597D\uFF0C${other?.name || "\u670B\u53CB"}\uFF01` : actor.wait > 3 ? "\u4ECA\u5929\u7684\u5AE9\u53F6\u5F88\u9999\u54E6\u3002" : "\u4E0B\u6B21\u4E00\u8D77\u53BB\u516C\u56ED\u5427\uFF01";
+          const first = actor.id < (other?.id || "");
+          actor.speech = actor.wait > 6 ? first ? `\u4F60\u597D\uFF0C${other?.name || "\u670B\u53CB"}\uFF01` : "" : actor.wait > 3 ? first ? "" : "\u662F\u5440\uFF0C\u8981\u4E0D\u8981\u4E00\u8D77\u53BB\u5C1D\u5C1D\uFF1F" : first ? "\u4E0B\u6B21\u4E00\u8D77\u53BB\u516C\u56ED\u5427\uFF01" : "";
           if (actor.wait <= 0) {
             actor.partner = null;
             complete(actor);
@@ -44502,6 +44549,8 @@ void main() {
     mainTag.className = "town-label town-npc-label town-pup-label";
     mainTag.onclick = () => focusPet();
     host.appendChild(mainTag);
+    const speechDirector = createSpeechDirector();
+    let speechLayoutAt = -Infinity;
     const lifeBubbles = /* @__PURE__ */ new Map();
     const outingMarker = document.createElement("button");
     outingMarker.className = "town-outing-marker";
@@ -44698,8 +44747,6 @@ void main() {
         lifeBubbles.set(actor.id, bubble);
       }
       bubble.classList.toggle("town-outing-speech", actor.id === "main" || actor.id === worldState.outing?.npcId);
-      if (bubble.textContent !== actor.speech) bubble.textContent = actor.speech;
-      bubble.hidden = !rig.visible || !actor.speech || firstPerson && actor.id === "main";
     }
     const returnButton = document.createElement("button");
     returnButton.className = "town-room-return";
@@ -45247,6 +45294,8 @@ void main() {
       if (!firstPerson && focusedPup !== id) focusPup(id);
       focusedResident = -3;
       focusedPup = id;
+      speech._text = text || "\u5431\u5431\uFF0C\u6B22\u8FCE\u6765\u627E\u6211\u804A\u5929\u3002";
+      speech._until = performance.now() + 4200;
       speech.textContent = text;
       speech.hidden = false;
       clearTimeout(speech._timer);
@@ -45280,6 +45329,8 @@ void main() {
     function sayToResident(index, text) {
       if (firstPerson) focusedResident = index;
       else if (index !== focusedResident) focusResident(index);
+      speech._text = text || "\u5431\u5431\uFF0C\u6B22\u8FCE\u6765\u627E\u6211\u804A\u5929\u3002";
+      speech._until = performance.now() + 4200;
       speech.textContent = text || "\u5431\u5431\uFF0C\u6B22\u8FCE\u6765\u627E\u6211\u804A\u5929\u3002";
       speech.hidden = false;
       clearTimeout(speech._timer);
@@ -46243,36 +46294,65 @@ void main() {
       button.style.top = y + "px";
     }
     function layoutSpeech() {
-      const tags = [mainTag, ...residents.map((n) => n.tag), ...[...pups.values()].map((p) => p.tag), ...labels.map((l) => l.button), ...roomLabels.map((l) => l.button)];
-      const sizes = new Map([...tags, ...lifeBubbles.values(), speech].filter((el) => !el.hidden).map((el) => [el, { width: el.offsetWidth, height: el.offsetHeight }]));
-      const bounds = (el) => {
-        const size = sizes.get(el) || { width: 0, height: 0 }, x2 = parseFloat(el.style.left) || 0, y = parseFloat(el.style.top) || 0;
-        return { left: x2 - size.width / 2, right: x2 + size.width / 2, top: y - size.height, bottom: y };
-      };
-      const occupied = tags.filter((tag) => !tag.hidden).map(bounds);
-      function above(bubble, tag) {
-        if (bubble.hidden) return;
-        if (!tag) {
+      const now = performance.now() / 1e3;
+      if (now - speechLayoutAt < 0.1) return;
+      speechLayoutAt = now;
+      const manualId = focusedResident >= 0 ? residents[focusedResident]?.lifeId : focusedPup, manualActive = speech._until > now * 1e3;
+      const entries = [{ id: "main", rig: pet, tag: mainTag }, ...residents.map((n) => ({ id: n.lifeId, rig: n.rig, tag: n.tag })), ...[...pups.values()].map((p) => ({ id: p.data.id, rig: p.rig, tag: p.tag, headHeight: 0.75 * p.rig.scale.x }))];
+      const candidates = [];
+      let gazeId = firstPerson ? null : hoveredActor, gazeDistance = 0.18;
+      for (const { id, rig, tag, headHeight = 0.8 } of entries) {
+        const actor = life.actors.get(id), manual = manualActive && id === manualId, bubble = manual ? speech : lifeBubbles.get(id), text = manual ? speech._text : actor?.speech;
+        const ambient2 = lifeBubbles.get(id);
+        if (manual && ambient2) ambient2.hidden = true;
+        if (!bubble) continue;
+        if (!rig.visible || !text || firstPerson && id === "main" || document.body.dataset.townDialogue === "active" && (id === "main" || id === worldState.outing?.npcId)) {
           bubble.hidden = true;
-          return;
+          continue;
         }
-        const anchor = tag.hidden ? { top: parseFloat(tag.style.top) - 20 } : bounds(tag), width = sizes.get(bubble)?.width || 0, height = sizes.get(bubble)?.height || 0;
-        const x2 = Math.max(width / 2 + 6, Math.min(viewWidth - width / 2 - 6, parseFloat(tag.style.left)));
-        let bottom = firstPerson ? anchor.top + 48 : anchor.top - 8;
-        for (let i2 = 0; !firstPerson && i2 <= occupied.length; i2++) {
-          const hits = occupied.filter((r) => x2 + width / 2 > r.left - 6 && x2 - width / 2 < r.right + 6 && bottom > r.top - 6 && bottom - height < r.bottom + 6);
-          if (!hits.length) break;
-          bottom = Math.min(...hits.map((r) => r.top)) - 8;
+        const point2 = rig.position.clone().add(new Vector3(0, headHeight, 0)), projected = point2.project(camera);
+        if (projected.z < -1 || projected.z > 1 || Math.abs(projected.x) > 1 || Math.abs(projected.y) > 1) {
+          bubble.hidden = true;
+          continue;
         }
-        bubble.style.left = x2 + "px";
-        bubble.style.top = bottom + "px";
-        occupied.push({ left: x2 - width / 2, right: x2 + width / 2, top: bottom - height, bottom });
+        const x2 = (projected.x + 1) * viewWidth / 2, y = (1 - projected.y) * viewHeight / 2 - 12;
+        bubble.hidden = false;
+        const sizeKey = text + "|" + firstPerson + "|" + viewWidth;
+        if (bubble._speechSize?.key !== sizeKey) {
+          bubble.classList.remove("town-speech-hint");
+          bubble.textContent = text;
+          bubble._speechSize = { key: sizeKey, width: bubble.offsetWidth, height: bubble.offsetHeight };
+        }
+        const { width, height } = bubble._speechSize, bottom = tag.hidden ? y : Math.min(y, parseFloat(tag.style.top) - tag.offsetHeight - 8);
+        const distance4 = rig.position.distanceTo(camera.position), focused = !firstPerson && (focusedResident >= 0 && residents[focusedResident]?.lifeId === id || focusedPup === id);
+        const bx = manual ? Math.max(width / 2 + 9, Math.min(viewWidth - width / 2 - 9, x2)) : x2, by = manual ? Math.max(height + 9, Math.min(viewHeight - 9, bottom)) : bottom;
+        candidates.push({ id, text, element: bubble, x: bx, y: by, distance: distance4, urgent: manual || focused, viewWidth, viewHeight, rect: { left: bx - width / 2, right: bx + width / 2, top: by - height, bottom: by } });
+        if (firstPerson) {
+          const d = Math.hypot((x2 - viewWidth / 2) / viewWidth, (y - viewHeight / 2) / viewHeight);
+          if (d < gazeDistance) {
+            gazeDistance = d;
+            gazeId = id;
+          }
+        }
       }
-      above(lifeBubbles.get("main") || { hidden: true }, mainTag);
-      residents.forEach((n) => above(lifeBubbles.get(n.lifeId) || { hidden: true }, n.tag));
-      pups.forEach((p) => above(lifeBubbles.get(p.data.id) || { hidden: true }, p.tag));
-      if (focusedResident >= 0) above(speech, residents[focusedResident].tag);
-      else if (focusedPup && pups.has(focusedPup)) above(speech, pups.get(focusedPup).tag);
+      if (!manualActive || !candidates.some((c) => c.element === speech)) speech.hidden = true;
+      const placements = speechDirector.update(candidates, { now, firstPerson, gazeId, limit: document.body.dataset.townDialogue === "active" ? 1 : firstPerson ? 3 : 4 }), occupied = [];
+      const overlaps = (a, b) => a.left < b.right + 6 && a.right > b.left - 6 && a.top < b.bottom + 6 && a.bottom > b.top - 6;
+      for (const mode of ["full", "hint"]) for (const c of candidates) {
+        const result = placements.find((p) => p.id === c.id);
+        if (result.mode !== mode) continue;
+        const bubble = c.element;
+        bubble.classList.toggle("town-speech-hint", mode === "hint");
+        bubble.dataset.speechMode = mode;
+        if (bubble.textContent !== result.text) bubble.textContent = result.text;
+        const width = bubble.offsetWidth, height = bubble.offsetHeight, y = c.y + (mode === "hint" ? 28 : 0), rect = { left: c.x - width / 2, right: c.x + width / 2, top: y - height, bottom: y };
+        bubble.hidden = rect.left < 6 || rect.right > viewWidth - 6 || rect.top < 6 || rect.bottom > viewHeight - 6 || occupied.some((r) => overlaps(rect, r));
+        if (!bubble.hidden) {
+          bubble.style.left = c.x + "px";
+          bubble.style.top = y + "px";
+          occupied.push(rect);
+        }
+      }
     }
     function syncPups() {
       const list = (worldState.offspring || []).filter((p) => p.alive !== false), ids = new Set(list.map((p) => p.id));

@@ -925,3 +925,9 @@ body[data-current-panel="town"] .town-info-stack .town-clock>b,
 body[data-current-panel="town"] #townWeather strong,
 body[data-current-panel="town"] .town-info-stack .town-birth-ticker>b,
 body[data-current-panel="town"] .town-info-stack .town-birth-window{color:#17231b;font-weight:800;-webkit-text-stroke:1.6px rgba(255,255,255,.95);paint-order:stroke fill;text-shadow:none}
+
+/* Ambient conversations stay anchored; compact hints preserve the town's activity. */
+.town-life-bubble,.town-npc-speech{transform:translate(-50%,-100%);overflow-wrap:anywhere}
+.town-life-bubble.town-speech-hint,.town-npc-speech.town-speech-hint,body[data-town-view="first-person"] .town-speech-hint{width:26px;max-width:26px;min-width:0;padding:0 3px!important;line-height:18px;font-size:13px;letter-spacing:0;white-space:nowrap!important;border:0;box-shadow:none;background:#fff9e9c7!important;color:#526152;animation:town-speaking-dots 1.2s ease-in-out infinite}
+@keyframes town-speaking-dots{0%,100%{opacity:.55}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.town-speech-hint{animation:none!important}}
