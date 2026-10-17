@@ -80,6 +80,7 @@ export function createClinic(){
  for(const y of [1.67,1.76]){box(3.06,.08,.13,0,y,-1.13,white);box(3.06,.08,.13,0,y,.75,white);for(const side of [-1,1])box(.13,.08,1.95,side*1.47,y,-.19,white)}
  const cross=(x,y,z,size)=>{box(size*.27,size,.025,x,y,z,red);box(size,size*.27,.027,x,y,z,red)};cross(0,1.32,-1.03,.33);
  box(1.8,.36,.055,0,1.43,.85,white);storeSign(group,'鼠鼠医院',0,1.44,.884,1.65,.32,'#f0f6f3','#3f7180');
+ box(.56,.56,.08,0,2.02,.75,white);cross(0,2.02,.806,.4);
  for(const side of [-1,1]){const chair=new THREE.Group(),seat=kit(chair);chair.position.set(side*1.08,0,1.22);chair.userData.townAction='clinic-seat';chair.userData.seatSide=side;seat.box(.44,.08,.38,0,.31,0,blue);seat.box(.44,.43,.07,0,.55,-.17,blue);for(const x of [-.17,.17])for(const z of [-.13,.13])seat.box(.045,.28,.045,x,.14,z,metal);group.add(chair)}
  group.userData.footprint=3.5*2.7;return group;
 }

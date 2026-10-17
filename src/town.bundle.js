@@ -40504,6 +40504,8 @@ void main() {
     cross(0, 1.32, -1.03, 0.33);
     box3(1.8, 0.36, 0.055, 0, 1.43, 0.85, white);
     storeSign(group, "\u9F20\u9F20\u533B\u9662", 0, 1.44, 0.884, 1.65, 0.32, "#f0f6f3", "#3f7180");
+    box3(0.56, 0.56, 0.08, 0, 2.02, 0.75, white);
+    cross(0, 2.02, 0.806, 0.4);
     for (const side of [-1, 1]) {
       const chair = new Group(), seat = kit2(chair);
       chair.position.set(side * 1.08, 0, 1.22);
