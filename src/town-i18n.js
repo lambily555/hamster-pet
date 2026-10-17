@@ -44,7 +44,7 @@
       if(dictionaries[lang]?.[result])result=dictionaries[lang][result];
       else{
         for(const template of templates.filter(item=>!item.key.startsWith('{')&&/[。！？]$/.test(item.key))){
-          result=result.replace(new RegExp(template.pattern.source.slice(1,-1),'g'),(...match)=>{const values={};template.slots.forEach((slot,i)=>values[slot]=translate(match[i+1],lang));return dictionaries[lang][template.key].replace(/\{(\d+)\}/g,(_,i)=>values[i])});
+          result=result.replace(new RegExp(template.pattern.source.slice(1,-1),'g'),(...match)=>{const values={};template.slots.forEach((slot,i)=>values[slot]=translate(match[i+1],lang));return ' '+dictionaries[lang][template.key].replace(/\{(\d+)\}/g,(_,i)=>values[i])+' '});
         }
         result=result.replace(pattern,word=>' '+(dictionaries[lang]?.[word]??displayName(word,lang))+' ');
       }
@@ -53,7 +53,8 @@
     if(cache.size>5000)cache.clear();cache.set(key,result);return result;
   }
   const textStates=new WeakMap(),attributeStates=new WeakMap();
-  function renderText(node){const current=node.nodeValue,old=textStates.get(node),preview=node.parentElement?.dataset.i18nPreview,source=preview?decodeURIComponent(preview):old&&current===old.rendered?old.source:current;const rendered=preview?translate(source).slice(0,language==='zh'?25:60)+'…':translate(source);textStates.set(node,{source,rendered});if(rendered!==current)node.nodeValue=rendered}
+  function previewText(source){const text=translate(source),limit=language==='zh'?25:60;if(text.length<=limit)return text;let preview=text.slice(0,limit);if(language!=='zh'&&/\S/.test(text[limit])){const boundary=preview.lastIndexOf(' ');if(boundary>0)preview=preview.slice(0,boundary)}return preview.trimEnd()+'…'}
+  function renderText(node){const current=node.nodeValue,old=textStates.get(node),preview=node.parentElement?.dataset.i18nPreview,source=preview?decodeURIComponent(preview):old&&current===old.rendered?old.source:current;const rendered=preview?previewText(source):translate(source);textStates.set(node,{source,rendered});if(rendered!==current)node.nodeValue=rendered}
   const excluded='script,style,[data-i18n-user],.chat-message p,#lineList .line span';
   function render(root){if(!root)return;observer?.disconnect();try{
     const nodes=[];if(root.nodeType===3)nodes.push(root);else{const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);while(walker.nextNode())nodes.push(walker.currentNode)}

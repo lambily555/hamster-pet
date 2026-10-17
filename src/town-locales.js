@@ -1376,7 +1376,13 @@ TownI18n.add({
     "我跑了 {0} 回跑轮，六十多克的小身体也很有力量！": "I ran the wheel {0} times. My little body is strong too!",
     "选择图片": "Choose Image",
     "未选择文件": "No File Chosen",
-    "下午好，鼠鼠一直在这里": "Good afternoon. Hamster is right here with you."
+    "下午好，鼠鼠一直在这里": "Good afternoon. Hamster is right here with you.",
+    "英语": "English",
+    "西班牙语": "Spanish",
+    "菜叶": "Leaf",
+    "面包虫": "Mealworm",
+    "小饼干": "Cookie",
+    "营养糊糊": "Nutrition paste"
   },
   "es": {
     "鼠鼠小镇": "Pueblo Hámster",
@@ -2754,6 +2760,12 @@ TownI18n.add({
     "我跑了 {0} 回跑轮，六十多克的小身体也很有力量！": "Corrí en la rueda {0} veces. ¡Mi pequeño cuerpo también es fuerte!",
     "选择图片": "Elegir Imagen",
     "未选择文件": "Ningún Archivo Elegido",
-    "下午好，鼠鼠一直在这里": "Buenas tardes. Hámster está aquí contigo."
+    "下午好，鼠鼠一直在这里": "Buenas tardes. Hámster está aquí contigo.",
+    "英语": "Inglés",
+    "西班牙语": "Español",
+    "菜叶": "Hoja",
+    "面包虫": "Gusano de harina",
+    "小饼干": "Galletita",
+    "营养糊糊": "Papilla nutritiva"
   }
 });

@@ -948,3 +948,7 @@ html[lang="en"] main>header::after{content:"🐾 A little life with Hamster"}
 html[lang="es"] main>header::after{content:"🐾 Una pequeña vida con Hámster"}
 .town-overlay>header::after,.town-return-notice>header::after{content:none}
 .town-overlay>header{margin:0 0 12px;padding:0 0 12px!important;max-width:100%;box-sizing:border-box}
+
+/* Latin diary text uses natural word spacing and never adds hyphenation. */
+html:is([lang="en"],[lang="es"]) :is(.diary-paper,.diary-preview>p,.diary-archive span){font-family:"Segoe UI",Arial,sans-serif;letter-spacing:normal;word-spacing:normal;text-align:start;word-break:normal;overflow-wrap:normal;hyphens:none}
+html:is([lang="en"],[lang="es"]) .diary-paper p{font-family:"Segoe UI",Arial,sans-serif;letter-spacing:normal;word-spacing:normal;text-indent:0;text-align:start;word-break:normal;overflow-wrap:normal;hyphens:none}
