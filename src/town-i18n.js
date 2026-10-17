@@ -1,7 +1,7 @@
 /* Offline display translations. Simulation keys, saves and user-authored text stay unchanged. */
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.TownI18n=api})(typeof window==='undefined'?globalThis:window,function(){
   const dictionaries={en:{},es:{}},listeners=new Set(),protectedNames=new Set(),cache=new Map();
-  const syllables={子:'Zi',鼠:'Shu',杏:'Xing',桃:'Tao',栗:'Li',麦:'Mai',糖:'Tang',花:'Hua',芋:'Yu',米:'Mi',豆:'Dou',果:'Guo',松:'Song',雪:'Xue',云:'Yun',星:'Xing',月:'Yue',竹:'Zhu',叶:'Ye',芝:'Zhi',橙:'Cheng',蓝:'Lan',宝:'Bao',芽:'Ya',团:'Tuan',酥:'Su',铃:'Ling',露:'Lu',糕:'Gao',粒:'Li',萌:'Meng',棠:'Tang',棉:'Mian',青:'Qing',璐:'Lu',诺:'Nuo',香:'Xiang',绒:'Rong',朵:'Duo',圆:'Yuan',悠:'You',小:'Xiao',轮:'Lun',白:'Bai',念:'Nian',安:'An',礼:'Li',石:'Shi',头:'Tou',糯:'Nuo',奶:'Nai',盖:'Gai',仁:'Ren',绵:'Mian',球:'Qiu',生:'Sheng',错:'Cuo',黛:'Dai',西:'Xi'};
+  const syllables={麻:'Ma',子:'Zi',鼠:'Shu',杏:'Xing',桃:'Tao',栗:'Li',麦:'Mai',糖:'Tang',花:'Hua',芋:'Yu',米:'Mi',豆:'Dou',果:'Guo',松:'Song',雪:'Xue',云:'Yun',星:'Xing',月:'Yue',竹:'Zhu',叶:'Ye',芝:'Zhi',橙:'Cheng',蓝:'Lan',宝:'Bao',芽:'Ya',团:'Tuan',酥:'Su',铃:'Ling',露:'Lu',糕:'Gao',粒:'Li',萌:'Meng',棠:'Tang',棉:'Mian',青:'Qing',璐:'Lu',诺:'Nuo',香:'Xiang',绒:'Rong',朵:'Duo',圆:'Yuan',悠:'You',小:'Xiao',轮:'Lun',白:'Bai',念:'Nian',安:'An',礼:'Li',石:'Shi',头:'Tou',糯:'Nuo',奶:'Nai',盖:'Gai',仁:'Ren',绵:'Mian',球:'Qiu',生:'Sheng',错:'Cuo',黛:'Dai',西:'Xi'};
   function displayName(name,lang){
     if(name==='白大夫')return 'Dr. Bai';
     if(name==='蜜桃')return lang==='es'?'Melocotón':'Peach';
