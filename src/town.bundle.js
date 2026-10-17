@@ -34965,18 +34965,19 @@ void main() {
       seed.scale.set(0.55, 1.5, 0.55);
       group.add(seed);
       const start = new Vector3(point2.x, 0.6, point2.z), end = room.worldToLocal(slot.getWorldPosition(new Vector3()));
-      const c = document.createElement("canvas");
-      c.width = 256;
-      c.height = 128;
-      const g = c.getContext("2d");
-      g.font = "bold 40px Microsoft YaHei";
-      g.fillStyle = "#ffdb76";
-      g.strokeStyle = "#705335";
-      g.lineWidth = 3;
-      g.textAlign = "center";
-      g.strokeText("+" + amount + "\u74DC\u5B50", 128, 70);
-      g.fillText("+" + amount + "\u74DC\u5B50", 128, 70);
-      const map = new CanvasTexture(c);
+      const c = document.createElement("canvas"), map = new CanvasTexture(c);
+      window.TownI18n.canvas(map, (draw) => {
+        c.width = 256;
+        c.height = 128;
+        const g = c.getContext("2d");
+        g.font = "bold 40px Microsoft YaHei";
+        g.fillStyle = "#ffdb76";
+        g.strokeStyle = "#705335";
+        g.lineWidth = 3;
+        g.textAlign = "center";
+        g.strokeText(window.TownI18n.t("+" + amount + "\u74DC\u5B50"), 128, 70, 240);
+        draw(g, "+" + amount + "\u74DC\u5B50", 128, 70, 240);
+      });
       map.colorSpace = SRGBColorSpace;
       const text = new Sprite(new SpriteMaterial({ map, transparent: true, depthTest: true }));
       text.visible = false;
@@ -37746,20 +37747,22 @@ void main() {
   }
   function sign2(group, text, w, h, x2, y, z) {
     const c = document.createElement("canvas");
-    c.width = 768;
-    c.height = 192;
-    const g = c.getContext("2d");
-    g.fillStyle = "#77482d";
-    g.fillRect(0, 0, c.width, c.height);
-    g.strokeStyle = "#dcaa64";
-    g.lineWidth = 12;
-    g.strokeRect(8, 8, 752, 176);
-    g.fillStyle = "#ffe3a2";
-    g.font = "bold 84px Microsoft YaHei";
-    g.textAlign = "center";
-    g.textBaseline = "middle";
-    g.fillText(text, 384, 98);
     const map = new CanvasTexture(c);
+    window.TownI18n.canvas(map, (draw) => {
+      c.width = 768;
+      c.height = 192;
+      const g = c.getContext("2d");
+      g.fillStyle = "#77482d";
+      g.fillRect(0, 0, c.width, c.height);
+      g.strokeStyle = "#dcaa64";
+      g.lineWidth = 12;
+      g.strokeRect(8, 8, 752, 176);
+      g.fillStyle = "#ffe3a2";
+      g.font = "bold 84px Microsoft YaHei";
+      g.textAlign = "center";
+      g.textBaseline = "middle";
+      draw(g, text, 384, 98);
+    });
     map.colorSpace = SRGBColorSpace;
     const mesh = new Mesh(new PlaneGeometry(w, h), new MeshBasicMaterial({ map, side: DoubleSide }));
     mesh.position.set(x2, y, z);
@@ -39541,35 +39544,37 @@ void main() {
   var hallPhotos = [2, 3, 4, 5, 6, 13];
   function textTexture(title, subtitle = "MARIAH CAREY", portrait = false) {
     const c = document.createElement("canvas");
-    c.width = 512;
-    c.height = portrait ? 720 : 512;
-    const g = c.getContext("2d");
-    const grad = g.createLinearGradient(0, 0, 512, c.height);
-    grad.addColorStop(0, "#e9dce7");
-    grad.addColorStop(1, "#637f95");
-    g.fillStyle = grad;
-    g.fillRect(0, 0, 512, c.height);
-    g.strokeStyle = "#e8ce9d";
-    g.lineWidth = 8;
-    g.strokeRect(20, 20, 472, c.height - 40);
-    g.fillStyle = "#fff4db";
-    g.textAlign = "center";
-    g.font = "22px Georgia";
-    g.fillText(subtitle, 256, 85);
-    g.font = "bold 30px Microsoft YaHei";
-    const words = title.split(" ");
-    let lines = [], line = "";
-    for (const word of words) {
-      if (g.measureText(line + " " + word).width > 400) {
-        lines.push(line);
-        line = word;
-      } else line += (line ? " " : "") + word;
-    }
-    lines.push(line);
-    lines.forEach((line2, i2) => g.fillText(line2, 256, c.height * 0.48 + i2 * 42));
-    g.font = "18px Microsoft YaHei";
-    g.fillText("FAN GALLERY", 256, c.height - 70);
     const t = new CanvasTexture(c);
+    window.TownI18n.canvas(t, (draw) => {
+      c.width = 512;
+      c.height = portrait ? 720 : 512;
+      const g = c.getContext("2d");
+      const grad = g.createLinearGradient(0, 0, 512, c.height);
+      grad.addColorStop(0, "#e9dce7");
+      grad.addColorStop(1, "#637f95");
+      g.fillStyle = grad;
+      g.fillRect(0, 0, 512, c.height);
+      g.strokeStyle = "#e8ce9d";
+      g.lineWidth = 8;
+      g.strokeRect(20, 20, 472, c.height - 40);
+      g.fillStyle = "#fff4db";
+      g.textAlign = "center";
+      g.font = "22px Georgia";
+      draw(g, subtitle, 256, 85);
+      g.font = "bold 30px Microsoft YaHei";
+      const words = title.split(" ");
+      let lines = [], line = "";
+      for (const word of words) {
+        if (g.measureText(line + " " + word).width > 400) {
+          lines.push(line);
+          line = word;
+        } else line += (line ? " " : "") + word;
+      }
+      lines.push(line);
+      lines.forEach((line2, i2) => draw(g, line2, 256, c.height * 0.48 + i2 * 42));
+      g.font = "18px Microsoft YaHei";
+      draw(g, "FAN GALLERY", 256, c.height - 70);
+    });
     t.colorSpace = SRGBColorSpace;
     return t;
   }
@@ -39611,19 +39616,21 @@ void main() {
   }
   function sign3(group, title, x2, y, z, w, h) {
     const c = document.createElement("canvas");
-    c.width = 1024;
-    c.height = 140;
-    const ctx = c.getContext("2d");
-    ctx.fillStyle = "#eadbc0";
-    ctx.fillRect(0, 0, 1024, 140);
-    ctx.strokeStyle = "#a88954";
-    ctx.lineWidth = 8;
-    ctx.strokeRect(6, 6, 1012, 128);
-    ctx.fillStyle = "#564539";
-    ctx.font = "bold 64px Microsoft YaHei";
-    ctx.textAlign = "center";
-    ctx.fillText(title, 512, 94);
     const texture2 = new CanvasTexture(c);
+    window.TownI18n.canvas(texture2, (draw) => {
+      c.width = 1024;
+      c.height = 140;
+      const ctx = c.getContext("2d");
+      ctx.fillStyle = "#eadbc0";
+      ctx.fillRect(0, 0, 1024, 140);
+      ctx.strokeStyle = "#a88954";
+      ctx.lineWidth = 8;
+      ctx.strokeRect(6, 6, 1012, 128);
+      ctx.fillStyle = "#564539";
+      ctx.font = "bold 64px Microsoft YaHei";
+      ctx.textAlign = "center";
+      draw(ctx, title, 512, 94);
+    });
     texture2.colorSpace = SRGBColorSpace;
     const m = new Mesh(new PlaneGeometry(w, h), new MeshBasicMaterial({ map: texture2, side: DoubleSide }));
     m.position.set(x2, y, z);
@@ -40126,20 +40133,22 @@ void main() {
   }
   function sign4(group, text, x2, y, z, action) {
     const c = document.createElement("canvas");
-    c.width = 512;
-    c.height = 256;
-    const ctx = c.getContext("2d");
-    ctx.fillStyle = "#e9dbb9";
-    ctx.fillRect(0, 0, 512, 256);
-    ctx.strokeStyle = "#765e3e";
-    ctx.lineWidth = 12;
-    ctx.strokeRect(8, 8, 496, 240);
-    ctx.fillStyle = "#4c4935";
-    ctx.font = "bold 55px Microsoft YaHei";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    text.split("\n").forEach((line, i2, all) => ctx.fillText(line, 256, 128 + (i2 - (all.length - 1) / 2) * 65));
     const t = new CanvasTexture(c);
+    window.TownI18n.canvas(t, (draw) => {
+      c.width = 512;
+      c.height = 256;
+      const ctx = c.getContext("2d");
+      ctx.fillStyle = "#e9dbb9";
+      ctx.fillRect(0, 0, 512, 256);
+      ctx.strokeStyle = "#765e3e";
+      ctx.lineWidth = 12;
+      ctx.strokeRect(8, 8, 496, 240);
+      ctx.fillStyle = "#4c4935";
+      ctx.font = "bold 55px Microsoft YaHei";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      text.split("\n").forEach((line, i2, all) => draw(ctx, line, 256, 128 + (i2 - (all.length - 1) / 2) * 65));
+    });
     t.colorSpace = SRGBColorSpace;
     const mesh = new Mesh(new PlaneGeometry(0.95, 0.48), new MeshBasicMaterial({ map: t, side: DoubleSide }));
     mesh.position.set(x2, y, z);
@@ -40353,17 +40362,19 @@ void main() {
   }
   function storeSign(group, text, x2, y, z, width, height, background, ink) {
     const c = document.createElement("canvas");
-    c.width = 1024;
-    c.height = Math.round(1024 * height / width);
-    const g = c.getContext("2d");
-    g.fillStyle = background;
-    g.fillRect(0, 0, c.width, c.height);
-    g.fillStyle = ink;
-    g.font = "bold " + Math.floor(c.height * 0.67) + "px Microsoft YaHei";
-    g.textAlign = "center";
-    g.textBaseline = "middle";
-    g.fillText(text, c.width / 2, c.height / 2);
     const texture2 = new CanvasTexture(c);
+    window.TownI18n.canvas(texture2, (draw) => {
+      c.width = 1024;
+      c.height = Math.round(1024 * height / width);
+      const g = c.getContext("2d");
+      g.fillStyle = background;
+      g.fillRect(0, 0, c.width, c.height);
+      g.fillStyle = ink;
+      g.font = "bold " + Math.floor(c.height * 0.67) + "px Microsoft YaHei";
+      g.textAlign = "center";
+      g.textBaseline = "middle";
+      draw(g, text, c.width / 2, c.height / 2);
+    });
     texture2.colorSpace = SRGBColorSpace;
     const mesh = new Mesh(new PlaneGeometry(width, height), new MeshBasicMaterial({ map: texture2, side: DoubleSide }));
     mesh.position.set(x2, y, z);
@@ -44501,6 +44512,7 @@ void main() {
       const button = document.createElement("button");
       button.className = "town-label";
       button.textContent = name;
+      button.title = name;
       button.onclick = () => enterPlace(name);
       host.appendChild(button);
       return { button, point: new Vector3(x2, name === "\u4E2D\u5FC3\u5E7F\u573A" ? 1.85 : name === "\u9F20\u9F20\u5B66\u6821" ? 4.4 : 2.1, z) };
@@ -44808,6 +44820,7 @@ void main() {
         const button = document.createElement(action ? "button" : "span");
         button.className = "town-label town-furniture-label";
         button.textContent = text;
+        button.dataset.sourceText = text;
         if (extra) button.title = extra.title + "\uFF1A" + window.TownInteractions.description(extra);
         if (action) button.onclick = () => window.dispatchEvent(new CustomEvent("town-object-action", { detail: { action, place: name } }));
         host.appendChild(button);
@@ -45056,14 +45069,16 @@ void main() {
         c.width = 512;
         c.height = 256;
         const g = c.getContext("2d");
-        g.fillStyle = "#365d48";
-        g.fillRect(0, 0, 512, 256);
-        g.fillStyle = "#eee9d4";
-        g.font = "30px Microsoft YaHei";
-        const text = worldState.schoolBoard || "\u6B22\u8FCE\u6765\u5230\u9F20\u9F20\u5B66\u6821";
-        for (let i2 = 0; i2 < text.length; i2 += 15) g.fillText(text.slice(i2, i2 + 15), 22, 43 + Math.floor(i2 / 15) * 37);
         board.material.color.set(16777215);
         board.material.map = new CanvasTexture(c);
+        window.TownI18n.canvas(board.material.map, () => {
+          g.fillStyle = "#365d48";
+          g.fillRect(0, 0, 512, 256);
+          g.fillStyle = "#eee9d4";
+          g.font = "30px Microsoft YaHei";
+          const text = worldState.schoolBoard || window.TownI18n.t("\u6B22\u8FCE\u6765\u5230\u9F20\u9F20\u5B66\u6821");
+          for (let i2 = 0; i2 < text.length; i2 += 28) g.fillText(text.slice(i2, i2 + 28), 22, 43 + Math.floor(i2 / 28) * 37, 468);
+        });
         board.material.map.colorSpace = SRGBColorSpace;
         label("\u9ED1\u677F", 0.5, -2.5, "school-board");
         room.userData.classroomSeats = [];
@@ -45781,8 +45796,8 @@ void main() {
       }
       if (actor.inside && (source === "keyboard" || actor.inside !== "\u9F20\u9F20\u5B66\u6821")) {
         const nearby = roomLabels.map((l) => ({ ...l, d: Math.hypot(l.point.x - actor.position.x, l.point.z - actor.position.z) })).sort((a, b) => a.d - b.d)[0];
-        if (nearby?.d < 1.2 && !(source === "mouse" && nearby.button.textContent.startsWith("\u4F11\u606F\u957F\u6905"))) {
-          const text = nearby.button.textContent, extra = window.TownInteractions.actions.find((a) => a.place === actor.inside && a.object === text), action = actor.inside === "\u5BA0\u7269\u4E4B\u5BB6" ? "pet-home" : text.startsWith("\u5BA0\u7269") ? "pet-roster" : extra ? "place-" + extra.id : text.startsWith("\u6C34\u58F6") ? "water" : text.startsWith("\u7CAE\u4ED3") ? "supply" : text === "\u8BCA\u7597\u5E8A" ? "treat" : text.includes("\u5E8A") ? "rest" : text === "\u98DF\u76C6" ? "eat" : "inspect";
+        if (nearby?.d < 1.2 && !(source === "mouse" && nearby.button.dataset.sourceText.startsWith("\u4F11\u606F\u957F\u6905"))) {
+          const text = nearby.button.dataset.sourceText, extra = window.TownInteractions.actions.find((a) => a.place === actor.inside && a.object === text), action = actor.inside === "\u5BA0\u7269\u4E4B\u5BB6" ? "pet-home" : text.startsWith("\u5BA0\u7269") ? "pet-roster" : extra ? "place-" + extra.id : text.startsWith("\u6C34\u58F6") ? "water" : text.startsWith("\u7CAE\u4ED3") ? "supply" : text === "\u8BCA\u7597\u5E8A" ? "treat" : text.includes("\u5E8A") ? "rest" : text === "\u98DF\u76C6" ? "eat" : "inspect";
           window.dispatchEvent(new CustomEvent("town-player-action", { detail: { action, text, place: actor.inside } }));
           actor.speech = "\u770B\u770B" + text.split(" \xB7 ")[0];
           return;
@@ -46302,7 +46317,7 @@ void main() {
       const candidates = [];
       let gazeId = firstPerson ? null : hoveredActor, gazeDistance = 0.18;
       for (const { id, rig, tag, headHeight = 0.8 } of entries) {
-        const actor = life.actors.get(id), manual = manualActive && id === manualId, bubble = manual ? speech : lifeBubbles.get(id), text = manual ? speech._text : actor?.speech;
+        const actor = life.actors.get(id), manual = manualActive && id === manualId, bubble = manual ? speech : lifeBubbles.get(id), text = window.TownI18n.t(manual ? speech._text : actor?.speech);
         const ambient2 = lifeBubbles.get(id);
         if (manual && ambient2) ambient2.hidden = true;
         if (!bubble) continue;
@@ -46478,7 +46493,7 @@ void main() {
       residents.forEach((npc, index) => {
         const actor = life.actors.get(npc.lifeId);
         renderActor(npc.rig, actor, t);
-        const text = (worldState.npcs?.[index]?.name || roles[index]) + " " + (worldState.npcs?.[index]?.sex === "male" ? "\u2642" : "\u2640");
+        const text = window.TownI18n.t(worldState.npcs?.[index]?.name || roles[index]) + " " + (worldState.npcs?.[index]?.sex === "male" ? "\u2642" : "\u2640");
         if (npc.tag.textContent !== text) npc.tag.textContent = text;
         placeLabel(npc.tag, npc.rig.position.clone().add(new Vector3(0, 0.8, 0)), occupied, !npc.rig.visible || (firstPerson ? Math.hypot(npc.rig.position.x - camera.position.x, npc.rig.position.z - camera.position.z) > 2.8 : focusedResident !== -1 ? focusedResident !== index : hoveredActor !== npc.lifeId), true);
       });

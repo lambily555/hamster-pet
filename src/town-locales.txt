@@ -1,0 +1,1377 @@
+鼠鼠小镇|Hamster Town|Pueblo Hámster
+中心广场|Central Plaza|Plaza Central
+鼠鼠小屋|Hamster Cottage|Casita Hámster
+鼠鼠学校|Hamster School|Escuela Hámster
+鼠鼠饭馆|Hamster Restaurant|Restaurante Hámster
+鼠鼠医院|Hamster Hospital|Hospital Hámster
+诊所|Clinic|Clínica
+零食铺|Snack Shop|Tienda de Aperitivos
+纪念馆|Memorial Hall|Sala de Recuerdos
+殡仪馆|Farewell Hall|Sala de Despedida
+墓地|Cemetery|Cementerio
+小菜园|Vegetable Garden|Huerto
+跑轮公园|Wheel Park|Parque de Ruedas
+名人堂|Hall of Fame|Salón de la Fama
+宠物之家|Pet Home|Hogar de Mascotas
+小镇鼠鼠信息|Town Residents|Habitantes del Pueblo
+居民|Residents|Habitantes
+饱食度|Fullness|Saciedad
+健康|Health|Salud
+心情|Mood|Ánimo
+体力|Stamina|Energía
+年龄|Age|Edad
+粮仓|Granary|Granero
+瓜子|Seeds|Semillas
+小镇广播|Town Broadcast|Noticias del Pueblo
+暂停|Pause|Pausar
+继续|Resume|Continuar
+生活记录|Life Journal|Diario de Vida
+小镇设置|Town Settings|Ajustes del Pueblo
+生活速度|Life Speed|Velocidad de Vida
+进入鼠鼠第一视角|Enter First Person|Entrar en Primera Persona
+第一视角|First Person|Primera Persona
+上帝视角|Overview|Vista General
+返回上帝视角|Return to Overview|Volver a Vista General
+返回小镇|Return to Town|Volver al Pueblo
+返回桌面主页|Return Home|Volver al Inicio
+显示文字框|Show Interface|Mostrar Interfaz
+全屏视野|Clear View|Vista Despejada
+正在下小雨|Light rain|Lluvia ligera
+晴朗|Sunny|Soleado
+多云|Cloudy|Nublado
+微风|Breezy|Brisa
+白天|Daytime|Día
+傍晚|Evening|Atardecer
+夜晚|Night|Noche
+深夜|Late night|Madrugada
+写实|Realistic|Realista
+悠闲|Relaxed|Tranquilo
+快速|Fast|Rápido
+现实日|real days|días reales
+现实小时|real hours|horas reales
+现实分钟|real minutes|minutos reales
+小镇年|town years|años del pueblo
+小镇日|town days|días del pueblo
+小镇时间|town time|hora del pueblo
+当前小镇天气|Current weather|Tiempo actual
+叫鼠鼠回家睡觉|Send Hamster Home to Sleep|Enviar a Hámster a Dormir
+叫鼠鼠起床|Wake Hamster Up|Despertar a Hámster
+正常成长|Natural Growth|Crecimiento Natural
+自然死亡|Natural Death|Muerte Natural
+可能生病|Illness Enabled|Enfermedades Activadas
+界面语言|Interface Language|Idioma de la Interfaz
+中文|Chinese|Chino
+居民资料|Resident Profile|Perfil del Habitante
+性别|Sex|Sexo
+公鼠|Male|Macho
+母鼠|Female|Hembra
+小男鼠|Male hamster|Hámster macho
+小女鼠|Female hamster|Hámster hembra
+毛色|Coat|Pelaje
+三线|Winter White|Ruso
+灰黑色|Dark gray|Gris oscuro
+银狐|Pearl|Perla
+白色|White|Blanco
+布丁|Pudding|Pudín
+黄白色|Yellow and white|Amarillo y blanco
+紫仓|Sapphire|Zafiro
+灰紫色|Lilac gray|Gris lila
+少年|Young|Joven
+成年|Adult|Adulto
+老年|Senior|Anciano
+长寿|Long-lived|Longevo
+无敌长寿|Exceptionally long-lived|Excepcionalmente longevo
+幼鼠|Pup|Cría
+生日|Birthday|Cumpleaños
+身份|Role|Identidad
+主鼠|Main Hamster|Hámster Principal
+继任者|Successor|Sucesor
+代数|Generation|Generación
+父母|Parents|Padres
+子女|Children|Hijos
+伴侣|Partner|Pareja
+好感度|Affection|Afinidad
+繁育条件|Breeding Conditions|Condiciones de Cría
+今日社交|Today's Social Activity|Actividad Social de Hoy
+爱好|Hobbies|Aficiones
+当前活动|Current Activity|Actividad Actual
+居民朋友|Friends|Amigos
+居住与工作|Home and Work|Hogar y Trabajo
+个人介绍|About|Presentación
+聊一会儿|Chat|Conversar
+繁育后代|Have Pups|Tener Crías
+结伴活动|Activities Together|Actividades Juntos
+结伴故事|Story Together|Historia Juntos
+对方的回应|Their Reply|Su Respuesta
+继续结伴故事|Continue the Story|Continuar la Historia
+邀请一起去|Invite Along|Invitar
+查看|View|Ver
+知识|Knowledge|Conocimiento
+暂无记录|No records yet|Sin registros
+暂时没有|None yet|Todavía ninguno
+暂无伴侣|No partner yet|Sin pareja
+未知|Unknown|Desconocido
+未知毛色|Unknown coat|Pelaje desconocido
+休息|Resting|Descansando
+睡觉|Sleeping|Durmiendo
+学习|Studying|Estudiando
+工作|Working|Trabajando
+检查|Checkup|Revisión
+参观|Visiting|Visitando
+用餐|Dining|Comiendo
+跑轮|Running the wheel|En la rueda
+纪念|Remembering|Recordando
+社交|Socializing|Socializando
+探索|Exploring|Explorando
+寻找食物|Looking for food|Buscando comida
+理毛|Grooming|Aseándose
+菜园散步|Garden walk|Paseo por el huerto
+欣赏展览|Enjoying the gallery|Viendo la exposición
+陪伴宠物|Playing with pets|Jugando con mascotas
+迎接幼鼠|Welcoming pups|Recibiendo crías
+结伴游玩|Outing together|Paseando juntos
+庆祝|Celebrating|Celebrando
+购买粮食|Buying food|Comprando comida
+照看菜园|Tending the garden|Cuidando el huerto
+住院|Hospitalized|Hospitalizado
+跑轮管理员|Wheel Park Keeper|Encargado del Parque
+医生|Doctor|Médico
+零食店主|Snack Shopkeeper|Tendero de Aperitivos
+纪念馆管理员|Memorial Keeper|Encargado de Recuerdos
+园丁|Gardener|Jardinero
+礼仪师|Farewell Attendant|Encargado de Despedidas
+守墓人|Cemetery Keeper|Guardián del Cementerio
+教师|Teacher|Profesor
+餐馆服务员|Restaurant Server|Camarero
+名人堂管理员|Gallery Keeper|Encargado de la Galería
+宠物照护员|Pet Caretaker|Cuidador de Mascotas
+不分配职业|No Job Assigned|Sin Profesión
+小镇职业|Town Job|Profesión
+模型预览|Model Preview|Vista del Modelo
+正在加载模型…|Loading model…|Cargando modelo…
+迎接新邻居|Welcome New Neighbors|Recibir Nuevos Vecinos
+返回鼠鼠小屋|Back to the Cottage|Volver a la Casita
+返回小镇鼠鼠信息|Back to Residents|Volver a Habitantes
+小镇后代|Town Descendant|Descendiente del Pueblo
+桌面伙伴|Desktop Companion|Compañero de Escritorio
+与主鼠档案一致|Matches the main profile|Coincide con el perfil principal
+旧友|Old friend|Viejo amigo
+正在认识新朋友|Making new friends|Haciendo nuevos amigos
+会自主繁育|Will have pups autonomously|Tendrá crías de forma autónoma
+回家睡觉中|Returning home to sleep|Volviendo a casa a dormir
+疲劳减速|Slowing from fatigue|Más lento por cansancio
+亲密|Close|Cercano
+认识|Acquainted|Conocido
+陌生|Stranger|Desconocido
+我的宠物|My Pets|Mis Mascotas
+邻居的宠物|Neighbor's Pets|Mascotas del Vecino
+查看这只宠物|View This Pet|Ver Esta Mascota
+主人|Owner|Dueño
+小镇居民|Town Resident|Habitante del Pueblo
+寿命|Lifespan|Esperanza de Vida
+饱腹|Fullness|Saciedad
+所在地点|Location|Ubicación
+宠物粮|Pet Food|Comida para Mascotas
+宠物窝|Pet Bed|Cama de Mascota
+玩具|Toys|Juguetes
+已购置|Purchased|Comprado
+未购置|Not purchased|Sin comprar
+让宠物回家等待|Send Pet Home|Enviar Mascota a Casa
+一键跟随主人|Follow Owner|Seguir al Dueño
+免费切换|Switch for free|Cambiar gratis
+摸摸|Pet|Acariciar
+喂食|Feed|Alimentar
+全部宠物回家等待|Send All Pets Home|Enviar Todas a Casa
+全部宠物跟随主鼠|All Pets Follow Me|Todas Me Siguen
+免费切换；睡觉时宠物回家|Switch for free; pets go home while you sleep|Cambio gratis; vuelven a casa mientras duermes
+补充宠物粮|Restock Pet Food|Reponer Comida
+小镇道路|Town Path|Camino del Pueblo
+宠物服务|Pet Services|Servicios para Mascotas
+跟随|Follow|Seguir
+回家|Go Home|Ir a Casa
+摸摸伙伴|Pet Your Companion|Acariciar al Compañero
+我的鼠鼠|My Hamster|Mi Hámster
+你正在陪伴的桌面伙伴|Your desktop companion|Tu compañero de escritorio
+新邻居|New Neighbor|Nuevo Vecino
+鼠鼠们碰面和交换消息的地方|Where residents meet and share news|Donde los habitantes se reúnen y comparten noticias
+正在查看这里的鼠鼠和设施|Viewing the residents and facilities here|Viendo los habitantes y las instalaciones
+建筑内外共用模型|Shared interior and exterior model|Modelo compartido interior y exterior
+拖动旋转|Drag to rotate|Arrastra para girar
+滚轮缩放|Scroll to zoom|Rueda para ampliar
+近距离查看|Close-up view|Vista de cerca
+移动|Move|Mover
+开门|Open door|Abrir puerta
+互动|Interact|Interactuar
+鼠标环顾|Mouse to look around|Ratón para mirar
+点击查看结伴故事|Click to open the story|Haz clic para abrir la historia
+今天也很高兴见到你！|It's lovely to see you today!|¡Qué alegría verte hoy!
+吱吱，欢迎来找我聊天。|Squeak! Come and chat with me.|¡Chii! Ven a conversar conmigo.
+去长椅上歇一会儿|I'll rest on a bench.|Voy a descansar en un banco.
+广场小憩|Resting in the plaza|Descansando en la plaza
+通知领养宠物|Inviting to adopt a pet|Invitando a adoptar
+你可以去宠物之家领养一只伙伴！|You can adopt a companion at Pet Home!|¡Puedes adoptar un compañero en el Hogar de Mascotas!
+谢谢你！我这就去宠物之家看看。|Thank you! I'll go and have a look now.|¡Gracias! Voy a echar un vistazo ahora.
+领养宠物|Adopt a Pet|Adoptar una Mascota
+老板，我想领养一位宠物伙伴！|Hello! I'd like to adopt a pet!|¡Hola! ¡Quiero adoptar una mascota!
+去餐桌用餐，吃完再付款|Let's eat first and pay afterward.|Comamos primero y paguemos después.
+瓜子不够，下次再来|Not enough seeds. I'll come back later.|No tengo semillas suficientes. Volveré luego.
+离开饭馆|Leaving the restaurant|Saliendo del restaurante
+嚼嚼，好香呀|Munch, munch. Delicious!|Ñam, ñam. ¡Qué rico!
+吃好了，去收银台排队|All done! Time to queue and pay.|¡Terminé! A hacer cola para pagar.
+等前面的朋友付完款|Waiting for my friend to finish paying.|Esperando a que mi amigo termine de pagar.
+请收下我的瓜子|Here are my seeds.|Aquí están mis semillas.
+瓜子不足，先让其他朋友付款|I'm short on seeds. You can go first.|Me faltan semillas. Puedes pagar primero.
+谢谢招待，支付完成！|All paid. Thanks for the meal!|¡Ya pagué! ¡Gracias por la comida!
+行动|Action|Acción
+等朋友一起聊聊|Waiting for a friend to chat.|Esperando a un amigo para conversar.
+坐一会儿，看看广场的风景|A little rest with a view of the plaza.|Un descansito mirando la plaza.
+谢谢大家陪我过生日！|Thanks for celebrating my birthday with me!|¡Gracias por celebrar mi cumpleaños conmigo!
+生日快乐！|Happy birthday!|¡Feliz cumpleaños!
+蛋糕已经准备好啦！|The cake is ready!|¡La tarta está lista!
+今天也要开开心心！|Let's have a happy day!|¡Que tengamos un día feliz!
+一起分享小蛋糕吧！|Let's share some cake!|¡Compartamos la tarta!
+大家一起庆祝吧！|Let's all celebrate!|¡Celebremos juntos!
+节日快乐！|Happy holidays!|¡Felices fiestas!
+今天广场真热闹！|The plaza is so lively today!|¡La plaza está muy animada hoy!
+和大家在一起真开心。|I'm so happy we're all together.|Qué alegría estar todos juntos.
+来一起庆祝吧！|Come and celebrate with us!|¡Ven a celebrar con nosotros!
+准备迎接小鼠|Getting ready to welcome pups|Preparándonos para recibir crías
+陪宠物玩一会儿，帮老板照顾新伙伴|Playing with pets and helping care for new arrivals.|Jugando con las mascotas y cuidando a los recién llegados.
+看看喜欢的专辑和唱片|Browsing my favorite albums and records.|Mirando mis álbumes y discos favoritos.
+坐下来，尝尝新鲜蔬菜和谷物|Time to sit down for fresh vegetables and grains.|A sentarse a comer verduras y cereales frescos.
+安静休养，等白大夫照料|Resting quietly while waiting for the doctor.|Descansando en espera del médico.
+挑一点喜欢的粮食|Picking out some favorite food.|Eligiendo mi comida favorita.
+认真检查身体|Getting a thorough checkup.|Haciéndome una revisión completa.
+喝一点水|Having a little water.|Bebiendo un poco de agua.
+看看嫩叶长好了没有|Let's see if the leaves are ready.|Veamos si las hojas ya han crecido.
+跑起来！|Let's run!|¡A correr!
+看看大家留下的回忆|Looking through everyone's memories.|Recordando a nuestros amigos.
+翻开书本，认识新的种子|Reading about new kinds of seeds.|Leyendo sobre nuevos tipos de semillas.
+轻轻问好，记住在这里的朋友|A quiet hello to the friends we remember.|Un saludo tranquilo a los amigos que recordamos.
+整理送别用品，保持这里安静|Preparing farewell items and keeping things peaceful.|Preparando la despedida y manteniendo la tranquilidad.
+呼……|Zzz…|Zzz…
+休息一会儿|Taking a short rest.|Descansando un momento.
+一起玩一会儿|Let's play together for a while.|Juguemos juntos un rato.
+下次再来找朋友|I'll see my friends another time.|Veré a mis amigos otro día.
+你好，|Hello, |Hola,
+朋友|friend|amigo
+是呀，要不要一起去尝尝？|Yes! Shall we go and try it together?|¡Sí! ¿Vamos a probarlo juntos?
+下次一起去公园吧！|Let's go to the park together next time!|¡La próxima vez vayamos juntos al parque!
+分享点心|Share Snacks|Compartir Aperitivos
+一起帮忙|Help Together|Ayudar Juntos
+合影留念|Take a Photo|Hacer una Foto
+带宠物出游|Walk the Pets|Pasear con Mascotas
+走到半路，对方忽然说有点累了。|Halfway there, your friend says they feel tired.|A mitad de camino, tu amigo dice que está cansado.
+找个安静的地方休息，等它恢复|Find a quiet place to rest until they feel better.|Buscar un lugar tranquilo y esperar a que se recupere.
+按原计划继续，慢一点走|Continue as planned, at a slower pace.|Seguir el plan, pero más despacio.
+催它赶紧跟上，别扫兴|Tell them to hurry up and stop spoiling the fun.|Decirle que se apresure y no arruine la diversión.
+谢谢你愿意等我，我们下次再来！|Thanks for waiting for me. Let's come back another day!|Gracias por esperarme. ¡Volvamos otro día!
+对方带来的点心不小心掉在了地上。|Your friend accidentally drops their snacks.|A tu amigo se le caen los aperitivos al suelo.
+拿出自己的点心一起分享|Share your own snacks.|Compartir tus propios aperitivos.
+帮它收拾好，继续散步|Help clean up, then keep walking.|Ayudar a recoger y seguir paseando.
+笑它连点心都拿不稳|Laugh at them for dropping their snacks.|Reírte por no poder sujetar los aperitivos.
+有你一起分享，今天还是很开心。|Sharing with you still makes this a happy day.|Compartir contigo hace que el día siga siendo feliz.
+你们遇到一位找不到路的新邻居。|You meet a new neighbor who is lost.|Os encontráis con un vecino nuevo que está perdido.
+和对方一起带新邻居找到路|Help the new neighbor find their way together.|Ayudar juntos al nuevo vecino a encontrar el camino.
+指一下方向，再继续活动|Point out the way and continue your outing.|Indicarle el camino y continuar el paseo.
+嫌麻烦，拉着对方离开|Decide it's too much trouble and pull your friend away.|Decidir que es una molestia y llevarte a tu amigo.
+能和你一起帮忙，真好。|It feels good to help someone together.|Qué bonito poder ayudar juntos.
+对方想合影，却担心自己不好看。|Your friend wants a photo but worries about how they look.|Tu amigo quiere una foto, pero le preocupa salir mal.
+让它挑喜欢的角度，认真拍一张|Let them choose an angle and take a careful photo.|Dejarle elegir el ángulo y hacer una buena foto.
+随手拍一张，留作纪念|Take a quick photo as a keepsake.|Hacer una foto rápida de recuerdo.
+说它太挑剔，不想拍了|Say they're too fussy and refuse to take it.|Decir que es demasiado exigente y negarte.
+这张照片我会好好保存。|I'll treasure this photo.|Guardaré esta foto con cariño.
+你们喜欢的活动不同，剩下的时间只够玩一种。|You prefer different activities, with time left for only one.|Preferís actividades diferentes y solo queda tiempo para una.
+先陪它玩喜欢的，下次再一起选|Try their favorite today and choose together next time.|Hacer su favorita hoy y elegir juntos la próxima vez.
+按原计划安排这一次|Follow your original plan this time.|Seguir el plan original esta vez.
+只玩自己喜欢的，不听建议|Do only what you want and ignore their suggestion.|Hacer solo lo que tú quieres e ignorar su sugerencia.
+你还记得我喜欢什么，我很开心。|I'm happy you remembered what I like.|Me alegra que recuerdes lo que me gusta.
+突然起风，对方的围巾飘走了。|A sudden gust blows your friend's scarf away.|Una ráfaga de viento se lleva la bufanda de tu amigo.
+一起找回来，再确认它有没有着凉|Find it together and check they're warm enough.|Buscarla juntos y comprobar que no tenga frío.
+提醒它下次收好围巾|Remind them to secure their scarf next time.|Recordarle que sujete bien la bufanda la próxima vez.
+说它粗心，让它自己去找|Call them careless and make them find it alone.|Decir que es descuidado y que la busque solo.
+谢谢你陪我找回来。|Thank you for helping me find it.|Gracias por ayudarme a encontrarla.
+你们带着宠物散步，小伙伴被响声吓到了。|During your pet walk, a loud noise frightens a little companion.|Durante el paseo, un ruido asusta a una mascota.
+和对方一起安抚宠物，到安静处玩|Soothe the pet together and find somewhere quiet.|Calmar juntos a la mascota y buscar un lugar tranquilo.
+暂停一下，等宠物自己平静|Pause and wait for the pet to settle down.|Parar y esperar a que se calme.
+拉着宠物继续走，不管它的反应|Pull the pet along, ignoring its reaction.|Tirar de la mascota e ignorar su reacción.
+它安心了，我们也能继续开心地玩。|They're calm again. Now we can all enjoy our walk.|Ya está tranquila. Ahora podemos disfrutar del paseo.
+对方认真讲起最近的小烦恼。|Your friend opens up about a recent worry.|Tu amigo te cuenta algo que le preocupa.
+认真听完，问它需要什么帮助|Listen carefully and ask how you can help.|Escuchar con atención y preguntar cómo puedes ayudar.
+听完后换个轻松的话题|Listen, then switch to a lighter topic.|Escuchar y luego cambiar a un tema más alegre.
+打断它，说这没什么好烦的|Interrupt and say it's nothing to worry about.|Interrumpir y decir que no es para tanto.
+谢谢你认真听我说。|Thank you for really listening.|Gracias por escucharme con atención.
+我有些难过，下次希望你也听听我的想法。|That hurt a little. I hope you'll hear me out next time.|Me ha dolido un poco. Espero que me escuches la próxima vez.
+好，那我们继续吧。|All right, let's carry on.|Bien, sigamos.
+猫|Cat|Gato
+狗|Dog|Perro
+海狸|Beaver|Castor
+蜜蜂|Bee|Abeja
+兔子|Rabbit|Conejo
+毛毛虫|Caterpillar|Oruga
+小鸡|Chick|Pollito
+奶牛|Cow|Vaca
+螃蟹|Crab|Cangrejo
+鹿|Deer|Ciervo
+大象|Elephant|Elefante
+鱼|Fish|Pez
+狐狸|Fox|Zorro
+长颈鹿|Giraffe|Jirafa
+野猪|Boar|Jabalí
+考拉|Koala|Koala
+狮子|Lion|León
+猴子|Monkey|Mono
+熊猫|Panda|Panda
+鹦鹉|Parrot|Loro
+企鹅|Penguin|Pingüino
+小猪|Pig|Cerdito
+北极熊|Polar Bear|Oso Polar
+老虎|Tiger|Tigre
+宠物专属粮仓|Pet Food Storage|Almacén de Comida para Mascotas
+宠物玩具|Pet Toys|Juguetes para Mascotas
+宠物食盆|Pet Bowl|Comedero
+领养柜台|Adoption Counter|Mostrador de Adopción
+宠物用品架|Pet Supplies|Estante de Mascotas
+持续照顾|Lifelong Care|Cuidado de por Vida
+宠物陪伴区|Pet Play Area|Zona de Juego
+宠物店老板|Pet Shopkeeper|Encargado de Mascotas
+蓝色肖像封面|Blue Portrait Cover|Portada de Retrato Azul
+彩虹封面|Rainbow Cover|Portada Arcoíris
+人形立牌|Standee|Figura de Pie
+照片|Photo|Foto
+床铺|Bed|Cama
+食盆|Food Bowl|Comedero
+水壶|Water Bottle|Bebedero
+台灯|Lamp|Lámpara
+书柜|Bookcase|Librería
+黑板|Blackboard|Pizarra
+课桌|School Desk|Pupitre
+唱片展柜|Record Display|Vitrina de Discos
+专辑墙|Album Wall|Muro de Álbumes
+木桌|Wooden Table|Mesa de Madera
+坐垫|Cushion|Cojín
+检查台|Examination Table|Mesa de Exploración
+诊疗床|Hospital Bed|Cama de Hospital
+点餐柜台|Order Counter|Mostrador de Pedidos
+药柜|Medicine Cabinet|Armario de Medicinas
+厨房|Kitchen|Cocina
+零食货架|Snack Shelf|Estante de Aperitivos
+粮食货架|Food Shelf|Estante de Comida
+相册展柜|Photo Album Display|Vitrina de Álbumes
+纪念物展柜|Keepsake Display|Vitrina de Recuerdos
+送别用品柜|Farewell Supplies|Armario de Despedidas
+告别台|Farewell Table|Mesa de Despedida
+热身栏杆|Warm-up Rail|Barra de Calentamiento
+公园长椅|Park Bench|Banco del Parque
+浇水壶|Watering Can|Regadera
+菜畦|Vegetable Bed|Bancal
+喷泉|Fountain|Fuente
+广场长椅|Plaza Bench|Banco de la Plaza
+墓碑|Gravestone|Lápida
+纪念墙|Memorial Wall|Muro Conmemorativo
+生平卡片展柜|Life Story Display|Vitrina de Biografías
+休息长椅|Rest Bench|Banco de Descanso
+等候长椅|Waiting Bench|Banco de Espera
+用餐区|Dining Area|Comedor
+柜台|Counter|Mostrador
+室内|Interior|Interior
+依偎|Cuddling|Acurrucándose
+用餐后收银|Pay After Dining|Pagar Después de Comer
+欢迎来到鼠鼠学校|Welcome to Hamster School|Bienvenidos a la Escuela Hámster
+坐下|Sit Down|Sentarse
+起身|Stand Up|Levantarse
+坐下欣赏专辑|Sit and Enjoy the Albums|Sentarse a Ver los Álbumes
+坐在广场长椅上|Sitting on a plaza bench|Sentado en un banco de la plaza
+坐在纪念馆长椅上|Sitting on a memorial bench|Sentado en un banco del memorial
+坐在餐椅上|Sitting at the dining table|Sentado a la mesa
+坐在课桌前|Sitting at a desk|Sentado en un pupitre
+坐在学校秋千上|Sitting on the school swing|Sentado en el columpio
+坐在学校门口|Sitting by the school entrance|Sentado junto a la escuela
+坐在医院椅子上|Sitting on a hospital chair|Sentado en una silla del hospital
+这张长椅有朋友在休息，换一张吧。|This bench is occupied. Try another one.|Este banco está ocupado. Prueba otro.
+再靠近一点，就可以互动啦。|Move a little closer to interact.|Acércate un poco para interactuar.
+先离开门框，再关门|Step out of the doorway before closing the door.|Sal del marco antes de cerrar la puerta.
+门已推开，用|Door open. Use |Puerta abierta. Usa
+自己走进去或出去；按| to walk in or out; press | para entrar o salir; pulsa
+关门|Close Door|Cerrar Puerta
+关上门|Close the Door|Cerrar la Puerta
+方向键移动|Arrow keys to move|Flechas para moverse
+空格跳跃|Space to jump|Espacio para saltar
+跑步|Run|Correr
+正在前往|Heading to |De camino a
+小镇重要事件通知|Important town news|Noticias importantes del pueblo
+暂停滚动消息|Pause scrolling news|Pausar noticias
+继续滚动消息|Resume scrolling news|Reanudar noticias
+可旋转、平移和缩放的鼠鼠小镇三维场景|Interactive 3D town: rotate, pan and zoom|Pueblo 3D: girar, desplazar y ampliar
+最近生活|Recent Life|Vida Reciente
+鼠鼠的小生活|Hamster's Little Life|La Vida de Hámster
+鼠鼠从小屋探出脑袋，慢慢走向中心广场。|Hamster peeks out of the cottage and walks toward the plaza.|Hámster sale de la casita y camina hacia la plaza.
+鼠鼠正在小屋附近闻闻新鲜空气。|Hamster is enjoying fresh air near the cottage.|Hámster disfruta del aire fresco junto a la casita.
+标准|Standard|Normal
+个现实日对应|real days per |días reales por
+个小镇年；时钟与昼夜随小镇时间推进|town year; the clock and day cycle follow town time|año del pueblo; el reloj y el ciclo diario siguen su tiempo
+主鼠名字|Main Hamster's Name|Nombre del Hámster Principal
+保存名字|Save Name|Guardar Nombre
+主鼠性别|Main Hamster's Sex|Sexo del Hámster Principal
+第一视角灵敏度|First-person Sensitivity|Sensibilidad en Primera Persona
+默认|Default|Predeterminado
+同时调整鼠标环顾和按住左键转向，自动保存。|Adjusts mouse look and left-drag turning. Saves automatically.|Ajusta la mirada con ratón y el giro al arrastrar. Se guarda automáticamente.
+这三个开关控制主鼠；|These switches apply to the main hamster; |Estos ajustes afectan al hámster principal;
+保持正常生命周期。|retain a natural life cycle.|conservan un ciclo de vida natural.
+岁半开始渐老，行动与食欲减缓、睡眠增多、毛发逐渐稀疏；开启生病后，年长鼠更容易不舒服。自然死亡同时需要开启正常成长，寿命多数约|years old, aging gradually slows movement and appetite, increases sleep and thins fur. Older hamsters are more vulnerable when illness is enabled. Natural death also requires growth to be enabled. Most live around |años, el envejecimiento reduce movimiento y apetito, aumenta el sueño y aclara el pelaje. Si se activan enfermedades, los mayores son más vulnerables. La muerte natural requiere crecimiento activo. La mayoría vive unos
+岁为长寿，超过|years is long-lived; over |años se considera longevo; superar
+岁极少。主鼠性别用于判断繁育条件。|years is very rare. Sex determines breeding eligibility.|años es muy raro. El sexo determina las condiciones de cría.
+行走与活动消耗体力，|Walking and activities use stamina. From |Caminar y realizar actividades consume energía. Entre
+逐渐减速，|movement gradually slows; at |el movimiento se ralentiza; con
+及以下自动回小屋睡觉；休息和睡眠恢复体力，恢复满后继续生活。|or less, hamsters return home to sleep. Rest restores stamina; normal life resumes once fully rested.|o menos, vuelven a dormir. El descanso recupera energía; retoman su rutina al recuperarse por completo.
+第一视角操作|First-person Controls|Controles en Primera Persona
+随时切换上帝视角与鼠鼠第一视角，无需等待节日或生日。|Switch between overview and first person anytime, without waiting for a celebration.|Cambia de vista en cualquier momento, sin esperar a una celebración.
+前进|Forward|Avanzar
+向左|Left|Izquierda
+后退|Backward|Retroceder
+向右|Right|Derecha
+鼠标|Mouse|Ratón
+点击画面后环顾；也可按住左键拖动调整视野|Click the scene to look around, or hold the left button and drag.|Haz clic para mirar alrededor, o mantén el botón izquierdo y arrastra.
+靠近后与鼠鼠、家具或地点互动；在门口推开或关闭门；用移动键自行进出|Interact with nearby residents, furniture and places. Open or close doors, then walk through yourself.|Interactúa con habitantes, muebles y lugares cercanos. Abre o cierra puertas y cruza por tu cuenta.
+空格|Space|Espacio
+跳跃|Jump|Saltar
+按住跑步，松开恢复步行|Hold to run; release to walk.|Mantén para correr; suelta para caminar.
+移动有碰撞限制；交换消耗物品，聊天和运动仍按体力与次数规则进行。|Solid objects block movement. Trades cost items; chats and exercise still follow stamina and daily limits.|Los objetos sólidos bloquean el paso. Los intercambios cuestan objetos; charlas y ejercicio respetan energía y límites diarios.
+地点任务|Local Activities|Actividades del Lugar
+居民名册|Resident Directory|Directorio de Habitantes
+关闭鼠鼠信息面板|Close resident panel|Cerrar panel de habitantes
+为小镇挑选|Choose for the town: |Elige para el pueblo:
+位新邻居| new neighbors| nuevos vecinos
+暂时关闭挑选面板|Close selection for now|Cerrar selección por ahora
+挑选|Choose |Elegir
+位新邻居并分配职业：每个建筑至少| new neighbors and assign jobs. Each building needs at least | nuevos vecinos y asigna profesiones. Cada edificio necesita al menos
+位负责人，同一建筑可多人；补齐空岗后，其他鼠鼠可不分配职业。|worker; multiple workers may share a building. Once vacancies are filled, others may remain unassigned.|trabajador; puede haber varios por edificio. Al cubrir las vacantes, los demás pueden quedarse sin profesión.
+已选择|Selected|Seleccionados
+欢迎|Welcome|Dar la Bienvenida
+选择下一代桌面伙伴|Choose Your Next Companion|Elegir al Próximo Compañero
+暂时关闭|Close for Now|Cerrar por Ahora
+从仍在世的主鼠后代、|Choose from living descendants of the main hamster, |Elige entre descendientes vivos del hámster principal,
+后代和居民中选择一位。接任后保留它的年龄、毛色、健康与生日。|descendants and residents. Age, coat, health and birthday are retained.|descendientes y habitantes. Se conservan edad, pelaje, salud y cumpleaños.
+新主鼠名字|New Main Hamster's Name|Nombre del Nuevo Protagonista
+选择鼠鼠后可修改名字|Choose a hamster to edit its name|Elige un hámster para cambiar su nombre
+接任后的性别|Sex After Succession|Sexo al Suceder
+确认领养|Confirm Adoption|Confirmar Adopción
+查看完整小镇日记|View Full Town Journal|Ver Diario Completo
+鼠鼠身份卡|Hamster ID|Identidad del Hámster
+时钟与昼夜按小镇时间|The clock and day cycle follow town time|El reloj y el ciclo diario siguen el tiempo del pueblo
+的生活已经珍藏在纪念馆。|'s life is preserved in the Memorial Hall.|: su vida se conserva en la Sala de Recuerdos.
+鼠鼠正在经营自己的小生活。|Hamster is enjoying everyday town life.|Hámster disfruta de su vida en el pueblo.
+鼠鼠的小镇生活刚刚开始。|Hamster's town life has just begun.|La vida de Hámster en el pueblo acaba de empezar.
+纪念资料|Memorial Records|Recuerdos
+暂无体重记录|No weight record|Sin registro de peso
+年长，休息增多|Older; needs more rest|Mayor; necesita más descanso
+任桌面伙伴|desktop companion|compañero de escritorio
+已离世|Passed Away|Fallecido
+记忆长存|Always Remembered|Siempre en el Recuerdo
+的小档案|'s Profile|: Perfil
+身份卡|Identity Card|Ficha de Identidad
+暂时没有可接任的在世鼠鼠，可先迎接新邻居。|No living successor is available. Welcome new neighbors first.|No hay sucesor vivo disponible. Recibe nuevos vecinos primero.
+请先领养新的主鼠。|Please adopt a new main hamster first.|Adopta primero un nuevo protagonista.
+名字请填写|Name length: |Longitud del nombre:
+个字。| characters.| caracteres.
+这个名字已在小镇使用过，请换一个新名字。|This name has already been used. Please choose another.|Este nombre ya se ha usado. Elige otro.
+名字已保存。|Name saved.|Nombre guardado.
+小镇现有|Current population: |Población actual:
+只居民。居民| residents. At | habitantes. Con
+只及以下，可从镇外挑选|or fewer residents, choose |habitantes o menos, elige
+只新邻居加入。|new neighbors from outside town.|nuevos vecinos de fuera del pueblo.
+小镇目前有|Current population: |Población actual:
+只鼠鼠，|hamsters; |hámsteres;
+只及以下可迎接新邻居。可从|or fewer allows new neighbors. Choose from |o menos permite nuevos vecinos. Elige entre
+位来访者中选择|visitors: select |visitantes: selecciona
+模型预览暂时无法加载，可关闭后重试；资料和选择功能仍可使用。|Preview unavailable. Close and retry; profiles and selection still work.|Vista no disponible. Cierra y reintenta; las fichas y la selección siguen funcionando.
+分配尚不符合要求，缺岗：|Assignment incomplete. Vacancies: |Asignación incompleta. Vacantes:
+职业分配满足要求，可选择不分配职业。|All required jobs are filled. Others may remain unassigned.|Los puestos necesarios están cubiertos. Los demás pueden quedar sin profesión.
+跑轮和修理器械|Wheels and equipment repair|Ruedas y reparación de aparatos
+精力充沛，负责照看公园里的跑轮。|An energetic keeper who looks after the park's wheels.|Un encargado enérgico que cuida las ruedas del parque.
+草药和晒太阳|Herbs and sunshine|Hierbas y tomar el sol
+说话温和，会留意每只鼠鼠的健康。|Soft-spoken and attentive to everyone's health.|De voz suave y atento a la salud de todos.
+收集坚果|Collecting nuts|Coleccionar frutos secos
+熟悉各种粮食，也爱研究新零食。|Knows every grain and loves discovering new snacks.|Conoce todos los cereales y disfruta descubriendo aperitivos.
+听小镇故事|Listening to town stories|Escuchar historias del pueblo
+热心随和，经常在广场迎接新居民。|Friendly and welcoming to newcomers at the plaza.|Amable y acogedor con los recién llegados.
+整理旧物|Organizing keepsakes|Ordenar recuerdos
+细心安静，替居民保管珍贵回忆。|Quiet and careful, safeguarding treasured memories.|Tranquilo y cuidadoso, conserva recuerdos valiosos.
+布置小屋|Decorating the cottage|Decorar la casita
+喜欢舒适的角落，熟悉小屋的一切。|Loves cozy corners and knows the cottage inside out.|Le encantan los rincones acogedores y conoce bien la casita.
+种嫩叶|Growing leafy greens|Cultivar hojas tiernas
+耐心照顾菜园，会判断收获时机。|Patiently tends the garden and knows when to harvest.|Cuida el huerto con paciencia y sabe cuándo cosechar.
+折纸花|Folding paper flowers|Hacer flores de papel
+温柔庄重，陪伴居民完成告别。|Gentle and respectful, helping residents say farewell.|Amable y respetuoso, acompaña las despedidas.
+观察星空|Stargazing|Mirar las estrellas
+寡言可靠，认真照看每一块纪念碑。|Quiet and dependable, caring for every memorial.|Callado y fiable, cuida cada monumento.
+还没有领养宠物，可在宠物之家选择猫狗伙伴。|No pets adopted yet. Visit Pet Home to choose a companion.|Todavía no tienes mascotas. Visita el Hogar de Mascotas.
+按好感度从高到低排列。当前在世居民|Sorted by affection, highest first. Living residents: |Ordenados por afinidad descendente. Habitantes vivos:
+只，点击查看完整资料；结伴游玩、点心、帮忙、合影和带宠出游可增进好感。|. Click for full profiles. Outings, snacks, helping, photos and pet walks build affection.|. Haz clic para ver perfiles. Paseos, aperitivos, ayuda, fotos y mascotas mejoran la afinidad.
+一位正在认真生活的小镇居民。|A resident making the most of town life.|Un habitante que disfruta de la vida del pueblo.
+在小镇散步|Walking around town|Paseando por el pueblo
+体力不足，需要|Not enough stamina. Required: |Energía insuficiente. Se necesita:
+点体力| stamina| de energía
+今天和这位居民的|Today's chats with this resident: |Charlas de hoy con este habitante:
+次交流已用完| chats used up| charlas agotadas
+今天的|Today's |De hoy:
+次社交已全部用完| social interactions used up| interacciones sociales agotadas
+今天还可社交|Social interactions left today: |Interacciones restantes hoy:
+次，与|; with |; con
+还可聊|chats remaining: |charlas restantes:
+游玩、点心、帮忙、合影或带宠出游；友善选择好感|Outings, snacks, helping, photos or pet walks. Kind choices add affection |Paseos, aperitivos, ayuda, fotos o mascotas. Las decisiones amables suman afinidad
+一般不变，冷淡会降低。每次|; neutral choices leave it unchanged, unkind ones lower it. Each outing has |; las neutras no cambian nada y las frías restan. Cada salida tiene
+个问题，每天|questions; daily limit: |preguntas; límite diario:
+邀请一起去|Invite Along|Invitar
+点可出发；点心需|stamina to depart; snacks cost |de energía para salir; los aperitivos cuestan
+份粮食| servings of food| raciones de comida
+回答刚才遇到的问题|Answer the pending question|Responder a la pregunta pendiente
+接任|Succeeding|Sucediendo a
+的好感度|'s affection|: afinidad
+黑板留言|Blackboard Message|Mensaje en la Pizarra
+编辑留言，保留一个小镇日|Edit a message that lasts one town day|Editar un mensaje que dura un día del pueblo
+阅读鼠鼠书籍|Read Hamster Books|Leer Libros
+查看可读书籍，增加知识|Read available books to gain knowledge|Leer libros para aprender
+课桌分类练习|Sorting Exercise|Ejercicio de Clasificación
+每个小镇日一次|Once per town day|Una vez por día del pueblo
+门口双层木台可在第一视角按空格跳上；低凳和秋千可点击坐下，靠近后按|In first person, press Space to jump onto the two-tier platforms. Click low stools or swings to sit, or approach and press |En primera persona, pulsa Espacio para subir a las plataformas dobles. Haz clic en taburetes o columpios para sentarte, o acércate y pulsa
+也能互动。|to interact.|para interactuar.
+鼠鼠知识|Hamster Knowledge|Conocimientos
+保留一个小镇日，随后自动清除。当前留言：|Clears automatically after one town day. Current message: |Se borra tras un día del pueblo. Mensaje actual:
+暂无留言|No message|Sin mensaje
+写下想教鼠鼠的内容|Write something to teach Hamster|Escribe algo para enseñar a Hámster
+保存黑板留言|Save Message|Guardar Mensaje
+字；空白保存可清空|characters; save an empty message to clear|caracteres; guarda vacío para borrar
+鼠鼠书籍|Hamster Books|Libros de Hámster
+每本每个小镇日阅读一次，知识|Read each book once per town day. Knowledge |Lee cada libro una vez por día del pueblo. Conocimiento
+阅读这本书|Read This Book|Leer Este Libro
+课桌练习|Desk Exercise|Ejercicio en el Pupitre
+练习把种子与蔬菜分类，复习今天学到的生活知识。|Sort seeds and vegetables to review today's life skills.|Clasifica semillas y verduras para repasar lo aprendido.
+完成分类练习|Finish Sorting|Completar Clasificación
+在上方选择黑板、书籍或课桌活动。|Choose a blackboard, book or desk activity above.|Elige una actividad de pizarra, libro o pupitre arriba.
+这里还没有纪念资料。|No memorial records yet.|Aún no hay recuerdos guardados.
+小屋里暂时没有幼鼠。|No pups in the cottage yet.|Todavía no hay crías en la casita.
+的孩子|'s child|: su cría
+家庭暂时还没有幼鼠。|This family has no pups yet.|Esta familia todavía no tiene crías.
+挑选下一代桌面伙伴|Choose the Next Companion|Elegir al Próximo Compañero
+缺水|No water|Sin agua
+新鲜|Fresh|Fresca
+水质正常|Water is clean|Agua limpia
+待换水|Change water|Cambiar agua
+建议换水|Water change recommended|Se recomienda cambiar el agua
+变质|Stale|En mal estado
+水已变质|Water has gone stale|El agua está en mal estado
+水已耗尽|Water has run out|Se ha acabado el agua
+上个月|Previous Month|Mes Anterior
+下个月|Next Month|Mes Siguiente
+一|Mon|Lun
+二|Tue|Mar
+三|Wed|Mié
+四|Thu|Jue
+五|Fri|Vie
+六|Sat|Sáb
+日|Sun|Dom
+另|plus |más
+项| items| elementos
+当日事项|Events for This Day|Eventos del Día
+这一天没有节日、生日或忌日。|No holidays, birthdays or memorial dates today.|Hoy no hay fiestas, cumpleaños ni aniversarios de fallecimiento.
+粮食|Food|Comida
+蔬菜|Vegetables|Verduras
+垫料|Bedding|Lecho
+今天已交换|Traded Today|Intercambiado Hoy
+今天是日常交换日|Daily trading is available today|Hoy hay intercambios diarios
+小镇日期|Town Date|Fecha del Pueblo
+节日与生日按小镇日期触发，时钟与昼夜跟随小镇日期。|Holidays, birthdays, the clock and the day cycle follow the town date.|Fiestas, cumpleaños, reloj y ciclo diario siguen la fecha del pueblo.
+每日物品交换|Daily Item Trading|Intercambios Diarios
+干净垫料|Clean Bedding|Lecho Limpio
+每类每天交换一次，点击摊位也可打开。菜园收获可获得蔬菜。|Trade each category once a day, also available at the stalls. Harvest the garden for vegetables.|Intercambia cada categoría una vez al día, también en los puestos. Cosecha el huerto para obtener verduras.
+鼠鼠日历|Hamster Calendar|Calendario Hámster
+记录节日、在世鼠鼠的生日和已离世鼠鼠的忌日。忌日只作纪念，不召集居民。旧版未记录小镇离世日期的资料，按现有时间与速度推算。|Tracks holidays, living residents' birthdays and memorial dates. Memorial dates do not gather residents. Missing historical dates are estimated from the saved time and speed.|Registra fiestas, cumpleaños de habitantes vivos y aniversarios de fallecimiento. Estos últimos no reúnen habitantes. Las fechas históricas ausentes se estiman según el tiempo y la velocidad guardados.
+特殊节日和生日当天，所有鼠鼠会聚集到中心广场庆祝。|On holidays and birthdays, all hamsters gather at Central Plaza to celebrate.|En fiestas y cumpleaños, todos se reúnen en la Plaza Central.
+当前体力|Current Stamina|Energía Actual
+在公园锻炼会改善健康和心情，但需要消耗体力。|Exercise improves health and mood but uses stamina.|El ejercicio mejora salud y ánimo, pero consume energía.
+跑一会儿跑轮|Run the Wheel|Correr en la Rueda
+当前健康|Current Health|Salud Actual
+白大夫建议做一次温和治疗。|The doctor recommends gentle treatment.|El médico recomienda un tratamiento suave.
+白大夫检查后说，鼠鼠现在状态不错。|The doctor says Hamster is doing well.|El médico dice que Hámster se encuentra bien.
+接受诊疗|Receive Treatment|Recibir Tratamiento
+花费|Cost: |Coste:
+颗瓜子，恢复健康| seeds; health restored: | semillas; salud recuperada:
+当前鼠鼠已离世，选择新的鼠鼠伙伴后即可参观和坐下。|Choose a new companion before visiting or sitting down.|Elige un nuevo compañero antes de visitar o sentarte.
+鼠鼠正在住院休养，出院后即可参观和坐下。|Hamster is hospitalized. Visit and sit after discharge.|Hámster está hospitalizado. Podrás visitar y sentarte al salir.
+进入名人堂|Enter the Hall of Fame|Entrar al Salón de la Fama
+唤醒鼠鼠并前往门口，自行开门进入|Wake Hamster, approach the entrance and open the door yourself.|Despierta a Hámster, acércate y abre la puerta.
+前往门口，按|Approach the door and press |Acércate a la puerta y pulsa
+开关门，|to open or close it; |para abrir o cerrar;
+自行进出|walk through yourself|entra y sal por tu cuenta
+鼠鼠正在名人堂参观|Hamster is visiting the Hall of Fame|Hámster visita el Salón de la Fama
+自行移动、鼠标环顾；靠近大门按|Move freely and look with the mouse; approach the door and press |Muévete y mira con el ratón; acércate a la puerta y pulsa
+开关门。上帝视角和第一视角可以随时切换。|to open or close. Switch views anytime.|para abrir o cerrar. Cambia de vista cuando quieras.
+面朝专辑墙，第一视角靠近长椅按|Face the album wall; in first person approach a bench and press |Mira al muro de álbumes; en primera persona acércate al banco y pulsa
+也可坐下|to sit down|para sentarte
+查看展厅全貌|View the Whole Gallery|Ver Toda la Galería
+点击专辑、照片或人形立牌，镜头会聚焦展品|Click an album, photo or standee to focus the camera.|Haz clic en un álbum, foto o figura para enfocar la cámara.
+张专辑封面、|album covers and |portadas de álbumes y
+幅日常与舞台照片，搭配黑胶、粉胶、唱机、人形立牌和金色音符展台。拖动旋转、滚轮缩放可近看展品。|daily-life and stage photos, with vinyl, a record player, a standee and golden music notes. Drag to rotate and scroll to zoom.|fotos cotidianas y del escenario, con vinilos, tocadiscos, figura y notas doradas. Arrastra para girar y usa la rueda para ampliar.
+灰瓦木门的小饭馆，屋内设有厨房、门旁点餐柜台和三组餐桌。点击餐椅可坐下或起身；第一视角靠近餐椅按|A cozy restaurant with a kitchen, an entrance-side counter and dining tables. Click chairs to sit or stand; in first person approach and press |Un restaurante acogedor con cocina, mostrador junto a la entrada y mesas. Haz clic en las sillas; en primera persona acércate y pulsa
+可互动。|to interact.|para interactuar.
+粮仓存量|Food in Storage|Reserva de Comida
+购买|Buy |Comprar
+颗瓜子，直接送入粮仓|seeds; delivered to storage|semillas; entrega al granero
+这里保存鼠鼠们留下的生平记录。|Residents' life stories are preserved here.|Aquí se conservan las historias de los habitantes.
+查看宠物粮、窝和玩具，切换跟随模式|Manage pet food, beds, toys and following.|Gestiona comida, camas, juguetes y seguimiento.
+在本卡片补给粮仓，或免费清洗水壶并换满清水。水量约可用|Restock food or clean and refill the bottle for free. Water lasts about |Repón comida o limpia y llena gratis el bebedero. El agua dura unas
+个现实小时；|real hours; |horas reales;
+小时后建议换水，|hours before a change is recommended; |horas hasta recomendar un cambio;
+小时后变质。缺水或变质会缓慢影响健康。|hours before spoiling. Empty or stale water slowly harms health.|horas hasta estropearse. La falta de agua o el agua sucia perjudican la salud.
+查看主鼠及所有代数居民资料|View the main hamster and residents of all generations|Ver al protagonista y habitantes de todas las generaciones
+补给粮仓|Restock Food|Reponer Comida
+清洗水壶并换水|Clean and Refill Water|Limpiar y Cambiar Agua
+免费，补满新鲜水|Free; refill with fresh water|Gratis; llenar con agua fresca
+食盆进食|Eat from the Bowl|Comer del Comedero
+床铺休息|Rest in Bed|Descansar en la Cama
+分钟内一次|once per minutes indicated|una vez por los minutos indicados
+购买或移动家具|Buy or Move Furniture|Comprar o Mover Muebles
+切换家具的安全摆放位置|Move furniture between safe positions|Cambiar los muebles entre posiciones seguras
+颗瓜子购买台灯|seeds to buy a lamp|semillas para comprar una lámpara
+主鼠家庭|Main Hamster's Family|Familia del Protagonista
+家庭|Family|Familia
+如何迎来幼鼠？|How Are Pups Born?|¿Cómo Nacen las Crías?
+已经结伴的异性居民，双方成年、健康值至少|Partners of opposite sexes who are both adults with health of at least |Parejas de distinto sexo, ambos adultos y con salud mínima de
+家中没有幼鼠且已有子女不足|, no pups at home and fewer than |, sin crías en casa y con menos de
+只时，每个小镇日有|children, have a daily chance of |hijos, tienen una probabilidad diaria de
+的机会选出一对准备繁育。伴侣头顶会出现小爱心，并回到鼠鼠小屋相聚；爱心出现后约|of being selected to breed. Hearts appear above the pair as they meet at the cottage. About |de ser elegidos para criar. Aparecen corazones y se reúnen en la casita. Unos
+秒迎来|seconds later, they welcome |segundos después reciben
+只幼鼠，不再等待一个小镇日。出生喜讯会滚动显示，离线期间的出生消息也会保留。这是小镇的简化生活流程。|pups, without waiting a full town day. Birth announcements scroll in the news, including offline births. This is a simplified game process.|crías, sin esperar un día entero. Las noticias anuncian nacimientos, también los ocurridos sin conexión. Es un proceso simplificado del juego.
+已成熟|Ready to Harvest|Maduro
+生长中|Growing|Creciendo
+嫩叶已经成熟，在下方收获。|The leaves are ready. Harvest below.|Las hojas están listas. Cosecha abajo.
+嫩叶会按现实时间慢慢生长，成熟后再来看看。|Leaves grow in real time. Come back when they're ready.|Las hojas crecen en tiempo real. Vuelve cuando maduren.
+收获嫩叶|Harvest Leaves|Cosechar Hojas
+获得|Gain |Obtener
+份粮食和|food servings and |raciones de comida y
+礼仪师已经准备好陪鼠鼠完成温柔的告别。|The attendant is ready for a peaceful farewell.|El encargado está listo para una despedida tranquila.
+礼仪师正在整理告别用品。|The attendant is preparing farewell supplies.|El encargado prepara los artículos de despedida.
+完成送别|Complete Farewell|Completar Despedida
+安葬并生成纪念资料|Lay to rest and create memorial records|Enterrar y crear recuerdos
+这里的生活正在慢慢展开。|Life here is slowly unfolding.|La vida aquí se desarrolla poco a poco.
+地点互动|Local Interactions|Interacciones del Lugar
+下列项目每个小镇日可进行一次。|Each activity is available once per town day.|Cada actividad está disponible una vez por día del pueblo.
+写下给小镇故友的寄语（最多|Write a message for a departed friend (up to |Escribe un mensaje para un amigo fallecido (hasta
+字）|characters)|caracteres)
+住院休养中，预计出院：|Hospitalized. Expected discharge: |Hospitalizado. Alta prevista:
+主鼠正在睡觉恢复体力，醒来后再进行活动。|Hamster is sleeping to recover stamina. Activities resume after waking.|Hámster duerme para recuperar energía. Las actividades se reanudan al despertar.
+正在近看：|Viewing: |Viendo:
+点击“查看展厅全貌”返回。|Click "View the Whole Gallery" to return.|Haz clic en «Ver Toda la Galería» para volver.
+操作完成。|Done.|Hecho.
+现在还不能这样做。|This action is not available yet.|Esta acción aún no está disponible.
+鼠鼠回来找你啦|Hamster Is Back|Hámster Ha Vuelto
+稍后|Later|Más Tarde
+你不在的时候，鼠鼠也认真生活了|Hamster kept busy while you were away|Hámster siguió con su vida mientras no estabas
+查看完整生活记录|View Full Life Journal|Ver Diario Completo
+在小镇里安静地照顾着自己的生活。|has been enjoying a peaceful life in town.|ha disfrutado de una vida tranquila en el pueblo.
+回来找你啦|is back to see you|ha vuelto a verte
+你不在的时候，|While you were away, |Mientras no estabas,
+也认真生活了|kept busy with daily life|siguió con su vida cotidiana
+回家睡觉|Go Home to Sleep|Ir a Casa a Dormir
+主鼠宠物|Main Hamster's Pets|Mascotas del Protagonista
+领养后猫狗伙伴跟随主鼠，住在鼠鼠小屋；可一键切换跟随或回家等待。主鼠最多拥有|Adopted companions follow you and live at the cottage. Toggle following or waiting at home. Pet limit: |Las mascotas adoptadas te siguen y viven en la casita. Alterna entre seguir y esperar en casa. Límite:
+只；换代立即继承仍在世的宠物，不弃养。|. Living pets pass immediately to the next generation; no abandonment.|. Las mascotas vivas pasan de inmediato a la siguiente generación; no se abandonan.
+领养费|Adoption Fee|Coste de Adopción
+颗瓜子：最近|seeds: over the last |semillas: durante los últimos
+个小镇日的日均收入|town days, average daily income |días del pueblo, ingresos diarios medios
+无记录按|with no records, assume |sin registros, se supone
+颗计算。|seeds.|semillas.
+我愿意持续照顾，理解领养后不能弃养|I commit to lifelong care and understand pets cannot be abandoned.|Me comprometo a cuidarlas de por vida y entiendo que no se pueden abandonar.
+伙伴|Companion|Compañero
+领养|Adopt|Adoptar
+永久领养|Adopt Permanently|Adoptar para Siempre
+一键跟随主鼠|Follow Main Hamster|Seguir al Protagonista
+免费切换；主鼠睡觉时宠物回家|Switch for free; pets go home while Hamster sleeps|Cambio gratis; vuelven a casa mientras Hámster duerme
+撸猫狗体验一天|One-day Pet Visit|Visita con Mascotas por un Día
+颗瓜子，有效期一个小镇日|seeds; lasts one town day|semillas; dura un día del pueblo
+摸摸猫狗伙伴|Pet a Companion|Acariciar a un Compañero
+每天一次，心情|Once a day; mood |Una vez al día; ánimo
+份宠物粮|servings of pet food|raciones de comida para mascotas
+颗瓜子；每只已领养宠物每天吃|seeds; each adopted pet eats daily: |semillas; cada mascota adoptada come al día:
+喂食宠物|Feed Pets|Alimentar Mascotas
+每只消耗|Each uses |Cada una consume
+购置宠物窝|Buy a Pet Bed|Comprar Cama de Mascota
+颗瓜子，购买后摆放在鼠鼠小屋|seeds; placed in the cottage|semillas; se coloca en la casita
+购置猫爬架与玩具|Buy a Cat Tree and Toys|Comprar Rascador y Juguetes
+已领养|Adopted|Adoptado
+等待通知|Awaiting Invitation|Esperando Invitación
+本代已邀请|Invited This Generation|Invitado en Esta Generación
+正在前往宠物之家|Heading to Pet Home|De Camino al Hogar de Mascotas
+免费领养区|Free Adoption Area|Zona de Adopción Gratuita
+原主人离世且无在世子女继承的宠物，由这里照护。免费领养，同样需要持续照顾。|Pets with no living owner or children to inherit them are cared for here. Adoption is free, with the same lifelong commitment.|Aquí se cuidan las mascotas sin dueño vivo ni hijos que las hereden. La adopción es gratuita y exige el mismo compromiso permanente.
+免费领养|Adopt for Free|Adoptar Gratis
+宠物|Pet|Mascota
+目前没有免费待领养宠物。|No pets are awaiting free adoption.|No hay mascotas para adopción gratuita.
+老板|Shopkeeper|Encargado
+正在安排|Arranging|Preparando
+宠物寿命随机为|Pet lifespans are randomly set to |La vida de las mascotas se fija al azar entre
+个小镇年，主鼠与|town years, for both the main hamster's and |años del pueblo, tanto para las mascotas del protagonista como las de
+宠物均适用。店内售罄立即补充新伙伴。指定物种和图片贴图各收|pets. Stock refreshes when sold out. Species requests and custom textures each cost |. Se repone al agotarse. Elegir especie o personalizar textura cuesta, cada uno,
+颗瓜子，领养费另计。|seeds, excluding adoption fees.|semillas, aparte de la adopción.
+请老板准备这个物种|Request This Species|Pedir Esta Especie
+上传图片贴到模型表面，保留原有立体形状。图片仅保存在本机。|Apply an uploaded image to the model surface; its shape stays unchanged. Images remain on this computer.|Aplica una imagen al modelo sin cambiar su forma. Las imágenes permanecen en este equipo.
+制作图片贴图|Apply Custom Texture|Aplicar Textura
+邀请|Invite|Invitar
+每代最多|Per generation, up to |Por generación, hasta
+每代主鼠重新选择最多|Each generation selects up to |Cada generación elige hasta
+位；原有宠物保留；|residents; existing pets stay; |habitantes; conservan las mascotas existentes;
+离世后由在世子女继承，没有在世子女则由宠物之家照护。主鼠逐一找到居民对话，好感度各增加|living children inherit pets after an owner's death; otherwise Pet Home cares for them. Hamster invites residents individually, adding affection: |los hijos vivos heredan las mascotas al fallecer el dueño; de lo contrario las cuida el Hogar. Hámster invita a cada habitante y suma afinidad:
+再由居民自行到店领养；通知不消耗主鼠体力。|. Residents then visit the shop to adopt. Invitations use no stamina.|. Los habitantes van a adoptar por su cuenta. Invitar no consume energía.
+通知所选居民|Notify Selected Residents|Avisar a los Elegidos
+免费；最多|Free; up to |Gratis; hasta
+位包含已安排居民|residents, including pending invitations|habitantes, incluidas invitaciones pendientes
+请选择|Please select |Selecciona
+以内的|within the limit: |dentro del límite:
+图片。|image.|imagen.
+图片太大|Image Too Large|Imagen Demasiado Grande
+图片已准备好，点击制作收取|Image ready. Apply it for |Imagen lista. Aplicarla cuesta
+颗瓜子。|seeds.|semillas.
+图片读取失败，请换一张图片。|Unable to read the image. Try another one.|No se pudo leer la imagen. Prueba otra.
+诊疗需要|Treatment requires |El tratamiento requiere
+白大夫为鼠鼠完成了一次温和诊疗。|The doctor has given Hamster gentle treatment.|El médico ha tratado a Hámster con cuidado.
+购买台灯需要|A lamp costs |Una lámpara cuesta
+小屋家具已经换到新的摆放位置。|The furniture has been moved to its new position.|Los muebles se han colocado en su nueva posición.
+台灯已经送到鼠鼠小屋。|The lamp has arrived at the cottage.|La lámpara ha llegado a la casita.
+在诊疗床接受了温和诊疗。|received gentle treatment on the hospital bed.|recibió tratamiento en la cama del hospital.
+食盆旁没有粮食，先补给粮仓吧。|There's no food. Restock the granary first.|No hay comida. Repón primero el granero.
+鼠鼠吃了一份粮食。|Hamster ate a serving of food.|Hámster comió una ración.
+刚刚休息过，陪大家继续逛逛吧。|You've just rested. Enjoy some more exploring.|Acabas de descansar. Sigue explorando.
+鼠鼠在床铺休息，恢复了|Hamster rested in bed and recovered |Hámster descansó en la cama y recuperó
+点体力。|stamina.|de energía.
+正在查看|Viewing |Viendo
+邻居|Neighbor|Vecino
+结束活动|End Activity|Terminar Actividad
+双层木台是跳台：靠近后按空格跳上。|The two-tier wooden platforms are jump platforms. Approach and press Space.|Las plataformas dobles son para saltar. Acércate y pulsa Espacio.
+双层木台可以跳上去。|You can jump onto the two-tier platforms.|Puedes saltar sobre las plataformas dobles.
+物品交换|Item Trading|Intercambio de Objetos
+鼠鼠零食铺|Hamster Snack Shop|Tienda de Aperitivos Hámster
+每日新鲜|Fresh Daily|Fresco Cada Día
+鼠鼠纪念馆|Hamster Memorial Hall|Sala de Recuerdos Hámster
+鼠鼠殡仪馆|Hamster Farewell Hall|Sala de Despedida Hámster
+鼠鼠纪念墓园|Hamster Memorial Cemetery|Cementerio Conmemorativo Hámster
+认识种子|Discover Seeds|Descubrir Semillas
+学习生活|Learn Life Skills|Aprender a Vivir
+校园公告|School Notices|Avisos Escolares
+运动与饮水|Exercise and Water|Ejercicio y Agua
+欣赏黑胶与粉胶展|View the vinyl collection|Ver la colección de vinilos
+记录专辑收藏|Record the album collection|Registrar la colección de álbumes
+整理小屋|Tidy the Cottage|Ordenar la Casita
+更换垫料|Change Bedding|Cambiar el Lecho
+健康检查|Health Check|Revisión Médica
+查看健康、饮水与饱腹状况|Check health, water and fullness|Revisar salud, agua y saciedad
+急诊处理|Emergency Treatment|Tratamiento de Urgencia
+健康低于|Available when health is below |Disponible con salud inferior a
+时可用|only|solamente
+住院休养|Hospital Rest|Reposo Hospitalario
+个小镇小时，出院健康|town hours; health on discharge |horas del pueblo; salud al salir
+蔬菜汤|Vegetable Soup|Sopa de Verduras
+丰盛谷物拼盘|Hearty Grain Platter|Plato Abundante de Cereales
+领取护理用品|Collect Care Supplies|Recoger Material de Cuidado
+点一份谷物蔬菜餐|Order a Grain and Vegetable Meal|Pedir Cereales con Verduras
+学习制作鼠鼠餐|Learn to Cook Hamster Meals|Aprender a Cocinar
+品尝小零食|Try a Snack|Probar un Aperitivo
+购买干净垫料|Buy Clean Bedding|Comprar Lecho Limpio
+复习今日课程|Review Today's Lesson|Repasar la Lección
+整理分享书籍|Organize Shared Books|Ordenar Libros Compartidos
+整理纪念相册|Organize Memorial Albums|Ordenar Álbumes de Recuerdos
+摆放纪念鲜花|Arrange Memorial Flowers|Colocar Flores Conmemorativas
+整理送别用品|Organize Farewell Supplies|Ordenar Material de Despedida
+留下温柔寄语|Leave a Kind Message|Dejar un Mensaje Cariñoso
+在生活记录里保存你的寄语|Save your message in the life journal|Guardar tu mensaje en el diario
+伸展热身|Stretch and Warm Up|Estirar y Calentar
+坐下歇息|Sit and Rest|Sentarse y Descansar
+每日一次，恢复|Once daily; restore |Una vez al día; recuperar
+给菜地浇水|Water the Garden|Regar el Huerto
+生长进度提前|Advance growth by |Adelantar el crecimiento
+除草照料|Weed and Tend|Quitar Hierbas y Cuidar
+整理广场|Tidy the Plaza|Limpiar la Plaza
+居民感谢你的照料|Residents appreciate your care|Los habitantes agradecen tu cuidado
+听听小镇故事|Listen to Town Stories|Escuchar Historias
+清扫纪念墓碑|Clean Gravestones|Limpiar las Lápidas
+献花纪念|Leave Flowers|Dejar Flores
+记录对小镇故友的纪念|Record a memory of a departed friend|Guardar un recuerdo de un amigo fallecido
+吃完自动排队，收银成功扣|Queue automatically after eating; on successful payment deduct |Haz cola automáticamente al terminar; al pagar se descuentan
+瓜子；每个小镇日一次|seeds; once per town day|semillas; una vez por día del pueblo
+未找到这个互动。|Interaction not found.|Interacción no encontrada.
+鼠鼠正在住院休养，出院后再进行活动。|Hamster is hospitalized. Activities resume after discharge.|Hámster está hospitalizado. Podrá hacer actividades al salir.
+健康达到|Health is at least |La salud es al menos
+以上，无需急诊，可选择检查或普通诊疗。|; no emergency treatment needed. Choose a checkup or regular treatment.|; no necesita urgencias. Elige revisión o tratamiento normal.
+请先选择新的鼠鼠伙伴。|Choose a new hamster companion first.|Elige primero un nuevo compañero.
+今天已经完成过了，明天再来吧。|Already completed today. Come back tomorrow.|Ya lo completaste hoy. Vuelve mañana.
+不足，需要|insufficient; required: |insuficiente; se necesita:
+寄语不能为空。|The message cannot be empty.|El mensaje no puede estar vacío.
+完成。|completed.|completado.
+检查结果：健康|Checkup result: health |Resultado: salud
+水质|Water Quality|Calidad del Agua
+留下寄语：|Message left: |Mensaje guardado:
+住院休养结束，健康|Hospital stay completed. Health |Alta hospitalaria. Salud
+小镇新邻居|New Town Neighbor|Nuevo Vecino
+广场邻居|Plaza Neighbor|Vecino de la Plaza
+小屋邻居|Cottage Neighbor|Vecino de la Casita
+由在世子女|Care inherited by living child |Cuidado heredado por su hijo vivo
+继承照顾。|who continues their care.|que continúa su cuidado.
+没有在世子女可以继承，已由宠物之家接管照护。|No living children can inherit this pet. Pet Home has taken over its care.|No hay hijos vivos que la hereden. El Hogar de Mascotas se encarga de su cuidado.
+由宠物之家照护，开放免费领养。|Cared for at Pet Home and available for free adoption.|Cuidada por el Hogar de Mascotas y disponible para adopción gratuita.
+继承了上一代主鼠的|inherited the previous main hamster's |heredó del protagonista anterior
+只在世宠物，继续在小屋照顾。|living pets and continues caring for them at the cottage.|mascotas vivas y sigue cuidándolas en la casita.
+主鼠的在世宠物由宠物之家临时照护，等待下一代主鼠继承。|Pet Home temporarily cares for the main hamster's living pets until the next generation inherits them.|El Hogar cuida temporalmente las mascotas vivas hasta que las herede la siguiente generación.
+岁时安静离世。|years old at their peaceful passing.|años al fallecer tranquilamente.
+鼠鼠小屋：宠物粮用完了，请及时补给照顾伙伴。|Cottage: pet food has run out. Please restock soon.|Casita: se acabó la comida para mascotas. Repón pronto.
+请先选择新的主鼠。|Choose a new main hamster first.|Elige primero un nuevo protagonista.
+这位宠物主人已经不在小镇。|This pet's owner is no longer in town.|El dueño de esta mascota ya no está en el pueblo.
+免费待领养宠物由宠物之家照护，领养后可跟随。|Free-adoption pets are cared for at Pet Home and can follow you after adoption.|El Hogar cuida las mascotas de adopción gratuita; podrán seguirte tras adoptarlas.
+宠物开始跟随|Pet now following |La mascota sigue a
+宠物回小屋等待主人。|The pet is waiting for its owner at home.|La mascota espera a su dueño en casa.
+这只宠物尚未领养。|This pet has not been adopted yet.|Esta mascota aún no está adoptada.
+主鼠最多拥有|The main hamster can have up to |El protagonista puede tener hasta
+只宠物。|pets.|mascotas.
+请先确认持续照顾，领养后不能弃养。|Please confirm lifelong care. Adopted pets cannot be abandoned.|Confirma el cuidado de por vida. No se pueden abandonar.
+这只免费宠物已被领养。|This free-adoption pet has already been adopted.|Esta mascota gratuita ya fue adoptada.
+免费领养了|adopted for free: |adoptó gratis a
+继续给它一个家。|and continues giving it a home.|y sigue dándole un hogar.
+只宠物；上一代在世宠物自动继承。|pets; living pets from the previous generation are inherited automatically.|mascotas; las de la generación anterior se heredan automáticamente.
+没有这只待领养的宠物。|This pet is not available for adoption.|Esta mascota no está disponible.
+这只宠物已经是小镇的伙伴了。|This pet is already a town companion.|Esta mascota ya es compañera del pueblo.
+请先确认会持续照顾宠物，领养后不提供弃养。|Confirm lifelong care before adopting. Abandonment is not available.|Confirma el cuidado de por vida. No se permite abandonarlas.
+瓜子不足，领养需要|Not enough seeds. Adoption costs |Semillas insuficientes. La adopción cuesta
+领养了|adopted |adoptó a
+它会跟随主鼠，回小屋生活。|It will follow the main hamster and live at the cottage.|Seguirá al protagonista y vivirá en la casita.
+请从老板提供的|Choose from the shopkeeper's |Elige entre las
+个物种中选择。|available species.|especies disponibles.
+指定物种需要|A species request costs |Pedir una especie cuesta
+老板准备了一只|The shopkeeper has prepared a |El encargado ha preparado un
+可在待领养列表中查看；领养费另计。|See the adoption list; adoption fees are separate.|Consulta la lista; la adopción se paga aparte.
+请选择店内待领养宠物。|Choose a pet available in the shop.|Elige una mascota disponible en la tienda.
+请选择有效的图片。|Please choose a valid image.|Elige una imagen válida.
+图片贴图定制需要|A custom texture costs |Una textura personalizada cuesta
+图片已贴到|Image applied to |Imagen aplicada a
+模型表面；立体形状保持原样，领养费另计。|the model surface; its shape is unchanged. Adoption fees are separate.|la superficie del modelo, sin cambiar su forma. La adopción se paga aparte.
+请选择现有在世|Choose living |Elige habitantes vivos
+居民，不能选择主鼠。|residents, excluding the main hamster.|, sin incluir al protagonista.
+最多允许|At most |Como máximo
+领养宠物，包含已领养和已安排的居民。|may adopt, including those already adopted or invited.|pueden adoptar, incluidos los que ya adoptaron o están invitados.
+主鼠将依次通知所选居民，好感度各增加|Hamster will notify each selected resident, adding affection |Hámster avisará a cada elegido y sumará afinidad
+然后由他们自主到店领养；不消耗主鼠体力。|They will then adopt at the shop themselves; no main hamster stamina is used.|Después irán a adoptar por su cuenta; no consume energía del protagonista.
+先领养宠物，再选择跟随。|Adopt a pet before enabling follow.|Adopta antes de activar el seguimiento.
+宠物开始跟随主鼠。|Pets are now following the main hamster.|Las mascotas siguen ahora al protagonista.
+宠物会回鼠鼠小屋等待。|Pets will wait at the cottage.|Las mascotas esperarán en la casita.
+今天的陪伴体验仍在有效期内。|Today's pet visit is still active.|La visita de hoy sigue activa.
+开启一天猫狗陪伴体验，可在陪伴区与宠物互动。|A one-day pet visit is active. Play with pets in the play area.|Visita de un día activada. Juega en la zona de mascotas.
+份宠物粮，领养的每只宠物每天消耗|servings of pet food; each adopted pet uses daily: |raciones; cada mascota adoptada consume al día:
+已经购买这件设施了。|You already own this facility.|Ya tienes esta instalación.
+柔软宠物窝已送到鼠鼠小屋。|The soft pet bed has arrived at the cottage.|La cama de mascota ha llegado a la casita.
+猫爬架与玩具已送到鼠鼠小屋。|The cat tree and toys have arrived at the cottage.|El rascador y los juguetes han llegado a la casita.
+先领养宠物，再进行喂食。|Adopt a pet before feeding.|Adopta antes de alimentar.
+宠物已经吃饱了。|The pet is already full.|La mascota ya está llena.
+宠物粮不足，请先补给。|Not enough pet food. Restock first.|Falta comida para mascotas. Repón primero.
+喂了|fed |alimentó con
+为每只宠物喂了|Each pet was fed |Cada mascota recibió
+先领养宠物或购买一天陪伴体验。|Adopt a pet or buy a one-day visit first.|Adopta o compra una visita de un día primero.
+今天已经陪猫狗玩过了，明天再来吧。|You've already played with pets today. Come back tomorrow.|Ya jugaste hoy. Vuelve mañana.
+轻轻摸摸猫狗伙伴，心情增加|Petting a companion increased mood by |Acariciar al compañero aumentó el ánimo en
+没有这项宠物互动。|Pet interaction not found.|Interacción no encontrada.
+瓜子不足，需要|Not enough seeds. Required: |Semillas insuficientes. Se necesitan:
+告诉|told |avisó a
+可以去宠物之家领养宠物，好感度增加|about adopting at Pet Home; affection increased by |sobre adoptar en el Hogar; afinidad aumentada en
+在宠物之家免费领养了|adopted for free at Pet Home: |adoptó gratis en el Hogar a
+在宠物之家领养了|adopted at Pet Home: |adoptó en el Hogar a
+鼠鼠守护神像|Hamster Guardian Statue|Estatua del Guardián Hámster
+更名为|renamed to |renombrado a
+避免与其他鼠鼠重名。|to avoid duplicate names.|para evitar nombres repetidos.
+的继任者|'s successor|: su sucesor
+前任居民|Former Resident|Antiguo Habitante
+成为了新的桌面伙伴|became the new desktop companion|se convirtió en el nuevo compañero
+迎来了|welcomed |recibió a
+当前主鼠已离世。|The current main hamster has passed away.|El protagonista actual ha fallecido.
+及以上才能叫鼠鼠起床。|or more is needed to wake Hamster.|o más para despertar a Hámster.
+鼠鼠已经起床。|Hamster is awake.|Hámster ya se ha despertado.
+其中一只居民现在不在小镇。|One of these residents is no longer in town.|Uno de estos habitantes ya no está en el pueblo.
+两只居民还没有结为伴侣。|These residents are not partners yet.|Estos habitantes aún no son pareja.
+伴侣需要是异性。|Partners must be of opposite sexes.|La pareja debe ser de distinto sexo.
+双方成年后才会自主繁育。|Both must be adults to breed autonomously.|Ambos deben ser adultos para criar por su cuenta.
+双方健康值达到|Both need health of at least |Ambos necesitan salud mínima de
+后才会自主繁育。|to breed autonomously.|para criar por su cuenta.
+这个家庭已经有|This family already has |Esta familia ya tiene
+只孩子。|children.|hijos.
+这个家庭正在照顾幼鼠。|This family is caring for pups.|Esta familia está cuidando crías.
+双方符合自主繁育条件。|Both meet autonomous breeding conditions.|Ambos cumplen las condiciones para criar.
+安静|Quiet|Tranquilo
+好奇|Curious|Curioso
+嫩叶|Young Leaves|Hojas Tiernas
+坚果|Nuts|Frutos Secos
+在鼠鼠小屋迎来了|welcomed at the cottage: |recibieron en la casita a
+只幼鼠：|pups: |crías:
+只幼鼠。|pups.|crías.
+这个家庭暂时不会继续繁育。|This family will not breed again for now.|Esta familia no volverá a criar por ahora.
+体力降至|Stamina dropped to |La energía bajó a
+及以下，正在回小屋睡觉。|or less; returning to the cottage to sleep.|o menos; vuelve a la casita para dormir.
+爱探索|Adventurous|Explorador
+温柔|Gentle|Amable
+爱运动|Sporty|Deportista
+南瓜籽|Pumpkin Seeds|Semillas de Calabaza
+燕麦|Oats|Avena
+小米|Millet|Mijo
+向日葵村|Sunflower Village|Aldea Girasol
+溪边小镇|Brookside Town|Pueblo del Arroyo
+松果林|Pinecone Woods|Bosque de Piñas
+麦田村|Wheatfield Village|Aldea Trigal
+目前已有超过|There are currently more than |Actualmente hay más de
+只鼠鼠，暂不需要接纳新居民。|hamsters; no new residents are needed yet.|hámsteres; no hacen falta nuevos habitantes.
+只不同的鼠鼠。|different hamsters.|hámsteres distintos.
+候选名单已变化，请重新打开挑选面板。|The candidate list changed. Reopen the selection panel.|La lista cambió. Vuelve a abrir el panel.
+职业分配无效，请为每只所选鼠鼠选择建筑职业或不分配职业。|Invalid assignment. Choose a building job or no job for each selected hamster.|Asignación no válida. Elige un puesto o ninguna profesión para cada hámster.
+职业分配不符合要求，以下建筑至少需要|Assignment incomplete. These buildings need at least |Asignación incompleta. Estos edificios necesitan al menos
+位负责人：|worker: |trabajador:
+请调整分配。|Please adjust the assignments.|Ajusta la asignación.
+成为了伴侣。|became partners.|se hicieron pareja.
+加入小镇。|joined the town.|se unió al pueblo.
+位新邻居已加入小镇，现在共有|new neighbors have joined. Total residents: |nuevos vecinos se han unido. Habitantes en total:
+只鼠鼠。|hamsters.|hámsteres.
+鼠鼠和|Hamster and |Hámster y
+准备回鼠鼠小屋相聚，爱心出现后约|are meeting at the cottage. After hearts appear, about |se reúnen en la casita. Tras aparecer corazones, unos
+秒迎来幼鼠。|seconds until pups arrive.|segundos hasta el nacimiento.
+小屋已有伴侣准备迎接幼鼠，请稍后再来。|A pair is already expecting pups. Please wait.|Una pareja ya espera crías. Espera un poco.
+清洗水壶并换满了新鲜清水。|cleaned and refilled the bottle with fresh water.|limpió y llenó el bebedero con agua fresca.
+水壶已清洗并换满清水。|Bottle cleaned and filled with fresh water.|Bebedero limpio y lleno de agua fresca.
+鼠鼠的一天|A Hamster's Day|El Día de un Hámster
+仓鼠通常在黄昏和夜间更活跃，白天需要安静休息。观察自己的作息，留出充分睡眠时间。|Hamsters are usually more active at dusk and night and need quiet rest by day. Observe your routine and leave enough time for sleep.|Los hámsteres suelen estar activos al anochecer y de noche. Necesitan descanso tranquilo de día. Observa tu rutina y reserva tiempo para dormir.
+种子与蔬菜|Seeds and Vegetables|Semillas y Verduras
+粮食、清水和适量新鲜食物构成日常补给。定期查看粮仓和水壶，及时换水并收获成熟蔬菜。|Grains, clean water and moderate fresh food are daily essentials. Check storage and water regularly, change water and harvest ripe vegetables.|Cereales, agua limpia y alimentos frescos moderados son esenciales. Revisa granero y bebedero, cambia el agua y cosecha verduras maduras.
+小镇生活手册|Town Life Handbook|Manual de Vida del Pueblo
+在广场与朋友交流，在公园适度运动，也别忘记休息。纪念馆保存故事，日历记录值得相聚的日子。|Meet friends at the plaza, exercise moderately and remember to rest. The memorial preserves stories; the calendar marks days to celebrate.|Habla con amigos en la plaza, haz ejercicio moderado y descansa. El memorial guarda historias y el calendario señala días para reunirse.
+黑板留言已保存，保留一个小镇日。|Message saved for one town day.|Mensaje guardado por un día del pueblo.
+黑板已清空。|Blackboard cleared.|Pizarra borrada.
+当前没有可学习的主鼠。|No main hamster is available to study.|No hay protagonista disponible para estudiar.
+请选择书籍。|Choose a book.|Elige un libro.
+今天已读过这本书，明天再来。|Already read today. Come back tomorrow.|Ya leído hoy. Vuelve mañana.
+鼠鼠阅读了《|Hamster read "|Hámster leyó «
+知识增加|knowledge increased by |conocimiento aumentado en
+今天的课桌练习已完成。|Today's desk exercise is complete.|El ejercicio de hoy ya está completo.
+练习需要|The exercise requires |El ejercicio requiere
+点体力，先休息吧。|stamina. Rest first.|de energía. Descansa primero.
+鼠鼠在课桌完成练习，知识增加|Hamster completed the exercise; knowledge increased by |Hámster completó el ejercicio; conocimiento aumentado en
+完成种子分类练习，知识|Seed-sorting exercise complete. Knowledge |Clasificación completada. Conocimiento
+请选择学校互动。|Choose a school activity.|Elige una actividad escolar.
+礼仪师来到小屋，陪鼠鼠前往墓地。|The attendant came to the cottage to escort Hamster to the cemetery.|El encargado llegó a la casita para acompañar a Hámster al cementerio.
+礼仪师将鼠鼠送到墓地，纪念馆保存了生平卡片和相册。|Hamster was laid to rest. The memorial preserves a life card and photo album.|Hámster fue enterrado. El memorial conserva su biografía y álbum.
+鼠鼠从粮仓吃了|Hamster ate from storage: |Hámster comió del granero:
+鼠鼠有些不舒服，去诊所检查了。|Hamster felt unwell and went for a checkup.|Hámster se sintió mal y fue a revisión.
+在小屋睡了一觉|slept at the cottage|durmió en la casita
+去了|went to |fue a
+小菜园的嫩叶成熟了。|The garden's leaves are ready to harvest.|Las hojas del huerto están listas para cosechar.
+安静休息|Resting Quietly|Descansando Tranquilamente
+鼠鼠离世了，回到小屋安静长眠。|Hamster has passed away and rests peacefully at the cottage.|Hámster ha fallecido y descansa en paz en la casita.
+有些不舒服，去诊所休养。|felt unwell and went to the clinic to rest.|se sintió mal y fue a descansar a la clínica.
+曾在|once lived in |vivió en
+认真生活。|and lived a full life.|con una vida plena.
+走完了小镇的一生，墓地增加了一块纪念碑。|completed a life in town. A memorial was added to the cemetery.|completó su vida en el pueblo. Se añadió un monumento al cementerio.
+加入小镇，接任|joined the town, taking over as |se unió al pueblo, asumiendo el puesto de
+工作。|duties.|tareas.
+有些不舒服，回小屋休养。|felt unwell and returned home to rest.|se sintió mal y volvió a descansar.
+在小镇留下了温暖的回忆。|left warm memories in town.|dejó recuerdos cariñosos en el pueblo.
+走完了小镇的一生。|completed a life in town.|completó su vida en el pueblo.
+正月|First Lunar Month|Primer Mes Lunar
+春节|Lunar New Year|Año Nuevo Lunar
+五月|Fifth Lunar Month|Quinto Mes Lunar
+端午节|Dragon Boat Festival|Fiesta del Barco Dragón
+八月|Eighth Lunar Month|Octavo Mes Lunar
+中秋节|Mid-Autumn Festival|Fiesta de Medio Otoño
+元旦|New Year's Day|Año Nuevo
+世界仓鼠日|World Hamster Day|Día Mundial del Hámster
+你的小宠物|Your Little Pet|Tu Mascota
+曾认真地陪伴主人度过每一天。|was a devoted companion every day.|fue un compañero fiel cada día.
+的生日|'s Birthday|: Cumpleaños
+居民们在中心广场相聚庆祝。|Residents gathered at Central Plaza to celebrate.|Los habitantes se reunieron en la Plaza Central.
+的忌日|'s Memorial Day|: Aniversario de Fallecimiento
+新鲜蔬菜|Fresh Vegetables|Verduras Frescas
+粮食小包|Small Food Pack|Paquete de Comida
+请选择摊位上的交换物品。|Choose an item to trade at the stall.|Elige un objeto para intercambiar.
+今天已经交换过这类物品，明天再来吧。|Already traded this category today. Come back tomorrow.|Ya intercambiaste esta categoría hoy. Vuelve mañana.
+交换物品不足。|Not enough items to trade.|Faltan objetos para intercambiar.
+在广场换得|traded at the plaza for |obtuvo en la plaza
+换得|received in trade: |recibió a cambio:
+瓜子不够。|Not enough seeds.|Semillas insuficientes.
+在零食铺买了|bought at the snack shop: |compró en la tienda:
+粮仓增加|Food storage increased by |La reserva aumentó en
+嫩叶还没有成熟。|The leaves are not ready yet.|Las hojas aún no están maduras.
+收获嫩叶，获得|Harvested leaves and gained |Cosechó hojas y obtuvo
+收获|Harvest|Cosechar
+这位居民现在不在。|This resident is not available.|Este habitante no está disponible.
+请先选择新的主鼠，再继续交流。|Choose a new main hamster before chatting.|Elige un nuevo protagonista antes de conversar.
+鼠鼠体力不足，休息一会儿再来聊天吧。|Hamster is too tired to chat. Rest first.|Hámster está demasiado cansado. Descansa primero.
+鼠鼠今天已经社交|Hamster's social interactions today: |Interacciones de Hámster hoy:
+次了，明天再继续吧。|. Continue tomorrow.|. Continúa mañana.
+今天已经和|Already chatted today with |Ya conversaste hoy con
+聊过|chats: |charlas:
+次了，明天再来吧。|. Come back tomorrow.|. Vuelve mañana.
+聊了一会儿。|chatted for a while.|conversaron un rato.
+的关系增加了。|'s friendship grew.|: la amistad aumentó.
+体力不足，先回小屋休息吧。|Not enough stamina. Rest at the cottage first.|Energía insuficiente. Descansa en la casita.
+鼠鼠在跑轮公园认真锻炼了一会儿。|Hamster enjoyed a workout at Wheel Park.|Hámster hizo ejercicio en el Parque de Ruedas.
+锻炼完成：健康|Workout complete. Health |Ejercicio completado. Salud
+这位居民现在不在小镇。|This resident is no longer in town.|Este habitante ya no está en el pueblo.
+主鼠需要先回到小镇生活。|The main hamster must return to town life first.|El protagonista debe volver primero a la vida del pueblo.
+直系亲属或同父母的居民不能繁育。|Direct relatives and siblings cannot breed.|Los parientes directos y hermanos no pueden criar juntos.
+双方性别相同，需要选择异性成年居民。|Choose an adult resident of the opposite sex.|Elige un habitante adulto de distinto sexo.
+主鼠目前是|The main hamster is currently |El protagonista es actualmente
+成年后才可繁育。|and must be an adult to breed.|y debe ser adulto para criar.
+目前是|is currently |es actualmente
+主鼠健康值需要达到|The main hamster needs health of at least |El protagonista necesita salud mínima de
+目前|currently |actualmente
+主鼠需要|The main hamster needs |El protagonista necesita
+点体力，目前|stamina; currently |de energía; actualmente
+好感度需要达到|Required affection: |Afinidad necesaria:
+先照顾正在成长的幼鼠。|Care for the growing pups first.|Cuida primero a las crías que están creciendo.
+条件已满足：异性、双方成年、健康与好感度达标。|Eligible: opposite sexes, both adults, sufficient health and affection.|Condiciones cumplidas: distinto sexo, adultos, salud y afinidad suficientes.
+亲人|Affectionate|Cariñoso
+小屋迎来了|The cottage welcomed |La casita recibió a
+当前主鼠仍在陪伴你。|Your current main hamster is still with you.|Tu protagonista actual aún te acompaña.
+请选择一只仍在小镇生活的鼠鼠。|Choose a living hamster in town.|Elige un hámster vivo del pueblo.
+请选择主鼠性别。|Choose the main hamster's sex.|Elige el sexo del protagonista.
+成为了新的桌面伙伴。|became your new desktop companion.|se convirtió en tu nuevo compañero.
+现在由|Now |Ahora
+继续陪伴你。|will be your companion.|será tu compañero.
+这位鼠鼠现在不能点餐。|This hamster cannot order right now.|Este hámster no puede pedir ahora.
+请先吃完并结清当前餐费。|Finish your current meal and pay first.|Termina y paga la comida actual primero.
+瓜子不足，点餐需要|Not enough seeds. This meal costs |Semillas insuficientes. La comida cuesta
+今天已经点过这份餐了。|You've already ordered this meal today.|Ya pediste esta comida hoy.
+已点餐，吃完后自动排队到收银台；付款成功才扣|Order placed. Queue after eating; only successful payment deducts |Pedido hecho. Harás cola al terminar; solo se descuenta al pagar:
+这笔餐费已经结清或已失效。|This bill is already paid or no longer valid.|Esta cuenta ya está pagada o no es válida.
+瓜子不足，请补足后再付款。|Not enough seeds. Add more before paying.|Semillas insuficientes. Consigue más antes de pagar.
+用餐后在收银台支付了|paid at the register after dining: |pagó en caja tras comer:
+支付完成：|Payment Complete: |Pago Completado:
+在广场相遇，聊了聊小镇生活。|met at the plaza and chatted about town life.|se encontraron en la plaza y hablaron de la vida del pueblo.
+完成了|completed |completó
+请先完成用餐并结清餐费。|Finish dining and pay the bill first.|Termina de comer y paga primero.
+请先选择在世居民。|Choose a living resident first.|Elige primero un habitante vivo.
+先完成当前的结伴活动。|Finish the current outing first.|Termina primero la salida actual.
+对方正在休养，等它恢复后再邀请。|Your friend is resting. Invite them after recovery.|Tu amigo está descansando. Invítalo al recuperarse.
+请选择活动和小镇地点。|Choose an activity and a town location.|Elige actividad y lugar.
+今天已经结伴活动|Outings today: |Salidas de hoy:
+次，明天再约吧。|. Invite again tomorrow.|. Invita de nuevo mañana.
+结伴活动扣|An outing uses |Una salida consume
+点体力，需要至少|stamina; at least |de energía; se necesitan al menos
+点体力以免立即回家睡觉。|stamina to avoid immediately going home to sleep.|de energía para no volver a dormir de inmediato.
+分享点心需要|Sharing snacks requires |Compartir aperitivos requiere
+双方都领养了宠物后，才能一起带宠物出游。|Both must own pets to take a pet walk together.|Ambos deben tener mascotas para pasearlas juntos.
+正在一起前往|are heading together to |van juntos a
+到达后会遇到一段小故事。|A little story awaits on arrival.|Una pequeña historia os espera al llegar.
+当前没有可以回答的结伴事件。|No outing question is awaiting an answer.|No hay preguntas de la salida pendientes.
+鼠鼠桌面小宠|Hamster Desktop Pet|Mascota Hámster de Escritorio
+叫鼠鼠出来|Show Hamster|Mostrar a Hámster
+仓鼠功能主页|Hamster Home|Inicio de Hámster
+出生于|Born on |Nació el
+鼠鼠头像|Hamster portrait|Retrato de Hámster
+返回功能主页|Back Home|Volver al Inicio
+鼠鼠功能主页|Hamster Home|Inicio de Hámster
+进入鼠鼠小镇|Enter Hamster Town|Entrar al Pueblo Hámster
+设置|Settings|Ajustes
+同步小镇主鼠资料|Sync Town Main Profile|Sincronizar Perfil del Pueblo
+漫剧|Animated|Animado
+闲置|Idle|Inactivo
+便捷键|Keyboard Shortcuts|Atajos de Teclado
+在其他应用里也可以快速照顾鼠鼠|Care for Hamster quickly from other apps|Cuida a Hámster desde otras aplicaciones
+恢复默认|Restore Defaults|Restaurar Valores
+点击按键框，然后按下新的组合键|Click a shortcut field, then press the new combination|Haz clic en un campo y pulsa la nueva combinación
+今天想和鼠鼠做什么？|What would you like to do with Hamster?|¿Qué quieres hacer con Hámster?
+轻轻点它的耳朵、脸颊、小爪或肚子。|Gently tap the ears, cheeks, paws or belly.|Toca las orejas, mejillas, patas o barriga.
+鼠鼠功能地图|Hamster Feature Map|Mapa de Funciones
+正面坐着的灰色仓鼠|A gray hamster sitting facing forward|Un hámster gris sentado de frente
+左耳|Left Ear|Oreja Izquierda
+本地或|Local or |Local o
+陪伴|Companionship|Compañía
+右耳|Right Ear|Oreja Derecha
+脸颊|Cheek|Mejilla
+左爪|Left Paw|Pata Izquierda
+肚子|Belly|Barriga
+右爪|Right Paw|Pata Derecha
+六个区域，六种陪伴|Six areas, six ways to stay together|Seis zonas, seis formas de acompañarte
+今天也一起慢慢来吧|Let's take today at our own pace|Tomemos el día con calma
+鼠鼠正从小木屋里探出脑袋，准备陪你度过今天。|Hamster peeks out of the cottage, ready to spend the day with you.|Hámster asoma la cabeza, listo para pasar el día contigo.
+喜欢小木屋|Loves the Cottage|Le Gusta la Casita
+跑轮选手|Wheel Runner|Corredor de Rueda
+我在这里陪你～|I'm here with you.|Estoy aquí contigo.
+正在活动的鼠鼠|Hamster in action|Hámster en acción
+心情很好，肚子也很满足|Happy and well fed|Feliz y bien alimentado
+生日倒计时|Birthday Countdown|Cuenta Atrás del Cumpleaños
+初次见面|First Meeting|Primer Encuentro
+再互动一下，我们会更熟悉彼此|Spend more time together to grow closer|Pasad más tiempo juntos para conoceros
+查看完整日记|View Full Diary|Ver Diario Completo
+鼠鼠正在认真回忆今天发生的事情……|Hamster is remembering today's adventures…|Hámster recuerda las aventuras de hoy…
+年|years|años
+月|months|meses
+日出生，体重六十多克。喜欢住在小木屋里，晚上精力旺盛，最爱跑跑轮。|. Weighs over 60 g, loves the cottage and wheel, and is active at night.|. Pesa más de 60 g, le encantan la casita y la rueda, y es activo de noche.
+智能聊天|AI Chat|Chat con IA
+理解能力更强，需要自己的|Smarter responses; requires your own |Respuestas más inteligentes; requiere tu propia
+地址|Address|Dirección
+例如|For example|Por ejemplo
+当前为免费本地模式，不会产生任何|Free local mode. No |Modo local gratuito. Sin
+费用。|charges.|costes.
+可以问鼠鼠|Ask Hamster|Pregunta a Hámster
+可左右滑动的问题建议|Suggested questions; scroll horizontally|Preguntas sugeridas; desplaza horizontalmente
+现在就可以免费和鼠鼠说话啦。|You can chat with Hamster for free now.|Ya puedes conversar gratis con Hámster.
+跟鼠鼠说点什么……（|Say something to Hamster… (|Di algo a Hámster… (
+换行）|new line)|nueva línea)
+查看公开反馈|View Public Feedback|Ver Comentarios Públicos
+附件不会自动上传，请在打开的|Attachments are not uploaded automatically. Add them on the |Los archivos no se suben automáticamente. Añádelos en la
+页面中确认后添加|page after reviewing them|página tras revisarlos
+选择一种鼠鼠形态，再挑选想播放的动作。|Choose a form, then an action to play.|Elige una forma y una acción.
+动作切换|Switch Actions|Cambiar Acciones
+选择鼠鼠形态|Choose Hamster Form|Elegir Forma de Hámster
+实时模型动作|Real-time Model Actions|Acciones del Modelo
+流畅视频动作|Smooth Video Actions|Acciones de Vídeo Fluidas
+透明实拍动作|Transparent Filmed Actions|Acciones Grabadas Transparentes
+支持透明|Supports transparent |Admite archivos transparentes
+普通笼内视频暂不自动抠图，避免生成残缺鼠鼠。|Cage videos are not automatically cut out, to avoid incomplete results.|Los vídeos de jaula no se recortan automáticamente para evitar resultados incompletos.
+打开设置|Open Settings|Abrir Ajustes
+漫剧形态支持呼吸、蹦跳、睡觉、侧躺、开心和爬行。|Animated form supports breathing, jumping, sleeping, reclining, happiness and crawling.|La forma animada permite respirar, saltar, dormir, tumbarse, alegrarse y gatear.
+只|animals|animales
+天|days|días
+岁|years|años
+个月|months|meses
+到|to|a
+正面理毛|Front Grooming|Aseo de Frente
+正面对着你，整理脸颊和小爪|Facing you while grooming cheeks and paws|Se asea las mejillas y patas de frente
+抱菜进食|Holding Greens|Comiendo Hojas
+抱着绿色菜叶慢慢吃|Holding a green leaf and eating slowly|Sostiene una hoja y come despacio
+低头进食|Head-down Eating|Comiendo Cabizbajo
+低下头认真吃东西|Lowering the head to eat|Baja la cabeza para comer
+坐着观察|Sitting and Watching|Observando Sentado
+坐在中央，轻轻转头观察|Sitting and gently looking around|Sentado y mirando a su alrededor
+转身活动|Turning Around|Girando
+转动身体，保留完整主体片段|Turning with the full body visible|Gira con el cuerpo completo visible
+近景理毛|Close-up Grooming|Aseo de Cerca
+近距离整理脸部毛发|Grooming the face up close|Se asea la cara de cerca
+还没有自定义台词|No custom lines yet|Todavía no hay frases personalizadas
+模式使用你自己的接口额度，|mode uses your own API quota; |usa tu propia cuota de API;
+当前为免费本地模式，不联网，也不会产生任何|Free local mode: offline, without any |Modo local gratuito: sin conexión ni
+填写并保存接口设置后，就可以使用|Save your API settings to enable |Guarda los ajustes de API para activar
+聊天。|chat.|el chat.
+看看鼠鼠今天如何经营自己的小生活|See how Hamster lives in town|Descubre la vida de Hámster en el pueblo
+说说今天的心情，鼠鼠会认真听|Share your feelings; Hamster is listening|Cuenta cómo te sientes; Hámster te escucha
+管理和预览鼠鼠的真实动态|Manage and preview Hamster's actions|Gestiona y previsualiza las acciones
+翻看你们每天共同留下的记录|Revisit your days together|Recuerda los días juntos
+调整鼠鼠的习惯、形态和装扮|Adjust habits, form and outfits|Ajusta hábitos, forma y accesorios
+写下只属于你和鼠鼠的台词|Write your own lines for Hamster|Escribe tus propias frases
+准备喜欢的食物，看鼠鼠慢慢吃掉|Prepare a favorite food and watch Hamster eat|Prepara su comida favorita y míralo comer
+集中管理语言、鼠标特效、行为与形态|Manage language, effects, behavior and form|Gestiona idioma, efectos, conducta y forma
+鼠鼠基本信息|Hamster Profile|Perfil de Hámster
+查看鼠鼠的身份、年龄与生活习惯|View identity, age and habits|Consulta identidad, edad y hábitos
+你添加的自定义透明动作|Your custom transparent action|Tu acción transparente personalizada
+播放动作|Play Action|Reproducir Acción
+正在播放|Now Playing|Reproduciendo
+个可用动作|available actions|acciones disponibles
+今天将是第一篇日记|Today will be your first diary entry|Hoy será la primera entrada del diario
+的小日记|'s Diary|: Diario
+来到世界|Time in the World|Tiempo en el Mundo
+距生日|Until Birthday|Hasta el Cumpleaños
+夜深了，鼠鼠陪你一会儿|It's late. Hamster will keep you company.|Es tarde. Hámster te acompaña un rato.
+早上好，今天也一起加油|Good morning! Let's do our best today.|¡Buenos días! Hagámoslo bien hoy.
+到午休时间啦，先喘口气|Time for a lunch break. Take a breath.|Hora de descansar al mediodía. Respira.
+晚上好，到鼠鼠活跃的时间啦|Good evening! It's Hamster's active time.|¡Buenas noches! Hámster empieza su actividad.
+熟悉的气味|A Familiar Scent|Un Aroma Familiar
+最信任的主人|Most Trusted Human|Su Persona de Confianza
+永远的小伙伴|Forever Friends|Amigos para Siempre
+鼠鼠最信任的人就是你。|You're the person Hamster trusts most.|Eres la persona en quien más confía Hámster.
+亲密值|Closeness|Afinidad
+距离下一等级还差|To the next level: |Para el siguiente nivel:
+次互动|interactions|interacciones
+肚子有一点饿了|A little hungry|Un poco hambriento
+今天想让你多陪陪|Wants more company today|Quiere más compañía hoy
+正在安静地陪着你|Quietly keeping you company|Te acompaña tranquilamente
+睡|Sleep|Dormir
+跑|Run|Correr
+开心|Happy|Feliz
+鼠鼠把菜叶抱在手里，正在一口一口慢慢吃。|Hamster holds a leaf and takes slow little bites.|Hámster sujeta una hoja y da pequeños bocados.
+鼠鼠接过|Hamster takes |Hámster recibe
+开始认真享用啦！|and starts enjoying it!|¡y empieza a disfrutarlo!
+口|bites|bocados
+已切换为|Switched to |Cambiado a
+模型，可按住鼠鼠旋转。|model. Hold and drag Hamster to rotate.|modelo. Mantén y arrastra para girar.
+已切换为真实动态。|Switched to real motion.|Cambiado a movimiento real.
+对话设置已保存在这台电脑。|Dialogue settings saved on this computer.|Ajustes de diálogo guardados en este equipo.
+已切换到免费本地聊天，不会产生费用。|Switched to free local chat. No charges.|Cambiado al chat local gratuito. Sin costes.
+已切换到|Switched to |Cambiado a
+智能聊天，请确认接口设置可用。|AI chat. Check that your API settings work.|chat con IA. Comprueba los ajustes de API.
+鼠鼠正在认真理解你说的话……|Hamster is listening carefully…|Hámster escucha con atención…
+鼠鼠正在通过|Hamster is using |Hámster está usando
+思考怎么回答……|to think of a reply…|para pensar una respuesta…
+鼠鼠已用免费本地模式回答。|Hamster replied in free local mode.|Hámster respondió en modo local gratuito.
+鼠鼠已经通过|Hamster has replied using |Hámster ha respondido mediante
+回答你啦。|to your message.|a tu mensaje.
+发送失败，原消息已保留：|Send failed. Your message is preserved: |Error al enviar. Tu mensaje se conserva:
+聊天暂时没有响应|Chat is not responding|El chat no responde
+未知错误|Unknown error|Error desconocido
+聊天记录已清空。|Chat history cleared.|Historial borrado.
+嘿嘿，摸到我啦～|Hehe, you found me!|¡Jeje, me encontraste!
+已恢复默认鼠鼠|Default Hamster restored|Hámster predeterminado restaurado
+已自动抠图并保存|Background removed and image saved|Fondo eliminado e imagen guardada
+动作名称不能为空|Action name cannot be empty|El nombre no puede estar vacío
+名称已保存：|Name saved: |Nombre guardado:
+自定义动作已删除|Custom action deleted|Acción eliminada
+请选择一个已经透明的动作文件…|Choose an action file with transparency…|Elige un archivo de acción transparente…
+没有选择文件|No file selected|Ningún archivo seleccionado
+添加失败：|Unable to add: |No se pudo añadir:
+已添加动作：|Action added: |Acción añadida:
+鼠鼠开心地蹭了蹭你！|Hamster nuzzles you happily!|¡Hámster se acurruca feliz junto a ti!
+鼠鼠抱着菜叶认真地吃起来了。|Hamster holds a leaf and starts eating.|Hámster sujeta una hoja y empieza a comer.
+鼠鼠已经跳上跑轮啦！|Hamster has hopped onto the wheel!|¡Hámster se ha subido a la rueda!
+鼠鼠已经出来陪你啦！|Hamster is here to keep you company!|¡Hámster ha venido a acompañarte!
+仿真形态支持呼吸、打字、睡觉、侧躺、开心、爬行和进食。|Lifelike form supports breathing, typing, sleeping, reclining, happiness, crawling and eating.|La forma realista permite respirar, teclear, dormir, tumbarse, alegrarse, gatear y comer.
+漫剧形态|Animated Form|Forma Animada
+鼠鼠的小日记|Hamster's Diary|Diario de Hámster
+小鼠|Hamster|Hámster
+已选择附件，请在打开的|Attachments selected. Add them on the |Archivos seleccionados. Añádelos en la
+页面中手动添加|page manually|página manualmente
+没有选择附件|No attachments selected|Ningún archivo seleccionado
+草稿已保存在这台电脑|Draft saved on this computer|Borrador guardado en este equipo
+正在打开|Opening |Abriendo
+反馈页面…|feedback page…|página de comentarios…
+已打开|Opened |Abierto
+请检查内容并点击提交|Review the contents and submit|Revisa el contenido y envía
+暂时无法打开反馈页面|Unable to open feedback right now|No se pueden abrir los comentarios ahora
+你今天心情怎么样？|How are you feeling today?|¿Cómo te sientes hoy?
+你饿了吗？|Are you hungry?|¿Tienes hambre?
+你最喜欢吃什么？|What is your favorite food?|¿Cuál es tu comida favorita?
+你在做什么？|What are you doing?|¿Qué estás haciendo?
+你什么时候生日？|When is your birthday?|¿Cuándo es tu cumpleaños?
+你为什么喜欢跑轮？|Why do you like your wheel?|¿Por qué te gusta la rueda?
+可以陪我一会儿吗？|Can you stay with me?|¿Puedes acompañarme?
+我今天很累，安慰我一下|I had a hard day. Can you comfort me?|Tuve un día difícil. ¿Puedes animarme?
+请按下新的组合键，|Press the new combination; |Pulsa la nueva combinación;
+取消|Cancel|Cancelar
+便捷键已保存并立即生效|Shortcut saved and active immediately|Atajo guardado y activado
+已恢复默认便捷键|Default shortcuts restored|Atajos predeterminados restaurados
+这个组合键已被其他功能使用|This shortcut is already in use|Este atajo ya está en uso
+请使用包含|Use a combination including |Usa una combinación que incluya
+或|or|o
+的组合键|in the combination|en la combinación
+该组合键被系统或其他应用占用，请换一个|This shortcut is reserved by the system or another app. Choose another.|El sistema u otra aplicación usa este atajo. Elige otro.
+显示或隐藏鼠鼠|Show or Hide Hamster|Mostrar u Ocultar a Hámster
+无需打开控制中心|Without opening the control center|Sin abrir el centro de control
+打开控制中心|Open Control Center|Abrir Centro de Control
+查看功能与设置|View features and settings|Ver funciones y ajustes
+快速增加一次互动|Add an interaction quickly|Añadir una interacción rápida
+喂一口菜叶|Feed a Bite of Greens|Dar un Bocado de Hojas
+直接投喂常用食物|Feed a favorite food directly|Dar directamente la comida habitual
+让鼠鼠跑轮|Start the Wheel|Usar la Rueda
+立即播放跑轮动作|Play the wheel action now|Reproducir la acción de rueda
+切换鼠鼠形态|Switch Hamster Form|Cambiar Forma de Hámster
+与真实动态间切换|and real motion|y movimiento real
+依次切换|Cycle through |Alternar entre
+仿真形态与真实动态|lifelike form and real motion|forma realista y movimiento real
+主鼠资料保存失败|Unable to save the main profile|No se pudo guardar el perfil principal
+小雨|Light Rain|Lluvia Ligera
+小镇天气|Town Weather|Tiempo del Pueblo
+体力恢复到|Stamina must recover to |La energía debe recuperarse hasta
+及以上才能起床|or more before waking|o más para despertar
+正在|is |está
+克|g|g
+喜欢|Likes |Le gusta
+第|No.|N.º
+出生，|born; |nacido;
+现在|Now|Ahora
+来自|From |De
+人|people|personas
+与|and|y
+的|of|de
+份|servings|raciones
+这位伙伴由|This companion is cared for by |Este compañero está a cargo de
+主人照顾，默认跟随主人生活。|its owner and follows them by default.|su dueño y lo sigue por defecto.
+每天一次，主鼠心情|Once daily; main hamster mood |Una vez al día; ánimo del protagonista
+消耗|Uses |Consume
+颗瓜子购买|seeds to buy |semillas para comprar
+代|generation|generación
+小镇|Town|Pueblo
+我的|My|Mi
+次|times|veces
+至少|at least |al menos
+的宠物|'s pet|: su mascota
+对|For |Para
+最多|up to |hasta
+让|Let |Dejar a
+颗瓜子|seeds|semillas
+现实|real time|tiempo real
+前|First |Primeros
+位安放于墓碑，其余名字登记在后方骨灰墙。骨灰墙每页|are remembered on gravestones; remaining names are on the columbarium wall. Names per page: |se recuerdan en lápidas; los demás nombres están en el muro de urnas. Nombres por página:
+上一页|Previous Page|Página Anterior
+骨灰墙|Columbarium Wall|Muro de Urnas
+下一页|Next Page|Página Siguiente
+颗|seeds|semillas
+位|residents|habitantes
+饮水|Drinking|Bebiendo
+进食|Eating|Comiendo
+为|For |Para
+点|points|puntos
+和|and|y
+约|about |unos
+路边花草|Roadside Flowers|Flores del Camino
+领养、陪伴与照护猫狗伙伴|Adopt, play with and care for pets|Adopta, juega y cuida a las mascotas
+夜里最热闹的运动场|The liveliest exercise spot at night|El lugar más animado para hacer ejercicio de noche
+医生鼠鼠守护大家的健康|Our doctor looks after everyone's health|Nuestro médico cuida la salud de todos
+购买粮食和偶尔的小零食|Buy food and occasional treats|Compra comida y algún aperitivo
+收藏逝去鼠鼠的纪念物|Keepsakes of departed friends|Recuerdos de amigos fallecidos
+休息、粮仓和家具都在这里|Rest, food storage and furniture|Descanso, granero y muebles
+种下鼠鼠喜欢的新鲜食物|Grow Hamster's favorite fresh food|Cultiva su comida fresca favorita
+温柔送别小镇里的鼠鼠|A gentle farewell to town residents|Una despedida cariñosa a los habitantes
+安静纪念每一段小小生命|Quietly remembering every little life|Recordando cada pequeña vida en paz
+钟楼、教室和学习庭院|Clock tower, classroom and school yard|Torre del reloj, aula y patio escolar
+厨房、柜台和舒适的用餐区|Kitchen, counter and cozy dining area|Cocina, mostrador y comedor acogedor
+专辑、照片和黑胶收藏展|Albums, photos and vinyl collection|Colección de álbumes, fotos y vinilos
+鼠鼠模型加载失败，请返回后重新进入。|Hamster model failed to load. Return and try again.|No se pudo cargar el modelo. Vuelve a entrar.
+点击清洗换水|Click to Clean and Refill|Clic para Limpiar y Rellenar
+点击免费清洗并补满新鲜水。|Click to clean and refill with fresh water for free.|Haz clic para limpiar y rellenar gratis.
+点击补给|Click to Restock|Clic para Reponer
+床|Bed|Cama
+看看|Look at |Mirar
+鼠鼠|Hamster|Hámster
+在|at|en
+个现实小时|real hours|horas reales
+对{0}的好感度|Affection toward {0}|Afinidad con {0}
+第 {0} 代|Generation {0}|Generación {0}
+{0}岁{1}个月|{0} years, {1} months|{0} años, {1} meses
+{0}的生日|{0}'s Birthday|Cumpleaños de {0}
+{0}的忌日|Remembering {0}|En Recuerdo de {0}
+{0}的孩子|Child of {0}|Cría de {0}
+{0}正在{1}。|{0} is currently at {1}.|{0} está en {1}.
+{0}的生活已经珍藏在纪念馆。|{0}'s life is preserved in the Memorial Hall.|La vida de {0} se conserva en la Sala de Recuerdos.
+{0}和{1}成为了伴侣。|{0} and {1} became partners.|{0} y {1} se hicieron pareja.
+{0}在鼠鼠小屋迎来了{1}只幼鼠：{2}。|{0} welcomed {1} pups at the cottage: {2}.|{0} recibió {1} crías en la casita: {2}.
+{0}在鼠鼠小屋迎来了{1}只幼鼠。|{0} welcomed {1} pups at the cottage.|{0} recibió {1} crías en la casita.
+{0}加入小镇。|{0} joined the town.|{0} se unió al pueblo.
+{0}用餐后在收银台支付了{1}颗瓜子。|{0} paid {1} seeds at the register after dining.|{0} pagó {1} semillas en caja después de comer.
+今天还可社交{0}次，与{1}还可聊{2}次|{0} social interactions left today; {2} chats left with {1}.|Quedan {0} interacciones hoy y {2} charlas con {1}.
+今天和这位居民的{0}次交流已用完|All {0} chats with this resident have been used today.|Ya se han usado las {0} charlas de hoy con este habitante.
+今天的{0}次社交已全部用完|All {0} social interactions have been used today.|Ya se han usado las {0} interacciones de hoy.
+{0}只|{0}|{0}
+{0}份|{0} servings|{0} raciones
+{0}岁|{0} years|{0} años
+{0}颗瓜子|{0} seeds|{0} semillas
+{0}颗瓜子。|{0} seeds.|{0} semillas.
+{0}次|{0} times|{0} veces
+{0}的小日记|{0}'s Diary|Diario de {0}
+{0}的小档案|{0}'s Profile|Perfil de {0}
+与{0}的{1}|{1} with {0}|{1} con {0}
+这位伙伴由NPC主人照顾，默认跟随主人生活。|This pet belongs to a neighbor and follows its owner by default.|Esta mascota pertenece a un vecino y sigue a su dueño por defecto.
+邀请NPC领养 · 每代最多{0}位|Invite Neighbors to Adopt · Up to {0} per Generation|Invitar a Vecinos a Adoptar · Hasta {0} por Generación
+木屋里暖暖的，我把胡须也收拾得整整齐齐。|The cottage is warm, and I've groomed my whiskers neatly.|La casita está calentita y he dejado mis bigotes bien arreglados.
+今天认真巡逻了桌面，没有漏掉任何一块小饼干。|I patrolled the desktop carefully today and didn't miss a single cookie.|Hoy patrullé el escritorio con cuidado y no se me escapó ninguna galleta.
+我悄悄藏了一点精神，准备晚上再拿出来用。|I've saved a little energy for tonight.|He guardado un poco de energía para esta noche.
+主人在旁边的时候，连空气闻起来都很安心。|Even the air feels comforting when my human is nearby.|Hasta el aire me tranquiliza cuando mi humano está cerca.
+今天的心情是|Today's mood: |Ánimo de hoy:
+圆滚滚的开心|round and happy|feliz y redondito
+安安静静的满足|quietly content|tranquilamente satisfecho
+需要主人多陪陪|needing more company|necesitando más compañía
+主人摸了我 {0} 次，我每次都有认真回应。|My human petted me {0} times, and I responded each time.|Mi humano me acarició {0} veces y respondí cada vez.
+主人今天好像有点忙，我就在小木屋门口等一等。|My human seems busy today, so I'll wait by the cottage door.|Mi humano parece ocupado; esperaré junto a la casita.
+还吃到了{0}，肚子非常满意。|I also ate {0}, and my tummy was delighted.|También comí {0} y mi barriguita quedó encantada.
+我跑了 {0} 回跑轮，六十多克的小身体也很有力量！|I ran the wheel {0} times. My little body is strong too!|Corrí en la rueda {0} veces. ¡Mi pequeño cuerpo también es fuerte!
+选择图片|Choose Image|Elegir Imagen
+未选择文件|No File Chosen|Ningún Archivo Elegido
+下午好，鼠鼠一直在这里|Good afternoon. Hamster is right here with you.|Buenas tardes. Hámster está aquí contigo.
