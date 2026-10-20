@@ -34848,43 +34848,99 @@ void main() {
     return map;
   }
   var buildingSurfaceStyles = {
-    "\u9F20\u9F20\u5C0F\u5C4B": { floor: "wood", tint: 16772559, roughness: 0.68 },
-    "\u9F20\u9F20\u5B66\u6821": { floor: "wood", tint: 16248793, roughness: 0.75 },
-    "\u5BA0\u7269\u4E4B\u5BB6": { floor: "wood", tint: 16773080, roughness: 0.7 },
-    "\u96F6\u98DF\u94FA": { floor: "wood", tint: 16773075, roughness: 0.65 },
-    "\u9F20\u9F20\u996D\u9986": { floor: "tile", tint: 16774111, roughness: 0.48 },
-    "Mariah Carey\u540D\u4EBA\u5802": { floor: "marble", tint: 16777215, roughness: 0.24 },
-    "\u8BCA\u6240": { floor: "ceramic", tint: 15857911, roughness: 0.3 },
-    "\u7EAA\u5FF5\u9986": { floor: "marble", tint: 16116953, roughness: 0.65 },
-    "\u6BA1\u4EEA\u9986": { floor: "marble", tint: 15132899, roughness: 0.72 }
+    "\u9F20\u9F20\u5C0F\u5C4B": { floor: "wood", tint: 16772559, roughness: 0.68, wall: "plaster", wallTint: 15916996 },
+    "\u9F20\u9F20\u5B66\u6821": { floor: "linoleum", tint: 13359558, roughness: 0.8, wall: "wainscot", wallTint: 16774364 },
+    "\u5BA0\u7269\u4E4B\u5BB6": { floor: "terrazzo", tint: 16773341, roughness: 0.65, wall: "paint", wallTint: 15980989 },
+    "\u96F6\u98DF\u94FA": { floor: "ceramic", tint: 16777215, roughness: 0.28, wall: "subway", wallTint: 14282211 },
+    "\u9F20\u9F20\u996D\u9986": { floor: "terracotta", tint: 15250323, roughness: 0.82, wall: "brick", wallTint: 15852233 },
+    "Mariah Carey\u540D\u4EBA\u5802": { floor: "ceramic", tint: 16777215, roughness: 0.22, wall: "fluted", wallTint: 16184561 },
+    "\u8BCA\u6240": { floor: "ceramic", tint: 15923447, roughness: 0.32, wall: "subway", wallTint: 14938606 },
+    "\u7EAA\u5FF5\u9986": { floor: "limestone", tint: 14931901, roughness: 0.8, wall: "plaster", wallTint: 15787471 },
+    "\u6BA1\u4EEA\u9986": { floor: "slate", tint: 11647416, roughness: 0.85, wall: "paint", wallTint: 15067621 }
   };
-  function ceramicTexture() {
-    if (maps.has("ceramic")) return maps.get("ceramic");
+  function surfaceTexture(kind) {
+    if (maps.has(kind)) return maps.get(kind);
     const canvas = document.createElement("canvas");
     canvas.width = canvas.height = 256;
     const ctx = canvas.getContext("2d");
-    ctx.fillStyle = "#f4f7f5";
+    ctx.fillStyle = kind === "wainscot" ? "#eee4d4" : "#f6f5f1";
     ctx.fillRect(0, 0, 256, 256);
-    ctx.strokeStyle = "#d5dedb";
-    ctx.lineWidth = 2;
-    ctx.strokeRect(0, 0, 256, 256);
+    const noise = (i2) => {
+      const n = Math.sin(i2 * 127.1 + 31.7) * 43758.5453;
+      return n - Math.floor(n);
+    };
+    if (["plaster", "paint", "linoleum", "limestone", "slate", "terrazzo"].includes(kind)) {
+      for (let i2 = 0; i2 < 1800; i2++) {
+        const value = Math.floor(185 + noise(i2) * 60);
+        ctx.fillStyle = "rgba(" + value + "," + value + "," + value + "," + (kind === "paint" ? 0.12 : 0.3) + ")";
+        const size = kind === "terrazzo" ? 2 + noise(i2 + 9) * 5 : 1;
+        ctx.fillRect(noise(i2 + 1) * 256, noise(i2 + 2) * 256, size, size);
+      }
+    }
+    if (kind === "terrazzo") for (let i2 = 0; i2 < 260; i2++) {
+      ctx.fillStyle = ["#c3b3a2", "#bcc5bc", "#d4bdb3", "#ddd4c2"][i2 % 4];
+      ctx.fillRect(noise(i2 + 5) * 256, noise(i2 + 6) * 256, 2 + noise(i2 + 7) * 4, 2 + noise(i2 + 8) * 3);
+    }
+    if (kind === "slate") for (let i2 = 0; i2 < 35; i2++) {
+      ctx.strokeStyle = i2 % 2 ? "#dedfda" : "#eceee9";
+      ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      ctx.moveTo(0, i2 * 7.4);
+      ctx.lineTo(256, i2 * 7.4 + noise(i2) * 4);
+      ctx.stroke();
+    }
+    ctx.strokeStyle = "#d9d9d2";
+    ctx.lineWidth = 1;
+    if (["ceramic", "terracotta", "slate", "limestone"].includes(kind)) {
+      ctx.strokeStyle = kind === "terracotta" ? "#b9a99b" : "#d8dcda";
+      ctx.lineWidth = kind === "terracotta" ? 3 : 1.5;
+      ctx.strokeRect(0, 0, 256, 256);
+    }
+    if (["subway", "brick"].includes(kind)) for (let row = 0; row < 4; row++) {
+      const y = row * 64;
+      ctx.fillStyle = row % 2 ? "#eeeee8" : "#f8f8f4";
+      ctx.fillRect(0, y, 256, 64);
+      ctx.strokeStyle = kind === "brick" ? "#c8c4b8" : "#d8e0da";
+      ctx.lineWidth = kind === "brick" ? 3 : 2;
+      for (let x2 = row % 2 ? -128 : 0; x2 < 256; x2 += 128) ctx.strokeRect(x2, y, 128, 64);
+    }
+    if (kind === "wainscot") {
+      ctx.fillStyle = "#bda88a";
+      ctx.fillRect(0, 154, 256, 102);
+      ctx.strokeStyle = "#99886c";
+      ctx.lineWidth = 2;
+      for (let x2 = 0; x2 < 256; x2 += 32) {
+        ctx.beginPath();
+        ctx.moveTo(x2, 154);
+        ctx.lineTo(x2, 256);
+        ctx.stroke();
+      }
+      ctx.fillStyle = "#d0bc9c";
+      ctx.fillRect(0, 151, 256, 6);
+    }
+    if (kind === "fluted") for (let x2 = 0; x2 < 256; x2 += 16) {
+      ctx.fillStyle = "#e1e0db";
+      ctx.fillRect(x2, 0, 2, 256);
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(x2 + 2, 0, 2, 256);
+    }
     const map = new CanvasTexture(canvas);
     map.wrapS = map.wrapT = RepeatWrapping;
     map.colorSpace = SRGBColorSpace;
     map.anisotropy = 4;
-    maps.set("ceramic", map);
+    maps.set(kind, map);
     return map;
   }
   function applyBuildingSurface(mesh, name, role = "floor", units = 1) {
     const style = buildingSurfaceStyles[name];
     if (!style || !mesh.isMesh) return mesh;
-    const kind = role === "wood" ? "wood" : role === "stone" ? "marble" : style.floor;
+    const kind = role === "wood" ? "wood" : role === "wall" ? style.wall : style.floor;
     const material3 = mesh.material.clone();
-    material3.color.set(role === "wood" ? 16773081 : style.tint);
-    material3.roughness = role === "wood" ? 0.7 : style.roughness;
+    material3.color.set(role === "wood" ? 16773081 : role === "wall" ? style.wallTint : style.tint);
+    material3.roughness = role === "wood" ? 0.7 : role === "wall" ? kind === "subway" ? 0.4 : 0.87 : style.roughness;
     material3.metalness = 0;
-    material3.map = kind === "ceramic" ? ceramicTexture() : texture(kind, "Color");
-    if (kind !== "ceramic") {
+    material3.map = kind === "wood" ? texture(kind, "Color") : surfaceTexture(kind);
+    if (kind === "wood") {
       material3.normalMap = texture(kind, "NormalGL");
       material3.normalScale = new Vector2(kind === "wood" ? 0.18 : 0.1, kind === "wood" ? 0.18 : 0.1);
       material3.roughnessMap = texture(kind, "Roughness");
@@ -34892,7 +34948,7 @@ void main() {
     material3.envMapIntensity = kind === "wood" ? 0.25 : 0.65;
     material3.userData.townSurface = kind;
     mesh.material = material3;
-    const p = mesh.geometry.attributes.position, n = mesh.geometry.attributes.normal, uv = new Float32Array(p.count * 2), span = kind === "wood" ? 1.8 : kind === "tile" ? 2.1 : kind === "ceramic" ? 0.45 : 2.4;
+    const p = mesh.geometry.attributes.position, n = mesh.geometry.attributes.normal, uv = new Float32Array(p.count * 2), span = kind === "wood" ? 1.8 : kind === "ceramic" ? 0.55 : kind === "terracotta" ? 0.3 : role === "wall" ? 1.6 : 1.2;
     for (let i2 = 0; i2 < p.count; i2++) {
       const x2 = (p.getX(i2) * mesh.scale.x + mesh.position.x) * units, y = (p.getY(i2) * mesh.scale.y + mesh.position.y) * units, z = (p.getZ(i2) * mesh.scale.z + mesh.position.z) * units;
       const nx = Math.abs(n.getX(i2)), ny = Math.abs(n.getY(i2)), nz = Math.abs(n.getZ(i2));
@@ -34907,8 +34963,8 @@ void main() {
     if (!buildingSurfaceStyles[name]) return;
     group.traverse((mesh) => {
       if (!mesh.isMesh || Array.isArray(mesh.material) || mesh.material.map || mesh.material.transparent || mesh.material.metalness > 0.1) return;
-      if (woodColors.has(mesh.material.color.getHex())) applyBuildingSurface(mesh, name, "wood", units);
-      else if (name === "Mariah Carey\u540D\u4EBA\u5802" && [15394006, 15262679, 15261129, 15853782].includes(mesh.material.color.getHex())) applyBuildingSurface(mesh, name, "stone", units);
+      if (mesh.userData.buildingWall) applyBuildingSurface(mesh, name, "wall", units);
+      else if (woodColors.has(mesh.material.color.getHex())) applyBuildingSurface(mesh, name, "wood", units);
       else if (mesh.geometry.type === "BoxGeometry") {
         const { width, height, depth } = mesh.geometry.parameters;
         if (width * units > 2 && depth * units > 1 && height * units < 0.5 && mesh.position.y * units < 0.4) applyBuildingSurface(mesh, name, "floor", units);
@@ -39110,6 +39166,9 @@ void main() {
         box2(shell, layout.doorWidth, layout.height - layout.doorHeight, 0.065, layout.doorX, layout.floor + (layout.height + layout.doorHeight) / 2, front, wall);
       }
     }
+    shell.traverse((mesh) => {
+      if (mesh.isMesh && !mesh.userData.cutawayRoof && mesh.material.color.equals(wall.color) && !mesh.material.transparent) mesh.userData.buildingWall = true;
+    });
     const pivot = new Group();
     pivot.position.set(layout.doorX - layout.doorWidth / 2, layout.floor, front + 0.015);
     model.add(pivot);
@@ -45233,6 +45292,10 @@ void main() {
         for (const x2 of [-2, 2]) bouquet(x2, 0.25, -0.5);
         add(0.58, 0.65, 0.045, 0, 1.25, -2.88, trimColor);
         add(0.47, 0.54, 0.025, 0, 1.25, -2.85, 14603453);
+      }
+      for (const wall of cutaway) {
+        wall.geometry.computeBoundingBox();
+        if (wall.geometry.boundingBox.max.y - wall.geometry.boundingBox.min.y > 1) wall.userData.buildingWall = true;
       }
       finishBuildingSurfaces(room, name, 0.36);
       room.userData.cutaway = cutaway;

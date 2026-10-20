@@ -53,6 +53,7 @@ export function installBuildingPortal(model,name){const layout=buildingLayouts[n
    box(shell,layout.doorWidth,layout.height-layout.doorHeight,.065,layout.doorX,layout.floor+(layout.height+layout.doorHeight)/2,front,wall);
   }
  }
+ shell.traverse(mesh=>{if(mesh.isMesh&&!mesh.userData.cutawayRoof&&mesh.material.color.equals(wall.color)&&!mesh.material.transparent)mesh.userData.buildingWall=true});
  const pivot=new THREE.Group();pivot.position.set(layout.doorX-layout.doorWidth/2,layout.floor,front+.015);model.add(pivot);const w=layout.doorWidth,h=layout.doorHeight;
  if(layout.cottage){const door=new THREE.Mesh(new THREE.CircleGeometry(w/2,48),trim);door.material=trim.clone();door.material.side=THREE.DoubleSide;door.position.set(w/2,h/2,0);door.scale.y=h/w;pivot.add(door)}else{box(pivot,w,h*.42,.045,w/2,h*.21,0,trim);box(pivot,w,h*.09,.045,w/2,h*.955,0,trim);for(const x of [.025,w-.025])box(pivot,.05,h*.53,.045,x,h*.685,0,trim);box(pivot,w-.1,h*.49,.018,w/2,h*.685,0,glass);box(pivot,.025,h*.49,.03,w/2,h*.685,0,trim)}
  const handle=new THREE.Mesh(new THREE.SphereGeometry(.025,16,10),new THREE.MeshStandardMaterial({color:0xd2b479,metalness:.75,roughness:.27}));handle.position.set(w-.085,h*.44,.05);pivot.add(handle);pivot.traverse(mesh=>{if(mesh.isMesh)mesh.userData.buildingDoor=name});
