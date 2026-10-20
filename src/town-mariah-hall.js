@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-const material=(color,extra={})=>new THREE.MeshStandardMaterial({color,roughness:.65,...extra});
+const material=(color,extra={})=>new THREE.MeshStandardMaterial({color,roughness:.65,...([0xc4a178,0xe2cfb1,0xc2a47d].includes(color)?{metalness:.55,roughness:.34}:{}),...extra});
 export const hallAlbums=[
  [7,'#1 to Infinity'],[8,'Infinity'],[9,'Memoirs of an imperfect Angel'],[10,'The Rarities'],[11,'Daydream'],[12,'Daydream · alternate'],[14,'Charmbracelet'],[15,'Butterfly'],[16,'Emotions'],[17,'Here For It All'],[18,'Music Box'],[19,'蓝色肖像封面'],[20,'Me. I Am Mariah'],[21,'Mariah Carey'],[22,'彩虹封面'],[23,'Glitter'],[24,'The Emancipation of Mimi'],[25,'E=MC²'],[26,"Didn't Mean To Turn You On"],[27,'Merry Christmas'],[28,'Me. I Am Mariah · alternate']
 ];

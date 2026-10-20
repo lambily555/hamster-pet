@@ -34,7 +34,7 @@ export function populateCottagePets(room,label){
 export function populatePetHome(room,label,clickable){
  const wood=0x95603b,cream=0xf3dec0;
  box(room,8,.09,6,0,-.045,0,0xe7c68f);
- for(let x=-3.8;x<4;x+=.8)box(room,.015,.007,6,x,.004,0,0xc7a673);
+
  const [cx,cz,cw,cd]=petHomeFurniture.counter;box(room,cw*2,.85,cd*2,cx,.425,cz,wood);box(room,cw*2+.12,.08,cd*2+.1,cx,.89,cz,0xc99553);label('领养柜台',cx,cz,'pet-home');
  box(room,7,.12,.65,0,.12,-2.4,wood);for(const x of [-3.5,-1.75,0,1.75,3.5])box(room,.1,2.4,.65,x,1.3,-2.4,wood);
  for(const y of [.5,1.3,2.1]){box(room,7,.09,.65,0,y,-2.4,wood);for(let i=0;i<10;i++){const x=-3.1+i*.69;box(room,.35,.4,.3,x,y+.24,-2.4,[0xcfa453,0x90a86d,0xc68563,0xe5d7ab][i%4]);box(room,.22,.1,.015,x,y+.27,-2.235,cream)}}label('宠物用品架',0,-2.4,'pet-home');

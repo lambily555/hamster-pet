@@ -1,55 +1,4 @@
 (() => {
-  // src/town-speech.js
-  function createSpeechDirector() {
-    const states = /* @__PURE__ */ new Map();
-    let gaze = null, gazeSince = 0;
-    const hash = (id) => [...id].reduce((n, c) => n * 31 + c.charCodeAt(0) >>> 0, 0);
-    const overlaps = (a, b) => a.left < b.right + 8 && a.right > b.left - 8 && a.top < b.bottom + 8 && a.bottom > b.top - 8;
-    return { update(candidates, { now, firstPerson = false, limit = firstPerson ? 3 : 4, gazeId = null } = {}) {
-      if (gazeId !== gaze) {
-        gaze = gazeId;
-        gazeSince = now;
-      }
-      const ids = new Set(candidates.map((c) => c.id));
-      for (const id of states.keys()) if (!ids.has(id)) states.delete(id);
-      for (const c of candidates) {
-        let s = states.get(c.id);
-        if (!s) {
-          s = { text: c.text, until: 0, ready: now + hash(c.id) % 1500 / 1e3, last: -Infinity };
-          states.set(c.id, s);
-        }
-        if (s.text !== c.text) {
-          s.text = c.text;
-          s.until = 0;
-          s.ready = now + hash(c.id) % 700 / 1e3;
-        }
-      }
-      const looking = gaze && now - gazeSince >= 0.45 ? gaze : null, rank = (c) => c.urgent ? 3 : c.id === looking ? 2 : states.get(c.id).until > now ? 1 : 0;
-      const ordered = [...candidates].sort((a, b) => rank(b) - rank(a) || states.get(a.id).last - states.get(b.id).last || a.distance - b.distance || hash(a.id) - hash(b.id));
-      const full = /* @__PURE__ */ new Set(), occupied = [], texts = /* @__PURE__ */ new Set();
-      for (const c of ordered) {
-        const s = states.get(c.id), priority = c.urgent || c.id === looking;
-        if (full.size >= limit || !c.rect || c.rect.top < 8 || c.rect.bottom > c.viewHeight - 8 || c.rect.left < 8 || c.rect.right > c.viewWidth - 8) continue;
-        if (!priority && (now < s.ready && s.until <= now || firstPerson && c.distance > 5 || texts.has(c.text))) continue;
-        if (occupied.some((r) => overlaps(c.rect, r))) continue;
-        full.add(c.id);
-        occupied.push(c.rect);
-        texts.add(c.text);
-        if (s.until <= now) {
-          s.until = now + 3.6;
-          s.ready = s.until + 6 + hash(c.id) % 3e3 / 1e3;
-          s.last = now;
-        }
-      }
-      return candidates.map((c) => ({ id: c.id, mode: full.has(c.id) ? "full" : "hint", text: full.has(c.id) ? c.text : "\xB7\xB7\xB7" }));
-    } };
-  }
-
-  // src/town-restaurant-layout.js
-  var restaurantTables = [[0.35, -1], [2.35, -1], [0.35, 1], [2.35, 1]];
-  var restaurantSeats = restaurantTables.flatMap(([x2, z]) => [-0.6, 0.6].map((dz) => ({ x: x2, z: z + dz, heading: dz < 0 ? 0 : Math.PI })));
-  var restaurantQueuePoint = (index) => ({ x: -1.8, z: 1.65 - index * 0.45 });
-
   // node_modules/.pnpm/three@0.185.1/node_modules/three/build/three.core.js
   var REVISION = "185";
   var CullFaceNone = 0;
@@ -4826,10 +4775,10 @@
       this.viewport = new Vector4(0, 0, width, height);
       this.textures = [];
       const image = { width, height, depth: options.depth };
-      const texture2 = new Texture(image);
+      const texture3 = new Texture(image);
       const count = options.count;
       for (let i2 = 0; i2 < count; i2++) {
-        this.textures[i2] = texture2.clone();
+        this.textures[i2] = texture3.clone();
         this.textures[i2].isRenderTargetTexture = true;
         this.textures[i2].renderTarget = this;
       }
@@ -4865,8 +4814,8 @@
       if (options.generateMipmaps !== void 0) values.generateMipmaps = options.generateMipmaps;
       if (options.internalFormat !== void 0) values.internalFormat = options.internalFormat;
       for (let i2 = 0; i2 < this.textures.length; i2++) {
-        const texture2 = this.textures[i2];
-        texture2.setValues(values);
+        const texture3 = this.textures[i2];
+        texture3.setValues(values);
       }
     }
     /**
@@ -19898,8 +19847,8 @@
         urlModifier = transform;
         return this;
       };
-      this.addHandler = function(regex, loader) {
-        handlers.push(regex, loader);
+      this.addHandler = function(regex, loader2) {
+        handlers.push(regex, loader2);
         return this;
       };
       this.removeHandler = function(regex) {
@@ -19912,10 +19861,10 @@
       this.getHandler = function(file) {
         for (let i2 = 0, l = handlers.length; i2 < l; i2 += 2) {
           const regex = handlers[i2];
-          const loader = handlers[i2 + 1];
+          const loader2 = handlers[i2 + 1];
           if (regex.global) regex.lastIndex = 0;
           if (regex.test(file)) {
-            return loader;
+            return loader2;
           }
         }
         return null;
@@ -20346,18 +20295,18 @@
      * @return {Texture} The texture.
      */
     load(url, onLoad, onProgress, onError) {
-      const texture2 = new Texture();
-      const loader = new ImageLoader(this.manager);
-      loader.setCrossOrigin(this.crossOrigin);
-      loader.setPath(this.path);
-      loader.load(url, function(image) {
-        texture2.image = image;
-        texture2.needsUpdate = true;
+      const texture3 = new Texture();
+      const loader2 = new ImageLoader(this.manager);
+      loader2.setCrossOrigin(this.crossOrigin);
+      loader2.setPath(this.path);
+      loader2.load(url, function(image) {
+        texture3.image = image;
+        texture3.needsUpdate = true;
         if (onLoad !== void 0) {
-          onLoad(texture2);
+          onLoad(texture3);
         }
       }, onProgress, onError);
-      return texture2;
+      return texture3;
     }
   };
   var Light = class extends Object3D {
@@ -25181,11 +25130,11 @@
       outputTarget.scissorTest = false;
       _setViewport(outputTarget, 0, 0, outputTarget.width, outputTarget.height);
     }
-    _fromTexture(texture2, renderTarget) {
-      if (texture2.mapping === CubeReflectionMapping || texture2.mapping === CubeRefractionMapping) {
-        this._setSize(texture2.image.length === 0 ? 16 : texture2.image[0].width || texture2.image[0].image.width);
+    _fromTexture(texture3, renderTarget) {
+      if (texture3.mapping === CubeReflectionMapping || texture3.mapping === CubeRefractionMapping) {
+        this._setSize(texture3.image.length === 0 ? 16 : texture3.image[0].width || texture3.image[0].image.width);
       } else {
-        this._setSize(texture2.image.width / 4);
+        this._setSize(texture3.image.width / 4);
       }
       _oldTarget = this._renderer.getRenderTarget();
       _oldActiveCubeFace = this._renderer.getActiveCubeFace();
@@ -25193,7 +25142,7 @@
       _oldXrEnabled = this._renderer.xr.enabled;
       this._renderer.xr.enabled = false;
       const cubeUVRenderTarget = renderTarget || this._allocateTargets();
-      this._textureToCubeUV(texture2, cubeUVRenderTarget);
+      this._textureToCubeUV(texture3, cubeUVRenderTarget);
       this._applyPMREM(cubeUVRenderTarget);
       this._cleanup(cubeUVRenderTarget);
       return cubeUVRenderTarget;
@@ -25297,14 +25246,14 @@
       renderer.autoClear = originalAutoClear;
       scene.background = background;
     }
-    _textureToCubeUV(texture2, cubeUVRenderTarget) {
+    _textureToCubeUV(texture3, cubeUVRenderTarget) {
       const renderer = this._renderer;
-      const isCubeTexture = texture2.mapping === CubeReflectionMapping || texture2.mapping === CubeRefractionMapping;
+      const isCubeTexture = texture3.mapping === CubeReflectionMapping || texture3.mapping === CubeRefractionMapping;
       if (isCubeTexture) {
         if (this._cubemapMaterial === null) {
           this._cubemapMaterial = _getCubemapMaterial();
         }
-        this._cubemapMaterial.uniforms.flipEnvMap.value = texture2.isRenderTargetTexture === false ? -1 : 1;
+        this._cubemapMaterial.uniforms.flipEnvMap.value = texture3.isRenderTargetTexture === false ? -1 : 1;
       } else {
         if (this._equirectMaterial === null) {
           this._equirectMaterial = _getEquirectMaterial();
@@ -25314,7 +25263,7 @@
       const mesh = this._lodMeshes[0];
       mesh.material = material3;
       const uniforms = material3.uniforms;
-      uniforms["envMap"].value = texture2;
+      uniforms["envMap"].value = texture3;
       const size = this._cubeSize;
       _setViewport(cubeUVRenderTarget, 0, 0, 3 * size, 2 * size);
       renderer.setRenderTarget(cubeUVRenderTarget);
@@ -25909,12 +25858,12 @@
      * @param {Texture} texture - The equirectangular texture.
      * @return {WebGLCubeRenderTarget} A reference to this cube render target.
      */
-    fromEquirectangularTexture(renderer, texture2) {
-      this.texture.type = texture2.type;
-      this.texture.colorSpace = texture2.colorSpace;
-      this.texture.generateMipmaps = texture2.generateMipmaps;
-      this.texture.minFilter = texture2.minFilter;
-      this.texture.magFilter = texture2.magFilter;
+    fromEquirectangularTexture(renderer, texture3) {
+      this.texture.type = texture3.type;
+      this.texture.colorSpace = texture3.colorSpace;
+      this.texture.generateMipmaps = texture3.generateMipmaps;
+      this.texture.minFilter = texture3.minFilter;
+      this.texture.magFilter = texture3.magFilter;
       const shader = {
         uniforms: {
           tEquirect: { value: null }
@@ -25972,13 +25921,13 @@
         side: BackSide,
         blending: NoBlending
       });
-      material3.uniforms.tEquirect.value = texture2;
+      material3.uniforms.tEquirect.value = texture3;
       const mesh = new Mesh(geometry, material3);
-      const currentMinFilter = texture2.minFilter;
-      if (texture2.minFilter === LinearMipmapLinearFilter) texture2.minFilter = LinearFilter;
+      const currentMinFilter = texture3.minFilter;
+      if (texture3.minFilter === LinearMipmapLinearFilter) texture3.minFilter = LinearFilter;
       const camera = new CubeCamera(1, 10, this);
       camera.update(renderer, mesh);
-      texture2.minFilter = currentMinFilter;
+      texture3.minFilter = currentMinFilter;
       mesh.geometry.dispose();
       mesh.material.dispose();
       return this;
@@ -26004,61 +25953,61 @@
     let cubeMaps = /* @__PURE__ */ new WeakMap();
     let pmremMaps = /* @__PURE__ */ new WeakMap();
     let pmremGenerator = null;
-    function get(texture2, usePMREM = false) {
-      if (texture2 === null || texture2 === void 0) return null;
+    function get(texture3, usePMREM = false) {
+      if (texture3 === null || texture3 === void 0) return null;
       if (usePMREM) {
-        return getPMREM(texture2);
+        return getPMREM(texture3);
       }
-      return getCube(texture2);
+      return getCube(texture3);
     }
-    function getCube(texture2) {
-      if (texture2 && texture2.isTexture) {
-        const mapping = texture2.mapping;
+    function getCube(texture3) {
+      if (texture3 && texture3.isTexture) {
+        const mapping = texture3.mapping;
         if (mapping === EquirectangularReflectionMapping || mapping === EquirectangularRefractionMapping) {
-          if (cubeMaps.has(texture2)) {
-            const cubemap = cubeMaps.get(texture2).texture;
-            return mapTextureMapping(cubemap, texture2.mapping);
+          if (cubeMaps.has(texture3)) {
+            const cubemap = cubeMaps.get(texture3).texture;
+            return mapTextureMapping(cubemap, texture3.mapping);
           } else {
-            const image = texture2.image;
+            const image = texture3.image;
             if (image && image.height > 0) {
               const renderTarget = new WebGLCubeRenderTarget(image.height);
-              renderTarget.fromEquirectangularTexture(renderer, texture2);
-              cubeMaps.set(texture2, renderTarget);
-              texture2.addEventListener("dispose", onCubemapDispose);
-              return mapTextureMapping(renderTarget.texture, texture2.mapping);
+              renderTarget.fromEquirectangularTexture(renderer, texture3);
+              cubeMaps.set(texture3, renderTarget);
+              texture3.addEventListener("dispose", onCubemapDispose);
+              return mapTextureMapping(renderTarget.texture, texture3.mapping);
             } else {
               return null;
             }
           }
         }
       }
-      return texture2;
+      return texture3;
     }
-    function getPMREM(texture2) {
-      if (texture2 && texture2.isTexture) {
-        const mapping = texture2.mapping;
+    function getPMREM(texture3) {
+      if (texture3 && texture3.isTexture) {
+        const mapping = texture3.mapping;
         const isEquirectMap = mapping === EquirectangularReflectionMapping || mapping === EquirectangularRefractionMapping;
         const isCubeMap = mapping === CubeReflectionMapping || mapping === CubeRefractionMapping;
         if (isEquirectMap || isCubeMap) {
-          let renderTarget = pmremMaps.get(texture2);
+          let renderTarget = pmremMaps.get(texture3);
           const currentPMREMVersion = renderTarget !== void 0 ? renderTarget.texture.pmremVersion : 0;
-          if (texture2.isRenderTargetTexture && texture2.pmremVersion !== currentPMREMVersion) {
+          if (texture3.isRenderTargetTexture && texture3.pmremVersion !== currentPMREMVersion) {
             if (pmremGenerator === null) pmremGenerator = new PMREMGenerator(renderer);
-            renderTarget = isEquirectMap ? pmremGenerator.fromEquirectangular(texture2, renderTarget) : pmremGenerator.fromCubemap(texture2, renderTarget);
-            renderTarget.texture.pmremVersion = texture2.pmremVersion;
-            pmremMaps.set(texture2, renderTarget);
+            renderTarget = isEquirectMap ? pmremGenerator.fromEquirectangular(texture3, renderTarget) : pmremGenerator.fromCubemap(texture3, renderTarget);
+            renderTarget.texture.pmremVersion = texture3.pmremVersion;
+            pmremMaps.set(texture3, renderTarget);
             return renderTarget.texture;
           } else {
             if (renderTarget !== void 0) {
               return renderTarget.texture;
             } else {
-              const image = texture2.image;
+              const image = texture3.image;
               if (isEquirectMap && image && image.height > 0 || isCubeMap && image && isCubeTextureComplete(image)) {
                 if (pmremGenerator === null) pmremGenerator = new PMREMGenerator(renderer);
-                renderTarget = isEquirectMap ? pmremGenerator.fromEquirectangular(texture2) : pmremGenerator.fromCubemap(texture2);
-                renderTarget.texture.pmremVersion = texture2.pmremVersion;
-                pmremMaps.set(texture2, renderTarget);
-                texture2.addEventListener("dispose", onPMREMDispose);
+                renderTarget = isEquirectMap ? pmremGenerator.fromEquirectangular(texture3) : pmremGenerator.fromCubemap(texture3);
+                renderTarget.texture.pmremVersion = texture3.pmremVersion;
+                pmremMaps.set(texture3, renderTarget);
+                texture3.addEventListener("dispose", onPMREMDispose);
                 return renderTarget.texture;
               } else {
                 return null;
@@ -26067,15 +26016,15 @@
           }
         }
       }
-      return texture2;
+      return texture3;
     }
-    function mapTextureMapping(texture2, mapping) {
+    function mapTextureMapping(texture3, mapping) {
       if (mapping === EquirectangularReflectionMapping) {
-        texture2.mapping = CubeReflectionMapping;
+        texture3.mapping = CubeReflectionMapping;
       } else if (mapping === EquirectangularRefractionMapping) {
-        texture2.mapping = CubeRefractionMapping;
+        texture3.mapping = CubeRefractionMapping;
       }
-      return texture2;
+      return texture3;
     }
     function isCubeTextureComplete(image) {
       let count = 0;
@@ -26086,20 +26035,20 @@
       return count === length;
     }
     function onCubemapDispose(event) {
-      const texture2 = event.target;
-      texture2.removeEventListener("dispose", onCubemapDispose);
-      const cubemap = cubeMaps.get(texture2);
+      const texture3 = event.target;
+      texture3.removeEventListener("dispose", onCubemapDispose);
+      const cubemap = cubeMaps.get(texture3);
       if (cubemap !== void 0) {
-        cubeMaps.delete(texture2);
+        cubeMaps.delete(texture3);
         cubemap.dispose();
       }
     }
     function onPMREMDispose(event) {
-      const texture2 = event.target;
-      texture2.removeEventListener("dispose", onPMREMDispose);
-      const pmrem = pmremMaps.get(texture2);
+      const texture3 = event.target;
+      texture3.removeEventListener("dispose", onPMREMDispose);
+      const pmrem = pmremMaps.get(texture3);
       if (pmrem !== void 0) {
-        pmremMaps.delete(texture2);
+        pmremMaps.delete(texture3);
         pmrem.dispose();
       }
     }
@@ -26332,7 +26281,7 @@
       let entry = morphTextures.get(geometry);
       if (entry === void 0 || entry.count !== morphTargetsCount) {
         let disposeTexture = function() {
-          texture2.dispose();
+          texture3.dispose();
           morphTextures.delete(geometry);
           geometry.removeEventListener("dispose", disposeTexture);
         };
@@ -26354,9 +26303,9 @@
           width = capabilities.maxTextureSize;
         }
         const buffer = new Float32Array(width * height * 4 * morphTargetsCount);
-        const texture2 = new DataArrayTexture(buffer, width, height, morphTargetsCount);
-        texture2.type = FloatType;
-        texture2.needsUpdate = true;
+        const texture3 = new DataArrayTexture(buffer, width, height, morphTargetsCount);
+        texture3.type = FloatType;
+        texture3.needsUpdate = true;
         const vertexDataStride = vertexDataCount * 4;
         for (let i2 = 0; i2 < morphTargetsCount; i2++) {
           const morphTarget = morphTargets[i2];
@@ -26390,7 +26339,7 @@
         }
         entry = {
           count: morphTargetsCount,
-          texture: texture2,
+          texture: texture3,
           size: new Vector2(width, height)
         };
         morphTextures.set(geometry, entry);
@@ -29647,8 +29596,8 @@
     const currentViewport = new Vector4().fromArray(viewportParam);
     function createTexture(type, target, count, dimensions) {
       const data = new Uint8Array(4);
-      const texture2 = gl.createTexture();
-      gl.bindTexture(type, texture2);
+      const texture3 = gl.createTexture();
+      gl.bindTexture(type, texture3);
       gl.texParameteri(type, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
       gl.texParameteri(type, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
       for (let i2 = 0; i2 < count; i2++) {
@@ -29658,7 +29607,7 @@
           gl.texImage2D(target + i2, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, data);
         }
       }
-      return texture2;
+      return texture3;
     }
     const emptyTextures = {};
     emptyTextures[gl.TEXTURE_2D] = createTexture(gl.TEXTURE_2D, gl.TEXTURE_2D, 1);
@@ -30236,16 +30185,16 @@
       }
       return image;
     }
-    function textureNeedsGenerateMipmaps(texture2) {
-      return texture2.generateMipmaps;
+    function textureNeedsGenerateMipmaps(texture3) {
+      return texture3.generateMipmaps;
     }
     function generateMipmap(target) {
       _gl.generateMipmap(target);
     }
-    function getTargetType(texture2) {
-      if (texture2.isWebGLCubeRenderTarget) return _gl.TEXTURE_CUBE_MAP;
-      if (texture2.isWebGL3DRenderTarget) return _gl.TEXTURE_3D;
-      if (texture2.isWebGLArrayRenderTarget || texture2.isCompressedArrayTexture) return _gl.TEXTURE_2D_ARRAY;
+    function getTargetType(texture3) {
+      if (texture3.isWebGLCubeRenderTarget) return _gl.TEXTURE_CUBE_MAP;
+      if (texture3.isWebGL3DRenderTarget) return _gl.TEXTURE_3D;
+      if (texture3.isWebGLArrayRenderTarget || texture3.isCompressedArrayTexture) return _gl.TEXTURE_2D_ARRAY;
       return _gl.TEXTURE_2D;
     }
     function getInternalFormat(internalFormatName, glFormat, glType, normalized, colorSpace, forceLinearTransfer = false) {
@@ -30350,26 +30299,26 @@
       }
       return glInternalFormat;
     }
-    function getMipLevels(texture2, image) {
-      if (textureNeedsGenerateMipmaps(texture2) === true || texture2.isFramebufferTexture && texture2.minFilter !== NearestFilter && texture2.minFilter !== LinearFilter) {
+    function getMipLevels(texture3, image) {
+      if (textureNeedsGenerateMipmaps(texture3) === true || texture3.isFramebufferTexture && texture3.minFilter !== NearestFilter && texture3.minFilter !== LinearFilter) {
         return Math.log2(Math.max(image.width, image.height)) + 1;
-      } else if (texture2.mipmaps !== void 0 && texture2.mipmaps.length > 0) {
-        return texture2.mipmaps.length;
-      } else if (texture2.isCompressedTexture && Array.isArray(texture2.image)) {
+      } else if (texture3.mipmaps !== void 0 && texture3.mipmaps.length > 0) {
+        return texture3.mipmaps.length;
+      } else if (texture3.isCompressedTexture && Array.isArray(texture3.image)) {
         return image.mipmaps.length;
       } else {
         return 1;
       }
     }
     function onTextureDispose(event) {
-      const texture2 = event.target;
-      texture2.removeEventListener("dispose", onTextureDispose);
-      deallocateTexture(texture2);
-      if (texture2.isVideoTexture) {
-        _videoTextures.delete(texture2);
+      const texture3 = event.target;
+      texture3.removeEventListener("dispose", onTextureDispose);
+      deallocateTexture(texture3);
+      if (texture3.isVideoTexture) {
+        _videoTextures.delete(texture3);
       }
-      if (texture2.isHTMLTexture) {
-        _htmlTextures.delete(texture2);
+      if (texture3.isHTMLTexture) {
+        _htmlTextures.delete(texture3);
       }
     }
     function onRenderTargetDispose(event) {
@@ -30377,27 +30326,27 @@
       renderTarget.removeEventListener("dispose", onRenderTargetDispose);
       deallocateRenderTarget(renderTarget);
     }
-    function deallocateTexture(texture2) {
-      const textureProperties = properties.get(texture2);
+    function deallocateTexture(texture3) {
+      const textureProperties = properties.get(texture3);
       if (textureProperties.__webglInit === void 0) return;
-      const source = texture2.source;
+      const source = texture3.source;
       const webglTextures = _sources.get(source);
       if (webglTextures) {
         const webglTexture = webglTextures[textureProperties.__cacheKey];
         webglTexture.usedTimes--;
         if (webglTexture.usedTimes === 0) {
-          deleteTexture(texture2);
+          deleteTexture(texture3);
         }
         if (Object.keys(webglTextures).length === 0) {
           _sources.delete(source);
         }
       }
-      properties.remove(texture2);
+      properties.remove(texture3);
     }
-    function deleteTexture(texture2) {
-      const textureProperties = properties.get(texture2);
+    function deleteTexture(texture3) {
+      const textureProperties = properties.get(texture3);
       _gl.deleteTexture(textureProperties.__webglTexture);
-      const source = texture2.source;
+      const source = texture3.source;
       const webglTextures = _sources.get(source);
       delete webglTextures[textureProperties.__cacheKey];
       info.memory.textures--;
@@ -30461,64 +30410,64 @@
       textureUnits += 1;
       return textureUnit;
     }
-    function getTextureCacheKey(texture2) {
+    function getTextureCacheKey(texture3) {
       const array = [];
-      array.push(texture2.wrapS);
-      array.push(texture2.wrapT);
-      array.push(texture2.wrapR || 0);
-      array.push(texture2.magFilter);
-      array.push(texture2.minFilter);
-      array.push(texture2.anisotropy);
-      array.push(texture2.internalFormat);
-      array.push(texture2.format);
-      array.push(texture2.type);
-      array.push(texture2.generateMipmaps);
-      array.push(texture2.premultiplyAlpha);
-      array.push(texture2.flipY);
-      array.push(texture2.unpackAlignment);
-      array.push(texture2.colorSpace);
+      array.push(texture3.wrapS);
+      array.push(texture3.wrapT);
+      array.push(texture3.wrapR || 0);
+      array.push(texture3.magFilter);
+      array.push(texture3.minFilter);
+      array.push(texture3.anisotropy);
+      array.push(texture3.internalFormat);
+      array.push(texture3.format);
+      array.push(texture3.type);
+      array.push(texture3.generateMipmaps);
+      array.push(texture3.premultiplyAlpha);
+      array.push(texture3.flipY);
+      array.push(texture3.unpackAlignment);
+      array.push(texture3.colorSpace);
       return array.join();
     }
-    function setTexture2D(texture2, slot) {
-      const textureProperties = properties.get(texture2);
-      if (texture2.isVideoTexture) updateVideoTexture(texture2);
-      if (texture2.isRenderTargetTexture === false && texture2.isExternalTexture !== true && texture2.version > 0 && textureProperties.__version !== texture2.version) {
-        const image = texture2.image;
+    function setTexture2D(texture3, slot) {
+      const textureProperties = properties.get(texture3);
+      if (texture3.isVideoTexture) updateVideoTexture(texture3);
+      if (texture3.isRenderTargetTexture === false && texture3.isExternalTexture !== true && texture3.version > 0 && textureProperties.__version !== texture3.version) {
+        const image = texture3.image;
         if (image === null) {
           warn("WebGLRenderer: Texture marked for update but no image data found.");
         } else if (image.complete === false) {
           warn("WebGLRenderer: Texture marked for update but image is incomplete");
         } else {
-          uploadTexture(textureProperties, texture2, slot);
+          uploadTexture(textureProperties, texture3, slot);
           return;
         }
-      } else if (texture2.isExternalTexture) {
-        textureProperties.__webglTexture = texture2.sourceTexture ? texture2.sourceTexture : null;
+      } else if (texture3.isExternalTexture) {
+        textureProperties.__webglTexture = texture3.sourceTexture ? texture3.sourceTexture : null;
       }
       state.bindTexture(_gl.TEXTURE_2D, textureProperties.__webglTexture, _gl.TEXTURE0 + slot);
     }
-    function setTexture2DArray(texture2, slot) {
-      const textureProperties = properties.get(texture2);
-      if (texture2.isRenderTargetTexture === false && texture2.version > 0 && textureProperties.__version !== texture2.version) {
-        uploadTexture(textureProperties, texture2, slot);
+    function setTexture2DArray(texture3, slot) {
+      const textureProperties = properties.get(texture3);
+      if (texture3.isRenderTargetTexture === false && texture3.version > 0 && textureProperties.__version !== texture3.version) {
+        uploadTexture(textureProperties, texture3, slot);
         return;
-      } else if (texture2.isExternalTexture) {
-        textureProperties.__webglTexture = texture2.sourceTexture ? texture2.sourceTexture : null;
+      } else if (texture3.isExternalTexture) {
+        textureProperties.__webglTexture = texture3.sourceTexture ? texture3.sourceTexture : null;
       }
       state.bindTexture(_gl.TEXTURE_2D_ARRAY, textureProperties.__webglTexture, _gl.TEXTURE0 + slot);
     }
-    function setTexture3D(texture2, slot) {
-      const textureProperties = properties.get(texture2);
-      if (texture2.isRenderTargetTexture === false && texture2.version > 0 && textureProperties.__version !== texture2.version) {
-        uploadTexture(textureProperties, texture2, slot);
+    function setTexture3D(texture3, slot) {
+      const textureProperties = properties.get(texture3);
+      if (texture3.isRenderTargetTexture === false && texture3.version > 0 && textureProperties.__version !== texture3.version) {
+        uploadTexture(textureProperties, texture3, slot);
         return;
       }
       state.bindTexture(_gl.TEXTURE_3D, textureProperties.__webglTexture, _gl.TEXTURE0 + slot);
     }
-    function setTextureCube(texture2, slot) {
-      const textureProperties = properties.get(texture2);
-      if (texture2.isCubeDepthTexture !== true && texture2.version > 0 && textureProperties.__version !== texture2.version) {
-        uploadCubeTexture(textureProperties, texture2, slot);
+    function setTextureCube(texture3, slot) {
+      const textureProperties = properties.get(texture3);
+      if (texture3.isCubeDepthTexture !== true && texture3.version > 0 && textureProperties.__version !== texture3.version) {
+        uploadCubeTexture(textureProperties, texture3, slot);
         return;
       }
       state.bindTexture(_gl.TEXTURE_CUBE_MAP, textureProperties.__webglTexture, _gl.TEXTURE0 + slot);
@@ -30546,45 +30495,45 @@
       [GreaterCompare]: _gl.GREATER,
       [NotEqualCompare]: _gl.NOTEQUAL
     };
-    function setTextureParameters(textureType, texture2) {
-      if (texture2.type === FloatType && extensions.has("OES_texture_float_linear") === false && (texture2.magFilter === LinearFilter || texture2.magFilter === LinearMipmapNearestFilter || texture2.magFilter === NearestMipmapLinearFilter || texture2.magFilter === LinearMipmapLinearFilter || texture2.minFilter === LinearFilter || texture2.minFilter === LinearMipmapNearestFilter || texture2.minFilter === NearestMipmapLinearFilter || texture2.minFilter === LinearMipmapLinearFilter)) {
+    function setTextureParameters(textureType, texture3) {
+      if (texture3.type === FloatType && extensions.has("OES_texture_float_linear") === false && (texture3.magFilter === LinearFilter || texture3.magFilter === LinearMipmapNearestFilter || texture3.magFilter === NearestMipmapLinearFilter || texture3.magFilter === LinearMipmapLinearFilter || texture3.minFilter === LinearFilter || texture3.minFilter === LinearMipmapNearestFilter || texture3.minFilter === NearestMipmapLinearFilter || texture3.minFilter === LinearMipmapLinearFilter)) {
         warn("WebGLRenderer: Unable to use linear filtering with floating point textures. OES_texture_float_linear not supported on this device.");
       }
-      _gl.texParameteri(textureType, _gl.TEXTURE_WRAP_S, wrappingToGL[texture2.wrapS]);
-      _gl.texParameteri(textureType, _gl.TEXTURE_WRAP_T, wrappingToGL[texture2.wrapT]);
+      _gl.texParameteri(textureType, _gl.TEXTURE_WRAP_S, wrappingToGL[texture3.wrapS]);
+      _gl.texParameteri(textureType, _gl.TEXTURE_WRAP_T, wrappingToGL[texture3.wrapT]);
       if (textureType === _gl.TEXTURE_3D || textureType === _gl.TEXTURE_2D_ARRAY) {
-        _gl.texParameteri(textureType, _gl.TEXTURE_WRAP_R, wrappingToGL[texture2.wrapR]);
+        _gl.texParameteri(textureType, _gl.TEXTURE_WRAP_R, wrappingToGL[texture3.wrapR]);
       }
-      _gl.texParameteri(textureType, _gl.TEXTURE_MAG_FILTER, filterToGL[texture2.magFilter]);
-      _gl.texParameteri(textureType, _gl.TEXTURE_MIN_FILTER, filterToGL[texture2.minFilter]);
-      if (texture2.compareFunction) {
+      _gl.texParameteri(textureType, _gl.TEXTURE_MAG_FILTER, filterToGL[texture3.magFilter]);
+      _gl.texParameteri(textureType, _gl.TEXTURE_MIN_FILTER, filterToGL[texture3.minFilter]);
+      if (texture3.compareFunction) {
         _gl.texParameteri(textureType, _gl.TEXTURE_COMPARE_MODE, _gl.COMPARE_REF_TO_TEXTURE);
-        _gl.texParameteri(textureType, _gl.TEXTURE_COMPARE_FUNC, compareToGL[texture2.compareFunction]);
+        _gl.texParameteri(textureType, _gl.TEXTURE_COMPARE_FUNC, compareToGL[texture3.compareFunction]);
       }
       if (extensions.has("EXT_texture_filter_anisotropic") === true) {
-        if (texture2.magFilter === NearestFilter) return;
-        if (texture2.minFilter !== NearestMipmapLinearFilter && texture2.minFilter !== LinearMipmapLinearFilter) return;
-        if (texture2.type === FloatType && extensions.has("OES_texture_float_linear") === false) return;
-        if (texture2.anisotropy > 1 || properties.get(texture2).__currentAnisotropy) {
+        if (texture3.magFilter === NearestFilter) return;
+        if (texture3.minFilter !== NearestMipmapLinearFilter && texture3.minFilter !== LinearMipmapLinearFilter) return;
+        if (texture3.type === FloatType && extensions.has("OES_texture_float_linear") === false) return;
+        if (texture3.anisotropy > 1 || properties.get(texture3).__currentAnisotropy) {
           const extension = extensions.get("EXT_texture_filter_anisotropic");
-          _gl.texParameterf(textureType, extension.TEXTURE_MAX_ANISOTROPY_EXT, Math.min(texture2.anisotropy, capabilities.getMaxAnisotropy()));
-          properties.get(texture2).__currentAnisotropy = texture2.anisotropy;
+          _gl.texParameterf(textureType, extension.TEXTURE_MAX_ANISOTROPY_EXT, Math.min(texture3.anisotropy, capabilities.getMaxAnisotropy()));
+          properties.get(texture3).__currentAnisotropy = texture3.anisotropy;
         }
       }
     }
-    function initTexture(textureProperties, texture2) {
+    function initTexture(textureProperties, texture3) {
       let forceUpload = false;
       if (textureProperties.__webglInit === void 0) {
         textureProperties.__webglInit = true;
-        texture2.addEventListener("dispose", onTextureDispose);
+        texture3.addEventListener("dispose", onTextureDispose);
       }
-      const source = texture2.source;
+      const source = texture3.source;
       let webglTextures = _sources.get(source);
       if (webglTextures === void 0) {
         webglTextures = {};
         _sources.set(source, webglTextures);
       }
-      const textureCacheKey = getTextureCacheKey(texture2);
+      const textureCacheKey = getTextureCacheKey(texture3);
       if (textureCacheKey !== textureProperties.__cacheKey) {
         if (webglTextures[textureCacheKey] === void 0) {
           webglTextures[textureCacheKey] = {
@@ -30599,7 +30548,7 @@
         if (webglTexture !== void 0) {
           webglTextures[textureProperties.__cacheKey].usedTimes--;
           if (webglTexture.usedTimes === 0) {
-            deleteTexture(texture2);
+            deleteTexture(texture3);
           }
         }
         textureProperties.__cacheKey = textureCacheKey;
@@ -30610,9 +30559,9 @@
     function getRow(index, rowLength, componentStride) {
       return Math.floor(Math.floor(index / componentStride) / rowLength);
     }
-    function updateTexture(texture2, image, glFormat, glType) {
+    function updateTexture(texture3, image, glFormat, glType) {
       const componentStride = 4;
-      const updateRanges = texture2.updateRanges;
+      const updateRanges = texture3.updateRanges;
       if (updateRanges.length === 0) {
         state.texSubImage2D(_gl.TEXTURE_2D, 0, 0, 0, image.width, image.height, glFormat, glType, image.data);
       } else {
@@ -30651,46 +30600,46 @@
           state.pixelStorei(_gl.UNPACK_SKIP_ROWS, y);
           state.texSubImage2D(_gl.TEXTURE_2D, 0, x2, y, width, height, glFormat, glType, image.data);
         }
-        texture2.clearUpdateRanges();
+        texture3.clearUpdateRanges();
         state.pixelStorei(_gl.UNPACK_ROW_LENGTH, currentUnpackRowLen);
         state.pixelStorei(_gl.UNPACK_SKIP_PIXELS, currentUnpackSkipPixels);
         state.pixelStorei(_gl.UNPACK_SKIP_ROWS, currentUnpackSkipRows);
       }
     }
-    function uploadTexture(textureProperties, texture2, slot) {
+    function uploadTexture(textureProperties, texture3, slot) {
       let textureType = _gl.TEXTURE_2D;
-      if (texture2.isDataArrayTexture || texture2.isCompressedArrayTexture) textureType = _gl.TEXTURE_2D_ARRAY;
-      if (texture2.isData3DTexture) textureType = _gl.TEXTURE_3D;
-      const forceUpload = initTexture(textureProperties, texture2);
-      const source = texture2.source;
+      if (texture3.isDataArrayTexture || texture3.isCompressedArrayTexture) textureType = _gl.TEXTURE_2D_ARRAY;
+      if (texture3.isData3DTexture) textureType = _gl.TEXTURE_3D;
+      const forceUpload = initTexture(textureProperties, texture3);
+      const source = texture3.source;
       state.bindTexture(textureType, textureProperties.__webglTexture, _gl.TEXTURE0 + slot);
       const sourceProperties = properties.get(source);
       if (source.version !== sourceProperties.__version || forceUpload === true) {
         state.activeTexture(_gl.TEXTURE0 + slot);
-        const isImageBitmap = typeof ImageBitmap !== "undefined" && texture2.image instanceof ImageBitmap;
+        const isImageBitmap = typeof ImageBitmap !== "undefined" && texture3.image instanceof ImageBitmap;
         if (isImageBitmap === false) {
           const workingPrimaries = ColorManagement.getPrimaries(ColorManagement.workingColorSpace);
-          const texturePrimaries = texture2.colorSpace === NoColorSpace ? null : ColorManagement.getPrimaries(texture2.colorSpace);
-          const unpackConversion = texture2.colorSpace === NoColorSpace || workingPrimaries === texturePrimaries ? _gl.NONE : _gl.BROWSER_DEFAULT_WEBGL;
-          state.pixelStorei(_gl.UNPACK_FLIP_Y_WEBGL, texture2.flipY);
-          state.pixelStorei(_gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, texture2.premultiplyAlpha);
+          const texturePrimaries = texture3.colorSpace === NoColorSpace ? null : ColorManagement.getPrimaries(texture3.colorSpace);
+          const unpackConversion = texture3.colorSpace === NoColorSpace || workingPrimaries === texturePrimaries ? _gl.NONE : _gl.BROWSER_DEFAULT_WEBGL;
+          state.pixelStorei(_gl.UNPACK_FLIP_Y_WEBGL, texture3.flipY);
+          state.pixelStorei(_gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, texture3.premultiplyAlpha);
           state.pixelStorei(_gl.UNPACK_COLORSPACE_CONVERSION_WEBGL, unpackConversion);
         }
-        state.pixelStorei(_gl.UNPACK_ALIGNMENT, texture2.unpackAlignment);
-        let image = resizeImage(texture2.image, false, capabilities.maxTextureSize);
-        image = verifyColorSpace(texture2, image);
-        const glFormat = utils.convert(texture2.format, texture2.colorSpace);
-        const glType = utils.convert(texture2.type);
-        let glInternalFormat = getInternalFormat(texture2.internalFormat, glFormat, glType, texture2.normalized, texture2.colorSpace, texture2.isVideoTexture);
-        setTextureParameters(textureType, texture2);
+        state.pixelStorei(_gl.UNPACK_ALIGNMENT, texture3.unpackAlignment);
+        let image = resizeImage(texture3.image, false, capabilities.maxTextureSize);
+        image = verifyColorSpace(texture3, image);
+        const glFormat = utils.convert(texture3.format, texture3.colorSpace);
+        const glType = utils.convert(texture3.type);
+        let glInternalFormat = getInternalFormat(texture3.internalFormat, glFormat, glType, texture3.normalized, texture3.colorSpace, texture3.isVideoTexture);
+        setTextureParameters(textureType, texture3);
         let mipmap;
-        const mipmaps = texture2.mipmaps;
-        const useTexStorage = texture2.isVideoTexture !== true;
+        const mipmaps = texture3.mipmaps;
+        const useTexStorage = texture3.isVideoTexture !== true;
         const allocateMemory = sourceProperties.__version === void 0 || forceUpload === true;
         const dataReady = source.dataReady;
-        const levels = getMipLevels(texture2, image);
-        if (texture2.isDepthTexture) {
-          glInternalFormat = getInternalDepthFormat(texture2.format === DepthStencilFormat, texture2.type);
+        const levels = getMipLevels(texture3, image);
+        if (texture3.isDepthTexture) {
+          glInternalFormat = getInternalDepthFormat(texture3.format === DepthStencilFormat, texture3.type);
           if (allocateMemory) {
             if (useTexStorage) {
               state.texStorage2D(_gl.TEXTURE_2D, 1, glInternalFormat, image.width, image.height);
@@ -30698,7 +30647,7 @@
               state.texImage2D(_gl.TEXTURE_2D, 0, glInternalFormat, image.width, image.height, 0, glFormat, glType, null);
             }
           }
-        } else if (texture2.isDataTexture) {
+        } else if (texture3.isDataTexture) {
           if (mipmaps.length > 0) {
             if (useTexStorage && allocateMemory) {
               state.texStorage2D(_gl.TEXTURE_2D, levels, glInternalFormat, mipmaps[0].width, mipmaps[0].height);
@@ -30713,40 +30662,40 @@
                 state.texImage2D(_gl.TEXTURE_2D, i2, glInternalFormat, mipmap.width, mipmap.height, 0, glFormat, glType, mipmap.data);
               }
             }
-            texture2.generateMipmaps = false;
+            texture3.generateMipmaps = false;
           } else {
             if (useTexStorage) {
               if (allocateMemory) {
                 state.texStorage2D(_gl.TEXTURE_2D, levels, glInternalFormat, image.width, image.height);
               }
               if (dataReady) {
-                updateTexture(texture2, image, glFormat, glType);
+                updateTexture(texture3, image, glFormat, glType);
               }
             } else {
               state.texImage2D(_gl.TEXTURE_2D, 0, glInternalFormat, image.width, image.height, 0, glFormat, glType, image.data);
             }
           }
-        } else if (texture2.isCompressedTexture) {
-          if (texture2.isCompressedArrayTexture) {
+        } else if (texture3.isCompressedTexture) {
+          if (texture3.isCompressedArrayTexture) {
             if (useTexStorage && allocateMemory) {
               state.texStorage3D(_gl.TEXTURE_2D_ARRAY, levels, glInternalFormat, mipmaps[0].width, mipmaps[0].height, image.depth);
             }
             for (let i2 = 0, il = mipmaps.length; i2 < il; i2++) {
               mipmap = mipmaps[i2];
-              if (texture2.format !== RGBAFormat) {
+              if (texture3.format !== RGBAFormat) {
                 if (glFormat !== null) {
                   if (useTexStorage) {
                     if (dataReady) {
-                      if (texture2.layerUpdates.size > 0) {
-                        const layerByteLength = getByteLength(mipmap.width, mipmap.height, texture2.format, texture2.type);
-                        for (const layerIndex of texture2.layerUpdates) {
+                      if (texture3.layerUpdates.size > 0) {
+                        const layerByteLength = getByteLength(mipmap.width, mipmap.height, texture3.format, texture3.type);
+                        for (const layerIndex of texture3.layerUpdates) {
                           const layerData = mipmap.data.subarray(
                             layerIndex * layerByteLength / mipmap.data.BYTES_PER_ELEMENT,
                             (layerIndex + 1) * layerByteLength / mipmap.data.BYTES_PER_ELEMENT
                           );
                           state.compressedTexSubImage3D(_gl.TEXTURE_2D_ARRAY, i2, 0, 0, layerIndex, mipmap.width, mipmap.height, 1, glFormat, layerData);
                         }
-                        texture2.clearLayerUpdates();
+                        texture3.clearLayerUpdates();
                       } else {
                         state.compressedTexSubImage3D(_gl.TEXTURE_2D_ARRAY, i2, 0, 0, 0, mipmap.width, mipmap.height, image.depth, glFormat, mipmap.data);
                       }
@@ -30773,7 +30722,7 @@
             }
             for (let i2 = 0, il = mipmaps.length; i2 < il; i2++) {
               mipmap = mipmaps[i2];
-              if (texture2.format !== RGBAFormat) {
+              if (texture3.format !== RGBAFormat) {
                 if (glFormat !== null) {
                   if (useTexStorage) {
                     if (dataReady) {
@@ -30796,22 +30745,22 @@
               }
             }
           }
-        } else if (texture2.isDataArrayTexture) {
+        } else if (texture3.isDataArrayTexture) {
           if (useTexStorage) {
             if (allocateMemory) {
               state.texStorage3D(_gl.TEXTURE_2D_ARRAY, levels, glInternalFormat, image.width, image.height, image.depth);
             }
             if (dataReady) {
-              if (texture2.layerUpdates.size > 0) {
-                const layerByteLength = getByteLength(image.width, image.height, texture2.format, texture2.type);
-                for (const layerIndex of texture2.layerUpdates) {
+              if (texture3.layerUpdates.size > 0) {
+                const layerByteLength = getByteLength(image.width, image.height, texture3.format, texture3.type);
+                for (const layerIndex of texture3.layerUpdates) {
                   const layerData = image.data.subarray(
                     layerIndex * layerByteLength / image.data.BYTES_PER_ELEMENT,
                     (layerIndex + 1) * layerByteLength / image.data.BYTES_PER_ELEMENT
                   );
                   state.texSubImage3D(_gl.TEXTURE_2D_ARRAY, 0, 0, 0, layerIndex, image.width, image.height, 1, glFormat, glType, layerData);
                 }
-                texture2.clearLayerUpdates();
+                texture3.clearLayerUpdates();
               } else {
                 state.texSubImage3D(_gl.TEXTURE_2D_ARRAY, 0, 0, 0, 0, image.width, image.height, image.depth, glFormat, glType, image.data);
               }
@@ -30819,7 +30768,7 @@
           } else {
             state.texImage3D(_gl.TEXTURE_2D_ARRAY, 0, glInternalFormat, image.width, image.height, image.depth, 0, glFormat, glType, image.data);
           }
-        } else if (texture2.isData3DTexture) {
+        } else if (texture3.isData3DTexture) {
           if (useTexStorage) {
             if (allocateMemory) {
               state.texStorage3D(_gl.TEXTURE_3D, levels, glInternalFormat, image.width, image.height, image.depth);
@@ -30830,7 +30779,7 @@
           } else {
             state.texImage3D(_gl.TEXTURE_3D, 0, glInternalFormat, image.width, image.height, image.depth, 0, glFormat, glType, image.data);
           }
-        } else if (texture2.isFramebufferTexture) {
+        } else if (texture3.isFramebufferTexture) {
           if (allocateMemory) {
             if (useTexStorage) {
               state.texStorage2D(_gl.TEXTURE_2D, levels, glInternalFormat, image.width, image.height);
@@ -30843,7 +30792,7 @@
               }
             }
           }
-        } else if (texture2.isHTMLTexture) {
+        } else if (texture3.isHTMLTexture) {
           if ("texElementImage2D" in _gl) {
             const canvas = _gl.canvas;
             if (!canvas.hasAttribute("layoutsubtree")) {
@@ -30851,7 +30800,7 @@
             }
             if (image.parentNode !== canvas) {
               canvas.appendChild(image);
-              _htmlTextures.add(texture2);
+              _htmlTextures.add(texture3);
               canvas.onpaint = (event) => {
                 const changed = event.changedElements;
                 for (const t of _htmlTextures) {
@@ -30892,7 +30841,7 @@
                 state.texImage2D(_gl.TEXTURE_2D, i2, glInternalFormat, glFormat, glType, mipmap);
               }
             }
-            texture2.generateMipmaps = false;
+            texture3.generateMipmaps = false;
           } else {
             if (useTexStorage) {
               if (allocateMemory) {
@@ -30907,46 +30856,46 @@
             }
           }
         }
-        if (textureNeedsGenerateMipmaps(texture2)) {
+        if (textureNeedsGenerateMipmaps(texture3)) {
           generateMipmap(textureType);
         }
         sourceProperties.__version = source.version;
-        if (texture2.onUpdate) texture2.onUpdate(texture2);
+        if (texture3.onUpdate) texture3.onUpdate(texture3);
       }
-      textureProperties.__version = texture2.version;
+      textureProperties.__version = texture3.version;
     }
-    function uploadCubeTexture(textureProperties, texture2, slot) {
-      if (texture2.image.length !== 6) return;
-      const forceUpload = initTexture(textureProperties, texture2);
-      const source = texture2.source;
+    function uploadCubeTexture(textureProperties, texture3, slot) {
+      if (texture3.image.length !== 6) return;
+      const forceUpload = initTexture(textureProperties, texture3);
+      const source = texture3.source;
       state.bindTexture(_gl.TEXTURE_CUBE_MAP, textureProperties.__webglTexture, _gl.TEXTURE0 + slot);
       const sourceProperties = properties.get(source);
       if (source.version !== sourceProperties.__version || forceUpload === true) {
         state.activeTexture(_gl.TEXTURE0 + slot);
         const workingPrimaries = ColorManagement.getPrimaries(ColorManagement.workingColorSpace);
-        const texturePrimaries = texture2.colorSpace === NoColorSpace ? null : ColorManagement.getPrimaries(texture2.colorSpace);
-        const unpackConversion = texture2.colorSpace === NoColorSpace || workingPrimaries === texturePrimaries ? _gl.NONE : _gl.BROWSER_DEFAULT_WEBGL;
-        state.pixelStorei(_gl.UNPACK_FLIP_Y_WEBGL, texture2.flipY);
-        state.pixelStorei(_gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, texture2.premultiplyAlpha);
-        state.pixelStorei(_gl.UNPACK_ALIGNMENT, texture2.unpackAlignment);
+        const texturePrimaries = texture3.colorSpace === NoColorSpace ? null : ColorManagement.getPrimaries(texture3.colorSpace);
+        const unpackConversion = texture3.colorSpace === NoColorSpace || workingPrimaries === texturePrimaries ? _gl.NONE : _gl.BROWSER_DEFAULT_WEBGL;
+        state.pixelStorei(_gl.UNPACK_FLIP_Y_WEBGL, texture3.flipY);
+        state.pixelStorei(_gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, texture3.premultiplyAlpha);
+        state.pixelStorei(_gl.UNPACK_ALIGNMENT, texture3.unpackAlignment);
         state.pixelStorei(_gl.UNPACK_COLORSPACE_CONVERSION_WEBGL, unpackConversion);
-        const isCompressed = texture2.isCompressedTexture || texture2.image[0].isCompressedTexture;
-        const isDataTexture = texture2.image[0] && texture2.image[0].isDataTexture;
+        const isCompressed = texture3.isCompressedTexture || texture3.image[0].isCompressedTexture;
+        const isDataTexture = texture3.image[0] && texture3.image[0].isDataTexture;
         const cubeImage = [];
         for (let i2 = 0; i2 < 6; i2++) {
           if (!isCompressed && !isDataTexture) {
-            cubeImage[i2] = resizeImage(texture2.image[i2], true, capabilities.maxCubemapSize);
+            cubeImage[i2] = resizeImage(texture3.image[i2], true, capabilities.maxCubemapSize);
           } else {
-            cubeImage[i2] = isDataTexture ? texture2.image[i2].image : texture2.image[i2];
+            cubeImage[i2] = isDataTexture ? texture3.image[i2].image : texture3.image[i2];
           }
-          cubeImage[i2] = verifyColorSpace(texture2, cubeImage[i2]);
+          cubeImage[i2] = verifyColorSpace(texture3, cubeImage[i2]);
         }
-        const image = cubeImage[0], glFormat = utils.convert(texture2.format, texture2.colorSpace), glType = utils.convert(texture2.type), glInternalFormat = getInternalFormat(texture2.internalFormat, glFormat, glType, texture2.normalized, texture2.colorSpace);
-        const useTexStorage = texture2.isVideoTexture !== true;
+        const image = cubeImage[0], glFormat = utils.convert(texture3.format, texture3.colorSpace), glType = utils.convert(texture3.type), glInternalFormat = getInternalFormat(texture3.internalFormat, glFormat, glType, texture3.normalized, texture3.colorSpace);
+        const useTexStorage = texture3.isVideoTexture !== true;
         const allocateMemory = sourceProperties.__version === void 0 || forceUpload === true;
         const dataReady = source.dataReady;
-        let levels = getMipLevels(texture2, image);
-        setTextureParameters(_gl.TEXTURE_CUBE_MAP, texture2);
+        let levels = getMipLevels(texture3, image);
+        setTextureParameters(_gl.TEXTURE_CUBE_MAP, texture3);
         let mipmaps;
         if (isCompressed) {
           if (useTexStorage && allocateMemory) {
@@ -30956,7 +30905,7 @@
             mipmaps = cubeImage[i2].mipmaps;
             for (let j = 0; j < mipmaps.length; j++) {
               const mipmap = mipmaps[j];
-              if (texture2.format !== RGBAFormat) {
+              if (texture3.format !== RGBAFormat) {
                 if (glFormat !== null) {
                   if (useTexStorage) {
                     if (dataReady) {
@@ -30980,7 +30929,7 @@
             }
           }
         } else {
-          mipmaps = texture2.mipmaps;
+          mipmaps = texture3.mipmaps;
           if (useTexStorage && allocateMemory) {
             if (mipmaps.length > 0) levels++;
             const dimensions = getDimensions(cubeImage[0]);
@@ -31027,20 +30976,20 @@
             }
           }
         }
-        if (textureNeedsGenerateMipmaps(texture2)) {
+        if (textureNeedsGenerateMipmaps(texture3)) {
           generateMipmap(_gl.TEXTURE_CUBE_MAP);
         }
         sourceProperties.__version = source.version;
-        if (texture2.onUpdate) texture2.onUpdate(texture2);
+        if (texture3.onUpdate) texture3.onUpdate(texture3);
       }
-      textureProperties.__version = texture2.version;
+      textureProperties.__version = texture3.version;
     }
-    function setupFrameBufferTexture(framebuffer, renderTarget, texture2, attachment, textureTarget, level) {
-      const glFormat = utils.convert(texture2.format, texture2.colorSpace);
-      const glType = utils.convert(texture2.type);
-      const glInternalFormat = getInternalFormat(texture2.internalFormat, glFormat, glType, texture2.normalized, texture2.colorSpace);
+    function setupFrameBufferTexture(framebuffer, renderTarget, texture3, attachment, textureTarget, level) {
+      const glFormat = utils.convert(texture3.format, texture3.colorSpace);
+      const glType = utils.convert(texture3.type);
+      const glInternalFormat = getInternalFormat(texture3.internalFormat, glFormat, glType, texture3.normalized, texture3.colorSpace);
       const renderTargetProperties = properties.get(renderTarget);
-      const textureProperties = properties.get(texture2);
+      const textureProperties = properties.get(texture3);
       textureProperties.__renderTarget = renderTarget;
       if (!renderTargetProperties.__hasExternalTextures) {
         const width = Math.max(1, renderTarget.width >> level);
@@ -31077,10 +31026,10 @@
       } else {
         const textures = renderTarget.textures;
         for (let i2 = 0; i2 < textures.length; i2++) {
-          const texture2 = textures[i2];
-          const glFormat = utils.convert(texture2.format, texture2.colorSpace);
-          const glType = utils.convert(texture2.type);
-          const glInternalFormat = getInternalFormat(texture2.internalFormat, glFormat, glType, texture2.normalized, texture2.colorSpace);
+          const texture3 = textures[i2];
+          const glFormat = utils.convert(texture3.format, texture3.colorSpace);
+          const glType = utils.convert(texture3.type);
+          const glInternalFormat = getInternalFormat(texture3.internalFormat, glFormat, glType, texture3.normalized, texture3.colorSpace);
           if (useMultisampledRTT(renderTarget)) {
             multisampledRTTExt.renderbufferStorageMultisampleEXT(_gl.RENDERBUFFER, getRenderTargetSamples(renderTarget), glInternalFormat, renderTarget.width, renderTarget.height);
           } else if (useMultisample) {
@@ -31226,9 +31175,9 @@
       }
     }
     function setupRenderTarget(renderTarget) {
-      const texture2 = renderTarget.texture;
+      const texture3 = renderTarget.texture;
       const renderTargetProperties = properties.get(renderTarget);
-      const textureProperties = properties.get(texture2);
+      const textureProperties = properties.get(texture3);
       renderTarget.addEventListener("dispose", onRenderTargetDispose);
       const textures = renderTarget.textures;
       const isCube = renderTarget.isWebGLCubeRenderTarget === true;
@@ -31237,15 +31186,15 @@
         if (textureProperties.__webglTexture === void 0) {
           textureProperties.__webglTexture = _gl.createTexture();
         }
-        textureProperties.__version = texture2.version;
+        textureProperties.__version = texture3.version;
         info.memory.textures++;
       }
       if (isCube) {
         renderTargetProperties.__webglFramebuffer = [];
         for (let i2 = 0; i2 < 6; i2++) {
-          if (texture2.mipmaps && texture2.mipmaps.length > 0) {
+          if (texture3.mipmaps && texture3.mipmaps.length > 0) {
             renderTargetProperties.__webglFramebuffer[i2] = [];
-            for (let level = 0; level < texture2.mipmaps.length; level++) {
+            for (let level = 0; level < texture3.mipmaps.length; level++) {
               renderTargetProperties.__webglFramebuffer[i2][level] = _gl.createFramebuffer();
             }
           } else {
@@ -31253,9 +31202,9 @@
           }
         }
       } else {
-        if (texture2.mipmaps && texture2.mipmaps.length > 0) {
+        if (texture3.mipmaps && texture3.mipmaps.length > 0) {
           renderTargetProperties.__webglFramebuffer = [];
-          for (let level = 0; level < texture2.mipmaps.length; level++) {
+          for (let level = 0; level < texture3.mipmaps.length; level++) {
             renderTargetProperties.__webglFramebuffer[level] = _gl.createFramebuffer();
           }
         } else {
@@ -31275,12 +31224,12 @@
           renderTargetProperties.__webglColorRenderbuffer = [];
           state.bindFramebuffer(_gl.FRAMEBUFFER, renderTargetProperties.__webglMultisampledFramebuffer);
           for (let i2 = 0; i2 < textures.length; i2++) {
-            const texture3 = textures[i2];
+            const texture4 = textures[i2];
             renderTargetProperties.__webglColorRenderbuffer[i2] = _gl.createRenderbuffer();
             _gl.bindRenderbuffer(_gl.RENDERBUFFER, renderTargetProperties.__webglColorRenderbuffer[i2]);
-            const glFormat = utils.convert(texture3.format, texture3.colorSpace);
-            const glType = utils.convert(texture3.type);
-            const glInternalFormat = getInternalFormat(texture3.internalFormat, glFormat, glType, texture3.normalized, texture3.colorSpace, renderTarget.isXRRenderTarget === true);
+            const glFormat = utils.convert(texture4.format, texture4.colorSpace);
+            const glType = utils.convert(texture4.type);
+            const glInternalFormat = getInternalFormat(texture4.internalFormat, glFormat, glType, texture4.normalized, texture4.colorSpace, renderTarget.isXRRenderTarget === true);
             const samples = getRenderTargetSamples(renderTarget);
             _gl.renderbufferStorageMultisample(_gl.RENDERBUFFER, samples, glInternalFormat, renderTarget.width, renderTarget.height);
             _gl.framebufferRenderbuffer(_gl.FRAMEBUFFER, _gl.COLOR_ATTACHMENT0 + i2, _gl.RENDERBUFFER, renderTargetProperties.__webglColorRenderbuffer[i2]);
@@ -31295,17 +31244,17 @@
       }
       if (isCube) {
         state.bindTexture(_gl.TEXTURE_CUBE_MAP, textureProperties.__webglTexture);
-        setTextureParameters(_gl.TEXTURE_CUBE_MAP, texture2);
+        setTextureParameters(_gl.TEXTURE_CUBE_MAP, texture3);
         for (let i2 = 0; i2 < 6; i2++) {
-          if (texture2.mipmaps && texture2.mipmaps.length > 0) {
-            for (let level = 0; level < texture2.mipmaps.length; level++) {
-              setupFrameBufferTexture(renderTargetProperties.__webglFramebuffer[i2][level], renderTarget, texture2, _gl.COLOR_ATTACHMENT0, _gl.TEXTURE_CUBE_MAP_POSITIVE_X + i2, level);
+          if (texture3.mipmaps && texture3.mipmaps.length > 0) {
+            for (let level = 0; level < texture3.mipmaps.length; level++) {
+              setupFrameBufferTexture(renderTargetProperties.__webglFramebuffer[i2][level], renderTarget, texture3, _gl.COLOR_ATTACHMENT0, _gl.TEXTURE_CUBE_MAP_POSITIVE_X + i2, level);
             }
           } else {
-            setupFrameBufferTexture(renderTargetProperties.__webglFramebuffer[i2], renderTarget, texture2, _gl.COLOR_ATTACHMENT0, _gl.TEXTURE_CUBE_MAP_POSITIVE_X + i2, 0);
+            setupFrameBufferTexture(renderTargetProperties.__webglFramebuffer[i2], renderTarget, texture3, _gl.COLOR_ATTACHMENT0, _gl.TEXTURE_CUBE_MAP_POSITIVE_X + i2, 0);
           }
         }
-        if (textureNeedsGenerateMipmaps(texture2)) {
+        if (textureNeedsGenerateMipmaps(texture3)) {
           generateMipmap(_gl.TEXTURE_CUBE_MAP);
         }
         state.unbindTexture();
@@ -31331,15 +31280,15 @@
           glTextureType = renderTarget.isWebGL3DRenderTarget ? _gl.TEXTURE_3D : _gl.TEXTURE_2D_ARRAY;
         }
         state.bindTexture(glTextureType, textureProperties.__webglTexture);
-        setTextureParameters(glTextureType, texture2);
-        if (texture2.mipmaps && texture2.mipmaps.length > 0) {
-          for (let level = 0; level < texture2.mipmaps.length; level++) {
-            setupFrameBufferTexture(renderTargetProperties.__webglFramebuffer[level], renderTarget, texture2, _gl.COLOR_ATTACHMENT0, glTextureType, level);
+        setTextureParameters(glTextureType, texture3);
+        if (texture3.mipmaps && texture3.mipmaps.length > 0) {
+          for (let level = 0; level < texture3.mipmaps.length; level++) {
+            setupFrameBufferTexture(renderTargetProperties.__webglFramebuffer[level], renderTarget, texture3, _gl.COLOR_ATTACHMENT0, glTextureType, level);
           }
         } else {
-          setupFrameBufferTexture(renderTargetProperties.__webglFramebuffer, renderTarget, texture2, _gl.COLOR_ATTACHMENT0, glTextureType, 0);
+          setupFrameBufferTexture(renderTargetProperties.__webglFramebuffer, renderTarget, texture3, _gl.COLOR_ATTACHMENT0, glTextureType, 0);
         }
-        if (textureNeedsGenerateMipmaps(texture2)) {
+        if (textureNeedsGenerateMipmaps(texture3)) {
           generateMipmap(glTextureType);
         }
         state.unbindTexture();
@@ -31351,10 +31300,10 @@
     function updateRenderTargetMipmap(renderTarget) {
       const textures = renderTarget.textures;
       for (let i2 = 0, il = textures.length; i2 < il; i2++) {
-        const texture2 = textures[i2];
-        if (textureNeedsGenerateMipmaps(texture2)) {
+        const texture3 = textures[i2];
+        if (textureNeedsGenerateMipmaps(texture3)) {
           const targetType = getTargetType(renderTarget);
-          const webglTexture = properties.get(texture2).__webglTexture;
+          const webglTexture = properties.get(texture3).__webglTexture;
           state.bindTexture(targetType, webglTexture);
           generateMipmap(targetType);
           state.unbindTexture();
@@ -31438,18 +31387,18 @@
       const renderTargetProperties = properties.get(renderTarget);
       return renderTarget.samples > 0 && extensions.has("WEBGL_multisampled_render_to_texture") === true && renderTargetProperties.__useRenderToTexture !== false;
     }
-    function updateVideoTexture(texture2) {
+    function updateVideoTexture(texture3) {
       const frame = info.render.frame;
-      if (_videoTextures.get(texture2) !== frame) {
-        _videoTextures.set(texture2, frame);
-        texture2.update();
+      if (_videoTextures.get(texture3) !== frame) {
+        _videoTextures.set(texture3, frame);
+        texture3.update();
       }
     }
-    function verifyColorSpace(texture2, image) {
-      const colorSpace = texture2.colorSpace;
-      const format = texture2.format;
-      const type = texture2.type;
-      if (texture2.isCompressedTexture === true || texture2.isVideoTexture === true) return image;
+    function verifyColorSpace(texture3, image) {
+      const colorSpace = texture3.colorSpace;
+      const format = texture3.format;
+      const type = texture3.type;
+      if (texture3.isCompressedTexture === true || texture3.isVideoTexture === true) return image;
       if (colorSpace !== LinearSRGBColorSpace && colorSpace !== NoColorSpace) {
         if (ColorManagement.getTransfer(colorSpace) === SRGBTransfer) {
           if (format !== RGBAFormat || type !== UnsignedByteType) {
@@ -31657,12 +31606,12 @@ void main() {
      */
     init(depthData, renderState) {
       if (this.texture === null) {
-        const texture2 = new ExternalTexture(depthData.texture);
+        const texture3 = new ExternalTexture(depthData.texture);
         if (depthData.depthNear !== renderState.depthNear || depthData.depthFar !== renderState.depthFar) {
           this.depthNear = depthData.depthNear;
           this.depthFar = depthData.depthFar;
         }
-        this.texture = texture2;
+        this.texture = texture3;
       }
     }
     /**
@@ -34556,8 +34505,8 @@ void main() {
               textures.setupDepthRenderbuffer(renderTarget);
             }
           }
-          const texture2 = renderTarget.texture;
-          if (texture2.isData3DTexture || texture2.isDataArrayTexture || texture2.isCompressedArrayTexture) {
+          const texture3 = renderTarget.texture;
+          if (texture3.isData3DTexture || texture3.isDataArrayTexture || texture3.isCompressedArrayTexture) {
             isRenderTarget3D = true;
           }
           const __webglFramebuffer = properties.get(renderTarget).__webglFramebuffer;
@@ -34622,9 +34571,9 @@ void main() {
         if (framebuffer) {
           state.bindFramebuffer(_gl.FRAMEBUFFER, framebuffer);
           try {
-            const texture2 = renderTarget.textures[textureIndex];
-            const textureFormat = texture2.format;
-            const textureType = texture2.type;
+            const texture3 = renderTarget.textures[textureIndex];
+            const textureFormat = texture3.format;
+            const textureType = texture3.type;
             if (renderTarget.textures.length > 1) _gl.readBuffer(_gl.COLOR_ATTACHMENT0 + textureIndex);
             if (!capabilities.textureFormatReadable(textureFormat)) {
               error("WebGLRenderer.readRenderTargetPixels: renderTarget is not in RGBA or implementation defined format.");
@@ -34654,9 +34603,9 @@ void main() {
         if (framebuffer) {
           if (x2 >= 0 && x2 <= renderTarget.width - width && (y >= 0 && y <= renderTarget.height - height)) {
             state.bindFramebuffer(_gl.FRAMEBUFFER, framebuffer);
-            const texture2 = renderTarget.textures[textureIndex];
-            const textureFormat = texture2.format;
-            const textureType = texture2.type;
+            const texture3 = renderTarget.textures[textureIndex];
+            const textureFormat = texture3.format;
+            const textureType = texture3.type;
             if (renderTarget.textures.length > 1) _gl.readBuffer(_gl.COLOR_ATTACHMENT0 + textureIndex);
             if (!capabilities.textureFormatReadable(textureFormat)) {
               throw new Error("THREE.WebGLRenderer.readRenderTargetPixelsAsync: renderTarget is not in RGBA or implementation defined format.");
@@ -34683,13 +34632,13 @@ void main() {
           }
         }
       };
-      this.copyFramebufferToTexture = function(texture2, position = null, level = 0) {
+      this.copyFramebufferToTexture = function(texture3, position = null, level = 0) {
         const levelScale = Math.pow(2, -level);
-        const width = Math.floor(texture2.image.width * levelScale);
-        const height = Math.floor(texture2.image.height * levelScale);
+        const width = Math.floor(texture3.image.width * levelScale);
+        const height = Math.floor(texture3.image.height * levelScale);
         const x2 = position !== null ? position.x : 0;
         const y = position !== null ? position.y : 0;
-        textures.setTexture2D(texture2, 0);
+        textures.setTexture2D(texture3, 0);
         _gl.copyTexSubImage2D(_gl.TEXTURE_2D, level, 0, 0, x2, y, width, height);
         state.unbindTexture();
       };
@@ -34833,15 +34782,15 @@ void main() {
           textures.setupRenderTarget(target);
         }
       };
-      this.initTexture = function(texture2) {
-        if (texture2.isCubeTexture) {
-          textures.setTextureCube(texture2, 0);
-        } else if (texture2.isData3DTexture) {
-          textures.setTexture3D(texture2, 0);
-        } else if (texture2.isDataArrayTexture || texture2.isCompressedArrayTexture) {
-          textures.setTexture2DArray(texture2, 0);
+      this.initTexture = function(texture3) {
+        if (texture3.isCubeTexture) {
+          textures.setTextureCube(texture3, 0);
+        } else if (texture3.isData3DTexture) {
+          textures.setTexture3D(texture3, 0);
+        } else if (texture3.isDataArrayTexture || texture3.isCompressedArrayTexture) {
+          textures.setTexture2DArray(texture3, 0);
         } else {
-          textures.setTexture2D(texture2, 0);
+          textures.setTexture2D(texture3, 0);
         }
         state.unbindTexture();
       };
@@ -34885,6 +34834,139 @@ void main() {
     }
   };
 
+  // src/town-surfaces.js
+  var maps = /* @__PURE__ */ new Map();
+  var loader = new TextureLoader();
+  function texture(kind, channel) {
+    const key = kind + "-" + channel;
+    if (maps.has(key)) return maps.get(key);
+    const map = loader.load("../assets/town-materials/" + key + ".jpg");
+    map.wrapS = map.wrapT = RepeatWrapping;
+    map.anisotropy = 4;
+    if (channel === "Color") map.colorSpace = SRGBColorSpace;
+    maps.set(key, map);
+    return map;
+  }
+  var buildingSurfaceStyles = {
+    "\u9F20\u9F20\u5C0F\u5C4B": { floor: "wood", tint: 16772559, roughness: 0.68 },
+    "\u9F20\u9F20\u5B66\u6821": { floor: "wood", tint: 16248793, roughness: 0.75 },
+    "\u5BA0\u7269\u4E4B\u5BB6": { floor: "wood", tint: 16773080, roughness: 0.7 },
+    "\u96F6\u98DF\u94FA": { floor: "wood", tint: 16773075, roughness: 0.65 },
+    "\u9F20\u9F20\u996D\u9986": { floor: "tile", tint: 16774111, roughness: 0.48 },
+    "Mariah Carey\u540D\u4EBA\u5802": { floor: "marble", tint: 16777215, roughness: 0.24 },
+    "\u8BCA\u6240": { floor: "ceramic", tint: 15857911, roughness: 0.3 },
+    "\u7EAA\u5FF5\u9986": { floor: "marble", tint: 16116953, roughness: 0.65 },
+    "\u6BA1\u4EEA\u9986": { floor: "marble", tint: 15132899, roughness: 0.72 }
+  };
+  function ceramicTexture() {
+    if (maps.has("ceramic")) return maps.get("ceramic");
+    const canvas = document.createElement("canvas");
+    canvas.width = canvas.height = 256;
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#f4f7f5";
+    ctx.fillRect(0, 0, 256, 256);
+    ctx.strokeStyle = "#d5dedb";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(0, 0, 256, 256);
+    const map = new CanvasTexture(canvas);
+    map.wrapS = map.wrapT = RepeatWrapping;
+    map.colorSpace = SRGBColorSpace;
+    map.anisotropy = 4;
+    maps.set("ceramic", map);
+    return map;
+  }
+  function applyBuildingSurface(mesh, name, role = "floor", units = 1) {
+    const style = buildingSurfaceStyles[name];
+    if (!style || !mesh.isMesh) return mesh;
+    const kind = role === "wood" ? "wood" : role === "stone" ? "marble" : style.floor;
+    const material3 = mesh.material.clone();
+    material3.color.set(role === "wood" ? 16773081 : style.tint);
+    material3.roughness = role === "wood" ? 0.7 : style.roughness;
+    material3.metalness = 0;
+    material3.map = kind === "ceramic" ? ceramicTexture() : texture(kind, "Color");
+    if (kind !== "ceramic") {
+      material3.normalMap = texture(kind, "NormalGL");
+      material3.normalScale = new Vector2(kind === "wood" ? 0.18 : 0.1, kind === "wood" ? 0.18 : 0.1);
+      material3.roughnessMap = texture(kind, "Roughness");
+    }
+    material3.envMapIntensity = kind === "wood" ? 0.25 : 0.65;
+    material3.userData.townSurface = kind;
+    mesh.material = material3;
+    const p = mesh.geometry.attributes.position, n = mesh.geometry.attributes.normal, uv = new Float32Array(p.count * 2), span = kind === "wood" ? 1.8 : kind === "tile" ? 2.1 : kind === "ceramic" ? 0.45 : 2.4;
+    for (let i2 = 0; i2 < p.count; i2++) {
+      const x2 = (p.getX(i2) * mesh.scale.x + mesh.position.x) * units, y = (p.getY(i2) * mesh.scale.y + mesh.position.y) * units, z = (p.getZ(i2) * mesh.scale.z + mesh.position.z) * units;
+      const nx = Math.abs(n.getX(i2)), ny = Math.abs(n.getY(i2)), nz = Math.abs(n.getZ(i2));
+      uv[i2 * 2] = (ny >= nx && ny >= nz ? x2 : nx >= nz ? z : x2) / span;
+      uv[i2 * 2 + 1] = (ny >= nx && ny >= nz ? z : y) / span;
+    }
+    mesh.geometry.setAttribute("uv", new BufferAttribute(uv, 2));
+    return mesh;
+  }
+  var woodColors = /* @__PURE__ */ new Set([9789499, 9992532, 8547409, 8939590, 9991247, 11898210, 9728078, 10051642, 6833454, 8409394, 13210963, 10324079]);
+  function finishBuildingSurfaces(group, name, units = 1) {
+    if (!buildingSurfaceStyles[name]) return;
+    group.traverse((mesh) => {
+      if (!mesh.isMesh || Array.isArray(mesh.material) || mesh.material.map || mesh.material.transparent || mesh.material.metalness > 0.1) return;
+      if (woodColors.has(mesh.material.color.getHex())) applyBuildingSurface(mesh, name, "wood", units);
+      else if (name === "Mariah Carey\u540D\u4EBA\u5802" && [15394006, 15262679, 15261129, 15853782].includes(mesh.material.color.getHex())) applyBuildingSurface(mesh, name, "stone", units);
+      else if (mesh.geometry.type === "BoxGeometry") {
+        const { width, height, depth } = mesh.geometry.parameters;
+        if (width * units > 2 && depth * units > 1 && height * units < 0.5 && mesh.position.y * units < 0.4) applyBuildingSurface(mesh, name, "floor", units);
+      }
+    });
+  }
+
+  // src/town-speech.js
+  function createSpeechDirector() {
+    const states = /* @__PURE__ */ new Map();
+    let gaze = null, gazeSince = 0;
+    const hash = (id) => [...id].reduce((n, c) => n * 31 + c.charCodeAt(0) >>> 0, 0);
+    const overlaps = (a, b) => a.left < b.right + 8 && a.right > b.left - 8 && a.top < b.bottom + 8 && a.bottom > b.top - 8;
+    return { update(candidates, { now, firstPerson = false, limit = firstPerson ? 3 : 4, gazeId = null } = {}) {
+      if (gazeId !== gaze) {
+        gaze = gazeId;
+        gazeSince = now;
+      }
+      const ids = new Set(candidates.map((c) => c.id));
+      for (const id of states.keys()) if (!ids.has(id)) states.delete(id);
+      for (const c of candidates) {
+        let s = states.get(c.id);
+        if (!s) {
+          s = { text: c.text, until: 0, ready: now + hash(c.id) % 1500 / 1e3, last: -Infinity };
+          states.set(c.id, s);
+        }
+        if (s.text !== c.text) {
+          s.text = c.text;
+          s.until = 0;
+          s.ready = now + hash(c.id) % 700 / 1e3;
+        }
+      }
+      const looking = gaze && now - gazeSince >= 0.45 ? gaze : null, rank = (c) => c.urgent ? 3 : c.id === looking ? 2 : states.get(c.id).until > now ? 1 : 0;
+      const ordered = [...candidates].sort((a, b) => rank(b) - rank(a) || states.get(a.id).last - states.get(b.id).last || a.distance - b.distance || hash(a.id) - hash(b.id));
+      const full = /* @__PURE__ */ new Set(), occupied = [], texts = /* @__PURE__ */ new Set();
+      for (const c of ordered) {
+        const s = states.get(c.id), priority = c.urgent || c.id === looking;
+        if (full.size >= limit || !c.rect || c.rect.top < 8 || c.rect.bottom > c.viewHeight - 8 || c.rect.left < 8 || c.rect.right > c.viewWidth - 8) continue;
+        if (!priority && (now < s.ready && s.until <= now || firstPerson && c.distance > 5 || texts.has(c.text))) continue;
+        if (occupied.some((r) => overlaps(c.rect, r))) continue;
+        full.add(c.id);
+        occupied.push(c.rect);
+        texts.add(c.text);
+        if (s.until <= now) {
+          s.until = now + 3.6;
+          s.ready = s.until + 6 + hash(c.id) % 3e3 / 1e3;
+          s.last = now;
+        }
+      }
+      return candidates.map((c) => ({ id: c.id, mode: full.has(c.id) ? "full" : "hint", text: full.has(c.id) ? c.text : "\xB7\xB7\xB7" }));
+    } };
+  }
+
+  // src/town-restaurant-layout.js
+  var restaurantTables = [[0.35, -1], [2.35, -1], [0.35, 1], [2.35, 1]];
+  var restaurantSeats = restaurantTables.flatMap(([x2, z]) => [-0.6, 0.6].map((dz) => ({ x: x2, z: z + dz, heading: dz < 0 ? 0 : Math.PI })));
+  var restaurantQueuePoint = (index) => ({ x: -1.8, z: 1.65 - index * 0.45 });
+
   // src/town-restaurant-register.js
   function createRestaurantRegister(room) {
     const register = new Group();
@@ -34909,9 +34991,9 @@ void main() {
     const canvas = document.createElement("canvas");
     canvas.width = 256;
     canvas.height = 128;
-    const ctx = canvas.getContext("2d"), texture2 = new CanvasTexture(canvas);
-    texture2.colorSpace = SRGBColorSpace;
-    const screen = box3(0.18, 0.09, 6e-3, -0.105, 0.29, 0.128, new MeshBasicMaterial({ map: texture2 }));
+    const ctx = canvas.getContext("2d"), texture3 = new CanvasTexture(canvas);
+    texture3.colorSpace = SRGBColorSpace;
+    const screen = box3(0.18, 0.09, 6e-3, -0.105, 0.29, 0.128, new MeshBasicMaterial({ map: texture3 }));
     function screenAmount(amount) {
       ctx.fillStyle = "#d7ebbc";
       ctx.fillRect(0, 0, 256, 128);
@@ -34919,7 +35001,7 @@ void main() {
       ctx.font = "bold 70px monospace";
       ctx.textAlign = "center";
       ctx.fillText(String(amount), 128, 88);
-      texture2.needsUpdate = true;
+      texture3.needsUpdate = true;
     }
     screenAmount(0);
     box3(0.14, 0.07, 0.035, 0.145, 0.29, 0.12, cream);
@@ -35046,17 +35128,17 @@ void main() {
 
   // src/town-fur.js
   var palettes = { silver: [13488341, 16776695], pudding: [13738062, 16775913], "three-line": [4277581, 14868953], violet: [7828878, 15526384] };
-  var texture;
+  var texture2;
   var materials = /* @__PURE__ */ new Map();
   function furMaterial(coat = "three-line", age = 0) {
     if (!Object.hasOwn(palettes, coat)) coat = "three-line";
     const loss = Math.round(Math.max(0, Math.min(1, (age - 1.5) / 1.5)) * 20) / 20, key = coat + ":" + loss;
     if (materials.has(key)) return materials.get(key);
-    if (!texture) {
-      texture = new TextureLoader().load("../assets/models/booth-hamster/restored/Assets/Ham/Texture/Ham.png");
-      texture.colorSpace = SRGBColorSpace;
+    if (!texture2) {
+      texture2 = new TextureLoader().load("../assets/models/booth-hamster/restored/Assets/Ham/Texture/Ham.png");
+      texture2.colorSpace = SRGBColorSpace;
     }
-    const [dark, light] = palettes[coat], material3 = new MeshStandardMaterial({ map: texture, roughness: 0.94 });
+    const [dark, light] = palettes[coat], material3 = new MeshStandardMaterial({ map: texture2, roughness: 0.94 });
     material3.userData.hamsterFur = true;
     if (coat === "three-line") material3.color.setHex(10198424);
     if (coat === "three-line" && !loss) {
@@ -35296,12 +35378,12 @@ void main() {
         scope.manager.itemError(url);
         scope.manager.itemEnd(url);
       };
-      const loader = new FileLoader(this.manager);
-      loader.setPath(this.path);
-      loader.setResponseType("arraybuffer");
-      loader.setRequestHeader(this.requestHeader);
-      loader.setWithCredentials(this.withCredentials);
-      loader.load(url, function(data) {
+      const loader2 = new FileLoader(this.manager);
+      loader2.setPath(this.path);
+      loader2.setResponseType("arraybuffer");
+      loader2.setRequestHeader(this.requestHeader);
+      loader2.setWithCredentials(this.withCredentials);
+      loader2.load(url, function(data) {
         try {
           scope.parse(data, resourcePath, function(gltf) {
             onLoad(gltf);
@@ -35895,15 +35977,15 @@ void main() {
         return null;
       }
       const extension = textureDef.extensions[this.name];
-      const loader = parser.options.ktx2Loader;
-      if (!loader) {
+      const loader2 = parser.options.ktx2Loader;
+      if (!loader2) {
         if (json.extensionsRequired && json.extensionsRequired.indexOf(this.name) >= 0) {
           throw new Error("THREE.GLTFLoader: setKTX2Loader must be called before loading KTX2 textures");
         } else {
           return null;
         }
       }
-      return parser.loadTextureImage(textureIndex, extension.source, loader);
+      return parser.loadTextureImage(textureIndex, extension.source, loader2);
     }
   };
   var GLTFTextureWebPExtension = class {
@@ -35921,12 +36003,12 @@ void main() {
       }
       const extension = textureDef.extensions[name];
       const source = json.images[extension.source];
-      let loader = parser.textureLoader;
+      let loader2 = parser.textureLoader;
       if (source.uri) {
         const handler = parser.options.manager.getHandler(source.uri);
-        if (handler !== null) loader = handler;
+        if (handler !== null) loader2 = handler;
       }
-      return parser.loadTextureImage(textureIndex, extension.source, loader);
+      return parser.loadTextureImage(textureIndex, extension.source, loader2);
     }
   };
   var GLTFTextureAVIFExtension = class {
@@ -35944,12 +36026,12 @@ void main() {
       }
       const extension = textureDef.extensions[name];
       const source = json.images[extension.source];
-      let loader = parser.textureLoader;
+      let loader2 = parser.textureLoader;
       if (source.uri) {
         const handler = parser.options.manager.getHandler(source.uri);
-        if (handler !== null) loader = handler;
+        if (handler !== null) loader2 = handler;
       }
-      return parser.loadTextureImage(textureIndex, extension.source, loader);
+      return parser.loadTextureImage(textureIndex, extension.source, loader2);
     }
   };
   var GLTFMeshoptCompression = class {
@@ -36160,25 +36242,25 @@ void main() {
     constructor() {
       this.name = EXTENSIONS.KHR_TEXTURE_TRANSFORM;
     }
-    extendTexture(texture2, transform) {
-      if ((transform.texCoord === void 0 || transform.texCoord === texture2.channel) && transform.offset === void 0 && transform.rotation === void 0 && transform.scale === void 0) {
-        return texture2;
+    extendTexture(texture3, transform) {
+      if ((transform.texCoord === void 0 || transform.texCoord === texture3.channel) && transform.offset === void 0 && transform.rotation === void 0 && transform.scale === void 0) {
+        return texture3;
       }
-      texture2 = texture2.clone();
+      texture3 = texture3.clone();
       if (transform.texCoord !== void 0) {
-        texture2.channel = transform.texCoord;
+        texture3.channel = transform.texCoord;
       }
       if (transform.offset !== void 0) {
-        texture2.offset.fromArray(transform.offset);
+        texture3.offset.fromArray(transform.offset);
       }
       if (transform.rotation !== void 0) {
-        texture2.rotation = transform.rotation;
+        texture3.rotation = transform.rotation;
       }
       if (transform.scale !== void 0) {
-        texture2.repeat.fromArray(transform.scale);
+        texture3.repeat.fromArray(transform.scale);
       }
-      texture2.needsUpdate = true;
-      return texture2;
+      texture3.needsUpdate = true;
+      return texture3;
     }
   };
   var GLTFMeshQuantizationExtension = class {
@@ -36728,7 +36810,7 @@ void main() {
      */
     loadBuffer(bufferIndex) {
       const bufferDef = this.json.buffers[bufferIndex];
-      const loader = this.fileLoader;
+      const loader2 = this.fileLoader;
       if (bufferDef.type && bufferDef.type !== "arraybuffer") {
         throw new Error("THREE.GLTFLoader: " + bufferDef.type + " buffer type is not supported.");
       }
@@ -36737,7 +36819,7 @@ void main() {
       }
       const options = this.options;
       return new Promise(function(resolve, reject) {
-        loader.load(LoaderUtils.resolveURL(bufferDef.uri, options.path), resolve, void 0, function() {
+        loader2.load(LoaderUtils.resolveURL(bufferDef.uri, options.path), resolve, void 0, function() {
           reject(new Error('THREE.GLTFLoader: Failed to load buffer "' + bufferDef.uri + '".'));
         });
       });
@@ -36850,14 +36932,14 @@ void main() {
       const textureDef = json.textures[textureIndex];
       const sourceIndex = textureDef.source;
       const sourceDef = json.images[sourceIndex];
-      let loader = this.textureLoader;
+      let loader2 = this.textureLoader;
       if (sourceDef.uri) {
         const handler = options.manager.getHandler(sourceDef.uri);
-        if (handler !== null) loader = handler;
+        if (handler !== null) loader2 = handler;
       }
-      return this.loadTextureImage(textureIndex, sourceIndex, loader);
+      return this.loadTextureImage(textureIndex, sourceIndex, loader2);
     }
-    loadTextureImage(textureIndex, sourceIndex, loader) {
+    loadTextureImage(textureIndex, sourceIndex, loader2) {
       const parser = this;
       const json = this.json;
       const textureDef = json.textures[textureIndex];
@@ -36866,33 +36948,33 @@ void main() {
       if (this.textureCache[cacheKey]) {
         return this.textureCache[cacheKey];
       }
-      const promise = this.loadImageSource(sourceIndex, loader).then(function(texture2) {
-        texture2.flipY = false;
-        texture2.name = textureDef.name || sourceDef.name || "";
-        if (texture2.name === "" && typeof sourceDef.uri === "string" && sourceDef.uri.startsWith("data:image/") === false) {
-          texture2.name = sourceDef.uri;
+      const promise = this.loadImageSource(sourceIndex, loader2).then(function(texture3) {
+        texture3.flipY = false;
+        texture3.name = textureDef.name || sourceDef.name || "";
+        if (texture3.name === "" && typeof sourceDef.uri === "string" && sourceDef.uri.startsWith("data:image/") === false) {
+          texture3.name = sourceDef.uri;
         }
         const samplers = json.samplers || {};
         const sampler = samplers[textureDef.sampler] || {};
-        texture2.magFilter = WEBGL_FILTERS[sampler.magFilter] || LinearFilter;
-        texture2.minFilter = WEBGL_FILTERS[sampler.minFilter] || LinearMipmapLinearFilter;
-        texture2.wrapS = WEBGL_WRAPPINGS[sampler.wrapS] || RepeatWrapping;
-        texture2.wrapT = WEBGL_WRAPPINGS[sampler.wrapT] || RepeatWrapping;
-        texture2.generateMipmaps = !texture2.isCompressedTexture && texture2.minFilter !== NearestFilter && texture2.minFilter !== LinearFilter;
-        parser.associations.set(texture2, { textures: textureIndex });
-        return texture2;
+        texture3.magFilter = WEBGL_FILTERS[sampler.magFilter] || LinearFilter;
+        texture3.minFilter = WEBGL_FILTERS[sampler.minFilter] || LinearMipmapLinearFilter;
+        texture3.wrapS = WEBGL_WRAPPINGS[sampler.wrapS] || RepeatWrapping;
+        texture3.wrapT = WEBGL_WRAPPINGS[sampler.wrapT] || RepeatWrapping;
+        texture3.generateMipmaps = !texture3.isCompressedTexture && texture3.minFilter !== NearestFilter && texture3.minFilter !== LinearFilter;
+        parser.associations.set(texture3, { textures: textureIndex });
+        return texture3;
       }).catch(function() {
         return null;
       });
       this.textureCache[cacheKey] = promise;
       return promise;
     }
-    loadImageSource(sourceIndex, loader) {
+    loadImageSource(sourceIndex, loader2) {
       const parser = this;
       const json = this.json;
       const options = this.options;
       if (this.sourceCache[sourceIndex] !== void 0) {
-        return this.sourceCache[sourceIndex].then((texture2) => texture2.clone());
+        return this.sourceCache[sourceIndex].then((texture3) => texture3.clone());
       }
       const sourceDef = json.images[sourceIndex];
       const URL2 = self.URL || self.webkitURL;
@@ -36911,22 +36993,22 @@ void main() {
       const promise = Promise.resolve(sourceURI).then(function(sourceURI2) {
         return new Promise(function(resolve, reject) {
           let onLoad = resolve;
-          if (loader.isImageBitmapLoader === true) {
+          if (loader2.isImageBitmapLoader === true) {
             onLoad = function(imageBitmap) {
-              const texture2 = new Texture(imageBitmap);
-              texture2.needsUpdate = true;
-              resolve(texture2);
+              const texture3 = new Texture(imageBitmap);
+              texture3.needsUpdate = true;
+              resolve(texture3);
             };
           }
-          loader.load(LoaderUtils.resolveURL(sourceURI2, options.path), onLoad, void 0, reject);
+          loader2.load(LoaderUtils.resolveURL(sourceURI2, options.path), onLoad, void 0, reject);
         });
-      }).then(function(texture2) {
+      }).then(function(texture3) {
         if (isObjectURL === true) {
           URL2.revokeObjectURL(sourceURI);
         }
-        assignExtrasToUserData(texture2, sourceDef);
-        texture2.userData.mimeType = sourceDef.mimeType || getImageURIMimeType(sourceDef.uri);
-        return texture2;
+        assignExtrasToUserData(texture3, sourceDef);
+        texture3.userData.mimeType = sourceDef.mimeType || getImageURIMimeType(sourceDef.uri);
+        return texture3;
       }).catch(function(error2) {
         console.error("THREE.GLTFLoader: Couldn't load texture", sourceURI);
         throw error2;
@@ -36946,25 +37028,25 @@ void main() {
      */
     assignTexture(materialParams, mapName, mapDef, colorSpace) {
       const parser = this;
-      return this.getDependency("texture", mapDef.index).then(function(texture2) {
-        if (!texture2) return null;
+      return this.getDependency("texture", mapDef.index).then(function(texture3) {
+        if (!texture3) return null;
         if (mapDef.texCoord !== void 0 && mapDef.texCoord > 0) {
-          texture2 = texture2.clone();
-          texture2.channel = mapDef.texCoord;
+          texture3 = texture3.clone();
+          texture3.channel = mapDef.texCoord;
         }
         if (parser.extensions[EXTENSIONS.KHR_TEXTURE_TRANSFORM]) {
           const transform = mapDef.extensions !== void 0 ? mapDef.extensions[EXTENSIONS.KHR_TEXTURE_TRANSFORM] : void 0;
           if (transform) {
-            const gltfReference = parser.associations.get(texture2);
-            texture2 = parser.extensions[EXTENSIONS.KHR_TEXTURE_TRANSFORM].extendTexture(texture2, transform);
-            parser.associations.set(texture2, gltfReference);
+            const gltfReference = parser.associations.get(texture3);
+            texture3 = parser.extensions[EXTENSIONS.KHR_TEXTURE_TRANSFORM].extendTexture(texture3, transform);
+            parser.associations.set(texture3, gltfReference);
           }
         }
         if (colorSpace !== void 0) {
-          texture2.colorSpace = colorSpace;
+          texture3.colorSpace = colorSpace;
         }
-        materialParams[mapName] = texture2;
-        return texture2;
+        materialParams[mapName] = texture3;
+        return texture3;
       });
     }
     /**
@@ -37804,14 +37886,14 @@ void main() {
     if (!assets.has(kind)) assets.set(kind, new GLTFLoader().loadAsync("../assets/models/cube-pets/animal-" + kind + ".glb"));
     return assets.get(kind);
   }
-  function createPetAnimal(kind, texture2) {
+  function createPetAnimal(kind, texture3) {
     const holder = new Group();
     holder.name = "Cube pet " + kind;
     holder.userData.roomAction = "pet-home";
     holder.userData.petId = kind;
     asset(kind).then((data) => {
       if (holder.userData.retired) return;
-      const customMap = texture2 ? new TextureLoader().load(texture2) : null;
+      const customMap = texture3 ? new TextureLoader().load(texture3) : null;
       if (customMap) {
         customMap.colorSpace = SRGBColorSpace;
         holder.userData.customMap = customMap;
@@ -37822,7 +37904,7 @@ void main() {
       model.traverse((o) => {
         if (o.isMesh) {
           o.castShadow = o.receiveShadow = true;
-          if (texture2) {
+          if (texture3) {
             o.geometry = o.geometry.clone();
             const positions = o.geometry.attributes.position, uv = new Float32Array(positions.count * 2);
             o.geometry.computeBoundingBox();
@@ -37899,7 +37981,6 @@ void main() {
   function populatePetHome(room, label, clickable) {
     const wood = 9789499, cream = 15982272;
     box(room, 8, 0.09, 6, 0, -0.045, 0, 15189647);
-    for (let x2 = -3.8; x2 < 4; x2 += 0.8) box(room, 0.015, 7e-3, 6, x2, 4e-3, 0, 13084275);
     const [cx, cz, cw, cd] = petHomeFurniture.counter;
     box(room, cw * 2, 0.85, cd * 2, cx, 0.425, cz, wood);
     box(room, cw * 2 + 0.12, 0.08, cd * 2 + 0.1, cx, 0.89, cz, 13210963);
@@ -38958,6 +39039,11 @@ void main() {
     model.add(shell);
     const wall = new MeshStandardMaterial({ color: layout.wall, roughness: 0.88 }), trim = new MeshStandardMaterial({ color: layout.trim, roughness: 0.62 }), glass = new MeshPhysicalMaterial({ color: 14478064, roughness: 0.12, metalness: 0, transparent: true, opacity: 0.16, depthWrite: false, side: DoubleSide, clearcoat: 1, envMapIntensity: 0.7 });
     if (name === "Mariah Carey\u540D\u4EBA\u5802") {
+      trim.color.set(13153679);
+      trim.metalness = 0.65;
+      trim.roughness = 0.32;
+    }
+    if (name === "Mariah Carey\u540D\u4EBA\u5802") {
       const h2 = layout.floor - 0.16, y = 0.16 + h2 / 2, foundation = new MeshStandardMaterial({ color: 15262679, roughness: 0.85 });
       for (const z of [back + 0.04, front - 0.04]) {
         const edge = box2(shell, layout.width, h2, 0.08, 0, y, z, foundation);
@@ -39517,7 +39603,7 @@ void main() {
   }
 
   // src/town-mariah-hall.js
-  var material2 = (color, extra = {}) => new MeshStandardMaterial({ color, roughness: 0.65, ...extra });
+  var material2 = (color, extra = {}) => new MeshStandardMaterial({ color, roughness: 0.65, ...[12886392, 14864305, 12756093].includes(color) ? { metalness: 0.55, roughness: 0.34 } : {}, ...extra });
   var hallAlbums = [
     [7, "#1 to Infinity"],
     [8, "Infinity"],
@@ -39616,8 +39702,8 @@ void main() {
   }
   function sign3(group, title, x2, y, z, w, h) {
     const c = document.createElement("canvas");
-    const texture2 = new CanvasTexture(c);
-    window.TownI18n.canvas(texture2, (draw) => {
+    const texture3 = new CanvasTexture(c);
+    window.TownI18n.canvas(texture3, (draw) => {
       c.width = 1024;
       c.height = 140;
       const ctx = c.getContext("2d");
@@ -39631,8 +39717,8 @@ void main() {
       ctx.textAlign = "center";
       draw(ctx, title, 512, 94);
     });
-    texture2.colorSpace = SRGBColorSpace;
-    const m = new Mesh(new PlaneGeometry(w, h), new MeshBasicMaterial({ map: texture2, side: DoubleSide }));
+    texture3.colorSpace = SRGBColorSpace;
+    const m = new Mesh(new PlaneGeometry(w, h), new MeshBasicMaterial({ map: texture3, side: DoubleSide }));
     m.position.set(x2, y, z);
     group.add(m);
   }
@@ -40362,8 +40448,8 @@ void main() {
   }
   function storeSign(group, text, x2, y, z, width, height, background, ink) {
     const c = document.createElement("canvas");
-    const texture2 = new CanvasTexture(c);
-    window.TownI18n.canvas(texture2, (draw) => {
+    const texture3 = new CanvasTexture(c);
+    window.TownI18n.canvas(texture3, (draw) => {
       c.width = 1024;
       c.height = Math.round(1024 * height / width);
       const g = c.getContext("2d");
@@ -40375,8 +40461,8 @@ void main() {
       g.textBaseline = "middle";
       draw(g, text, c.width / 2, c.height / 2);
     });
-    texture2.colorSpace = SRGBColorSpace;
-    const mesh = new Mesh(new PlaneGeometry(width, height), new MeshBasicMaterial({ map: texture2, side: DoubleSide }));
+    texture3.colorSpace = SRGBColorSpace;
+    const mesh = new Mesh(new PlaneGeometry(width, height), new MeshBasicMaterial({ map: texture3, side: DoubleSide }));
     mesh.position.set(x2, y, z);
     group.add(mesh);
   }
@@ -41587,12 +41673,12 @@ void main() {
     load(url, onLoad, onProgress, onError) {
       const scope = this;
       const path = scope.path === "" ? LoaderUtils.extractUrlBase(url) : scope.path;
-      const loader = new FileLoader(this.manager);
-      loader.setPath(scope.path);
-      loader.setResponseType("arraybuffer");
-      loader.setRequestHeader(scope.requestHeader);
-      loader.setWithCredentials(scope.withCredentials);
-      loader.load(url, function(buffer) {
+      const loader2 = new FileLoader(this.manager);
+      loader2.setPath(scope.path);
+      loader2.setResponseType("arraybuffer");
+      loader2.setRequestHeader(scope.requestHeader);
+      loader2.setWithCredentials(scope.withCredentials);
+      loader2.load(url, function(buffer) {
         try {
           onLoad(scope.parse(buffer, path));
         } catch (e) {
@@ -41751,59 +41837,59 @@ void main() {
       if ("Texture" in fbxTree.Objects) {
         const textureNodes = fbxTree.Objects.Texture;
         for (const nodeID in textureNodes) {
-          const texture2 = this.parseTexture(textureNodes[nodeID], images);
-          textureMap.set(parseInt(nodeID), texture2);
+          const texture3 = this.parseTexture(textureNodes[nodeID], images);
+          textureMap.set(parseInt(nodeID), texture3);
         }
       }
       return textureMap;
     }
     // Parse individual node in FBXTree.Objects.Texture
     parseTexture(textureNode, images) {
-      const texture2 = this.loadTexture(textureNode, images);
-      texture2.ID = textureNode.id;
-      texture2.name = textureNode.attrName;
+      const texture3 = this.loadTexture(textureNode, images);
+      texture3.ID = textureNode.id;
+      texture3.name = textureNode.attrName;
       const wrapModeU = textureNode.WrapModeU;
       const wrapModeV = textureNode.WrapModeV;
       const valueU = wrapModeU !== void 0 ? wrapModeU.value : 0;
       const valueV = wrapModeV !== void 0 ? wrapModeV.value : 0;
-      texture2.wrapS = valueU === 0 ? RepeatWrapping : ClampToEdgeWrapping;
-      texture2.wrapT = valueV === 0 ? RepeatWrapping : ClampToEdgeWrapping;
+      texture3.wrapS = valueU === 0 ? RepeatWrapping : ClampToEdgeWrapping;
+      texture3.wrapT = valueV === 0 ? RepeatWrapping : ClampToEdgeWrapping;
       if ("Scaling" in textureNode) {
         const values = textureNode.Scaling.value;
-        texture2.repeat.x = values[0];
-        texture2.repeat.y = values[1];
+        texture3.repeat.x = values[0];
+        texture3.repeat.y = values[1];
       }
       if ("Translation" in textureNode) {
         const values = textureNode.Translation.value;
-        texture2.offset.x = values[0];
-        texture2.offset.y = values[1];
+        texture3.offset.x = values[0];
+        texture3.offset.y = values[1];
       }
-      return texture2;
+      return texture3;
     }
     // load a texture specified as a blob or data URI, or via an external URL using TextureLoader
     loadTexture(textureNode, images) {
       const extension = textureNode.FileName.split(".").pop().toLowerCase();
-      let loader = this.manager.getHandler(`.${extension}`);
-      if (loader === null) loader = this.textureLoader;
-      const loaderPath = loader.path;
+      let loader2 = this.manager.getHandler(`.${extension}`);
+      if (loader2 === null) loader2 = this.textureLoader;
+      const loaderPath = loader2.path;
       if (!loaderPath) {
-        loader.setPath(this.textureLoader.path);
+        loader2.setPath(this.textureLoader.path);
       }
       const children = connections.get(textureNode.id).children;
       let fileName;
       if (children !== void 0 && children.length > 0 && images[children[0].ID] !== void 0) {
         fileName = images[children[0].ID];
         if (fileName.indexOf("blob:") === 0 || fileName.indexOf("data:") === 0) {
-          loader.setPath(void 0);
+          loader2.setPath(void 0);
         }
       }
       if (fileName === void 0) {
         console.warn("FBXLoader: Undefined filename, creating placeholder texture.");
         return new Texture();
       }
-      const texture2 = loader.load(fileName);
-      loader.setPath(loaderPath);
-      return texture2;
+      const texture3 = loader2.load(fileName);
+      loader2.setPath(loaderPath);
+      return texture3;
     }
     // Parse nodes in FBXTree.Objects.Material
     parseMaterials(textureMap) {
@@ -44425,6 +44511,7 @@ void main() {
       obj.rotation.y = facing(place[0]);
       placeModels.set(place[0], obj);
       installBuildingPortal(obj, place[0]);
+      finishBuildingSurfaces(obj, place[0]);
       if (place[0] === "\u9F20\u9F20\u5C0F\u5C4B") obj.scale.set(cottageExpansion, 1, cottageExpansion);
       clickable.push(obj);
       scene.add(obj);
@@ -44785,7 +44872,7 @@ void main() {
           if (o.isMesh) {
             o.geometry.dispose();
             for (const m of Array.isArray(o.material) ? o.material : [o.material]) {
-              if (m.map) {
+              if (m.map && !m.userData.townSurface) {
                 m.userData.disposed = true;
                 m.map.dispose();
               }
@@ -44836,10 +44923,7 @@ void main() {
         floor.scale.set(cottageFloor.x / (2.15 / 8), 1, cottageFloor.z / (2.14 / 6));
         floor.position.y = 0.02;
         room.add(floor);
-        for (let x2 = -3.6; x2 <= 3.6; x2 += 0.4) {
-          const length = 2 * floor.scale.z * Math.sqrt(Math.max(0, 1 - (x2 / floor.scale.x) ** 2));
-          if (length) add(0.012, 6e-3, length, x2, 0.062, 0, trimColor);
-        }
+        applyBuildingSurface(floor, name, "floor", 0.36);
         const g = cottageShellGeometry(0.045).toNonIndexed(), pos = g.attributes.position, indices = [];
         for (let i2 = 0; i2 < pos.count; i2 += 3) if ([0, 1, 2].every((j) => pos.getY(i2 + j) < 0.95 && pos.getZ(i2 + j) < 0.25)) indices.push(i2, i2 + 1, i2 + 2);
         g.setIndex(indices);
@@ -44849,7 +44933,7 @@ void main() {
         room.add(curved);
         cutaway.push(curved);
       } else {
-        add(8, 0.18, 6, 0, -0.1, 0, floorColor);
+        applyBuildingSurface(add(8, 0.18, 6, 0, -0.1, 0, floorColor), name, "floor", 0.36);
         cutaway.push(add(8, 1.9, 0.16, 0, 0.85, -3, wallColor));
         const sideWall = add(0.16, 1.9, 6, -4, 0.85, 0, wallColor);
         cutaway.push(sideWall);
@@ -44859,9 +44943,6 @@ void main() {
           sideWall.material.opacity = 0.3;
         }
         cutaway.push(add(8, 0.2, 0.16, 0, 0, 3, trimColor), add(0.16, 0.2, 6, 4, 0, 0, trimColor));
-        const tiled = ["\u8BCA\u6240", "\u7EAA\u5FF5\u9986", "\u6BA1\u4EEA\u9986"].includes(name);
-        for (let x2 = -3.8; x2 < 4; x2 += tiled ? 0.6 : 0.4) add(0.012, 0.01, 6, x2, 0, 0, trimColor);
-        if (tiled) for (let z = -2.8; z < 3; z += 0.6) add(8, 0.01, 0.012, 0, 0, z, trimColor);
         add(8, 0.28, 0.03, 0, 0.2, -2.9, trimColor);
         add(0.03, 0.28, 6, -3.9, 0.2, 0, trimColor);
       }
@@ -45153,6 +45234,7 @@ void main() {
         add(0.58, 0.65, 0.045, 0, 1.25, -2.88, trimColor);
         add(0.47, 0.54, 0.025, 0, 1.25, -2.85, 14603453);
       }
+      finishBuildingSurfaces(room, name, 0.36);
       room.userData.cutaway = cutaway;
       cutaway.forEach((o) => o.visible = false);
       room.userData.labels = [...roomLabels];
