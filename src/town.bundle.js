@@ -34872,8 +34872,8 @@ void main() {
     if (["plaster", "paint", "linoleum", "limestone", "slate", "terrazzo"].includes(kind)) {
       for (let i2 = 0; i2 < 1800; i2++) {
         const value = Math.floor(185 + noise(i2) * 60);
-        ctx.fillStyle = "rgba(" + value + "," + value + "," + value + "," + (kind === "paint" ? 0.12 : 0.3) + ")";
-        const size = kind === "terrazzo" ? 2 + noise(i2 + 9) * 5 : 1;
+        ctx.fillStyle = "rgba(" + value + "," + value + "," + value + "," + (kind === "paint" ? 0.22 : 0.48) + ")";
+        const size = kind === "terrazzo" ? 2 + noise(i2 + 9) * 5 : kind === "plaster" ? 1 + noise(i2 + 9) * 2 : 1;
         ctx.fillRect(noise(i2 + 1) * 256, noise(i2 + 2) * 256, size, size);
       }
     }
@@ -34892,23 +34892,23 @@ void main() {
     ctx.strokeStyle = "#d9d9d2";
     ctx.lineWidth = 1;
     if (["ceramic", "terracotta", "slate", "limestone"].includes(kind)) {
-      ctx.strokeStyle = kind === "terracotta" ? "#b9a99b" : "#d8dcda";
-      ctx.lineWidth = kind === "terracotta" ? 3 : 1.5;
+      ctx.strokeStyle = kind === "terracotta" ? "#9c8774" : "#9eaaa5";
+      ctx.lineWidth = kind === "terracotta" ? 6 : 5;
       ctx.strokeRect(0, 0, 256, 256);
     }
     if (["subway", "brick"].includes(kind)) for (let row = 0; row < 4; row++) {
       const y = row * 64;
       ctx.fillStyle = row % 2 ? "#eeeee8" : "#f8f8f4";
       ctx.fillRect(0, y, 256, 64);
-      ctx.strokeStyle = kind === "brick" ? "#c8c4b8" : "#d8e0da";
-      ctx.lineWidth = kind === "brick" ? 3 : 2;
+      ctx.strokeStyle = kind === "brick" ? "#a99b86" : "#99ada3";
+      ctx.lineWidth = kind === "brick" ? 5 : 4;
       for (let x2 = row % 2 ? -128 : 0; x2 < 256; x2 += 128) ctx.strokeRect(x2, y, 128, 64);
     }
     if (kind === "wainscot") {
       ctx.fillStyle = "#bda88a";
       ctx.fillRect(0, 154, 256, 102);
-      ctx.strokeStyle = "#99886c";
-      ctx.lineWidth = 2;
+      ctx.strokeStyle = "#897455";
+      ctx.lineWidth = 3;
       for (let x2 = 0; x2 < 256; x2 += 32) {
         ctx.beginPath();
         ctx.moveTo(x2, 154);
@@ -34919,10 +34919,10 @@ void main() {
       ctx.fillRect(0, 151, 256, 6);
     }
     if (kind === "fluted") for (let x2 = 0; x2 < 256; x2 += 16) {
-      ctx.fillStyle = "#e1e0db";
-      ctx.fillRect(x2, 0, 2, 256);
+      ctx.fillStyle = "#babbb5";
+      ctx.fillRect(x2, 0, 3, 256);
       ctx.fillStyle = "#ffffff";
-      ctx.fillRect(x2 + 2, 0, 2, 256);
+      ctx.fillRect(x2 + 3, 0, 2, 256);
     }
     const map = new CanvasTexture(canvas);
     map.wrapS = map.wrapT = RepeatWrapping;
@@ -34940,6 +34940,17 @@ void main() {
     material3.roughness = role === "wood" ? 0.7 : role === "wall" ? kind === "subway" ? 0.4 : 0.87 : style.roughness;
     material3.metalness = 0;
     material3.map = kind === "wood" ? texture(kind, "Color") : surfaceTexture(kind);
+    if (kind !== "wood") {
+      const key = kind + "-height";
+      if (!maps.has(key)) {
+        const height = material3.map.clone();
+        height.colorSpace = NoColorSpace;
+        height.needsUpdate = true;
+        maps.set(key, height);
+      }
+      material3.bumpMap = maps.get(key);
+      material3.bumpScale = ["ceramic", "terracotta", "subway", "brick", "slate", "limestone", "fluted", "wainscot"].includes(kind) ? 8e-3 : 3e-3;
+    }
     if (kind === "wood") {
       material3.normalMap = texture(kind, "NormalGL");
       material3.normalScale = new Vector2(kind === "wood" ? 0.18 : 0.1, kind === "wood" ? 0.18 : 0.1);
@@ -34947,6 +34958,7 @@ void main() {
     }
     material3.envMapIntensity = kind === "wood" ? 0.25 : 0.65;
     material3.userData.townSurface = kind;
+    material3.userData.townSurfaceRole = role;
     mesh.material = material3;
     const p = mesh.geometry.attributes.position, n = mesh.geometry.attributes.normal, uv = new Float32Array(p.count * 2), span = kind === "wood" ? 1.8 : kind === "ceramic" ? 0.55 : kind === "terracotta" ? 0.3 : role === "wall" ? 1.6 : 1.2;
     for (let i2 = 0; i2 < p.count; i2++) {

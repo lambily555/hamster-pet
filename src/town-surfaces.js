@@ -26,15 +26,15 @@ function surfaceTexture(kind){
  const ctx=canvas.getContext('2d');ctx.fillStyle=kind==='wainscot'?'#eee4d4':'#f6f5f1';ctx.fillRect(0,0,256,256);
  const noise=i=>{const n=Math.sin(i*127.1+31.7)*43758.5453;return n-Math.floor(n)};
  if(['plaster','paint','linoleum','limestone','slate','terrazzo'].includes(kind)){
-  for(let i=0;i<1800;i++){const value=Math.floor(185+noise(i)*60);ctx.fillStyle='rgba('+value+','+value+','+value+','+(kind==='paint'?.12:.3)+')';const size=kind==='terrazzo'?2+noise(i+9)*5:1;ctx.fillRect(noise(i+1)*256,noise(i+2)*256,size,size)}
+  for(let i=0;i<1800;i++){const value=Math.floor(185+noise(i)*60);ctx.fillStyle='rgba('+value+','+value+','+value+','+(kind==='paint'?.22:.48)+')';const size=kind==='terrazzo'?2+noise(i+9)*5:kind==='plaster'?1+noise(i+9)*2:1;ctx.fillRect(noise(i+1)*256,noise(i+2)*256,size,size)}
  }
  if(kind==='terrazzo')for(let i=0;i<260;i++){ctx.fillStyle=['#c3b3a2','#bcc5bc','#d4bdb3','#ddd4c2'][i%4];ctx.fillRect(noise(i+5)*256,noise(i+6)*256,2+noise(i+7)*4,2+noise(i+8)*3)}
  if(kind==='slate')for(let i=0;i<35;i++){ctx.strokeStyle=i%2?'#dedfda':'#eceee9';ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(0,i*7.4);ctx.lineTo(256,i*7.4+noise(i)*4);ctx.stroke()}
  ctx.strokeStyle='#d9d9d2';ctx.lineWidth=1;
- if(['ceramic','terracotta','slate','limestone'].includes(kind)){ctx.strokeStyle=kind==='terracotta'?'#b9a99b':'#d8dcda';ctx.lineWidth=kind==='terracotta'?3:1.5;ctx.strokeRect(0,0,256,256)}
- if(['subway','brick'].includes(kind))for(let row=0;row<4;row++){const y=row*64;ctx.fillStyle=row%2?'#eeeee8':'#f8f8f4';ctx.fillRect(0,y,256,64);ctx.strokeStyle=kind==='brick'?'#c8c4b8':'#d8e0da';ctx.lineWidth=kind==='brick'?3:2;for(let x=row%2?-128:0;x<256;x+=128)ctx.strokeRect(x,y,128,64)}
- if(kind==='wainscot'){ctx.fillStyle='#bda88a';ctx.fillRect(0,154,256,102);ctx.strokeStyle='#99886c';ctx.lineWidth=2;for(let x=0;x<256;x+=32){ctx.beginPath();ctx.moveTo(x,154);ctx.lineTo(x,256);ctx.stroke()}ctx.fillStyle='#d0bc9c';ctx.fillRect(0,151,256,6)}
- if(kind==='fluted')for(let x=0;x<256;x+=16){ctx.fillStyle='#e1e0db';ctx.fillRect(x,0,2,256);ctx.fillStyle='#ffffff';ctx.fillRect(x+2,0,2,256)}
+ if(['ceramic','terracotta','slate','limestone'].includes(kind)){ctx.strokeStyle=kind==='terracotta'?'#9c8774':'#9eaaa5';ctx.lineWidth=kind==='terracotta'?6:5;ctx.strokeRect(0,0,256,256)}
+ if(['subway','brick'].includes(kind))for(let row=0;row<4;row++){const y=row*64;ctx.fillStyle=row%2?'#eeeee8':'#f8f8f4';ctx.fillRect(0,y,256,64);ctx.strokeStyle=kind==='brick'?'#a99b86':'#99ada3';ctx.lineWidth=kind==='brick'?5:4;for(let x=row%2?-128:0;x<256;x+=128)ctx.strokeRect(x,y,128,64)}
+ if(kind==='wainscot'){ctx.fillStyle='#bda88a';ctx.fillRect(0,154,256,102);ctx.strokeStyle='#897455';ctx.lineWidth=3;for(let x=0;x<256;x+=32){ctx.beginPath();ctx.moveTo(x,154);ctx.lineTo(x,256);ctx.stroke()}ctx.fillStyle='#d0bc9c';ctx.fillRect(0,151,256,6)}
+ if(kind==='fluted')for(let x=0;x<256;x+=16){ctx.fillStyle='#babbb5';ctx.fillRect(x,0,3,256);ctx.fillStyle='#ffffff';ctx.fillRect(x+3,0,2,256)}
  const map=new THREE.CanvasTexture(canvas);map.wrapS=map.wrapT=THREE.RepeatWrapping;map.colorSpace=THREE.SRGBColorSpace;map.anisotropy=4;maps.set(kind,map);return map;
 }
 export function applyBuildingSurface(mesh,name,role='floor',units=1){
@@ -43,8 +43,9 @@ export function applyBuildingSurface(mesh,name,role='floor',units=1){
  const material=mesh.material.clone();material.color.set(role==='wood'?0xffefd9:role==='wall'?style.wallTint:style.tint);
  material.roughness=role==='wood'?.7:role==='wall'?(kind==='subway'?.4:.87):style.roughness;material.metalness=0;
  material.map=kind==='wood'?texture(kind,'Color'):surfaceTexture(kind);
+ if(kind!=='wood'){const key=kind+'-height';if(!maps.has(key)){const height=material.map.clone();height.colorSpace=THREE.NoColorSpace;height.needsUpdate=true;maps.set(key,height)}material.bumpMap=maps.get(key);material.bumpScale=['ceramic','terracotta','subway','brick','slate','limestone','fluted','wainscot'].includes(kind)?.008:.003}
  if(kind==='wood'){material.normalMap=texture(kind,'NormalGL');material.normalScale=new THREE.Vector2(kind==='wood'?.18:.1,kind==='wood'?.18:.1);material.roughnessMap=texture(kind,'Roughness')}
- material.envMapIntensity=kind==='wood'?.25:.65;material.userData.townSurface=kind;
+ material.envMapIntensity=kind==='wood'?.25:.65;material.userData.townSurface=kind;material.userData.townSurfaceRole=role;
  mesh.material=material;
  const p=mesh.geometry.attributes.position,n=mesh.geometry.attributes.normal,uv=new Float32Array(p.count*2),span=kind==='wood'?1.8:kind==='ceramic'?.55:kind==='terracotta'?.3:role==='wall'?1.6:1.2;
  for(let i=0;i<p.count;i++){
