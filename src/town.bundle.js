@@ -35146,7 +35146,7 @@ void main() {
     mesh.geometry.setAttribute("uv", new BufferAttribute(uv, 2));
     return mesh;
   }
-  var woodColors = /* @__PURE__ */ new Set([9789499, 9992532, 8547409, 8939590, 9991247, 11898210, 9728078, 10051642, 6833454, 8409394, 13210963, 10324079, 10188881, 12095576, 10779465, 6641478, 7299404, 9139029, 11967351, 10517845, 12885096, 8410680, 12429704]);
+  var woodColors = /* @__PURE__ */ new Set([9789499, 9992532, 8547409, 8939590, 9991247, 11898210, 9728078, 10051642, 6833454, 8409394, 13210963, 10324079, 10188881, 12095576, 10779465, 6641478, 7299404, 9139029, 11967351, 10517845, 12885096, 8410680, 12429704, 14137464]);
   function finishBuildingSurfaces(group, name, units = 1) {
     if (buildingSurfaceStyles[name]) group.traverse((mesh) => {
       if (!mesh.isMesh || Array.isArray(mesh.material) || mesh.material.map || mesh.material.transparent || mesh.material.metalness > 0.1) return;
@@ -35154,7 +35154,7 @@ void main() {
       else if (woodColors.has(mesh.material.color.getHex())) applyWorldSurface(mesh, "wood", units);
       else if ([10794938, 12304321, 12828345].includes(mesh.material.color.getHex())) applyWorldSurface(mesh, "metal", units);
       else if ([15261392, 15324341, 15657177, 8828613, 11060131, 11059872, 15791602].includes(mesh.material.color.getHex())) applyWorldSurface(mesh, "enamel", units);
-      else if ([13350815, 15982272, 13015927].includes(mesh.material.color.getHex())) applyWorldSurface(mesh, "fabric", units);
+      else if ([13350815, 13015927].includes(mesh.material.color.getHex())) applyWorldSurface(mesh, "fabric", units);
       else if (mesh.geometry.type === "BoxGeometry") {
         const { width, height, depth } = mesh.geometry.parameters;
         if (width * units > 2 && depth * units > 1 && height * units < 0.5 && mesh.position.y * units < 0.4) applyBuildingSurface(mesh, name, "floor", units);
@@ -38209,7 +38209,7 @@ void main() {
     const [tx, tz] = cottagePetFurniture.toy, toy = new Group();
     toy.position.set(tx, 0.07, tz);
     box(toy, 0.27, 0.05, 0.35, 0, 0.025, 0, 9789499);
-    box(toy, 0.07, 0.42, 0.07, 0, 0.25, 0, 13942150);
+    applyWorldSurface(box(toy, 0.07, 0.42, 0.07, 0, 0.25, 0, 13942150), "fabric", 0.36);
     box(toy, 0.3, 0.04, 0.32, 0, 0.46, 0, 13015927);
     room.add(toy);
     label("\u5BA0\u7269\u73A9\u5177", tx, tz, "pet-roster");
@@ -45167,13 +45167,27 @@ void main() {
       roomCache.set(name, room);
       placeRoom(room, placeModels.get(name).userData.portal);
       const palettes2 = { "\u5BA0\u7269\u4E4B\u5BB6": [15189647, 15849646, 9789499], "Mariah Carey\u540D\u4EBA\u5802": [15261129, 15853782, 12559998], "\u9F20\u9F20\u996D\u9986": [12429704, 15657177, 6641478], "\u9F20\u9F20\u5C0F\u5C4B": [11898210, 14796448, 9728078], "\u8BCA\u6240": [14411495, 15791861, 8632004], "\u96F6\u98DF\u94FA": [13942676, 15983537, 11060131], "\u9F20\u9F20\u5B66\u6821": [12425066, 14929058, 9990466], "\u7EAA\u5FF5\u9986": [13946042, 15656398, 10924951], "\u6BA1\u4EEA\u9986": [13157817, 15656401, 9149087] }, [floorColor, wallColor, trimColor] = palettes2[name];
+      const furnitureSurface = (color) => {
+        if (color === trimColor) return name === "\u8BCA\u6240" ? "enamel" : ["\u7EAA\u5FF5\u9986", "\u6BA1\u4EEA\u9986"].includes(name) ? "wood" : null;
+        if (name === "\u8BCA\u6240" && [10730176, 15331566, 14872302].includes(color)) return "enamel";
+        if (name === "\u9F20\u9F20\u996D\u9986" && color === 12958629) return "stone";
+        if (name === "\u9F20\u9F20\u996D\u9986" && [4344392, 12821364].includes(color)) return "metal";
+        if (name === "\u96F6\u98DF\u94FA" && [14723491, 15983537].includes(color)) return "enamel";
+        if (name === "\u6BA1\u4EEA\u9986" && color === 15130320) return "stone";
+        return null;
+      };
+      const finishFurniture = (mesh) => {
+        const kind = furnitureSurface(mesh.material.color.getHex());
+        if (kind) applyWorldSurface(mesh, kind, 0.36);
+        return mesh;
+      };
       const add = (w, h, d, x2, y, z, color) => {
         const mesh = new Mesh(new BoxGeometry(w, h, d), new MeshStandardMaterial({ color, roughness: 0.8 }));
         mesh.position.set(x2, y, z);
         mesh.castShadow = true;
         mesh.receiveShadow = true;
         room.add(mesh);
-        return mesh;
+        return finishFurniture(mesh);
       };
       const label = (text, x2, z, action) => {
         const extra = window.TownInteractions.actions.find((a) => a.place === name && a.object === text);
@@ -45223,13 +45237,13 @@ void main() {
         mesh.position.set(x2, y, z);
         mesh.scale.set(sx, sy, sz);
         room.add(mesh);
-        return mesh;
+        return finishFurniture(mesh);
       };
       const cylinder = (x2, y, z, r, h, color) => {
         const mesh = new Mesh(new CylinderGeometry(r, r, h, 16), new MeshStandardMaterial({ color, roughness: 0.7 }));
         mesh.position.set(x2, y, z);
         room.add(mesh);
-        return mesh;
+        return finishFurniture(mesh);
       };
       const windowFrame = (x2, z) => {
         const shape = new Shape();

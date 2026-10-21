@@ -56,7 +56,7 @@ export function applyBuildingSurface(mesh,name,role='floor',units=1){
  }
  mesh.geometry.setAttribute('uv',new THREE.BufferAttribute(uv,2));return mesh;
 }
-const woodColors=new Set([0x95603b,0x987954,0x826c51,0x886846,0x98744f,0xb58d62,0x94704e,0x99603a,0x68452e,0x805132,0xc99553,0x9d886f,0x9b7851,0xb89058,0xa47b49,0x655746,0x6f614c,0x8b7355,0xb69b77,0xa07d55,0xc49c68,0x805638,0xbda988]);
+const woodColors=new Set([0x95603b,0x987954,0x826c51,0x886846,0x98744f,0xb58d62,0x94704e,0x99603a,0x68452e,0x805132,0xc99553,0x9d886f,0x9b7851,0xb89058,0xa47b49,0x655746,0x6f614c,0x8b7355,0xb69b77,0xa07d55,0xc49c68,0x805638,0xbda988,0xd7b878]);
 export function finishBuildingSurfaces(group,name,units=1){
  if(buildingSurfaceStyles[name])group.traverse(mesh=>{
   if(!mesh.isMesh||Array.isArray(mesh.material)||mesh.material.map||mesh.material.transparent||mesh.material.metalness>.1)return;
@@ -64,7 +64,7 @@ export function finishBuildingSurfaces(group,name,units=1){
   else if(woodColors.has(mesh.material.color.getHex()))applyWorldSurface(mesh,'wood',units);
   else if([0xa4b7ba,0xbbbfc1,0xc3beb9].includes(mesh.material.color.getHex()))applyWorldSurface(mesh,'metal',units);
   else if([0xe8ded0,0xe9d4b5,0xeee8d9,0x86b6c5,0xa8c3a3,0xa8c2a0,0xf0f5f2].includes(mesh.material.color.getHex()))applyWorldSurface(mesh,'enamel',units);
-  else if([0xcbb79f,0xf3dec0,0xc69b77].includes(mesh.material.color.getHex()))applyWorldSurface(mesh,'fabric',units);
+  else if([0xcbb79f,0xc69b77].includes(mesh.material.color.getHex()))applyWorldSurface(mesh,'fabric',units);
   else if(mesh.geometry.type==='BoxGeometry'){
    const {width,height,depth}=mesh.geometry.parameters;
    if(width*units>2&&depth*units>1&&height*units<.5&&mesh.position.y*units<.4)applyBuildingSurface(mesh,name,'floor',units);

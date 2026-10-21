@@ -185,7 +185,17 @@ function init() {
     if(roomCache.has(name)){room=roomCache.get(name);roomLabels.push(...room.userData.labels);return}
     room=new THREE.Group();room.name=name+'室内';room.visible=false;scene.add(room);roomCache.set(name,room);placeRoom(room,placeModels.get(name).userData.portal);
     const palettes={'宠物之家':[0xe7c68f,0xf1d8ae,0x95603b],'Mariah Carey名人堂':[0xe8ddc9,0xf1e8d6,0xbfa67e],'鼠鼠饭馆':[0xbda988,0xeee8d9,0x655746],'鼠鼠小屋':[0xb58d62,0xe1c6a0,0x94704e],'诊所':[0xdbe6e7,0xf0f6f5,0x83b6c4],'零食铺':[0xd4bf94,0xf3e3b1,0xa8c3a3],'鼠鼠学校':[0xbd976a,0xe3cca2,0x987142],'纪念馆':[0xd4ccba,0xeee5ce,0xa6b397],'殡仪馆':[0xc8c5b9,0xeee5d1,0x8b9a9f]},[floorColor,wallColor,trimColor]=palettes[name];
-    const add=(w,h,d,x,y,z,color)=>{const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshStandardMaterial({color,roughness:.8}));mesh.position.set(x,y,z);mesh.castShadow=true;mesh.receiveShadow=true;room.add(mesh);return mesh};
+    const furnitureSurface=color=>{
+      if(color===trimColor)return name==='诊所'?'enamel':['纪念馆','殡仪馆'].includes(name)?'wood':null;
+      if(name==='诊所'&&[0xa3bac0,0xe9f0ee,0xe2eeee].includes(color))return 'enamel';
+      if(name==='鼠鼠饭馆'&&color===0xc5bba5)return 'stone';
+      if(name==='鼠鼠饭馆'&&[0x424a48,0xc3a374].includes(color))return 'metal';
+      if(name==='零食铺'&&[0xe0a9a3,0xf3e3b1].includes(color))return 'enamel';
+      if(name==='殡仪馆'&&color===0xe6ded0)return 'stone';
+      return null;
+    };
+    const finishFurniture=mesh=>{const kind=furnitureSurface(mesh.material.color.getHex());if(kind)applyWorldSurface(mesh,kind,.36);return mesh};
+    const add=(w,h,d,x,y,z,color)=>{const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshStandardMaterial({color,roughness:.8}));mesh.position.set(x,y,z);mesh.castShadow=true;mesh.receiveShadow=true;room.add(mesh);return finishFurniture(mesh)};
     const label=(text,x,z,action)=>{const extra=window.TownInteractions.actions.find(a=>a.place===name&&a.object===text);if(!action&&extra)action='place-'+extra.id;const button=document.createElement(action?'button':'span');button.className='town-label town-furniture-label';button.textContent=text;button.dataset.sourceText=text;if(extra)button.title=extra.title+'：'+window.TownInteractions.description(extra);if(action)button.onclick=()=>window.dispatchEvent(new CustomEvent('town-object-action',{detail:{action,place:name}}));host.appendChild(button);roomLabels.push({button,point:new THREE.Vector3(x,.95,z)})};
     const cutaway=[];
     if(name==='宠物之家'){/* Shared shell provides all walls and doorway. */}
@@ -196,8 +206,8 @@ function init() {
     applyBuildingSurface(add(8,.18,6,0,-.1,0,floorColor),name,'floor',.36);cutaway.push(add(8,1.9,.16,0,.85,-3,wallColor));const sideWall=add(.16,1.9,6,-4,.85,0,wallColor);cutaway.push(sideWall);if(name==='诊所'){sideWall.material.color.set(0xb9dce2);sideWall.material.transparent=true;sideWall.material.opacity=.3}cutaway.push(add(8,.2,.16,0,0,3,trimColor),add(.16,.2,6,4,0,0,trimColor));
     add(8,.28,.03,0,.2,-2.9,trimColor);add(.03,.28,6,-3.9,.2,0,trimColor);
     }
-    const oval=(x,y,z,sx,sy,sz,color)=>{const mesh=new THREE.Mesh(new THREE.SphereGeometry(1,14,10),new THREE.MeshStandardMaterial({color,roughness:.8}));mesh.position.set(x,y,z);mesh.scale.set(sx,sy,sz);room.add(mesh);return mesh};
-    const cylinder=(x,y,z,r,h,color)=>{const mesh=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,16),new THREE.MeshStandardMaterial({color,roughness:.7}));mesh.position.set(x,y,z);room.add(mesh);return mesh};
+    const oval=(x,y,z,sx,sy,sz,color)=>{const mesh=new THREE.Mesh(new THREE.SphereGeometry(1,14,10),new THREE.MeshStandardMaterial({color,roughness:.8}));mesh.position.set(x,y,z);mesh.scale.set(sx,sy,sz);room.add(mesh);return finishFurniture(mesh)};
+    const cylinder=(x,y,z,r,h,color)=>{const mesh=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,16),new THREE.MeshStandardMaterial({color,roughness:.7}));mesh.position.set(x,y,z);room.add(mesh);return finishFurniture(mesh)};
     const windowFrame=(x,z)=>{const shape=new THREE.Shape();shape.moveTo(-.38,0);shape.lineTo(.38,0);shape.lineTo(.38,.65);shape.absarc(0,.65,.38,0,Math.PI,false);shape.lineTo(-.38,0);const mesh=new THREE.Mesh(new THREE.ShapeGeometry(shape),new THREE.MeshStandardMaterial({color:0xa6c8cb,roughness:.3}));mesh.position.set(x,.62,z);room.add(mesh);for(const dx of [-.4,.4])add(.04,.7,.06,x+dx,.96,z+.02,trimColor);const arch=new THREE.Mesh(new THREE.TorusGeometry(.4,.025,8,24,Math.PI),new THREE.MeshStandardMaterial({color:trimColor}));arch.position.set(x,1.27,z+.02);room.add(arch);add(.025,.95,.04,x,1.1,z+.03,trimColor);add(.76,.025,.04,x,1.1,z+.03,trimColor);add(.86,.07,.16,x,.61,z+.04,trimColor)};
     // Windows and the doorway belong to the shared exterior shell.
     const table=(x,z,w,d,color)=>{add(w,.09,d,x,.58,z,color);for(const dx of [-w*.38,w*.38])for(const dz of [-d*.36,d*.36])add(.07,.53,.07,x+dx,.27,z+dz,color)};
