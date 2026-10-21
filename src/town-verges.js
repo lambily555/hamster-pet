@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {worldMaterial} from './town-world-surfaces.js';
 import {destinations,entrance} from './town-life.js';
 import {lampLayout,lampPositionClear} from './town-lights.js';
 
@@ -30,6 +31,6 @@ export function createTownVerges(){
   if(p.kind==='stone')add('stone',sphere,0xa5a18e,p.x,.035*s,p.z,.11*s,.055*s,.075*s,p.yaw);
   if(p.kind==='twig'){add('twig',branch,0x866b50,p.x,.033,p.z,.28*s,.017*s,.017*s,p.yaw);add('twig',branch,0x866b50,p.x+.035,.037,p.z,.14*s,.012*s,.012*s,p.yaw+.7)}
  }
- for(const {geometry,color,matrices} of batches.values()){const mesh=new THREE.InstancedMesh(geometry,new THREE.MeshStandardMaterial({color,roughness:1}),matrices.length);matrices.forEach((m,i)=>mesh.setMatrixAt(i,m));mesh.receiveShadow=true;group.add(mesh)}
+ for(const [key,{geometry,color,matrices}] of batches){const mesh=new THREE.InstancedMesh(geometry,worldMaterial(key==='stone'?'stone':key==='twig'?'bark':'foliage',color),matrices.length);matrices.forEach((m,i)=>mesh.setMatrixAt(i,m));mesh.receiveShadow=true;group.add(mesh)}
  group.name='路边花草';return group;
 }

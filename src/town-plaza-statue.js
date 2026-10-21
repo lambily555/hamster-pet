@@ -1,11 +1,12 @@
 import * as THREE from 'three';
+import {worldMaterial} from './town-world-surfaces.js';
 
 export function createPlazaStatue(){
  const statue=new THREE.Group();statue.name='鼠鼠守护神像';
  const bronze=new THREE.MeshStandardMaterial({color:0xb58b4e,metalness:.78,roughness:.34});
  const gold=new THREE.MeshStandardMaterial({color:0xe3bc6f,metalness:.8,roughness:.27});
  const recess=new THREE.MeshStandardMaterial({color:0x514334,metalness:.6,roughness:.48});
- const stone=new THREE.MeshStandardMaterial({color:0xe0d4b9,roughness:.78});
+ const stone=worldMaterial('stone',0xe0d4b9);
  const glow=new THREE.MeshStandardMaterial({color:0xffdb8d,metalness:.4,roughness:.3,emissive:0xffb84c,emissiveIntensity:.22});
  const mesh=(geometry,material,x,y,z)=>{const m=new THREE.Mesh(geometry,material);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;statue.add(m);return m};
  const oval=(x,y,z,sx,sy,sz,material=bronze)=>{const m=mesh(new THREE.SphereGeometry(1,32,24),material,x,y,z);m.scale.set(sx,sy,sz);return m};

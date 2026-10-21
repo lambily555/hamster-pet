@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {finishWorldSurfaces} from './town-world-surfaces.js';
 
 // Small local CC0 maps, shared by all buildings; never fetched at runtime.
 const maps=new Map(),loader=new THREE.TextureLoader();
@@ -55,10 +56,9 @@ export function applyBuildingSurface(mesh,name,role='floor',units=1){
  }
  mesh.geometry.setAttribute('uv',new THREE.BufferAttribute(uv,2));return mesh;
 }
-const woodColors=new Set([0x95603b,0x987954,0x826c51,0x886846,0x98744f,0xb58d62,0x94704e,0x99603a,0x68452e,0x805132,0xc99553,0x9d886f]);
+const woodColors=new Set([0x95603b,0x987954,0x826c51,0x886846,0x98744f,0xb58d62,0x94704e,0x99603a,0x68452e,0x805132,0xc99553,0x9d886f,0x9b7851,0xb89058,0xa47b49,0x655746,0x6f614c,0x8b7355,0xb69b77]);
 export function finishBuildingSurfaces(group,name,units=1){
- if(!buildingSurfaceStyles[name])return;
- group.traverse(mesh=>{
+ if(buildingSurfaceStyles[name])group.traverse(mesh=>{
   if(!mesh.isMesh||Array.isArray(mesh.material)||mesh.material.map||mesh.material.transparent||mesh.material.metalness>.1)return;
   if(mesh.userData.buildingWall)applyBuildingSurface(mesh,name,'wall',units);
   else if(woodColors.has(mesh.material.color.getHex()))applyBuildingSurface(mesh,name,'wood',units);
@@ -67,4 +67,5 @@ export function finishBuildingSurfaces(group,name,units=1){
    if(width*units>2&&depth*units>1&&height*units<.5&&mesh.position.y*units<.4)applyBuildingSurface(mesh,name,'floor',units);
   }
  });
+ finishWorldSurfaces(group,units);
 }

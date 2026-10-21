@@ -7357,16 +7357,16 @@
       }
       if (isRootObject) {
         const geometries = extractFromCache(meta.geometries);
-        const materials2 = extractFromCache(meta.materials);
-        const textures = extractFromCache(meta.textures);
+        const materials3 = extractFromCache(meta.materials);
+        const textures2 = extractFromCache(meta.textures);
         const images = extractFromCache(meta.images);
         const shapes = extractFromCache(meta.shapes);
         const skeletons = extractFromCache(meta.skeletons);
         const animations = extractFromCache(meta.animations);
         const nodes = extractFromCache(meta.nodes);
         if (geometries.length > 0) output.geometries = geometries;
-        if (materials2.length > 0) output.materials = materials2;
-        if (textures.length > 0) output.textures = textures;
+        if (materials3.length > 0) output.materials = materials3;
+        if (textures2.length > 0) output.textures = textures2;
         if (images.length > 0) output.images = images;
         if (shapes.length > 0) output.shapes = shapes;
         if (skeletons.length > 0) output.skeletons = skeletons;
@@ -11770,9 +11770,9 @@
         return values;
       }
       if (isRootObject) {
-        const textures = extractFromCache(meta.textures);
+        const textures2 = extractFromCache(meta.textures);
         const images = extractFromCache(meta.images);
-        if (textures.length > 0) data.textures = textures;
+        if (textures2.length > 0) data.textures = textures2;
         if (images.length > 0) data.images = images;
       }
       return data;
@@ -11784,7 +11784,7 @@
      * @param {Object<string,Texture>} textures - A dictionary holding textures referenced by the material.
      * @return {Material} A reference to this material.
      */
-    fromJSON(json, textures) {
+    fromJSON(json, textures2) {
       if (json.uuid !== void 0) this.uuid = json.uuid;
       if (json.name !== void 0) this.name = json.name;
       if (json.color !== void 0 && this.color !== void 0) this.color.setHex(json.color);
@@ -11869,12 +11869,12 @@
       }
       if (json.size !== void 0) this.size = json.size;
       if (json.sizeAttenuation !== void 0) this.sizeAttenuation = json.sizeAttenuation;
-      if (json.map !== void 0) this.map = textures[json.map] || null;
-      if (json.matcap !== void 0) this.matcap = textures[json.matcap] || null;
-      if (json.alphaMap !== void 0) this.alphaMap = textures[json.alphaMap] || null;
-      if (json.bumpMap !== void 0) this.bumpMap = textures[json.bumpMap] || null;
+      if (json.map !== void 0) this.map = textures2[json.map] || null;
+      if (json.matcap !== void 0) this.matcap = textures2[json.matcap] || null;
+      if (json.alphaMap !== void 0) this.alphaMap = textures2[json.alphaMap] || null;
+      if (json.bumpMap !== void 0) this.bumpMap = textures2[json.bumpMap] || null;
       if (json.bumpScale !== void 0) this.bumpScale = json.bumpScale;
-      if (json.normalMap !== void 0) this.normalMap = textures[json.normalMap] || null;
+      if (json.normalMap !== void 0) this.normalMap = textures2[json.normalMap] || null;
       if (json.normalMapType !== void 0) this.normalMapType = json.normalMapType;
       if (json.normalScale !== void 0) {
         let normalScale = json.normalScale;
@@ -11883,37 +11883,37 @@
         }
         this.normalScale = new Vector2().fromArray(normalScale);
       }
-      if (json.displacementMap !== void 0) this.displacementMap = textures[json.displacementMap] || null;
+      if (json.displacementMap !== void 0) this.displacementMap = textures2[json.displacementMap] || null;
       if (json.displacementScale !== void 0) this.displacementScale = json.displacementScale;
       if (json.displacementBias !== void 0) this.displacementBias = json.displacementBias;
-      if (json.roughnessMap !== void 0) this.roughnessMap = textures[json.roughnessMap] || null;
-      if (json.metalnessMap !== void 0) this.metalnessMap = textures[json.metalnessMap] || null;
-      if (json.emissiveMap !== void 0) this.emissiveMap = textures[json.emissiveMap] || null;
+      if (json.roughnessMap !== void 0) this.roughnessMap = textures2[json.roughnessMap] || null;
+      if (json.metalnessMap !== void 0) this.metalnessMap = textures2[json.metalnessMap] || null;
+      if (json.emissiveMap !== void 0) this.emissiveMap = textures2[json.emissiveMap] || null;
       if (json.emissiveIntensity !== void 0) this.emissiveIntensity = json.emissiveIntensity;
-      if (json.specularMap !== void 0) this.specularMap = textures[json.specularMap] || null;
-      if (json.specularIntensityMap !== void 0) this.specularIntensityMap = textures[json.specularIntensityMap] || null;
-      if (json.specularColorMap !== void 0) this.specularColorMap = textures[json.specularColorMap] || null;
-      if (json.envMap !== void 0) this.envMap = textures[json.envMap] || null;
+      if (json.specularMap !== void 0) this.specularMap = textures2[json.specularMap] || null;
+      if (json.specularIntensityMap !== void 0) this.specularIntensityMap = textures2[json.specularIntensityMap] || null;
+      if (json.specularColorMap !== void 0) this.specularColorMap = textures2[json.specularColorMap] || null;
+      if (json.envMap !== void 0) this.envMap = textures2[json.envMap] || null;
       if (json.envMapRotation !== void 0) this.envMapRotation.fromArray(json.envMapRotation);
       if (json.envMapIntensity !== void 0) this.envMapIntensity = json.envMapIntensity;
       if (json.reflectivity !== void 0) this.reflectivity = json.reflectivity;
       if (json.refractionRatio !== void 0) this.refractionRatio = json.refractionRatio;
-      if (json.lightMap !== void 0) this.lightMap = textures[json.lightMap] || null;
+      if (json.lightMap !== void 0) this.lightMap = textures2[json.lightMap] || null;
       if (json.lightMapIntensity !== void 0) this.lightMapIntensity = json.lightMapIntensity;
-      if (json.aoMap !== void 0) this.aoMap = textures[json.aoMap] || null;
+      if (json.aoMap !== void 0) this.aoMap = textures2[json.aoMap] || null;
       if (json.aoMapIntensity !== void 0) this.aoMapIntensity = json.aoMapIntensity;
-      if (json.gradientMap !== void 0) this.gradientMap = textures[json.gradientMap] || null;
-      if (json.clearcoatMap !== void 0) this.clearcoatMap = textures[json.clearcoatMap] || null;
-      if (json.clearcoatRoughnessMap !== void 0) this.clearcoatRoughnessMap = textures[json.clearcoatRoughnessMap] || null;
-      if (json.clearcoatNormalMap !== void 0) this.clearcoatNormalMap = textures[json.clearcoatNormalMap] || null;
+      if (json.gradientMap !== void 0) this.gradientMap = textures2[json.gradientMap] || null;
+      if (json.clearcoatMap !== void 0) this.clearcoatMap = textures2[json.clearcoatMap] || null;
+      if (json.clearcoatRoughnessMap !== void 0) this.clearcoatRoughnessMap = textures2[json.clearcoatRoughnessMap] || null;
+      if (json.clearcoatNormalMap !== void 0) this.clearcoatNormalMap = textures2[json.clearcoatNormalMap] || null;
       if (json.clearcoatNormalScale !== void 0) this.clearcoatNormalScale = new Vector2().fromArray(json.clearcoatNormalScale);
-      if (json.iridescenceMap !== void 0) this.iridescenceMap = textures[json.iridescenceMap] || null;
-      if (json.iridescenceThicknessMap !== void 0) this.iridescenceThicknessMap = textures[json.iridescenceThicknessMap] || null;
-      if (json.transmissionMap !== void 0) this.transmissionMap = textures[json.transmissionMap] || null;
-      if (json.thicknessMap !== void 0) this.thicknessMap = textures[json.thicknessMap] || null;
-      if (json.anisotropyMap !== void 0) this.anisotropyMap = textures[json.anisotropyMap] || null;
-      if (json.sheenColorMap !== void 0) this.sheenColorMap = textures[json.sheenColorMap] || null;
-      if (json.sheenRoughnessMap !== void 0) this.sheenRoughnessMap = textures[json.sheenRoughnessMap] || null;
+      if (json.iridescenceMap !== void 0) this.iridescenceMap = textures2[json.iridescenceMap] || null;
+      if (json.iridescenceThicknessMap !== void 0) this.iridescenceThicknessMap = textures2[json.iridescenceThicknessMap] || null;
+      if (json.transmissionMap !== void 0) this.transmissionMap = textures2[json.transmissionMap] || null;
+      if (json.thicknessMap !== void 0) this.thicknessMap = textures2[json.thicknessMap] || null;
+      if (json.anisotropyMap !== void 0) this.anisotropyMap = textures2[json.anisotropyMap] || null;
+      if (json.sheenColorMap !== void 0) this.sheenColorMap = textures2[json.sheenColorMap] || null;
+      if (json.sheenRoughnessMap !== void 0) this.sheenRoughnessMap = textures2[json.sheenRoughnessMap] || null;
       return this;
     }
     /**
@@ -18029,15 +18029,15 @@
      * @param {Object<string,Texture>} textures - A dictionary holding textures referenced by the material.
      * @return {ShaderMaterial} A reference to this material.
      */
-    fromJSON(json, textures) {
-      super.fromJSON(json, textures);
+    fromJSON(json, textures2) {
+      super.fromJSON(json, textures2);
       if (json.uniforms !== void 0) {
         for (const name in json.uniforms) {
           const uniform = json.uniforms[name];
           this.uniforms[name] = {};
           switch (uniform.type) {
             case "t":
-              this.uniforms[name].value = textures[uniform.value] || null;
+              this.uniforms[name].value = textures2[uniform.value] || null;
               break;
             case "c":
               this.uniforms[name].value = new Color().setHex(uniform.value);
@@ -26271,7 +26271,7 @@
       update
     };
   }
-  function WebGLMorphtargets(gl, capabilities, textures) {
+  function WebGLMorphtargets(gl, capabilities, textures2) {
     const morphTextures = /* @__PURE__ */ new WeakMap();
     const morph = new Vector4();
     function update(object, geometry, program) {
@@ -26346,7 +26346,7 @@
         geometry.addEventListener("dispose", disposeTexture);
       }
       if (object.isInstancedMesh === true && object.morphTexture !== null) {
-        program.getUniforms().setValue(gl, "morphTexture", object.morphTexture, textures);
+        program.getUniforms().setValue(gl, "morphTexture", object.morphTexture, textures2);
       } else {
         let morphInfluencesSum = 0;
         for (let i2 = 0; i2 < objectInfluences.length; i2++) {
@@ -26356,7 +26356,7 @@
         program.getUniforms().setValue(gl, "morphTargetBaseInfluence", morphBaseInfluence);
         program.getUniforms().setValue(gl, "morphTargetInfluences", objectInfluences);
       }
-      program.getUniforms().setValue(gl, "morphTargetsTexture", entry.texture, textures);
+      program.getUniforms().setValue(gl, "morphTargetsTexture", entry.texture, textures2);
       program.getUniforms().setValue(gl, "morphTargetsTextureSize", entry.size);
     }
     return {
@@ -26624,14 +26624,14 @@
       a[i2] = b[i2];
     }
   }
-  function allocTexUnits(textures, n) {
+  function allocTexUnits(textures2, n) {
     let r = arrayCacheI32[n];
     if (r === void 0) {
       r = new Int32Array(n);
       arrayCacheI32[n] = r;
     }
     for (let i2 = 0; i2 !== n; ++i2) {
-      r[i2] = textures.allocateTextureUnit();
+      r[i2] = textures2.allocateTextureUnit();
     }
     return r;
   }
@@ -26837,48 +26837,48 @@
       copyArray(cache, v);
     }
   }
-  function setValueT1(gl, v, textures) {
+  function setValueT1(gl, v, textures2) {
     const cache = this.cache;
-    const unit = textures.allocateTextureUnit();
+    const unit = textures2.allocateTextureUnit();
     if (cache[0] !== unit) {
       gl.uniform1i(this.addr, unit);
       cache[0] = unit;
     }
     let emptyTexture2D;
     if (this.type === gl.SAMPLER_2D_SHADOW) {
-      emptyShadowTexture.compareFunction = textures.isReversedDepthBuffer() ? GreaterEqualCompare : LessEqualCompare;
+      emptyShadowTexture.compareFunction = textures2.isReversedDepthBuffer() ? GreaterEqualCompare : LessEqualCompare;
       emptyTexture2D = emptyShadowTexture;
     } else {
       emptyTexture2D = emptyTexture;
     }
-    textures.setTexture2D(v || emptyTexture2D, unit);
+    textures2.setTexture2D(v || emptyTexture2D, unit);
   }
-  function setValueT3D1(gl, v, textures) {
+  function setValueT3D1(gl, v, textures2) {
     const cache = this.cache;
-    const unit = textures.allocateTextureUnit();
+    const unit = textures2.allocateTextureUnit();
     if (cache[0] !== unit) {
       gl.uniform1i(this.addr, unit);
       cache[0] = unit;
     }
-    textures.setTexture3D(v || empty3dTexture, unit);
+    textures2.setTexture3D(v || empty3dTexture, unit);
   }
-  function setValueT6(gl, v, textures) {
+  function setValueT6(gl, v, textures2) {
     const cache = this.cache;
-    const unit = textures.allocateTextureUnit();
+    const unit = textures2.allocateTextureUnit();
     if (cache[0] !== unit) {
       gl.uniform1i(this.addr, unit);
       cache[0] = unit;
     }
-    textures.setTextureCube(v || emptyCubeTexture, unit);
+    textures2.setTextureCube(v || emptyCubeTexture, unit);
   }
-  function setValueT2DArray1(gl, v, textures) {
+  function setValueT2DArray1(gl, v, textures2) {
     const cache = this.cache;
-    const unit = textures.allocateTextureUnit();
+    const unit = textures2.allocateTextureUnit();
     if (cache[0] !== unit) {
       gl.uniform1i(this.addr, unit);
       cache[0] = unit;
     }
-    textures.setTexture2DArray(v || emptyArrayTexture, unit);
+    textures2.setTexture2DArray(v || emptyArrayTexture, unit);
   }
   function getSingularSetter(type) {
     switch (type) {
@@ -27016,10 +27016,10 @@
   function setValueV4uiArray(gl, v) {
     gl.uniform4uiv(this.addr, v);
   }
-  function setValueT1Array(gl, v, textures) {
+  function setValueT1Array(gl, v, textures2) {
     const cache = this.cache;
     const n = v.length;
-    const units = allocTexUnits(textures, n);
+    const units = allocTexUnits(textures2, n);
     if (!arraysEqual(cache, units)) {
       gl.uniform1iv(this.addr, units);
       copyArray(cache, units);
@@ -27031,43 +27031,43 @@
       emptyTexture2D = emptyTexture;
     }
     for (let i2 = 0; i2 !== n; ++i2) {
-      textures.setTexture2D(v[i2] || emptyTexture2D, units[i2]);
+      textures2.setTexture2D(v[i2] || emptyTexture2D, units[i2]);
     }
   }
-  function setValueT3DArray(gl, v, textures) {
+  function setValueT3DArray(gl, v, textures2) {
     const cache = this.cache;
     const n = v.length;
-    const units = allocTexUnits(textures, n);
+    const units = allocTexUnits(textures2, n);
     if (!arraysEqual(cache, units)) {
       gl.uniform1iv(this.addr, units);
       copyArray(cache, units);
     }
     for (let i2 = 0; i2 !== n; ++i2) {
-      textures.setTexture3D(v[i2] || empty3dTexture, units[i2]);
+      textures2.setTexture3D(v[i2] || empty3dTexture, units[i2]);
     }
   }
-  function setValueT6Array(gl, v, textures) {
+  function setValueT6Array(gl, v, textures2) {
     const cache = this.cache;
     const n = v.length;
-    const units = allocTexUnits(textures, n);
+    const units = allocTexUnits(textures2, n);
     if (!arraysEqual(cache, units)) {
       gl.uniform1iv(this.addr, units);
       copyArray(cache, units);
     }
     for (let i2 = 0; i2 !== n; ++i2) {
-      textures.setTextureCube(v[i2] || emptyCubeTexture, units[i2]);
+      textures2.setTextureCube(v[i2] || emptyCubeTexture, units[i2]);
     }
   }
-  function setValueT2DArrayArray(gl, v, textures) {
+  function setValueT2DArrayArray(gl, v, textures2) {
     const cache = this.cache;
     const n = v.length;
-    const units = allocTexUnits(textures, n);
+    const units = allocTexUnits(textures2, n);
     if (!arraysEqual(cache, units)) {
       gl.uniform1iv(this.addr, units);
       copyArray(cache, units);
     }
     for (let i2 = 0; i2 !== n; ++i2) {
-      textures.setTexture2DArray(v[i2] || emptyArrayTexture, units[i2]);
+      textures2.setTexture2DArray(v[i2] || emptyArrayTexture, units[i2]);
     }
   }
   function getPureArraySetter(type) {
@@ -27180,11 +27180,11 @@
       this.seq = [];
       this.map = {};
     }
-    setValue(gl, value, textures) {
+    setValue(gl, value, textures2) {
       const seq = this.seq;
       for (let i2 = 0, n = seq.length; i2 !== n; ++i2) {
         const u = seq[i2];
-        u.setValue(gl, value[u.id], textures);
+        u.setValue(gl, value[u.id], textures2);
       }
     }
   };
@@ -27237,19 +27237,19 @@
         this.seq = shadowSamplers.concat(otherUniforms);
       }
     }
-    setValue(gl, name, value, textures) {
+    setValue(gl, name, value, textures2) {
       const u = this.map[name];
-      if (u !== void 0) u.setValue(gl, value, textures);
+      if (u !== void 0) u.setValue(gl, value, textures2);
     }
     setOptional(gl, object, name) {
       const v = object[name];
       if (v !== void 0) this.setValue(gl, name, v);
     }
-    static upload(gl, seq, values, textures) {
+    static upload(gl, seq, values, textures2) {
       for (let i2 = 0, n = seq.length; i2 !== n; ++i2) {
         const u = seq[i2], v = values[u.id];
         if (v.needsUpdate !== false) {
-          u.setValue(gl, v.value, textures);
+          u.setValue(gl, v.value, textures2);
         }
       }
     }
@@ -28865,8 +28865,8 @@
       state.ambient[0] = r;
       state.ambient[1] = g;
       state.ambient[2] = b;
-      const hash = state.hash;
-      if (hash.directionalLength !== directionalLength || hash.pointLength !== pointLength || hash.spotLength !== spotLength || hash.rectAreaLength !== rectAreaLength || hash.hemiLength !== hemiLength || hash.numDirectionalShadows !== numDirectionalShadows || hash.numPointShadows !== numPointShadows || hash.numSpotShadows !== numSpotShadows || hash.numSpotMaps !== numSpotMaps || hash.numLightProbes !== numLightProbes) {
+      const hash2 = state.hash;
+      if (hash2.directionalLength !== directionalLength || hash2.pointLength !== pointLength || hash2.spotLength !== spotLength || hash2.rectAreaLength !== rectAreaLength || hash2.hemiLength !== hemiLength || hash2.numDirectionalShadows !== numDirectionalShadows || hash2.numPointShadows !== numPointShadows || hash2.numSpotShadows !== numSpotShadows || hash2.numSpotMaps !== numSpotMaps || hash2.numLightProbes !== numLightProbes) {
         state.directional.length = directionalLength;
         state.spot.length = spotLength;
         state.rectArea.length = rectAreaLength;
@@ -28884,16 +28884,16 @@
         state.spotLightMap.length = numSpotMaps;
         state.numSpotLightShadowsWithMaps = numSpotShadowsWithMaps;
         state.numLightProbes = numLightProbes;
-        hash.directionalLength = directionalLength;
-        hash.pointLength = pointLength;
-        hash.spotLength = spotLength;
-        hash.rectAreaLength = rectAreaLength;
-        hash.hemiLength = hemiLength;
-        hash.numDirectionalShadows = numDirectionalShadows;
-        hash.numPointShadows = numPointShadows;
-        hash.numSpotShadows = numSpotShadows;
-        hash.numSpotMaps = numSpotMaps;
-        hash.numLightProbes = numLightProbes;
+        hash2.directionalLength = directionalLength;
+        hash2.pointLength = pointLength;
+        hash2.spotLength = spotLength;
+        hash2.rectAreaLength = rectAreaLength;
+        hash2.hemiLength = hemiLength;
+        hash2.numDirectionalShadows = numDirectionalShadows;
+        hash2.numPointShadows = numPointShadows;
+        hash2.numSpotShadows = numSpotShadows;
+        hash2.numSpotMaps = numSpotMaps;
+        hash2.numLightProbes = numLightProbes;
         state.version = nextVersion++;
       }
     }
@@ -29658,12 +29658,12 @@
           drawBuffers2 = [];
           currentDrawbuffers.set(framebuffer, drawBuffers2);
         }
-        const textures = renderTarget.textures;
-        if (drawBuffers2.length !== textures.length || drawBuffers2[0] !== gl.COLOR_ATTACHMENT0) {
-          for (let i2 = 0, il = textures.length; i2 < il; i2++) {
+        const textures2 = renderTarget.textures;
+        if (drawBuffers2.length !== textures2.length || drawBuffers2[0] !== gl.COLOR_ATTACHMENT0) {
+          for (let i2 = 0, il = textures2.length; i2 < il; i2++) {
             drawBuffers2[i2] = gl.COLOR_ATTACHMENT0 + i2;
           }
-          drawBuffers2.length = textures.length;
+          drawBuffers2.length = textures2.length;
           needsUpdate = true;
         }
       } else {
@@ -30381,14 +30381,14 @@
         }
         if (renderTargetProperties.__webglDepthRenderbuffer) _gl.deleteRenderbuffer(renderTargetProperties.__webglDepthRenderbuffer);
       }
-      const textures = renderTarget.textures;
-      for (let i2 = 0, il = textures.length; i2 < il; i2++) {
-        const attachmentProperties = properties.get(textures[i2]);
+      const textures2 = renderTarget.textures;
+      for (let i2 = 0, il = textures2.length; i2 < il; i2++) {
+        const attachmentProperties = properties.get(textures2[i2]);
         if (attachmentProperties.__webglTexture) {
           _gl.deleteTexture(attachmentProperties.__webglTexture);
           info.memory.textures--;
         }
-        properties.remove(textures[i2]);
+        properties.remove(textures2[i2]);
       }
       properties.remove(renderTarget);
     }
@@ -31024,9 +31024,9 @@
         }
         _gl.framebufferRenderbuffer(_gl.FRAMEBUFFER, glAttachmentType, _gl.RENDERBUFFER, renderbuffer);
       } else {
-        const textures = renderTarget.textures;
-        for (let i2 = 0; i2 < textures.length; i2++) {
-          const texture3 = textures[i2];
+        const textures2 = renderTarget.textures;
+        for (let i2 = 0; i2 < textures2.length; i2++) {
+          const texture3 = textures2[i2];
           const glFormat = utils.convert(texture3.format, texture3.colorSpace);
           const glType = utils.convert(texture3.type);
           const glInternalFormat = getInternalFormat(texture3.internalFormat, glFormat, glType, texture3.normalized, texture3.colorSpace);
@@ -31179,9 +31179,9 @@
       const renderTargetProperties = properties.get(renderTarget);
       const textureProperties = properties.get(texture3);
       renderTarget.addEventListener("dispose", onRenderTargetDispose);
-      const textures = renderTarget.textures;
+      const textures2 = renderTarget.textures;
       const isCube = renderTarget.isWebGLCubeRenderTarget === true;
-      const isMultipleRenderTargets = textures.length > 1;
+      const isMultipleRenderTargets = textures2.length > 1;
       if (!isMultipleRenderTargets) {
         if (textureProperties.__webglTexture === void 0) {
           textureProperties.__webglTexture = _gl.createTexture();
@@ -31211,8 +31211,8 @@
           renderTargetProperties.__webglFramebuffer = _gl.createFramebuffer();
         }
         if (isMultipleRenderTargets) {
-          for (let i2 = 0, il = textures.length; i2 < il; i2++) {
-            const attachmentProperties = properties.get(textures[i2]);
+          for (let i2 = 0, il = textures2.length; i2 < il; i2++) {
+            const attachmentProperties = properties.get(textures2[i2]);
             if (attachmentProperties.__webglTexture === void 0) {
               attachmentProperties.__webglTexture = _gl.createTexture();
               info.memory.textures++;
@@ -31223,8 +31223,8 @@
           renderTargetProperties.__webglMultisampledFramebuffer = _gl.createFramebuffer();
           renderTargetProperties.__webglColorRenderbuffer = [];
           state.bindFramebuffer(_gl.FRAMEBUFFER, renderTargetProperties.__webglMultisampledFramebuffer);
-          for (let i2 = 0; i2 < textures.length; i2++) {
-            const texture4 = textures[i2];
+          for (let i2 = 0; i2 < textures2.length; i2++) {
+            const texture4 = textures2[i2];
             renderTargetProperties.__webglColorRenderbuffer[i2] = _gl.createRenderbuffer();
             _gl.bindRenderbuffer(_gl.RENDERBUFFER, renderTargetProperties.__webglColorRenderbuffer[i2]);
             const glFormat = utils.convert(texture4.format, texture4.colorSpace);
@@ -31259,8 +31259,8 @@
         }
         state.unbindTexture();
       } else if (isMultipleRenderTargets) {
-        for (let i2 = 0, il = textures.length; i2 < il; i2++) {
-          const attachment = textures[i2];
+        for (let i2 = 0, il = textures2.length; i2 < il; i2++) {
+          const attachment = textures2[i2];
           const attachmentProperties = properties.get(attachment);
           let glTextureType = _gl.TEXTURE_2D;
           if (renderTarget.isWebGL3DRenderTarget || renderTarget.isWebGLArrayRenderTarget) {
@@ -31298,9 +31298,9 @@
       }
     }
     function updateRenderTargetMipmap(renderTarget) {
-      const textures = renderTarget.textures;
-      for (let i2 = 0, il = textures.length; i2 < il; i2++) {
-        const texture3 = textures[i2];
+      const textures2 = renderTarget.textures;
+      for (let i2 = 0, il = textures2.length; i2 < il; i2++) {
+        const texture3 = textures2[i2];
         if (textureNeedsGenerateMipmaps(texture3)) {
           const targetType = getTargetType(renderTarget);
           const webglTexture = properties.get(texture3).__webglTexture;
@@ -31315,15 +31315,15 @@
     function updateMultisampleRenderTarget(renderTarget) {
       if (renderTarget.samples > 0) {
         if (useMultisampledRTT(renderTarget) === false) {
-          const textures = renderTarget.textures;
+          const textures2 = renderTarget.textures;
           const width = renderTarget.width;
           const height = renderTarget.height;
           let mask = _gl.COLOR_BUFFER_BIT;
           const depthStyle = renderTarget.stencilBuffer ? _gl.DEPTH_STENCIL_ATTACHMENT : _gl.DEPTH_ATTACHMENT;
           const renderTargetProperties = properties.get(renderTarget);
-          const isMultipleRenderTargets = textures.length > 1;
+          const isMultipleRenderTargets = textures2.length > 1;
           if (isMultipleRenderTargets) {
-            for (let i2 = 0; i2 < textures.length; i2++) {
+            for (let i2 = 0; i2 < textures2.length; i2++) {
               state.bindFramebuffer(_gl.FRAMEBUFFER, renderTargetProperties.__webglMultisampledFramebuffer);
               _gl.framebufferRenderbuffer(_gl.FRAMEBUFFER, _gl.COLOR_ATTACHMENT0 + i2, _gl.RENDERBUFFER, null);
               state.bindFramebuffer(_gl.FRAMEBUFFER, renderTargetProperties.__webglFramebuffer);
@@ -31337,14 +31337,14 @@
           } else {
             state.bindFramebuffer(_gl.DRAW_FRAMEBUFFER, renderTargetProperties.__webglFramebuffer);
           }
-          for (let i2 = 0; i2 < textures.length; i2++) {
+          for (let i2 = 0; i2 < textures2.length; i2++) {
             if (renderTarget.resolveDepthBuffer) {
               if (renderTarget.depthBuffer) mask |= _gl.DEPTH_BUFFER_BIT;
               if (renderTarget.stencilBuffer && renderTarget.resolveStencilBuffer) mask |= _gl.STENCIL_BUFFER_BIT;
             }
             if (isMultipleRenderTargets) {
               _gl.framebufferRenderbuffer(_gl.READ_FRAMEBUFFER, _gl.COLOR_ATTACHMENT0, _gl.RENDERBUFFER, renderTargetProperties.__webglColorRenderbuffer[i2]);
-              const webglTexture = properties.get(textures[i2]).__webglTexture;
+              const webglTexture = properties.get(textures2[i2]).__webglTexture;
               _gl.framebufferTexture2D(_gl.DRAW_FRAMEBUFFER, _gl.COLOR_ATTACHMENT0, _gl.TEXTURE_2D, webglTexture, 0);
             }
             _gl.blitFramebuffer(0, 0, width, height, 0, 0, width, height, mask, _gl.NEAREST);
@@ -31363,10 +31363,10 @@
           state.bindFramebuffer(_gl.READ_FRAMEBUFFER, null);
           state.bindFramebuffer(_gl.DRAW_FRAMEBUFFER, null);
           if (isMultipleRenderTargets) {
-            for (let i2 = 0; i2 < textures.length; i2++) {
+            for (let i2 = 0; i2 < textures2.length; i2++) {
               state.bindFramebuffer(_gl.FRAMEBUFFER, renderTargetProperties.__webglMultisampledFramebuffer);
               _gl.framebufferRenderbuffer(_gl.FRAMEBUFFER, _gl.COLOR_ATTACHMENT0 + i2, _gl.RENDERBUFFER, renderTargetProperties.__webglColorRenderbuffer[i2]);
-              const webglTexture = properties.get(textures[i2]).__webglTexture;
+              const webglTexture = properties.get(textures2[i2]).__webglTexture;
               state.bindFramebuffer(_gl.FRAMEBUFFER, renderTargetProperties.__webglFramebuffer);
               _gl.framebufferTexture2D(_gl.DRAW_FRAMEBUFFER, _gl.COLOR_ATTACHMENT0 + i2, _gl.TEXTURE_2D, webglTexture, 0);
             }
@@ -33361,8 +33361,8 @@ void main() {
         throw e;
       }
       let extensions, capabilities, state, info;
-      let properties, textures, environments, attributes, geometries, objects;
-      let programCache, materials2, renderLists, renderStates, clipping, shadowMap;
+      let properties, textures2, environments, attributes, geometries, objects;
+      let programCache, materials3, renderLists, renderStates, clipping, shadowMap;
       let background, morphtargets, bufferRenderer, indexedBufferRenderer;
       let utils, bindingStates, uniformsGroups;
       function initGLContext() {
@@ -33379,16 +33379,16 @@ void main() {
         _dstFramebuffer = _gl.createFramebuffer();
         info = new WebGLInfo(_gl);
         properties = new WebGLProperties();
-        textures = new WebGLTextures(_gl, extensions, state, properties, capabilities, utils, info);
+        textures2 = new WebGLTextures(_gl, extensions, state, properties, capabilities, utils, info);
         environments = new WebGLEnvironments(_this);
         attributes = new WebGLAttributes(_gl);
         bindingStates = new WebGLBindingStates(_gl, attributes);
         geometries = new WebGLGeometries(_gl, attributes, info, bindingStates);
         objects = new WebGLObjects(_gl, geometries, attributes, bindingStates, info);
-        morphtargets = new WebGLMorphtargets(_gl, capabilities, textures);
+        morphtargets = new WebGLMorphtargets(_gl, capabilities, textures2);
         clipping = new WebGLClipping(properties);
         programCache = new WebGLPrograms(_this, environments, extensions, capabilities, bindingStates, clipping);
-        materials2 = new WebGLMaterials(_this, properties);
+        materials3 = new WebGLMaterials(_this, properties);
         renderLists = new WebGLRenderLists();
         renderStates = new WebGLRenderStates(extensions);
         background = new WebGLBackground(_this, environments, state, objects, _alpha, premultipliedAlpha);
@@ -33769,7 +33769,7 @@ void main() {
           });
         }
         currentRenderState.setupLights();
-        const materials3 = /* @__PURE__ */ new Set();
+        const materials4 = /* @__PURE__ */ new Set();
         scene.traverse(function(object) {
           if (!(object.isMesh || object.isPoints || object.isLine || object.isSprite)) {
             return;
@@ -33780,29 +33780,29 @@ void main() {
               for (let i2 = 0; i2 < material3.length; i2++) {
                 const material22 = material3[i2];
                 prepareMaterial(material22, targetScene, object);
-                materials3.add(material22);
+                materials4.add(material22);
               }
             } else {
               prepareMaterial(material3, targetScene, object);
-              materials3.add(material3);
+              materials4.add(material3);
             }
           }
         });
         currentRenderState = renderStateStack.pop();
-        return materials3;
+        return materials4;
       };
       this.compileAsync = function(scene, camera, targetScene = null) {
-        const materials3 = this.compile(scene, camera, targetScene);
+        const materials4 = this.compile(scene, camera, targetScene);
         return new Promise((resolve) => {
           function checkMaterialsReady() {
-            materials3.forEach(function(material3) {
+            materials4.forEach(function(material3) {
               const materialProperties = properties.get(material3);
               const program = materialProperties.currentProgram;
               if (program.isReady()) {
-                materials3.delete(material3);
+                materials4.delete(material3);
               }
             });
-            if (materials3.size === 0) {
+            if (materials4.size === 0) {
               resolve(scene);
               return;
             }
@@ -33855,7 +33855,7 @@ void main() {
         if (scene.isScene === true) scene.onBeforeRender(_this, scene, camera, _currentRenderTarget);
         currentRenderState = renderStates.get(scene, renderStateStack.length);
         currentRenderState.init(camera);
-        currentRenderState.state.textureUnits = textures.getTextureUnits();
+        currentRenderState.state.textureUnits = textures2.getTextureUnits();
         renderStateStack.push(currentRenderState);
         _projScreenMatrix3.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
         _frustum.setFromProjectionMatrix(_projScreenMatrix3, WebGLCoordinateSystem, camera.reversedDepth);
@@ -33910,8 +33910,8 @@ void main() {
           }
         }
         if (_currentRenderTarget !== null && _currentActiveMipmapLevel === 0) {
-          textures.updateMultisampleRenderTarget(_currentRenderTarget);
-          textures.updateRenderTargetMipmap(_currentRenderTarget);
+          textures2.updateMultisampleRenderTarget(_currentRenderTarget);
+          textures2.updateRenderTargetMipmap(_currentRenderTarget);
         }
         if (useOutput) {
           output.end(_this);
@@ -33923,7 +33923,7 @@ void main() {
         renderStateStack.pop();
         if (renderStateStack.length > 0) {
           currentRenderState = renderStateStack[renderStateStack.length - 1];
-          textures.setTextureUnits(currentRenderState.state.textureUnits);
+          textures2.setTextureUnits(currentRenderState.state.textureUnits);
           if (_clippingEnabled === true) clipping.setGlobalState(_this.clippingPlanes, currentRenderState.state.camera);
         } else {
           currentRenderState = null;
@@ -34049,8 +34049,8 @@ void main() {
         currentRenderState.setupLightsView(camera);
         if (_clippingEnabled === true) clipping.setGlobalState(_this.clippingPlanes, camera);
         renderObjects(opaqueObjects, scene, camera);
-        textures.updateMultisampleRenderTarget(transmissionRenderTarget);
-        textures.updateRenderTargetMipmap(transmissionRenderTarget);
+        textures2.updateMultisampleRenderTarget(transmissionRenderTarget);
+        textures2.updateRenderTargetMipmap(transmissionRenderTarget);
         if (extensions.has("WEBGL_multisampled_render_to_texture") === false) {
           let renderTargetNeedsUpdate = false;
           for (let i2 = 0, l = transmissiveObjects.length; i2 < l; i2++) {
@@ -34067,8 +34067,8 @@ void main() {
             }
           }
           if (renderTargetNeedsUpdate === true) {
-            textures.updateMultisampleRenderTarget(transmissionRenderTarget);
-            textures.updateRenderTargetMipmap(transmissionRenderTarget);
+            textures2.updateMultisampleRenderTarget(transmissionRenderTarget);
+            textures2.updateRenderTargetMipmap(transmissionRenderTarget);
           }
         }
         _this.setRenderTarget(currentRenderTarget, currentActiveCubeFace, currentActiveMipmapLevel);
@@ -34213,7 +34213,7 @@ void main() {
       }
       function setProgram(camera, scene, geometry, material3, object) {
         if (scene.isScene !== true) scene = _emptyScene;
-        textures.resetTextureUnits();
+        textures2.resetTextureUnits();
         const fog = scene.fog;
         const environment = material3.isMeshStandardMaterial || material3.isMeshLambertMaterial || material3.isMeshPhongMaterial ? scene.environment : null;
         const colorSpace = _currentRenderTarget === null ? _this.outputColorSpace : _currentRenderTarget.isXRRenderTarget === true ? _currentRenderTarget.texture.colorSpace : ColorManagement.workingColorSpace;
@@ -34354,13 +34354,13 @@ void main() {
         }
         if (materialProperties.needsLights) {
           if (lights.state.directionalShadowMap.length > 0) {
-            p_uniforms.setValue(_gl, "directionalShadowMap", lights.state.directionalShadowMap, textures);
+            p_uniforms.setValue(_gl, "directionalShadowMap", lights.state.directionalShadowMap, textures2);
           }
           if (lights.state.spotShadowMap.length > 0) {
-            p_uniforms.setValue(_gl, "spotShadowMap", lights.state.spotShadowMap, textures);
+            p_uniforms.setValue(_gl, "spotShadowMap", lights.state.spotShadowMap, textures2);
           }
           if (lights.state.pointShadowMap.length > 0) {
-            p_uniforms.setValue(_gl, "pointShadowMap", lights.state.pointShadowMap, textures);
+            p_uniforms.setValue(_gl, "pointShadowMap", lights.state.pointShadowMap, textures2);
           }
         }
         if (object.isSkinnedMesh) {
@@ -34369,17 +34369,17 @@ void main() {
           const skeleton = object.skeleton;
           if (skeleton) {
             if (skeleton.boneTexture === null) skeleton.computeBoneTexture();
-            p_uniforms.setValue(_gl, "boneTexture", skeleton.boneTexture, textures);
+            p_uniforms.setValue(_gl, "boneTexture", skeleton.boneTexture, textures2);
           }
         }
         if (object.isBatchedMesh) {
           p_uniforms.setOptional(_gl, object, "batchingTexture");
-          p_uniforms.setValue(_gl, "batchingTexture", object._matricesTexture, textures);
+          p_uniforms.setValue(_gl, "batchingTexture", object._matricesTexture, textures2);
           p_uniforms.setOptional(_gl, object, "batchingIdTexture");
-          p_uniforms.setValue(_gl, "batchingIdTexture", object._indirectTexture, textures);
+          p_uniforms.setValue(_gl, "batchingIdTexture", object._indirectTexture, textures2);
           p_uniforms.setOptional(_gl, object, "batchingColorTexture");
           if (object._colorsTexture !== null) {
-            p_uniforms.setValue(_gl, "batchingColorTexture", object._colorsTexture, textures);
+            p_uniforms.setValue(_gl, "batchingColorTexture", object._colorsTexture, textures2);
           }
         }
         const morphAttributes = geometry.morphAttributes;
@@ -34402,9 +34402,9 @@ void main() {
             markUniformsLightsNeedsUpdate(m_uniforms, refreshLights);
           }
           if (fog && material3.fog === true) {
-            materials2.refreshFogUniforms(m_uniforms, fog);
+            materials3.refreshFogUniforms(m_uniforms, fog);
           }
-          materials2.refreshMaterialUniforms(m_uniforms, material3, _pixelRatio, _height, currentRenderState.state.transmissionRenderTarget[camera.id]);
+          materials3.refreshMaterialUniforms(m_uniforms, material3, _pixelRatio, _height, currentRenderState.state.transmissionRenderTarget[camera.id]);
           if (materialProperties.needsLights && materialProperties.lightProbeGrid) {
             const volume = materialProperties.lightProbeGrid;
             m_uniforms.probesSH.value = volume.texture;
@@ -34412,10 +34412,10 @@ void main() {
             m_uniforms.probesMax.value.copy(volume.boundingBox.max);
             m_uniforms.probesResolution.value.copy(volume.resolution);
           }
-          WebGLUniforms.upload(_gl, getUniformList(materialProperties), m_uniforms, textures);
+          WebGLUniforms.upload(_gl, getUniformList(materialProperties), m_uniforms, textures2);
         }
         if (material3.isShaderMaterial && material3.uniformsNeedUpdate === true) {
-          WebGLUniforms.upload(_gl, getUniformList(materialProperties), m_uniforms, textures);
+          WebGLUniforms.upload(_gl, getUniformList(materialProperties), m_uniforms, textures2);
           material3.uniformsNeedUpdate = false;
         }
         if (material3.isSpriteMaterial) {
@@ -34493,16 +34493,16 @@ void main() {
             _currentMaterialId = -1;
             return;
           } else if (renderTargetProperties.__webglFramebuffer === void 0) {
-            textures.setupRenderTarget(renderTarget);
+            textures2.setupRenderTarget(renderTarget);
           } else if (renderTargetProperties.__hasExternalTextures) {
-            textures.rebindTextures(renderTarget, properties.get(renderTarget.texture).__webglTexture, properties.get(renderTarget.depthTexture).__webglTexture);
+            textures2.rebindTextures(renderTarget, properties.get(renderTarget.texture).__webglTexture, properties.get(renderTarget.depthTexture).__webglTexture);
           } else if (renderTarget.depthBuffer) {
             const depthTexture = renderTarget.depthTexture;
             if (renderTargetProperties.__boundDepthTexture !== depthTexture) {
               if (depthTexture !== null && properties.has(depthTexture) && (renderTarget.width !== depthTexture.image.width || renderTarget.height !== depthTexture.image.height)) {
                 throw new Error("THREE.WebGLRenderer: Attached DepthTexture is initialized to the incorrect size.");
               }
-              textures.setupDepthRenderbuffer(renderTarget);
+              textures2.setupDepthRenderbuffer(renderTarget);
             }
           }
           const texture3 = renderTarget.texture;
@@ -34517,7 +34517,7 @@ void main() {
               framebuffer = __webglFramebuffer[activeCubeFace];
             }
             isCube = true;
-          } else if (renderTarget.samples > 0 && textures.useMultisampledRTT(renderTarget) === false) {
+          } else if (renderTarget.samples > 0 && textures2.useMultisampledRTT(renderTarget) === false) {
             framebuffer = properties.get(renderTarget).__webglMultisampledFramebuffer;
           } else {
             if (Array.isArray(__webglFramebuffer)) {
@@ -34638,7 +34638,7 @@ void main() {
         const height = Math.floor(texture3.image.height * levelScale);
         const x2 = position !== null ? position.x : 0;
         const y = position !== null ? position.y : 0;
-        textures.setTexture2D(texture3, 0);
+        textures2.setTexture2D(texture3, 0);
         _gl.copyTexSubImage2D(_gl.TEXTURE_2D, level, 0, 0, x2, y, width, height);
         state.unbindTexture();
       };
@@ -34681,13 +34681,13 @@ void main() {
         const glType = utils.convert(dstTexture.type);
         let glTarget;
         if (dstTexture.isData3DTexture) {
-          textures.setTexture3D(dstTexture, 0);
+          textures2.setTexture3D(dstTexture, 0);
           glTarget = _gl.TEXTURE_3D;
         } else if (dstTexture.isDataArrayTexture || dstTexture.isCompressedArrayTexture) {
-          textures.setTexture2DArray(dstTexture, 0);
+          textures2.setTexture2DArray(dstTexture, 0);
           glTarget = _gl.TEXTURE_2D_ARRAY;
         } else {
-          textures.setTexture2D(dstTexture, 0);
+          textures2.setTexture2D(dstTexture, 0);
           glTarget = _gl.TEXTURE_2D;
         }
         state.activeTexture(_gl.TEXTURE0);
@@ -34779,18 +34779,18 @@ void main() {
       };
       this.initRenderTarget = function(target) {
         if (properties.get(target).__webglFramebuffer === void 0) {
-          textures.setupRenderTarget(target);
+          textures2.setupRenderTarget(target);
         }
       };
       this.initTexture = function(texture3) {
         if (texture3.isCubeTexture) {
-          textures.setTextureCube(texture3, 0);
+          textures2.setTextureCube(texture3, 0);
         } else if (texture3.isData3DTexture) {
-          textures.setTexture3D(texture3, 0);
+          textures2.setTexture3D(texture3, 0);
         } else if (texture3.isDataArrayTexture || texture3.isCompressedArrayTexture) {
-          textures.setTexture2DArray(texture3, 0);
+          textures2.setTexture2DArray(texture3, 0);
         } else {
-          textures.setTexture2D(texture3, 0);
+          textures2.setTexture2D(texture3, 0);
         }
         state.unbindTexture();
       };
@@ -34834,17 +34834,133 @@ void main() {
     }
   };
 
+  // src/town-world-surfaces.js
+  var profiles = {
+    grass: { span: 2.4, roughness: 1, relief: 3e-3, contrast: 0.22 },
+    soil: { span: 1.4, roughness: 1, relief: 6e-3, contrast: 0.25 },
+    gravel: { span: 0.9, roughness: 0.95, relief: 4e-3, contrast: 0.24 },
+    stone: { span: 0.65, roughness: 0.84, relief: 4e-3, contrast: 0.17 },
+    roof: { span: 0.8, roughness: 0.82, relief: 4e-3, contrast: 0.12 },
+    bark: { span: 0.55, roughness: 0.95, relief: 8e-3, contrast: 0.2 },
+    foliage: { span: 1, roughness: 0.93, relief: 2e-3, contrast: 0.12 },
+    paint: { span: 0.7, roughness: null, relief: 8e-4, contrast: 0.035 },
+    metal: { span: 0.45, roughness: null, relief: 3e-4, contrast: 0.025 },
+    fabric: { span: 0.35, roughness: 0.95, relief: 2e-3, contrast: 0.09 }
+  };
+  var textures = /* @__PURE__ */ new Map();
+  var materials = /* @__PURE__ */ new WeakMap();
+  var hash = (x2, y) => {
+    const n = Math.sin(x2 * 127.1 + y * 311.7 + 57.3) * 43758.5453;
+    return n - Math.floor(n);
+  };
+  function noise(x2, y, period, periodY = period) {
+    const ix = Math.floor(x2), iy = Math.floor(y), fx = x2 - ix, fy = y - iy, u = fx * fx * (3 - 2 * fx), v = fy * fy * (3 - 2 * fy);
+    const a = hash(ix % period, iy % periodY), b = hash((ix + 1) % period, iy % periodY), c = hash(ix % period, (iy + 1) % periodY), d = hash((ix + 1) % period, (iy + 1) % periodY);
+    return (a + (b - a) * u) * (1 - v) + (c + (d - c) * u) * v;
+  }
+  function maps(kind) {
+    if (textures.has(kind)) return textures.get(kind);
+    const size = 256, color = new Uint8Array(size * size * 4), height = new Uint8Array(color.length), p = profiles[kind];
+    for (let y = 0; y < size; y++) for (let x2 = 0; x2 < size; x2++) {
+      const broad = noise(x2 / 32, y / 32, 8), grain = hash(x2, y), fine = noise(x2 / 4, y / 4, 64);
+      let value = 0.48 * broad + 0.32 * fine + 0.2 * grain;
+      if (kind === "grass") value = 0.55 * broad + 0.2 * fine + 0.25 * noise(x2 / 2, y / 8, 128, 32);
+      if (kind === "gravel" || kind === "stone") value = 0.45 * fine + 0.35 * grain + 0.2 * broad;
+      if (kind === "bark") value = 0.7 * noise(x2 / 4, y / 64, 64, 4) + 0.3 * grain;
+      if (kind === "fabric") value = 0.55 + (x2 % 4 < 2 ? 0.17 : -0.17) + (y % 4 < 2 ? 0.12 : -0.12);
+      if (kind === "metal") value = 0.65 * hash(0, y) + 0.35 * grain;
+      const shade = Math.round(255 * (1 - p.contrast * (1 - value))), i2 = (y * size + x2) * 4;
+      color[i2] = shade;
+      color[i2 + 1] = shade;
+      color[i2 + 2] = shade;
+      color[i2 + 3] = 255;
+      height[i2] = height[i2 + 1] = height[i2 + 2] = Math.round(value * 255);
+      height[i2 + 3] = 255;
+    }
+    const make = (data, colorSpace) => {
+      const t = new DataTexture(data, size, size);
+      t.wrapS = t.wrapT = RepeatWrapping;
+      t.magFilter = LinearFilter;
+      t.minFilter = LinearMipmapLinearFilter;
+      t.generateMipmaps = true;
+      t.anisotropy = 4;
+      t.colorSpace = colorSpace;
+      t.needsUpdate = true;
+      return t;
+    };
+    const result = { map: make(color, SRGBColorSpace), bumpMap: make(height, NoColorSpace) };
+    textures.set(kind, result);
+    return result;
+  }
+  function detail(material3, kind) {
+    const p = profiles[kind], t = maps(kind);
+    material3.map = t.map;
+    material3.bumpMap = t.bumpMap;
+    material3.bumpScale = p.relief;
+    if (p.roughness !== null) material3.roughness = p.roughness;
+    material3.userData.townSurface = kind;
+    material3.userData.worldSurface = kind;
+    return material3;
+  }
+  function worldMaterial(kind, color, extra = {}) {
+    return detail(new MeshStandardMaterial({ color, roughness: 0.8, ...extra }), kind);
+  }
+  function project(mesh, kind, units) {
+    if (mesh.userData.worldSurfaceUV || mesh.isInstancedMesh) return;
+    if (!["BoxGeometry", "CylinderGeometry", "PlaneGeometry"].includes(mesh.geometry.type)) return;
+    const g = mesh.geometry, p = g.attributes.position, n = g.attributes.normal;
+    if (!p || !n) return;
+    const uv = new Float32Array(p.count * 2), span = profiles[kind].span;
+    for (let i2 = 0; i2 < p.count; i2++) {
+      const x2 = p.getX(i2) * mesh.scale.x * units, y = p.getY(i2) * mesh.scale.y * units, z = p.getZ(i2) * mesh.scale.z * units;
+      const nx = Math.abs(n.getX(i2)), ny = Math.abs(n.getY(i2)), nz = Math.abs(n.getZ(i2));
+      uv[i2 * 2] = (ny >= nx && ny >= nz ? x2 : nx >= nz ? z : x2) / span;
+      uv[i2 * 2 + 1] = (ny >= nx && ny >= nz ? z : y) / span;
+    }
+    mesh.geometry = g.clone();
+    mesh.geometry.setAttribute("uv", new BufferAttribute(uv, 2));
+    mesh.userData.worldSurfaceUV = true;
+  }
+  function applyWorldSurface(mesh, kind, units = 1) {
+    const original = mesh.material;
+    if (!mesh.isMesh || Array.isArray(original) || !original.isMeshStandardMaterial || original.transparent || original.emissive?.getHex() || original.userData.hamsterFur) return mesh;
+    if (!mesh.geometry.attributes.uv) return mesh;
+    if (original.userData.worldSurface) {
+      project(mesh, original.userData.worldSurface, units);
+      return mesh;
+    }
+    if (original.map || original.userData.townSurface || original.roughness < 0.2) return mesh;
+    let byKind = materials.get(original);
+    if (!byKind) {
+      byKind = /* @__PURE__ */ new Map();
+      materials.set(original, byKind);
+    }
+    if (!byKind.has(kind)) byKind.set(kind, detail(original.clone(), kind));
+    mesh.material = byKind.get(kind);
+    project(mesh, kind, units);
+    return mesh;
+  }
+  function finishWorldSurfaces(group, units = 1) {
+    group.traverse((mesh) => {
+      if (!mesh.isMesh || Array.isArray(mesh.material)) return;
+      const p = mesh.geometry.parameters;
+      if (!mesh.material.userData.worldSurface && p && Math.max((p.width || p.radius * 2 || 0) * mesh.scale.x, (p.height || p.radius * 2 || 0) * mesh.scale.y, (p.depth || p.radius * 2 || 0) * mesh.scale.z) * units < 0.12) return;
+      const kind = mesh.material.userData.worldSurface || (mesh.userData.cutawayRoof || mesh.userData.petRoof ? "roof" : mesh.material.metalness > 0.1 ? "metal" : "paint");
+      applyWorldSurface(mesh, kind, units);
+    });
+  }
+
   // src/town-surfaces.js
-  var maps = /* @__PURE__ */ new Map();
+  var maps2 = /* @__PURE__ */ new Map();
   var loader = new TextureLoader();
   function texture(kind, channel) {
     const key = kind + "-" + channel;
-    if (maps.has(key)) return maps.get(key);
+    if (maps2.has(key)) return maps2.get(key);
     const map = loader.load("../assets/town-materials/" + key + ".jpg");
     map.wrapS = map.wrapT = RepeatWrapping;
     map.anisotropy = 4;
     if (channel === "Color") map.colorSpace = SRGBColorSpace;
-    maps.set(key, map);
+    maps2.set(key, map);
     return map;
   }
   var buildingSurfaceStyles = {
@@ -34859,34 +34975,34 @@ void main() {
     "\u6BA1\u4EEA\u9986": { floor: "slate", tint: 11647416, roughness: 0.85, wall: "paint", wallTint: 15067621 }
   };
   function surfaceTexture(kind) {
-    if (maps.has(kind)) return maps.get(kind);
+    if (maps2.has(kind)) return maps2.get(kind);
     const canvas = document.createElement("canvas");
     canvas.width = canvas.height = 256;
     const ctx = canvas.getContext("2d");
     ctx.fillStyle = kind === "wainscot" ? "#eee4d4" : "#f6f5f1";
     ctx.fillRect(0, 0, 256, 256);
-    const noise = (i2) => {
+    const noise2 = (i2) => {
       const n = Math.sin(i2 * 127.1 + 31.7) * 43758.5453;
       return n - Math.floor(n);
     };
     if (["plaster", "paint", "linoleum", "limestone", "slate", "terrazzo"].includes(kind)) {
       for (let i2 = 0; i2 < 1800; i2++) {
-        const value = Math.floor(185 + noise(i2) * 60);
+        const value = Math.floor(185 + noise2(i2) * 60);
         ctx.fillStyle = "rgba(" + value + "," + value + "," + value + "," + (kind === "paint" ? 0.22 : 0.48) + ")";
-        const size = kind === "terrazzo" ? 2 + noise(i2 + 9) * 5 : kind === "plaster" ? 1 + noise(i2 + 9) * 2 : 1;
-        ctx.fillRect(noise(i2 + 1) * 256, noise(i2 + 2) * 256, size, size);
+        const size = kind === "terrazzo" ? 2 + noise2(i2 + 9) * 5 : kind === "plaster" ? 1 + noise2(i2 + 9) * 2 : 1;
+        ctx.fillRect(noise2(i2 + 1) * 256, noise2(i2 + 2) * 256, size, size);
       }
     }
     if (kind === "terrazzo") for (let i2 = 0; i2 < 260; i2++) {
       ctx.fillStyle = ["#c3b3a2", "#bcc5bc", "#d4bdb3", "#ddd4c2"][i2 % 4];
-      ctx.fillRect(noise(i2 + 5) * 256, noise(i2 + 6) * 256, 2 + noise(i2 + 7) * 4, 2 + noise(i2 + 8) * 3);
+      ctx.fillRect(noise2(i2 + 5) * 256, noise2(i2 + 6) * 256, 2 + noise2(i2 + 7) * 4, 2 + noise2(i2 + 8) * 3);
     }
     if (kind === "slate") for (let i2 = 0; i2 < 35; i2++) {
       ctx.strokeStyle = i2 % 2 ? "#dedfda" : "#eceee9";
       ctx.lineWidth = 0.5;
       ctx.beginPath();
       ctx.moveTo(0, i2 * 7.4);
-      ctx.lineTo(256, i2 * 7.4 + noise(i2) * 4);
+      ctx.lineTo(256, i2 * 7.4 + noise2(i2) * 4);
       ctx.stroke();
     }
     ctx.strokeStyle = "#d9d9d2";
@@ -34928,7 +35044,7 @@ void main() {
     map.wrapS = map.wrapT = RepeatWrapping;
     map.colorSpace = SRGBColorSpace;
     map.anisotropy = 4;
-    maps.set(kind, map);
+    maps2.set(kind, map);
     return map;
   }
   function applyBuildingSurface(mesh, name, role = "floor", units = 1) {
@@ -34942,13 +35058,13 @@ void main() {
     material3.map = kind === "wood" ? texture(kind, "Color") : surfaceTexture(kind);
     if (kind !== "wood") {
       const key = kind + "-height";
-      if (!maps.has(key)) {
+      if (!maps2.has(key)) {
         const height = material3.map.clone();
         height.colorSpace = NoColorSpace;
         height.needsUpdate = true;
-        maps.set(key, height);
+        maps2.set(key, height);
       }
-      material3.bumpMap = maps.get(key);
+      material3.bumpMap = maps2.get(key);
       material3.bumpScale = ["ceramic", "terracotta", "subway", "brick", "slate", "limestone", "fluted", "wainscot"].includes(kind) ? 8e-3 : 3e-3;
     }
     if (kind === "wood") {
@@ -34970,10 +35086,9 @@ void main() {
     mesh.geometry.setAttribute("uv", new BufferAttribute(uv, 2));
     return mesh;
   }
-  var woodColors = /* @__PURE__ */ new Set([9789499, 9992532, 8547409, 8939590, 9991247, 11898210, 9728078, 10051642, 6833454, 8409394, 13210963, 10324079]);
+  var woodColors = /* @__PURE__ */ new Set([9789499, 9992532, 8547409, 8939590, 9991247, 11898210, 9728078, 10051642, 6833454, 8409394, 13210963, 10324079, 10188881, 12095576, 10779465, 6641478, 7299404, 9139029, 11967351]);
   function finishBuildingSurfaces(group, name, units = 1) {
-    if (!buildingSurfaceStyles[name]) return;
-    group.traverse((mesh) => {
+    if (buildingSurfaceStyles[name]) group.traverse((mesh) => {
       if (!mesh.isMesh || Array.isArray(mesh.material) || mesh.material.map || mesh.material.transparent || mesh.material.metalness > 0.1) return;
       if (mesh.userData.buildingWall) applyBuildingSurface(mesh, name, "wall", units);
       else if (woodColors.has(mesh.material.color.getHex())) applyBuildingSurface(mesh, name, "wood", units);
@@ -34982,13 +35097,14 @@ void main() {
         if (width * units > 2 && depth * units > 1 && height * units < 0.5 && mesh.position.y * units < 0.4) applyBuildingSurface(mesh, name, "floor", units);
       }
     });
+    finishWorldSurfaces(group, units);
   }
 
   // src/town-speech.js
   function createSpeechDirector() {
     const states = /* @__PURE__ */ new Map();
     let gaze = null, gazeSince = 0;
-    const hash = (id) => [...id].reduce((n, c) => n * 31 + c.charCodeAt(0) >>> 0, 0);
+    const hash2 = (id) => [...id].reduce((n, c) => n * 31 + c.charCodeAt(0) >>> 0, 0);
     const overlaps = (a, b) => a.left < b.right + 8 && a.right > b.left - 8 && a.top < b.bottom + 8 && a.bottom > b.top - 8;
     return { update(candidates, { now, firstPerson = false, limit = firstPerson ? 3 : 4, gazeId = null } = {}) {
       if (gazeId !== gaze) {
@@ -35000,17 +35116,17 @@ void main() {
       for (const c of candidates) {
         let s = states.get(c.id);
         if (!s) {
-          s = { text: c.text, until: 0, ready: now + hash(c.id) % 1500 / 1e3, last: -Infinity };
+          s = { text: c.text, until: 0, ready: now + hash2(c.id) % 1500 / 1e3, last: -Infinity };
           states.set(c.id, s);
         }
         if (s.text !== c.text) {
           s.text = c.text;
           s.until = 0;
-          s.ready = now + hash(c.id) % 700 / 1e3;
+          s.ready = now + hash2(c.id) % 700 / 1e3;
         }
       }
       const looking = gaze && now - gazeSince >= 0.45 ? gaze : null, rank = (c) => c.urgent ? 3 : c.id === looking ? 2 : states.get(c.id).until > now ? 1 : 0;
-      const ordered = [...candidates].sort((a, b) => rank(b) - rank(a) || states.get(a.id).last - states.get(b.id).last || a.distance - b.distance || hash(a.id) - hash(b.id));
+      const ordered = [...candidates].sort((a, b) => rank(b) - rank(a) || states.get(a.id).last - states.get(b.id).last || a.distance - b.distance || hash2(a.id) - hash2(b.id));
       const full = /* @__PURE__ */ new Set(), occupied = [], texts = /* @__PURE__ */ new Set();
       for (const c of ordered) {
         const s = states.get(c.id), priority = c.urgent || c.id === looking;
@@ -35022,7 +35138,7 @@ void main() {
         texts.add(c.text);
         if (s.until <= now) {
           s.until = now + 3.6;
-          s.ready = s.until + 6 + hash(c.id) % 3e3 / 1e3;
+          s.ready = s.until + 6 + hash2(c.id) % 3e3 / 1e3;
           s.last = now;
         }
       }
@@ -35197,11 +35313,11 @@ void main() {
   // src/town-fur.js
   var palettes = { silver: [13488341, 16776695], pudding: [13738062, 16775913], "three-line": [4277581, 14868953], violet: [7828878, 15526384] };
   var texture2;
-  var materials = /* @__PURE__ */ new Map();
+  var materials2 = /* @__PURE__ */ new Map();
   function furMaterial(coat = "three-line", age = 0) {
     if (!Object.hasOwn(palettes, coat)) coat = "three-line";
     const loss = Math.round(Math.max(0, Math.min(1, (age - 1.5) / 1.5)) * 20) / 20, key = coat + ":" + loss;
-    if (materials.has(key)) return materials.get(key);
+    if (materials2.has(key)) return materials2.get(key);
     if (!texture2) {
       texture2 = new TextureLoader().load("../assets/models/booth-hamster/restored/Assets/Ham/Texture/Ham.png");
       texture2.colorSpace = SRGBColorSpace;
@@ -35210,7 +35326,7 @@ void main() {
     material3.userData.hamsterFur = true;
     if (coat === "three-line") material3.color.setHex(10198424);
     if (coat === "three-line" && !loss) {
-      materials.set(key, material3);
+      materials2.set(key, material3);
       return material3;
     }
     if (coat !== "three-line") material3.onBeforeCompile = (shader) => {
@@ -35243,7 +35359,7 @@ void main() {
       };
     }
     material3.customProgramCacheKey = () => "hamster-coat-v2-" + key;
-    materials.set(key, material3);
+    materials2.set(key, material3);
     return material3;
   }
   function setHamsterCoat(rig, coat = "three-line", age = 0) {
@@ -37343,14 +37459,14 @@ void main() {
       }
       pending.push(parser.loadGeometries(primitives));
       return Promise.all(pending).then(function(results) {
-        const materials2 = results.slice(0, results.length - 1);
+        const materials3 = results.slice(0, results.length - 1);
         const geometries = results[results.length - 1];
         const meshes = [];
         for (let i2 = 0, il = geometries.length; i2 < il; i2++) {
           const geometry = geometries[i2];
           const primitive = primitives[i2];
           let mesh;
-          const material3 = materials2[i2];
+          const material3 = materials3[i2];
           if (primitive.mode === WEBGL_CONSTANTS.TRIANGLES || primitive.mode === WEBGL_CONSTANTS.TRIANGLE_STRIP || primitive.mode === WEBGL_CONSTANTS.TRIANGLE_FAN || primitive.mode === void 0) {
             mesh = meshDef.isSkinnedMesh === true ? new SkinnedMesh(geometry, material3) : new Mesh(geometry, material3);
             if (mesh.isSkinnedMesh === true) {
@@ -38012,7 +38128,7 @@ void main() {
       rim.rotation.x = Math.PI / 2;
       rim.position.y = 0.08;
       group.add(rim);
-      box(group, 0.45, 0.07, 0.45, 0, 0.035, 0, 15982272);
+      applyWorldSurface(box(group, 0.45, 0.07, 0.45, 0, 0.035, 0, 15982272), "fabric", 0.36);
       room.add(group);
       return group;
     });
@@ -39562,8 +39678,8 @@ void main() {
         add("twig", branch, 8809296, p.x + 0.035, 0.037, p.z, 0.14 * s, 0.012 * s, 0.012 * s, p.yaw + 0.7);
       }
     }
-    for (const { geometry, color, matrices } of batches.values()) {
-      const mesh = new InstancedMesh(geometry, new MeshStandardMaterial({ color, roughness: 1 }), matrices.length);
+    for (const [key, { geometry, color, matrices }] of batches) {
+      const mesh = new InstancedMesh(geometry, worldMaterial(key === "stone" ? "stone" : key === "twig" ? "bark" : "foliage", color), matrices.length);
       matrices.forEach((m, i2) => mesh.setMatrixAt(i2, m));
       mesh.receiveShadow = true;
       group.add(mesh);
@@ -40155,7 +40271,7 @@ void main() {
     const bronze = new MeshStandardMaterial({ color: 11897678, metalness: 0.78, roughness: 0.34 });
     const gold = new MeshStandardMaterial({ color: 14924911, metalness: 0.8, roughness: 0.27 });
     const recess = new MeshStandardMaterial({ color: 5325620, metalness: 0.6, roughness: 0.48 });
-    const stone = new MeshStandardMaterial({ color: 14734521, roughness: 0.78 });
+    const stone = worldMaterial("stone", 14734521);
     const glow = new MeshStandardMaterial({ color: 16767885, metalness: 0.4, roughness: 0.3, emissive: 16758860, emissiveIntensity: 0.22 });
     const mesh = (geometry, material3, x2, y, z) => {
       const m = new Mesh(geometry, material3);
@@ -40390,7 +40506,7 @@ void main() {
     return group;
   }
   function createPlaza() {
-    const group = new Group(), { box: box3, oval, tube } = kit2(group), wood = mat("#ffffff", { map: woodTexture() }), stone = mat("#d1c4a7");
+    const group = new Group(), { box: box3, oval, tube } = kit2(group), wood = mat("#ffffff", { map: woodTexture() }), stone = worldMaterial("stone", "#d1c4a7");
     const floor = new Mesh(new CylinderGeometry(1, 1, 0.14, 64), mat("#b6aa90"));
     floor.scale.set(3.15 * Math.SQRT2, 1, 1.8 * Math.SQRT2);
     floor.position.y = 0.02;
@@ -40399,7 +40515,7 @@ void main() {
     for (let row = -7; row <= 7; row++) for (let col = -12; col <= 12; col++) {
       const x2 = col * 0.36 + row % 2 * 0.16, z = row * 0.35;
       if ((x2 / (3.1 * Math.SQRT2)) ** 2 + (z / (1.75 * Math.SQRT2)) ** 2 > 1 || Math.hypot(x2, z) < 0.86) continue;
-      const slab = box3(0.33, 0.045, 0.31, x2, 0.115, z, mat(["#cfc4ac", "#bdbaa5", "#d9ceb4"][Math.abs(col + row) % 3]));
+      const slab = box3(0.33, 0.045, 0.31, x2, 0.115, z, worldMaterial("stone", ["#cfc4ac", "#bdbaa5", "#d9ceb4"][Math.abs(col + row) % 3]));
       slab.rotation.y = Math.sin(col * 7 + row) * 0.04;
     }
     const ring = new Mesh(new TorusGeometry(0.73, 0.11, 8, 40), stone);
@@ -40538,7 +40654,7 @@ void main() {
     group.add(mesh);
   }
   function createRestaurant() {
-    const group = new Group(), { box: box3, oval } = kit2(group), wall = mat(15657437), wood = mat(7428675, { map: woodTexture() }), roof = mat(6714481), stone = mat(10988192), green = mat(7439453);
+    const group = new Group(), { box: box3, oval } = kit2(group), wall = mat(15657437), wood = mat(7428675, { map: woodTexture() }), roof = worldMaterial("roof", 6714481), stone = worldMaterial("stone", 10988192), green = mat(7439453);
     box3(4.25, 0.14, 2.9, 0, 0.07, -0.14, stone);
     box3(4, 1.6, 2.65, 0, 0.94, -0.14, wall);
     for (const side of [-1, 1]) {
@@ -40802,10 +40918,11 @@ void main() {
     return group;
   }
   function createCemetery() {
-    const group = new Group(), { box: box3, oval, tube } = kit2(group), stone = mat("#aaa99a"), cap = mat("#c4c2af"), grass = mat("#8f9e72"), leaf = mat("#697d50"), iron = mat("#6c6653"), wood = mat("#9c7951");
+    const group = new Group(), { box: box3, oval, tube } = kit2(group), stone = worldMaterial("stone", "#aaa99a"), cap = worldMaterial("stone", "#c4c2af"), grass = worldMaterial("grass", "#8f9e72"), leaf = worldMaterial("foliage", "#697d50"), iron = worldMaterial("metal", "#6c6653", { metalness: 0.35, roughness: 0.65 }), wood = worldMaterial("bark", "#9c7951");
     box3(4.2, 0.1, 3.2, 0, 0.01, 0, grass);
-    box3(0.65, 0.04, 3.1, 0, 0.09, 0, cap);
-    box3(4, 0.035, 0.45, 0, 0.09, 0.08, cap);
+    const gravel = worldMaterial("gravel", "#c4b9a0");
+    box3(0.65, 0.04, 3.1, 0, 0.09, 0, gravel);
+    box3(4, 0.035, 0.45, 0, 0.09, 0.08, gravel);
     for (let i2 = 0; i2 < 155; i2++) {
       const x2 = Math.sin(i2 * 17.3) * 0.25, z = Math.cos(i2 * 7.1) * 1.45;
       oval(x2, 0.12, z, 0.035, 0.016, 0.045, i2 % 3 ? stone : cap);
@@ -40856,8 +40973,10 @@ void main() {
         child.traverse((o) => {
           if (o.isMesh) {
             o.geometry.dispose();
-            o.material.map?.dispose();
-            o.material.dispose();
+            if (!o.material.userData.townSurface) {
+              o.material.map?.dispose();
+              o.material.dispose();
+            }
           }
         });
         graves.remove(child);
@@ -40879,6 +40998,7 @@ void main() {
         const x2 = -0.7 + i2 % 5 * 0.35, y = 0.3 + Math.floor(i2 / 5) * 0.32;
         storeSign(graves, item.name, x2, y - 0.09, -1.045, 0.29, 0.085, "#c9c4ad", "#433e35");
       });
+      finishWorldSurfaces(graves);
       group.userData.memorialNames = allRecords.map((m) => m.name);
       group.userData.graveNames = records.map((m) => m.name);
       group.userData.wallNames = overflow.map((m) => m.name);
@@ -40895,7 +41015,7 @@ void main() {
     return group;
   }
   function createSchool() {
-    const group = new Group(), { box: box3, oval } = kit2(group), wood = mat("#ffffff", { map: woodTexture() }), roof = mat("#aa7245"), stone = mat("#c4baa4"), green = mat("#365d4b"), stepWood = mat("#b78956", { map: woodTexture() }), seatWood = mat("#9f7145", { map: woodTexture() }), gold = mat("#c8a155", { metalness: 0.65, roughness: 0.35 });
+    const group = new Group(), { box: box3, oval } = kit2(group), wood = mat("#ffffff", { map: woodTexture() }), roof = worldMaterial("roof", "#aa7245"), stone = worldMaterial("stone", "#c4baa4"), green = mat("#365d4b"), stepWood = mat("#b78956", { map: woodTexture() }), seatWood = mat("#9f7145", { map: woodTexture() }), gold = mat("#c8a155", { metalness: 0.65, roughness: 0.35 });
     const cylinder = (top, bottom, h, x2, y, z, m) => {
       const mesh = new Mesh(new CylinderGeometry(top, bottom, h, 40), m);
       mesh.position.set(x2, y, z);
@@ -40978,7 +41098,7 @@ void main() {
     return group;
   }
   function createWheelPark() {
-    const group = new Group(), { box: box3, oval, tube } = kit2(group), wood = mat("#ffffff", { map: woodTexture() }), dark = mat("#805638"), stone = mat("#c5b99d"), grass = mat("#90a165"), track = mat("#c89258"), line = mat("#ece0bc"), metal = mat("#9b9c8c", { metalness: 0.4, roughness: 0.45 }), wheels = [];
+    const group = new Group(), { box: box3, oval, tube } = kit2(group), wood = mat("#ffffff", { map: woodTexture() }), dark = mat("#805638"), stone = worldMaterial("stone", "#c5b99d"), grass = worldMaterial("grass", "#90a165"), track = worldMaterial("soil", "#c89258"), line = mat("#ece0bc"), metal = mat("#9b9c8c", { metalness: 0.4, roughness: 0.45 }), wheels = [];
     const disk = (r, h, x2, y, z, m) => {
       const o = new Mesh(new CylinderGeometry(r, r, h, 64), m);
       o.position.set(x2, y, z);
@@ -41794,11 +41914,11 @@ void main() {
     parse() {
       connections = this.parseConnections();
       const images = this.parseImages();
-      const textures = this.parseTextures(images);
-      const materials2 = this.parseMaterials(textures);
+      const textures2 = this.parseTextures(images);
+      const materials3 = this.parseMaterials(textures2);
       const deformers = this.parseDeformers();
       const geometryMap = new GeometryParser().parse(deformers);
-      this.parseScene(deformers, geometryMap, materials2);
+      this.parseScene(deformers, geometryMap, materials3);
       return sceneGraph;
     }
     // Parses FBXTree.Connections which holds parent-child connections between objects (e.g. material -> texture, model->geometry )
@@ -42455,28 +42575,28 @@ void main() {
       let model;
       let geometry = null;
       let material3 = null;
-      const materials2 = [];
+      const materials3 = [];
       relationships.children.forEach(function(child) {
         if (geometryMap.has(child.ID)) {
           geometry = geometryMap.get(child.ID);
         }
         if (materialMap.has(child.ID)) {
-          materials2.push(materialMap.get(child.ID));
+          materials3.push(materialMap.get(child.ID));
         }
       });
-      if (materials2.length > 1) {
-        material3 = materials2;
-      } else if (materials2.length > 0) {
-        material3 = materials2[0];
+      if (materials3.length > 1) {
+        material3 = materials3;
+      } else if (materials3.length > 0) {
+        material3 = materials3[0];
       } else {
         material3 = new MeshPhongMaterial({
           name: Loader.DEFAULT_MATERIAL_NAME,
           color: 13421772
         });
-        materials2.push(material3);
+        materials3.push(material3);
       }
       if ("color" in geometry.attributes) {
-        materials2.forEach(function(material4) {
+        materials3.forEach(function(material4) {
           material4.vertexColors = true;
         });
       }
@@ -42484,14 +42604,14 @@ void main() {
         let needsDefaultMaterial = false;
         for (let i2 = 0, il = geometry.groups.length; i2 < il; i2++) {
           const group = geometry.groups[i2];
-          if (group.materialIndex < 0 || group.materialIndex >= materials2.length) {
-            group.materialIndex = materials2.length;
+          if (group.materialIndex < 0 || group.materialIndex >= materials3.length) {
+            group.materialIndex = materials3.length;
             needsDefaultMaterial = true;
           }
         }
         if (needsDefaultMaterial) {
           const defaultMaterial = new MeshPhongMaterial();
-          materials2.push(defaultMaterial);
+          materials3.push(defaultMaterial);
         }
       }
       if (geometry.FBX_Deformer) {
@@ -44520,16 +44640,20 @@ void main() {
     scene.environmentIntensity = 0.25;
     environment.dispose();
     pmrem.dispose();
-    const ground = new Mesh(new CylinderGeometry(18, 18.5, 0.65, 64), new MeshStandardMaterial({ color: 10468753, roughness: 1 }));
+    const ground = new Mesh(new CylinderGeometry(18, 18.5, 0.65, 64), worldMaterial("grass", 8823923));
     ground.position.y = -0.35;
     ground.receiveShadow = true;
+    applyWorldSurface(ground, "grass");
+    const earth = worldMaterial("soil", 9730649);
+    ground.material = [earth, ground.material, earth];
     scene.add(ground);
-    const pathMat = new MeshStandardMaterial({ color: 14272941, roughness: 1 });
+    const pathMat = worldMaterial("gravel", 14272941);
     const road = (x2, z, w, d, angle = 0) => {
       const m = new Mesh(new BoxGeometry(w, 0.035, d), pathMat);
       m.position.set(x2, 0.01, z);
       m.rotation.y = angle;
       m.receiveShadow = true;
+      applyWorldSurface(m, "gravel");
       scene.add(m);
     };
     road(0, -1.3, 28, 1.05);
@@ -44574,6 +44698,7 @@ void main() {
       lampPositions.push([x2, z]);
     }
     lampLayout().forEach(({ x: x2, z, yaw: yaw2 }) => streetLamp(x2, z, yaw2));
+    finishWorldSurfaces(streetLights);
     scene.add(streetLights);
     scene.add(createTownVerges());
     const clickable = [], placeModels = /* @__PURE__ */ new Map();
@@ -44688,15 +44813,17 @@ void main() {
       const d = destinations.find((d2) => d2[0] === a.place), angle = facing(a.place), [x2, z] = a.point;
       return { button, place: a.place, point: new Vector3(d[1] + x2 * Math.cos(angle) + z * Math.sin(angle), 0.6, d[2] - x2 * Math.sin(angle) + z * Math.cos(angle)) };
     });
-    const landscape = new Mesh(new PlaneGeometry(160, 160), new MeshStandardMaterial({ color: 9612670, roughness: 1 }));
+    const landscape = new Mesh(new PlaneGeometry(160, 160), worldMaterial("grass", 8362856));
     landscape.rotation.x = -Math.PI / 2;
     landscape.position.y = -0.7;
+    applyWorldSurface(landscape, "grass");
     scene.add(landscape);
     for (let i2 = 0; i2 < 34; i2++) {
-      const tree = new Group(), trunk = new Mesh(new CylinderGeometry(0.08, 0.11, 0.55, 8), new MeshStandardMaterial({ color: 8414285 })), leaf = new Mesh(new SphereGeometry(0.34, 12, 9), new MeshStandardMaterial({ color: i2 % 3 ? 6263914 : 8168814, roughness: 1 }));
+      const tree = new Group(), trunk = new Mesh(new CylinderGeometry(0.08, 0.11, 0.55, 8), worldMaterial("bark", 8414285)), leaf = new Mesh(new SphereGeometry(0.34, 12, 9), worldMaterial("foliage", i2 % 3 ? 6263914 : 8168814));
       trunk.position.y = 0.28;
       leaf.position.y = 0.73;
       tree.add(trunk, leaf);
+      finishWorldSurfaces(tree);
       const a = i2 / 34 * Math.PI * 2, r = 17.1;
       tree.position.set(Math.cos(a) * r, 0, Math.sin(a) * r);
       scene.add(tree);
@@ -44716,7 +44843,7 @@ void main() {
     const weatherFx = new Group();
     scene.add(weatherFx);
     const roomLabels = [], pups = /* @__PURE__ */ new Map();
-    const life = createTownLife((detail) => queueMicrotask(() => window.dispatchEvent(new CustomEvent("town-life-event", { detail }))));
+    const life = createTownLife((detail2) => queueMicrotask(() => window.dispatchEvent(new CustomEvent("town-life-event", { detail: detail2 }))));
     const mainTag = document.createElement("button");
     mainTag.className = "town-label town-npc-label town-pup-label";
     mainTag.onclick = () => focusPet();
@@ -45068,9 +45195,9 @@ void main() {
       const bed = (x2, z, text) => {
         const clinical = name === "\u8BCA\u6240";
         add(1.9, 0.3, 1.2, x2, 0.2, z, clinical ? trimColor : 8939590);
-        add(1.78, 0.18, 1.1, x2, 0.43, z, clinical ? 15791344 : 15326138);
-        add(0.45, 0.17, 0.8, x2 - 0.58, 0.6, z, 16248537);
-        add(0.9, 0.09, 1.05, x2 + 0.3, 0.56, z, clinical ? 11981532 : 8887434);
+        applyWorldSurface(add(1.78, 0.18, 1.1, x2, 0.43, z, clinical ? 15791344 : 15326138), "fabric", 0.36);
+        applyWorldSurface(add(0.45, 0.17, 0.8, x2 - 0.58, 0.6, z, 16248537), "fabric", 0.36);
+        applyWorldSurface(add(0.9, 0.09, 1.05, x2 + 0.3, 0.56, z, clinical ? 11981532 : 8887434), "fabric", 0.36);
         if (clinical) {
           for (const end of [-1, 1]) {
             add(0.08, 0.48, 1.22, x2 + end * 0.92, 0.49, z, trimColor);
@@ -45147,7 +45274,7 @@ void main() {
         const moved = worldState.furniture?.table?.slot === "window", [tableX, tableZ] = moved ? cottageFurniture.windowTable : cottageFurniture.table;
         table(tableX, tableZ, 1, 0.75, 10188881);
         label("\u6728\u684C", tableX, tableZ);
-        add(0.65, 0.15, 0.65, tableX + 1, 0.1, tableZ + 0.2, 9609346);
+        applyWorldSurface(add(0.65, 0.15, 0.65, tableX + 1, 0.1, tableZ + 0.2, 9609346), "fabric", 0.36);
         label("\u5750\u57AB", tableX + 1, tableZ + 0.2);
         if (worldState.furniture?.lamp?.owned) {
           add(0.08, 0.65, 0.08, tableX, 0.9, tableZ, 7299404);
