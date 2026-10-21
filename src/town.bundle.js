@@ -34847,6 +34847,7 @@ void main() {
     foliage: { span: 1, roughness: 0.93, relief: 2e-3, contrast: 0.12 },
     paint: { span: 0.7, roughness: null, relief: 8e-4, contrast: 0.035 },
     metal: { span: 0.45, roughness: null, relief: 3e-4, contrast: 0.025 },
+    bedding: { span: 0.7, roughness: 1, relief: 3e-3, contrast: 0.18 },
     fabric: { span: 0.35, roughness: 0.95, relief: 2e-3, contrast: 0.09 }
   };
   var textures = /* @__PURE__ */ new Map();
@@ -34874,6 +34875,7 @@ void main() {
         value = 0.65 * noise((x2 + 256 + wave) / 4, y / 64, 64, 4) + 0.25 * noise(x2 / 16, y / 128, 16, 2) + 0.1 * grain;
       }
       if (kind === "fabric") value = 0.55 + (x2 % 4 < 2 ? 0.17 : -0.17) + (y % 4 < 2 ? 0.12 : -0.12);
+      if (kind === "bedding") value = 0.48 + (x2 % 8 < 4 ? 0.14 : -0.14) + (y % 8 < 4 ? 0.1 : -0.1) + 0.12 * fine;
       if (kind === "metal") value = 0.65 * hash(0, y) + 0.35 * grain;
       const shade = Math.round(255 * (1 - p.contrast * (1 - value))), i2 = (y * size + x2) * 4;
       color[i2] = shade;
@@ -45282,10 +45284,15 @@ void main() {
       };
       const bed = (x2, z, text) => {
         const clinical = name === "\u8BCA\u6240";
-        add(1.9, 0.3, 1.2, x2, 0.2, z, clinical ? trimColor : 8939590);
-        applyWorldSurface(add(1.78, 0.18, 1.1, x2, 0.43, z, clinical ? 15791344 : 15326138), "fabric", 0.36);
-        applyWorldSurface(add(0.45, 0.17, 0.8, x2 - 0.58, 0.6, z, 16248537), "fabric", 0.36);
-        applyWorldSurface(add(0.9, 0.09, 1.05, x2 + 0.3, 0.56, z, clinical ? 11981532 : 8887434), "fabric", 0.36);
+        const frame = add(1.9, 0.3, 1.2, x2, 0.2, z, clinical ? trimColor : 8939590);
+        if (!clinical) {
+          applyBuildingSurface(frame, name, "wood", 0.36);
+          frame.material.color.set(11898210);
+          frame.material.roughness = 0.72;
+        }
+        applyWorldSurface(add(1.78, 0.18, 1.1, x2, 0.43, z, clinical ? 15791344 : 15326138), clinical ? "fabric" : "bedding", 0.36);
+        applyWorldSurface(add(0.45, 0.17, 0.8, x2 - 0.58, 0.6, z, 16248537), clinical ? "fabric" : "bedding", 0.36);
+        applyWorldSurface(add(0.9, 0.09, 1.05, x2 + 0.3, 0.56, z, clinical ? 11981532 : 8887434), clinical ? "fabric" : "bedding", 0.36);
         if (clinical) {
           for (const end of [-1, 1]) {
             add(0.08, 0.48, 1.22, x2 + end * 0.92, 0.49, z, trimColor);

@@ -13,6 +13,7 @@ const profiles={
  foliage:{span:1,roughness:.93,relief:.002,contrast:.12},
  paint:{span:.7,roughness:null,relief:.0008,contrast:.035},
  metal:{span:.45,roughness:null,relief:.0003,contrast:.025},
+ bedding:{span:.7,roughness:1,relief:.003,contrast:.18},
  fabric:{span:.35,roughness:.95,relief:.002,contrast:.09}
 };
 const textures=new Map(),materials=new WeakMap();
@@ -33,6 +34,7 @@ function maps(kind){
   if(kind==='bark')value=.7*noise(x/4,y/64,64,4)+.3*grain;
   if(kind==='wood'){const wave=Math.sin(y/256*Math.PI*2)*2;value=.65*noise((x+256+wave)/4,y/64,64,4)+.25*noise(x/16,y/128,16,2)+.1*grain}
   if(kind==='fabric')value=.55+(x%4<2?.17:-.17)+(y%4<2?.12:-.12);
+  if(kind==='bedding')value=.48+(x%8<4?.14:-.14)+(y%8<4?.1:-.1)+.12*fine;
   if(kind==='metal')value=.65*hash(0,y)+.35*grain;
   const shade=Math.round(255*(1-p.contrast*(1-value))),i=(y*size+x)*4;
   color[i]=shade;color[i+1]=shade;color[i+2]=shade;color[i+3]=255;
