@@ -1389,7 +1389,8 @@ TownI18n.add({
     "仅主鼠和本代选中的最多5位NPC可领养。": "Only the main hamster and up to five NPCs selected for this generation may adopt.",
     "仅主鼠和本代选中的最多": "Only the main hamster and up to ",
     "可领养。": "may adopt.",
-    "外围树木": "Boundary Trees"
+    "外围树木": "Boundary Trees",
+    "物种": "Species"
   },
   "es": {
     "鼠鼠小镇": "Pueblo Hámster",
@@ -2780,6 +2781,7 @@ TownI18n.add({
     "仅主鼠和本代选中的最多5位NPC可领养。": "Solo el hámster principal y hasta cinco PNJ seleccionados para esta generación pueden adoptar.",
     "仅主鼠和本代选中的最多": "Solo el hámster principal y hasta",
     "可领养。": "pueden adoptar.",
-    "外围树木": "Árboles del Perímetro"
+    "外围树木": "Árboles del Perímetro",
+    "物种": "Especie"
   }
 });

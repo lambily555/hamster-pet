@@ -1389,3 +1389,4 @@
 仅主鼠和本代选中的最多|Only the main hamster and up to |Solo el hámster principal y hasta
 可领养。|may adopt.|pueden adoptar.
 外围树木|Boundary Trees|Árboles del Perímetro
+物种|Species|Especie
