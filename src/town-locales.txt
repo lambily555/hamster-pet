@@ -1382,3 +1382,10 @@
 面包虫|Mealworm|Gusano de harina
 小饼干|Cookie|Galletita
 营养糊糊|Nutrition paste|Papilla nutritiva
+无|None|Ninguno
+主人：无|Owner: None|Dueño: Ninguno
+宠物之家 · 免费领养区|Pet Home · Free Adoption Area|Hogar de Mascotas · Zona de Adopción Gratuita
+仅主鼠和本代选中的最多5位NPC可领养。|Only the main hamster and up to five NPCs selected for this generation may adopt.|Solo el hámster principal y hasta cinco PNJ seleccionados para esta generación pueden adoptar.
+仅主鼠和本代选中的最多|Only the main hamster and up to |Solo el hámster principal y hasta
+可领养。|may adopt.|pueden adoptar.
+外围树木|Boundary Trees|Árboles del Perímetro

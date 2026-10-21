@@ -1382,7 +1382,14 @@ TownI18n.add({
     "菜叶": "Leaf",
     "面包虫": "Mealworm",
     "小饼干": "Cookie",
-    "营养糊糊": "Nutrition paste"
+    "营养糊糊": "Nutrition paste",
+    "无": "None",
+    "主人：无": "Owner: None",
+    "宠物之家 · 免费领养区": "Pet Home · Free Adoption Area",
+    "仅主鼠和本代选中的最多5位NPC可领养。": "Only the main hamster and up to five NPCs selected for this generation may adopt.",
+    "仅主鼠和本代选中的最多": "Only the main hamster and up to ",
+    "可领养。": "may adopt.",
+    "外围树木": "Boundary Trees"
   },
   "es": {
     "鼠鼠小镇": "Pueblo Hámster",
@@ -2766,6 +2773,13 @@ TownI18n.add({
     "菜叶": "Hoja",
     "面包虫": "Gusano de harina",
     "小饼干": "Galletita",
-    "营养糊糊": "Papilla nutritiva"
+    "营养糊糊": "Papilla nutritiva",
+    "无": "Ninguno",
+    "主人：无": "Dueño: Ninguno",
+    "宠物之家 · 免费领养区": "Hogar de Mascotas · Zona de Adopción Gratuita",
+    "仅主鼠和本代选中的最多5位NPC可领养。": "Solo el hámster principal y hasta cinco PNJ seleccionados para esta generación pueden adoptar.",
+    "仅主鼠和本代选中的最多": "Solo el hámster principal y hasta",
+    "可领养。": "pueden adoptar.",
+    "外围树木": "Árboles del Perímetro"
   }
 });

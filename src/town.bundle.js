@@ -38063,6 +38063,10 @@ void main() {
 
   // src/town-pet-layout.js
   var cottagePetFurniture = { beds: [[0.25, -0.25], [1.25, -0.25]], grain: [1.3, -1.6, 0.22, 0.22], toy: [2.5, -0.65, 0.15, 0.2], bowls: [[0.7, 1.05], [1.15, 1.05]] };
+  function freePetSlot(index, count) {
+    const columns = Math.max(1, Math.ceil(Math.sqrt(Math.max(1, count) * 4))), rows = Math.ceil(Math.max(1, count) / columns), width = 2.4 / columns, depth = 0.6 / rows;
+    return { x: -3.55 + width * (index % columns + 0.5), z: -0.95 + depth * (Math.floor(index / columns) + 0.5), size: Math.min(0.25, width * 0.4, depth * 0.4) };
+  }
 
   // src/town-pet-home.js
   var petHomeFurniture = { counter: [2.75, 0.9, 0.45, 1.05], shelf: [0, -2.4, 3.45, 0.35], beds: [[-2.65, -1.35], [-0.85, -1.35]], animals: [[-1.85, 0.5], [0.3, 0.5]], toy: [2.7, -1.2] };
@@ -39539,74 +39543,90 @@ void main() {
       return distance2(actor.position, target) < 0.12;
     }
     function tick(dt, leader, state, activePlace, firstPerson, actors = /* @__PURE__ */ new Map()) {
-      let index = 0;
+      let index = 0, freeIndex = 0;
+      const freeCount = [...pets.values()].filter((a) => a.fostered).length;
       for (const actor of pets.values()) {
-        const owner = actor.ownerId ? actors.get(actor.ownerId) : leader;
-        if (actor.spawnNearOwner && owner) {
-          actor.inside = owner.inside;
-          actor.position = { ...owner.position };
-          prepare(actor, state);
-          actor.position = followingPoint(actor, owner, 0);
+        if (actor.fostered) {
+          const slot = freePetSlot(freeIndex++, freeCount);
+          actor.inside = "\u5BA0\u7269\u4E4B\u5BB6";
+          actor.position = { x: slot.x, z: slot.z };
           actor.spawnNearOwner = false;
-        }
-        prepare(actor, state);
-        actor.moving = false;
-        const follow = (actor.ownerId ? !!owner && state.petHome?.npcPets.find((p2) => p2.id === actor.id)?.follow !== false : state.petHome?.follow) && (actor.ownerId || state.alive !== false) && owner && !owner.forcedSleep && !owner.frozen, wanted = follow ? owner.inside || null : actor.fostered || actor.ownerId && !owner ? "\u5BA0\u7269\u4E4B\u5BB6" : "\u9F20\u9F20\u5C0F\u5C4B";
-        if (actor.exiting) {
-          const portal = actor.exiting, gate = localDoor(portal), p2 = worldPoint(portal.name, gate.x, petOutsideZ(portal));
-          actor.entryPortal = portal;
-          prepare(actor, state);
-          const target = { x: p2.x, z: p2.z };
-          actor.path = [target];
-          actor.goal = target;
-          if (walkTo(actor, target, dt)) {
-            actor.exiting = null;
-            actor.path = [];
-            actor.goal = null;
-          }
-        } else if (actor.inside !== wanted) {
-          if (actor.inside) {
-            const name = actor.inside, portal = models.get(name).userData.portal, gate = localDoor(portal);
-            if (distance2(actor.position, { x: gate.x, z: 2.35 }) < 1.1) portal.target = 1;
+          actor.path = [];
+          actor.goal = null;
+          actor.exiting = null;
+          actor.entering = null;
+          actor.entryPortal = null;
+          actor.moving = false;
+          actor.rig.scale.setScalar(slot.size);
+        } else {
+          actor.rig.scale.setScalar(0.25);
+          const owner = actor.ownerId ? actors.get(actor.ownerId) : leader;
+          if (actor.spawnNearOwner && owner) {
+            actor.inside = owner.inside;
+            actor.position = { ...owner.position };
             prepare(actor, state);
-            if (walkTo(actor, { x: gate.x, z: portal.angle > 1 ? 4.1 : 2.35 }, dt) && portal.angle > 1) {
-              const p2 = worldPoint(name, actor.position.x, actor.position.z);
-              actor.position = { x: p2.x, z: p2.z };
-              actor.inside = null;
-              actor.exiting = portal;
+            actor.position = followingPoint(actor, owner, 0);
+            actor.spawnNearOwner = false;
+          }
+          prepare(actor, state);
+          actor.moving = false;
+          const follow = (actor.ownerId ? !!owner && state.petHome?.npcPets.find((p2) => p2.id === actor.id)?.follow !== false : state.petHome?.follow) && (actor.ownerId || state.alive !== false) && owner && !owner.forcedSleep && !owner.frozen, wanted = follow ? owner.inside || null : actor.fostered || actor.ownerId && !owner ? "\u5BA0\u7269\u4E4B\u5BB6" : "\u9F20\u9F20\u5C0F\u5C4B";
+          if (actor.exiting) {
+            const portal = actor.exiting, gate = localDoor(portal), p2 = worldPoint(portal.name, gate.x, petOutsideZ(portal));
+            actor.entryPortal = portal;
+            prepare(actor, state);
+            const target = { x: p2.x, z: p2.z };
+            actor.path = [target];
+            actor.goal = target;
+            if (walkTo(actor, target, dt)) {
+              actor.exiting = null;
               actor.path = [];
               actor.goal = null;
             }
-          } else if (wanted) {
-            const portal = models.get(wanted).userData.portal, gate = localDoor(portal), approach = worldPoint(wanted, gate.x, petOutsideZ(portal));
-            actor.entryPortal = portal;
-            prepare(actor, state);
-            if (actor.entering === wanted) {
-              portal.target = 1;
-              if (portal.angle > 1) {
-                const p2 = worldPoint(wanted, gate.x, 4.05), target = { x: p2.x, z: p2.z };
-                actor.path = [target];
-                actor.goal = target;
-                walkTo(actor, target, dt);
-                if (distance2(actor.position, target) < 0.03) {
-                  const local = rooms.get(wanted).worldToLocal(new Vector3(actor.position.x, portal.layout.floor, actor.position.z));
-                  actor.position = { x: local.x, z: local.z };
-                  actor.inside = wanted;
-                  actor.entering = null;
-                  actor.path = [];
-                  actor.goal = null;
-                }
+          } else if (actor.inside !== wanted) {
+            if (actor.inside) {
+              const name = actor.inside, portal = models.get(name).userData.portal, gate = localDoor(portal);
+              if (distance2(actor.position, { x: gate.x, z: 2.35 }) < 1.1) portal.target = 1;
+              prepare(actor, state);
+              if (walkTo(actor, { x: gate.x, z: portal.angle > 1 ? 4.1 : 2.35 }, dt) && portal.angle > 1) {
+                const p2 = worldPoint(name, actor.position.x, actor.position.z);
+                actor.position = { x: p2.x, z: p2.z };
+                actor.inside = null;
+                actor.exiting = portal;
+                actor.path = [];
+                actor.goal = null;
               }
-            } else if (distance2(actor.position, { x: approach.x, z: approach.z }) < 0.03) {
-              actor.entering = wanted;
-              actor.path = [];
-              actor.goal = null;
-            } else walkTo(actor, { x: approach.x, z: approach.z }, dt);
+            } else if (wanted) {
+              const portal = models.get(wanted).userData.portal, gate = localDoor(portal), approach = worldPoint(wanted, gate.x, petOutsideZ(portal));
+              actor.entryPortal = portal;
+              prepare(actor, state);
+              if (actor.entering === wanted) {
+                portal.target = 1;
+                if (portal.angle > 1) {
+                  const p2 = worldPoint(wanted, gate.x, 4.05), target = { x: p2.x, z: p2.z };
+                  actor.path = [target];
+                  actor.goal = target;
+                  walkTo(actor, target, dt);
+                  if (distance2(actor.position, target) < 0.03) {
+                    const local = rooms.get(wanted).worldToLocal(new Vector3(actor.position.x, portal.layout.floor, actor.position.z));
+                    actor.position = { x: local.x, z: local.z };
+                    actor.inside = wanted;
+                    actor.entering = null;
+                    actor.path = [];
+                    actor.goal = null;
+                  }
+                }
+              } else if (distance2(actor.position, { x: approach.x, z: approach.z }) < 0.03) {
+                actor.entering = wanted;
+                actor.path = [];
+                actor.goal = null;
+              } else walkTo(actor, { x: approach.x, z: approach.z }, dt);
+            }
+          } else {
+            actor.entryPortal = null;
+            const homePoint = restPoints[index % restPoints.length], target = follow ? followingPoint(actor, owner, actor.ownerId ? 0 : index) : { x: homePoint[0], z: homePoint[1] };
+            walkTo(actor, target, dt);
           }
-        } else {
-          actor.entryPortal = null;
-          const homePoint = actor.fostered ? { x: -3.15 + index % 3 * 0.45, z: 1.25 + Math.floor(index / 3) % 3 * 0.4 } : restPoints[index % restPoints.length], target = follow ? followingPoint(actor, owner, actor.ownerId ? 0 : index) : { x: homePoint[0], z: homePoint[1] };
-          walkTo(actor, target, dt);
         }
         const p = new Vector3(actor.position.x, 0, actor.position.z);
         if (actor.inside) rooms.get(actor.inside).localToWorld(p);

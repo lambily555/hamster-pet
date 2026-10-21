@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {createPetAnimal,animatePet} from './town-pet-home.js';
-import {cottagePetFurniture} from './town-pet-layout.js';
+import {cottagePetFurniture,freePetSlot} from './town-pet-layout.js';
 import {canWalk,movePlayer} from './town-player.js';
 import {facing} from './town-life.js';
 import {localDoor} from './town-building-portals.js';
@@ -37,14 +37,16 @@ export function createPetCompanions({scene,rooms,models,clickable}){
   return distance(actor.position,target)<.12;
  }
  function tick(dt,leader,state,activePlace,firstPerson,actors=new Map()){
-  let index=0;for(const actor of pets.values()){
+  let index=0,freeIndex=0;const freeCount=[...pets.values()].filter(a=>a.fostered).length;for(const actor of pets.values()){
+   if(actor.fostered){const slot=freePetSlot(freeIndex++,freeCount);actor.inside='宠物之家';actor.position={x:slot.x,z:slot.z};actor.spawnNearOwner=false;actor.path=[];actor.goal=null;actor.exiting=null;actor.entering=null;actor.entryPortal=null;actor.moving=false;actor.rig.scale.setScalar(slot.size)}else{actor.rig.scale.setScalar(.25);
    const owner=actor.ownerId?actors.get(actor.ownerId):leader;if(actor.spawnNearOwner&&owner){actor.inside=owner.inside;actor.position={...owner.position};prepare(actor,state);actor.position=followingPoint(actor,owner,0);actor.spawnNearOwner=false}prepare(actor,state);actor.moving=false;const follow=(actor.ownerId?!!owner&&state.petHome?.npcPets.find(p=>p.id===actor.id)?.follow!==false:state.petHome?.follow)&&(actor.ownerId||state.alive!==false)&&owner&&!owner.forcedSleep&&!owner.frozen,wanted=follow?(owner.inside||null):actor.fostered||actor.ownerId&&!owner?'宠物之家':'鼠鼠小屋';
    if(actor.exiting){const portal=actor.exiting,gate=localDoor(portal),p=worldPoint(portal.name,gate.x,petOutsideZ(portal));actor.entryPortal=portal;prepare(actor,state);const target={x:p.x,z:p.z};actor.path=[target];actor.goal=target;if(walkTo(actor,target,dt)){actor.exiting=null;actor.path=[];actor.goal=null}}
    else if(actor.inside!==wanted){
     if(actor.inside){const name=actor.inside,portal=models.get(name).userData.portal,gate=localDoor(portal);if(distance(actor.position,{x:gate.x,z:2.35})<1.1)portal.target=1;prepare(actor,state);if(walkTo(actor,{x:gate.x,z:portal.angle>1?4.1:2.35},dt)&&portal.angle>1){const p=worldPoint(name,actor.position.x,actor.position.z);actor.position={x:p.x,z:p.z};actor.inside=null;actor.exiting=portal;actor.path=[];actor.goal=null}}
     else if(wanted){const portal=models.get(wanted).userData.portal,gate=localDoor(portal),approach=worldPoint(wanted,gate.x,petOutsideZ(portal));actor.entryPortal=portal;prepare(actor,state);if(actor.entering===wanted){portal.target=1;if(portal.angle>1){const p=worldPoint(wanted,gate.x,4.05),target={x:p.x,z:p.z};actor.path=[target];actor.goal=target;walkTo(actor,target,dt);if(distance(actor.position,target)<.03){const local=rooms.get(wanted).worldToLocal(new THREE.Vector3(actor.position.x,portal.layout.floor,actor.position.z));actor.position={x:local.x,z:local.z};actor.inside=wanted;actor.entering=null;actor.path=[];actor.goal=null}}}else if(distance(actor.position,{x:approach.x,z:approach.z})<.03){actor.entering=wanted;actor.path=[];actor.goal=null}else walkTo(actor,{x:approach.x,z:approach.z},dt)}
    }else{
-    actor.entryPortal=null;const homePoint=actor.fostered?{x:-3.15+(index%3)*.45,z:1.25+(Math.floor(index/3)%3)*.4}:restPoints[index%restPoints.length],target=follow?followingPoint(actor,owner,actor.ownerId?0:index):{x:homePoint[0],z:homePoint[1]};walkTo(actor,target,dt);
+    actor.entryPortal=null;const homePoint=restPoints[index%restPoints.length],target=follow?followingPoint(actor,owner,actor.ownerId?0:index):{x:homePoint[0],z:homePoint[1]};walkTo(actor,target,dt);
+   }
    }
    const p=new THREE.Vector3(actor.position.x,0,actor.position.z);if(actor.inside)rooms.get(actor.inside).localToWorld(p);else p.y=.03;actor.reaction=Math.max(0,(actor.reaction||0)-dt);if(actor.reaction>0)p.y+=Math.sin(Math.PI*(1-actor.reaction/.65))*.18;actor.rig.position.copy(p);actor.rig.rotation.y=actor.heading+(actor.inside?facing(actor.inside):0);actor.rig.visible=actor.inside?!!rooms.get(actor.inside)?.visible&&(firstPerson||!activePlace||activePlace===actor.inside):firstPerson||!activePlace;
    const data=actor.rig.userData;if(data.playFor>0)data.playFor-=dt;else animatePet(actor.rig,actor.moving?'walk':'idle');data.mixer?.update(dt);index++;
