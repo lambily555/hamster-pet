@@ -1,7 +1,8 @@
 import * as THREE from 'three';
+import {worldMaterial} from './town-world-surfaces.js';
 export function createRestaurantRegister(room){
  const register=new THREE.Group();register.position.set(-3.35,.92,1.35);register.rotation.y=Math.PI/2;room.add(register);
- const mint=new THREE.MeshStandardMaterial({color:0xa9d8c5,roughness:.65}),cream=new THREE.MeshStandardMaterial({color:0xf4e9c8,roughness:.8}),dark=new THREE.MeshStandardMaterial({color:0x54635c,roughness:.8});
+ const mint=worldMaterial('enamel',0xa9d8c5),cream=worldMaterial('enamel',0xf4e9c8),dark=new THREE.MeshStandardMaterial({color:0x54635c,roughness:.8});
  function box(w,h,d,x,y,z,material=mint,parent=register){const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material);mesh.position.set(x,y,z);mesh.castShadow=true;parent.add(mesh);return mesh}
  box(.52,.17,.48,0,.085,0);const body=box(.5,.25,.32,0,.26,-.075);body.rotation.x=-.18;box(.55,.04,.51,0,.025,0,dark);
  const drawer=box(.43,.09,.09,0,.085,.255,cream);box(.12,.015,.015,0,.08,.305,dark,register);

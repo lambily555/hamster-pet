@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {worldMaterial} from './town-world-surfaces.js';
 import {cottageShellGeometry,cottageDoorLining,cottageFloor,cottageRadius} from './town-cottage-interior.js';
 
 // Dimensions are in the town's world units, including the original front-door positions.
@@ -31,7 +32,7 @@ export function installBuildingPortal(model,name){const layout=buildingLayouts[n
   else if(name==='Mariah Carey名人堂'&&p.height>1&&centre.y<top&&centre.z>=front)removed.push(mesh);
  });removed.forEach(mesh=>mesh.parent.remove(mesh));
  if(layout.cottage){const old=model.getObjectByName('Round timber entrance');if(old)old.parent.remove(old);}
- const shell=new THREE.Group();shell.name='Shared exterior and interior shell';model.add(shell);const wall=new THREE.MeshStandardMaterial({color:layout.wall,roughness:.88}),trim=new THREE.MeshStandardMaterial({color:layout.trim,roughness:.62}),glass=new THREE.MeshPhysicalMaterial({color:0xdceaf0,roughness:.12,metalness:0,transparent:true,opacity:.16,depthWrite:false,side:THREE.DoubleSide,clearcoat:1,envMapIntensity:.7});
+ const shell=new THREE.Group();shell.name='Shared exterior and interior shell';model.add(shell);const wall=new THREE.MeshStandardMaterial({color:layout.wall,roughness:.88}),trim=worldMaterial(['诊所','Mariah Carey名人堂','殡仪馆'].includes(name)?'metal':['零食铺','纪念馆'].includes(name)?'enamel':'wood',layout.trim,{roughness:.38}),glass=new THREE.MeshPhysicalMaterial({color:0xdceaf0,roughness:.12,metalness:0,transparent:true,opacity:.16,depthWrite:false,side:THREE.DoubleSide,clearcoat:1,envMapIntensity:.7});
  if(name==='Mariah Carey名人堂'){trim.color.set(0xc8b58f);trim.metalness=.65;trim.roughness=.32}
  if(name==='Mariah Carey名人堂'){const h=layout.floor-.16,y=.16+h/2,foundation=new THREE.MeshStandardMaterial({color:0xe8e3d7,roughness:.85});for(const z of [back+.04,front-.04]){const edge=box(shell,layout.width,h,.08,0,y,z,foundation);edge.userData.hallFoundation=true}for(const x of [-layout.width/2+.04,layout.width/2-.04]){const edge=box(shell,.08,h,layout.depth-.16,x,y,layout.z,foundation);edge.userData.hallFoundation=true}}
  const roof=layout.round?new THREE.Mesh(new THREE.CylinderGeometry(layout.width/2,layout.width/2,.07,64),wall):box(shell,layout.width,.07,layout.depth,0,top,layout.z,wall);if(layout.round){roof.position.set(0,top,layout.z);shell.add(roof)}roof.userData.cutawayRoof=true;
@@ -56,7 +57,7 @@ export function installBuildingPortal(model,name){const layout=buildingLayouts[n
  shell.traverse(mesh=>{if(mesh.isMesh&&!mesh.userData.cutawayRoof&&mesh.material.color.equals(wall.color)&&!mesh.material.transparent)mesh.userData.buildingWall=true});
  const pivot=new THREE.Group();pivot.position.set(layout.doorX-layout.doorWidth/2,layout.floor,front+.015);model.add(pivot);const w=layout.doorWidth,h=layout.doorHeight;
  if(layout.cottage){const door=new THREE.Mesh(new THREE.CircleGeometry(w/2,48),trim);door.material=trim.clone();door.material.side=THREE.DoubleSide;door.position.set(w/2,h/2,0);door.scale.y=h/w;pivot.add(door)}else{box(pivot,w,h*.42,.045,w/2,h*.21,0,trim);box(pivot,w,h*.09,.045,w/2,h*.955,0,trim);for(const x of [.025,w-.025])box(pivot,.05,h*.53,.045,x,h*.685,0,trim);box(pivot,w-.1,h*.49,.018,w/2,h*.685,0,glass);box(pivot,.025,h*.49,.03,w/2,h*.685,0,trim)}
- const handle=new THREE.Mesh(new THREE.SphereGeometry(.025,16,10),new THREE.MeshStandardMaterial({color:0xd2b479,metalness:.75,roughness:.27}));handle.position.set(w-.085,h*.44,.05);pivot.add(handle);pivot.traverse(mesh=>{if(mesh.isMesh)mesh.userData.buildingDoor=name});
+ const handle=new THREE.Mesh(new THREE.SphereGeometry(.025,16,10),worldMaterial('metal',0xd2b479,{metalness:.75,roughness:.27}));handle.position.set(w-.085,h*.44,.05);pivot.add(handle);pivot.traverse(mesh=>{if(mesh.isMesh)mesh.userData.buildingDoor=name});
  const ceilingLight=new THREE.PointLight(0xffe2b0,1.1,4,2);ceilingLight.position.set(0,top-.15,layout.z);model.add(ceilingLight);box(shell,layout.width*.4,.018,.18,0,top-.045,layout.z,new THREE.MeshStandardMaterial({color:0xffeac7,emissive:0xffdfad,emissiveIntensity:.5}));
  const portal={name,layout,model,door:pivot,target:0,angle:0,front,roof,shell,light:ceilingLight,exteriorChildren:model.children.filter(child=>child!==shell&&child!==pivot&&child!==ceilingLight)};model.userData.portal=portal;return portal;
 }

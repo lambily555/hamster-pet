@@ -1,3 +1,4 @@
+import {createBoundaryTrees} from './town-trees.js';
 import {applyBuildingSurface,finishBuildingSurfaces} from './town-surfaces.js';
 import {worldMaterial,applyWorldSurface,finishWorldSurfaces} from './town-world-surfaces.js';
 import {createSpeechDirector} from './town-speech.js';
@@ -162,7 +163,7 @@ function init() {
   const labels=places.map(([name,x,z])=>{const button=document.createElement('button');button.className='town-label';button.textContent=name;button.title=name;button.onclick=()=>enterPlace(name);host.appendChild(button);return {button,point:new THREE.Vector3(x,name==='中心广场'?1.85:name==='鼠鼠学校'?4.4:2.1,z)}});
   const outdoorActions=window.TownInteractions.actions.filter(a=>a.point).map(a=>{const button=document.createElement('button');button.className='town-label town-furniture-label';button.textContent=a.object;button.title=a.title+'：'+window.TownInteractions.description(a);button.onclick=()=>window.dispatchEvent(new CustomEvent('town-object-action',{detail:{action:'place-'+a.id,place:a.place}}));button.hidden=true;host.appendChild(button);const d=destinations.find(d=>d[0]===a.place),angle=facing(a.place),[x,z]=a.point;return {button,place:a.place,point:new THREE.Vector3(d[1]+x*Math.cos(angle)+z*Math.sin(angle),.6,d[2]-x*Math.sin(angle)+z*Math.cos(angle))}});
   const landscape=new THREE.Mesh(new THREE.PlaneGeometry(160,160),worldMaterial('grass',0x7f9b68));landscape.rotation.x=-Math.PI/2;landscape.position.y=-.7;applyWorldSurface(landscape,'grass');scene.add(landscape);
-  for(let i=0;i<34;i++){const tree=new THREE.Group(),trunk=new THREE.Mesh(new THREE.CylinderGeometry(.08,.11,.55,8),worldMaterial('bark',0x80644d)),leaf=new THREE.Mesh(new THREE.SphereGeometry(.34,12,9),worldMaterial('foliage',i%3?0x5f946a:0x7ca56e));trunk.position.y=.28;leaf.position.y=.73;tree.add(trunk,leaf);finishWorldSurfaces(tree);const a=i/34*Math.PI*2,r=17.1;tree.position.set(Math.cos(a)*r,0,Math.sin(a)*r);scene.add(tree)}
+  scene.add(createBoundaryTrees());
   let yaw=0,pitch=.83,distance=34,drag=null,activePlace=null,savedCamera=null,focusedResident=-1,focusedPup=null,trackedSubject=null,savedFocusCamera=null,worldState={};let hoverPointer=null,hoveredActor=null,hoverUntil=0;let focusedExhibit=null;let lookSensitivity=1;let showFirstPersonHud=false;let firstPerson=false,playerYaw=0,playerPitch=0,playerSavedCamera=null,jumpHeight=0,jumpVelocity=0;const playerKeys=new Set();const roomCache=new Map();
   const target=new THREE.Vector3(0,0,1);
   let room=new THREE.Group();room.visible=false;scene.add(room);

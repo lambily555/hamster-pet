@@ -2,6 +2,8 @@ import * as THREE from 'three';
 
 // Original, seamless small maps. No game assets or per-frame texture generation.
 const profiles={
+ wood:{span:.9,roughness:.64,relief:.003,contrast:.24},
+ enamel:{span:.5,roughness:.3,relief:.0004,contrast:.035},
  grass:{span:2.4,roughness:1,relief:.003,contrast:.22},
  soil:{span:1.4,roughness:1,relief:.006,contrast:.25},
  gravel:{span:.9,roughness:.95,relief:.004,contrast:.24},
@@ -29,6 +31,7 @@ function maps(kind){
   if(kind==='grass')value=.55*broad+.2*fine+.25*noise(x/2,y/8,128,32);
   if(kind==='gravel'||kind==='stone')value=.45*fine+.35*grain+.2*broad;
   if(kind==='bark')value=.7*noise(x/4,y/64,64,4)+.3*grain;
+  if(kind==='wood'){const wave=Math.sin(y/256*Math.PI*2)*2;value=.65*noise((x+256+wave)/4,y/64,64,4)+.25*noise(x/16,y/128,16,2)+.1*grain}
   if(kind==='fabric')value=.55+(x%4<2?.17:-.17)+(y%4<2?.12:-.12);
   if(kind==='metal')value=.65*hash(0,y)+.35*grain;
   const shade=Math.round(255*(1-p.contrast*(1-value))),i=(y*size+x)*4;
@@ -41,6 +44,7 @@ function maps(kind){
 function detail(material,kind){
  const p=profiles[kind],t=maps(kind);material.map=t.map;material.bumpMap=t.bumpMap;material.bumpScale=p.relief;
  if(p.roughness!==null)material.roughness=p.roughness;
+ if(kind==='metal')material.metalness=Math.max(.45,material.metalness);
  material.userData.townSurface=kind;material.userData.worldSurface=kind;
  return material;
 }

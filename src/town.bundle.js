@@ -34836,6 +34836,8 @@ void main() {
 
   // src/town-world-surfaces.js
   var profiles = {
+    wood: { span: 0.9, roughness: 0.64, relief: 3e-3, contrast: 0.24 },
+    enamel: { span: 0.5, roughness: 0.3, relief: 4e-4, contrast: 0.035 },
     grass: { span: 2.4, roughness: 1, relief: 3e-3, contrast: 0.22 },
     soil: { span: 1.4, roughness: 1, relief: 6e-3, contrast: 0.25 },
     gravel: { span: 0.9, roughness: 0.95, relief: 4e-3, contrast: 0.24 },
@@ -34867,6 +34869,10 @@ void main() {
       if (kind === "grass") value = 0.55 * broad + 0.2 * fine + 0.25 * noise(x2 / 2, y / 8, 128, 32);
       if (kind === "gravel" || kind === "stone") value = 0.45 * fine + 0.35 * grain + 0.2 * broad;
       if (kind === "bark") value = 0.7 * noise(x2 / 4, y / 64, 64, 4) + 0.3 * grain;
+      if (kind === "wood") {
+        const wave = Math.sin(y / 256 * Math.PI * 2) * 2;
+        value = 0.65 * noise((x2 + 256 + wave) / 4, y / 64, 64, 4) + 0.25 * noise(x2 / 16, y / 128, 16, 2) + 0.1 * grain;
+      }
       if (kind === "fabric") value = 0.55 + (x2 % 4 < 2 ? 0.17 : -0.17) + (y % 4 < 2 ? 0.12 : -0.12);
       if (kind === "metal") value = 0.65 * hash(0, y) + 0.35 * grain;
       const shade = Math.round(255 * (1 - p.contrast * (1 - value))), i2 = (y * size + x2) * 4;
@@ -34898,6 +34904,7 @@ void main() {
     material3.bumpMap = t.bumpMap;
     material3.bumpScale = p.relief;
     if (p.roughness !== null) material3.roughness = p.roughness;
+    if (kind === "metal") material3.metalness = Math.max(0.45, material3.metalness);
     material3.userData.townSurface = kind;
     material3.userData.worldSurface = kind;
     return material3;
@@ -34948,6 +34955,59 @@ void main() {
       const kind = mesh.material.userData.worldSurface || (mesh.userData.cutawayRoof || mesh.userData.petRoof ? "roof" : mesh.material.metalness > 0.1 ? "metal" : "paint");
       applyWorldSurface(mesh, kind, units);
     });
+  }
+
+  // src/town-trees.js
+  function createBoundaryTrees() {
+    const group = new Group();
+    group.name = "\u5916\u56F4\u6811\u6728";
+    const count = 34, trunks = new InstancedMesh(new CylinderGeometry(0.065, 0.11, 0.65, 9), worldMaterial("bark", 8414285), count);
+    const branches = new InstancedMesh(new CylinderGeometry(0.016, 0.035, 1, 7), trunks.material, count * 3);
+    const crowns = new InstancedMesh(new SphereGeometry(1, 9, 7), worldMaterial("foliage", 8100704), count * 7);
+    const leaves = new InstancedMesh(new SphereGeometry(1, 5, 3), worldMaterial("foliage", 9414508), count * 42);
+    const dummy = new Object3D(), up = new Vector3(0, 1, 0), color = new Color();
+    const put = (batch, index, x2, y, z, sx, sy, sz, yaw = 0) => {
+      dummy.position.set(x2, y, z);
+      dummy.rotation.set(0, yaw, 0);
+      dummy.scale.set(sx, sy, sz);
+      dummy.updateMatrix();
+      batch.setMatrixAt(index, dummy.matrix);
+    };
+    for (let i2 = 0; i2 < count; i2++) {
+      const angle = i2 / count * Math.PI * 2, x2 = Math.cos(angle) * 17.1, z = Math.sin(angle) * 17.1, height = 0.94 + i2 % 5 * 0.035;
+      put(trunks, i2, x2, 0.325 * height, z, 1, height, 1);
+      for (let j = 0; j < 3; j++) {
+        const a = angle + j * Math.PI * 2 / 3, start = new Vector3(x2, 0.4 * height, z), end = new Vector3(x2 + Math.cos(a) * 0.2, 0.8 * height, z + Math.sin(a) * 0.2), direction = end.clone().sub(start);
+        dummy.position.copy(start).lerp(end, 0.5);
+        dummy.quaternion.setFromUnitVectors(up, direction.clone().normalize());
+        dummy.scale.set(1, direction.length(), 1);
+        dummy.updateMatrix();
+        branches.setMatrixAt(i2 * 3 + j, dummy.matrix);
+      }
+      for (let j = 0; j < 7; j++) {
+        const a = j * 2.4 + angle, r = j === 6 ? 0 : 0.2, y = j === 6 ? 1.02 : 0.78 + j % 2 * 0.13;
+        put(crowns, i2 * 7 + j, x2 + Math.cos(a) * r, y * height, z + Math.sin(a) * r, 0.21, 0.23 * height, 0.2, a);
+        crowns.setColorAt(i2 * 7 + j, color.setHSL(0.25 + i2 % 3 * 0.012, 0.23, 0.68 + j % 3 * 0.04));
+      }
+      for (let j = 0; j < 42; j++) {
+        const cluster = j % 7, a = cluster * 2.4 + angle, r = cluster === 6 ? 0 : 0.2, cy = cluster === 6 ? 1.02 : 0.78 + cluster % 2 * 0.13;
+        const phi = j * 2.39996, theta = (Math.floor(j / 7) + 0.5) * Math.PI / 6, normal = new Vector3(Math.sin(theta) * Math.cos(phi), Math.cos(theta), Math.sin(theta) * Math.sin(phi));
+        dummy.position.set(x2 + Math.cos(a) * r + normal.x * 0.21, (cy + normal.y * 0.23) * height, z + Math.sin(a) * r + normal.z * 0.2);
+        dummy.quaternion.setFromUnitVectors(up, normal);
+        dummy.scale.set(0.08, 0.014, 0.042);
+        dummy.updateMatrix();
+        leaves.setMatrixAt(i2 * 42 + j, dummy.matrix);
+        leaves.setColorAt(i2 * 42 + j, color.setHSL(0.23 + j % 3 * 0.015, 0.28, 0.65 + j % 4 * 0.04));
+      }
+    }
+    for (const mesh of [trunks, branches, crowns, leaves]) {
+      mesh.receiveShadow = true;
+      mesh.castShadow = mesh !== leaves;
+      mesh.computeBoundingSphere();
+      group.add(mesh);
+    }
+    group.userData.treeCount = count;
+    return group;
   }
 
   // src/town-surfaces.js
@@ -35086,12 +35146,15 @@ void main() {
     mesh.geometry.setAttribute("uv", new BufferAttribute(uv, 2));
     return mesh;
   }
-  var woodColors = /* @__PURE__ */ new Set([9789499, 9992532, 8547409, 8939590, 9991247, 11898210, 9728078, 10051642, 6833454, 8409394, 13210963, 10324079, 10188881, 12095576, 10779465, 6641478, 7299404, 9139029, 11967351]);
+  var woodColors = /* @__PURE__ */ new Set([9789499, 9992532, 8547409, 8939590, 9991247, 11898210, 9728078, 10051642, 6833454, 8409394, 13210963, 10324079, 10188881, 12095576, 10779465, 6641478, 7299404, 9139029, 11967351, 10517845, 12885096, 8410680, 12429704]);
   function finishBuildingSurfaces(group, name, units = 1) {
     if (buildingSurfaceStyles[name]) group.traverse((mesh) => {
       if (!mesh.isMesh || Array.isArray(mesh.material) || mesh.material.map || mesh.material.transparent || mesh.material.metalness > 0.1) return;
       if (mesh.userData.buildingWall) applyBuildingSurface(mesh, name, "wall", units);
-      else if (woodColors.has(mesh.material.color.getHex())) applyBuildingSurface(mesh, name, "wood", units);
+      else if (woodColors.has(mesh.material.color.getHex())) applyWorldSurface(mesh, "wood", units);
+      else if ([10794938, 12304321, 12828345].includes(mesh.material.color.getHex())) applyWorldSurface(mesh, "metal", units);
+      else if ([15261392, 15324341, 15657177, 8828613, 11060131, 11059872, 15791602].includes(mesh.material.color.getHex())) applyWorldSurface(mesh, "enamel", units);
+      else if ([13350815, 15982272, 13015927].includes(mesh.material.color.getHex())) applyWorldSurface(mesh, "fabric", units);
       else if (mesh.geometry.type === "BoxGeometry") {
         const { width, height, depth } = mesh.geometry.parameters;
         if (width * units > 2 && depth * units > 1 && height * units < 0.5 && mesh.position.y * units < 0.4) applyBuildingSurface(mesh, name, "floor", units);
@@ -35157,7 +35220,7 @@ void main() {
     register.position.set(-3.35, 0.92, 1.35);
     register.rotation.y = Math.PI / 2;
     room.add(register);
-    const mint = new MeshStandardMaterial({ color: 11131077, roughness: 0.65 }), cream = new MeshStandardMaterial({ color: 16050632, roughness: 0.8 }), dark = new MeshStandardMaterial({ color: 5530460, roughness: 0.8 });
+    const mint = worldMaterial("enamel", 11131077), cream = worldMaterial("enamel", 16050632), dark = new MeshStandardMaterial({ color: 5530460, roughness: 0.8 });
     function box3(w, h, d, x2, y, z, material3 = mint, parent = register) {
       const mesh = new Mesh(new BoxGeometry(w, h, d), material3);
       mesh.position.set(x2, y, z);
@@ -39221,7 +39284,7 @@ void main() {
     const shell = new Group();
     shell.name = "Shared exterior and interior shell";
     model.add(shell);
-    const wall = new MeshStandardMaterial({ color: layout.wall, roughness: 0.88 }), trim = new MeshStandardMaterial({ color: layout.trim, roughness: 0.62 }), glass = new MeshPhysicalMaterial({ color: 14478064, roughness: 0.12, metalness: 0, transparent: true, opacity: 0.16, depthWrite: false, side: DoubleSide, clearcoat: 1, envMapIntensity: 0.7 });
+    const wall = new MeshStandardMaterial({ color: layout.wall, roughness: 0.88 }), trim = worldMaterial(["\u8BCA\u6240", "Mariah Carey\u540D\u4EBA\u5802", "\u6BA1\u4EEA\u9986"].includes(name) ? "metal" : ["\u96F6\u98DF\u94FA", "\u7EAA\u5FF5\u9986"].includes(name) ? "enamel" : "wood", layout.trim, { roughness: 0.38 }), glass = new MeshPhysicalMaterial({ color: 14478064, roughness: 0.12, metalness: 0, transparent: true, opacity: 0.16, depthWrite: false, side: DoubleSide, clearcoat: 1, envMapIntensity: 0.7 });
     if (name === "Mariah Carey\u540D\u4EBA\u5802") {
       trim.color.set(13153679);
       trim.metalness = 0.65;
@@ -39315,7 +39378,7 @@ void main() {
       box2(pivot, w - 0.1, h * 0.49, 0.018, w / 2, h * 0.685, 0, glass);
       box2(pivot, 0.025, h * 0.49, 0.03, w / 2, h * 0.685, 0, trim);
     }
-    const handle = new Mesh(new SphereGeometry(0.025, 16, 10), new MeshStandardMaterial({ color: 13808761, metalness: 0.75, roughness: 0.27 }));
+    const handle = new Mesh(new SphereGeometry(0.025, 16, 10), worldMaterial("metal", 13808761, { metalness: 0.75, roughness: 0.27 }));
     handle.position.set(w - 0.085, h * 0.44, 0.05);
     pivot.add(handle);
     pivot.traverse((mesh) => {
@@ -44818,16 +44881,7 @@ void main() {
     landscape.position.y = -0.7;
     applyWorldSurface(landscape, "grass");
     scene.add(landscape);
-    for (let i2 = 0; i2 < 34; i2++) {
-      const tree = new Group(), trunk = new Mesh(new CylinderGeometry(0.08, 0.11, 0.55, 8), worldMaterial("bark", 8414285)), leaf = new Mesh(new SphereGeometry(0.34, 12, 9), worldMaterial("foliage", i2 % 3 ? 6263914 : 8168814));
-      trunk.position.y = 0.28;
-      leaf.position.y = 0.73;
-      tree.add(trunk, leaf);
-      finishWorldSurfaces(tree);
-      const a = i2 / 34 * Math.PI * 2, r = 17.1;
-      tree.position.set(Math.cos(a) * r, 0, Math.sin(a) * r);
-      scene.add(tree);
-    }
+    scene.add(createBoundaryTrees());
     let yaw = 0, pitch = 0.83, distance3 = 34, drag = null, activePlace = null, savedCamera = null, focusedResident = -1, focusedPup = null, trackedSubject = null, savedFocusCamera = null, worldState = {};
     let hoverPointer = null, hoveredActor = null, hoverUntil = 0;
     let focusedExhibit = null;
