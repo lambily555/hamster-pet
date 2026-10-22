@@ -573,11 +573,43 @@ for(const panel of ['townContext','townRoster'])$('#'+panel)?.addEventListener('
 window.addEventListener('town-player-action',event=>{const {action,place,text,index,npcId}=event.detail;if(townSim.mainSleeping(townState)){townResult(townSim.sleepBlocked(townState));return}if(action==='pet-roster'){showPetContext()}else if(action==='pet-home'){showPlaceContext('宠物之家')}else if(action.startsWith('place-')){showInteractionObject(action.slice(6))}else if(place==='鼠鼠学校'&&['黑板','书柜','课桌'].includes(text)){showPlaceContext(place);townContext.schoolObject=text==='黑板'?'school-board':text==='书柜'?'school-books':'school-desk';renderTownContext()}else if(action==='social'){if(!window.TownApp?.inspect().firstPerson&&index!==undefined)window.TownApp?.focusResident?.(index);const npc=npcId?townSim.resident(townState,npcId):townState.npcs[index];if(!npc)return;const result=townSim.interact(townState,npc.id);if(window.TownApp?.inspect().firstPerson){townState=result.state;saveTown();renderTown()}else{townResult(result);if(index!==undefined)showNpcContext(index)}window.TownApp?.sayToNpc?.(npc.id,result.message)}else if(action==='harvest')townResult(townSim.harvest(townState));else if(action==='exercise')townResult(townSim.exercise(townState));else if(action==='water')townResult(townSim.refillWater(townState));else if(action==='supply'){showPlaceContext('鼠鼠小屋');townResult(townSim.buyFood(townState))}else if(action==='treat'){if(townState.seeds<6)townResult({state:townState,ok:false,message:'诊疗需要6颗瓜子。'});else localTownAction('在诊疗床接受了温和诊疗。','诊所',()=>{townState.seeds-=6;townState.health=Math.min(100,townState.health+12)})}else if(action==='eat'){if(townState.food<=0)townResult({state:townState,ok:false,message:'食盆旁没有粮食，先补给粮仓吧。'});else localTownAction('鼠鼠吃了一份粮食。','鼠鼠小屋',()=>{townState.food--;townState.fullness=Math.min(100,townState.fullness+20)})}else if(action==='rest'){const last=townState.playerRestAt||0;if(Date.now()-last<1800000)townResult({state:townState,ok:false,message:'刚刚休息过，陪大家继续逛逛吧。'});else localTownAction('鼠鼠在床铺休息，恢复了6点体力。','鼠鼠小屋',()=>{townState.stamina=Math.min(100,townState.stamina+6);townState.playerRestAt=Date.now()})}else{showPlaceContext(place||'中心广场');$('#townActionResult').textContent='正在查看'+(text||place)+'。'}});
 window.addEventListener('town-plaza-action',event=>{if(event.detail.action==='harvest'){showPlaceContext('小菜园');townResult(townSim.harvest(townState));return}showPlaceContext('中心广场');$('#'+(event.detail.action==='calendar'?'townCalendarSection':'townExchangeSection'))?.scrollIntoView({block:'nearest'})});
 const floatingDialogue=document.createElement('div');floatingDialogue.className='town-floating-dialogue';floatingDialogue.hidden=true;floatingDialogue.innerHTML='<p class="town-dialogue-line" data-i18n-user aria-live="polite"></p><div class="town-dialogue-choices"></div>';$('#townScene').appendChild(floatingDialogue);
-let dialogueTimer=0,dialogueId=null,dialogueAnswered=false;
-function closeFloatingDialogue(){clearInterval(dialogueTimer);dialogueTimer=0;dialogueId=null;floatingDialogue.hidden=true;delete document.body.dataset.townDialogue}
+let dialogueTimer=0,dialogueId=null,dialogueAnswered=false,dialogueNext=null;
+function closeFloatingDialogue(){clearInterval(dialogueTimer);dialogueTimer=0;dialogueId=null;dialogueNext=null;dialogueDone=null;floatingDialogue.hidden=true;delete document.body.dataset.townDialogue}
 let dialogueSource="",dialogueDone;
-function typeDialogue(text,done){dialogueSource=text;dialogueDone=done;clearInterval(dialogueTimer);const line=floatingDialogue.querySelector('p'),letters=[...TownI18n.t(text)];let i=0;line.textContent='';dialogueTimer=setInterval(()=>{line.textContent+=letters[i++]||'';if(i>=letters.length){clearInterval(dialogueTimer);dialogueTimer=0;done?.()}},38)}
-function openOutingDialogue(){const outing=townState.outing;if(!outing||outing.status!=='ready'||townSim.mainSleeping(townState))return;document.exitPointerLock?.();dialogueId=outing.id;dialogueAnswered=false;floatingDialogue.hidden=false;document.body.dataset.townDialogue='active';$('#townContext').hidden=true;$('#townRoster').hidden=true;if($('#townReturnNotice'))$('#townReturnNotice').hidden=true;const choices=floatingDialogue.querySelector('div');choices.replaceChildren();typeDialogue((townSim.resident(townState,outing.npcId)?.name||'邻居')+'：'+townSim.outingStories[outing.storyIndex][0],()=>{if(dialogueId!==outing.id)return;outing.options.forEach((option,i)=>{const button=document.createElement('button');button.textContent=option.text;button.style.animationDelay=i*80+'ms';button.onclick=()=>{const result=townSim.resolveOuting(townState,outing.id,i,Date.now(),outing.questionIndex||0);if(!result.ok){closeFloatingDialogue();return}choices.replaceChildren();dialogueAnswered=true;townState=result.state;saveTown();renderTown();typeDialogue(result.message,()=>{const finish=document.createElement('button');finish.textContent=result.finished?'结束活动':'继续（'+((townState.outing?.questionIndex||0)+1)+'/'+townState.outing.questionCount+'）';finish.onclick=result.finished?closeFloatingDialogue:openOutingDialogue;choices.appendChild(finish)})};choices.appendChild(button)})})}
+function finishDialogueTyping(){clearInterval(dialogueTimer);dialogueTimer=0;floatingDialogue.querySelector('p').textContent=TownI18n.t(dialogueSource);const done=dialogueDone;dialogueDone=null;done?.()}
+function typeDialogue(text,done){dialogueSource=text;dialogueDone=done;clearInterval(dialogueTimer);const line=floatingDialogue.querySelector('p'),letters=[...TownI18n.t(text)];let i=0;line.textContent='';dialogueTimer=setInterval(()=>{line.textContent+=letters[i++]||'';if(i>=letters.length)finishDialogueTyping()},38)}
+function advanceFloatingDialogue(){if(floatingDialogue.hidden)return;if(dialogueTimer){finishDialogueTyping();return}const next=dialogueNext;dialogueNext=null;next?.()}
+// Capture input before the scene so advancing cannot also walk, turn or interact.
+window.addEventListener('keydown',event=>{
+  if(floatingDialogue.hidden||event.target.closest?.('input,textarea,select')||event.ctrlKey||event.altKey||event.metaKey)return;
+  const choosing=!dialogueTimer&&floatingDialogue.querySelector('.town-dialogue-choices button');
+  if(choosing&&(event.key==='Tab'||(['Enter',' '].includes(event.key)&&event.target.closest?.('.town-dialogue-choices button'))))return;
+  event.preventDefault();event.stopImmediatePropagation();if(!event.repeat)advanceFloatingDialogue();
+},true);
+window.addEventListener('click',event=>{
+  if(floatingDialogue.hidden||event.target.closest?.('.town-dialogue-choices button'))return;
+  event.preventDefault();event.stopImmediatePropagation();advanceFloatingDialogue();
+},true);
+function openOutingDialogue(){
+  const outing=townState.outing;if(!outing||outing.status!=='ready'||townSim.mainSleeping(townState))return;
+  document.exitPointerLock?.();dialogueId=outing.id;dialogueAnswered=false;dialogueNext=null;floatingDialogue.hidden=false;document.body.dataset.townDialogue='active';
+  $('#townContext').hidden=true;$('#townRoster').hidden=true;if($('#townReturnNotice'))$('#townReturnNotice').hidden=true;
+  const choices=floatingDialogue.querySelector('div');choices.replaceChildren();
+  typeDialogue((townSim.resident(townState,outing.npcId)?.name||'邻居')+'：'+townSim.outingStories[outing.storyIndex][0],()=>{
+    if(dialogueId!==outing.id)return;
+    outing.options.forEach((option,i)=>{
+      const button=document.createElement('button');button.type='button';button.textContent=TownI18n.t(option.text);button.style.animationDelay=i*80+'ms';
+      button.onclick=event=>{
+        event.stopPropagation();if(dialogueAnswered)return;
+        const result=townSim.resolveOuting(townState,outing.id,i,Date.now(),outing.questionIndex||0);
+        if(!result.ok){closeFloatingDialogue();return}
+        choices.replaceChildren();dialogueAnswered=true;townState=result.state;saveTown();renderTown();
+        typeDialogue(result.message,()=>{dialogueNext=result.finished?closeFloatingDialogue:openOutingDialogue});
+      };
+      choices.appendChild(button);
+    });
+  });
+}
 window.addEventListener('town-outing-open',openOutingDialogue);window.addEventListener('town-dialogue-close',closeFloatingDialogue);
 window.addEventListener('town-life-event',event=>{const result=townSim.recordSceneEvent(townState,event.detail);if(event.detail.type==='restaurant-payment'&&!result.ok)window.TownApp?.finishRestaurantPayment(event.detail.id,result);if(result.ok){townState=result.state;saveTown(event.detail.type==='energy');if(event.detail.type==='restaurant-payment'){$('#townContext').hidden=true;if($('#townReturnNotice'))$('#townReturnNotice').hidden=true;window.TownApp?.finishRestaurantPayment(event.detail.id,result)}if(event.detail.type!=='energy'){renderTown();if(event.detail.type==='outing-ready'){window.TownApp?.focusOuting();$('#townContext').hidden=true;$('#townRoster').hidden=true;townContext={type:'place',place:townState.outing.place}}renderTownContext(true)}}});
 window.addEventListener('town-pup-select',event=>{if(window.TownApp?.inspect().firstPerson){window.TownApp.focusPup(event.detail.id);return}townContext={type:'npc',npcId:event.detail.id};openTownOverlay('townContext');renderTownContext()});

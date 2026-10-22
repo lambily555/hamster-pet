@@ -47032,7 +47032,19 @@ void main() {
         buildRoom(activePlace);
       }
     }
-    window.TownApp = { finishRestaurantPayment: (id, result) => {
+    window.TownApp = { mobileCamera: (dx, dy, zoom = 0) => {
+      if (!window.HamsterMobile) return;
+      if (firstPerson) {
+        if (document.body.dataset.townDialogue !== "active") {
+          playerYaw -= dx * 3e-3 * lookSensitivity;
+          playerPitch = Math.max(-1.3, Math.min(1.3, playerPitch + dy * 3e-3 * lookSensitivity));
+        }
+      } else {
+        drag = null;
+        distance3 = Math.max(activePlace ? 5 : 14, Math.min(activePlace ? 20 : 38, distance3 + zoom));
+        positionCamera();
+      }
+    }, finishRestaurantPayment: (id, result) => {
       const actor = life.actors.get(id);
       if (result.ok && actor) {
         if (firstPerson && id === "main") {
