@@ -13,7 +13,7 @@ events.click(event());assert.equal(resolved,0);assert.equal(choices.children.len
 for(let n=0;n<3;n++){
  choices.children[0].onclick({stopPropagation(){}});assert.equal(resolved,n+1);assert.equal(choices.children.length,0);
  events.keydown(event('a',new Element(),true));assert.equal(line.textContent,'');
- events.click(event());assert.equal(line.textContent,'芝麻：Response');assert.equal(choices.children.length,0);
+ events.click(event());assert.equal(line.textContent,'芝麻：Response'+(n===2?'\n\n本次鼠鼠会谈正式散场，剩下的话题先塞进腮帮子，下次见面接着聊。':''));assert.equal(choices.children.length,0);
  events.keydown(event(' '));
  if(n<2){assert.equal(floating.hidden,false);events.keydown(event('Enter'));assert.equal(choices.children.length,3);}
 }

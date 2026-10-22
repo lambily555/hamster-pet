@@ -610,7 +610,8 @@ function openOutingDialogue(){
         const result=townSim.resolveOuting(townState,outing.id,i,Date.now(),outing.questionIndex||0);
         if(!result.ok){closeFloatingDialogue();return}
         choices.replaceChildren();dialogueAnswered=true;townState=result.state;saveTown();renderTown();
-        typeDialogue(result.message,()=>{dialogueNext=result.finished?closeFloatingDialogue:openOutingDialogue});
+        const closing=result.finished?'本次鼠鼠会谈正式散场，剩下的话题先塞进腮帮子，下次见面接着聊。':'';
+        typeDialogue(result.message+(closing?'\n\n'+closing:''),()=>{dialogueNext=result.finished?closeFloatingDialogue:openOutingDialogue});
       };
       choices.appendChild(button);
     });
