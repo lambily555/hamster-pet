@@ -80,7 +80,7 @@ export function createTownLife(onEvent=()=>{}){
    if(actor.phase==='idle'){actor.wait-=dt;if(actor.wait<=0)plan(actor)}
    else if(actor.phase==='arrived'){
     actor.place=actor.destination;onEvent({id:actor.id,type:'status',action:actor.action==='睡觉'?'回家睡觉':actor.action,place:actor.destination});const d=byName.get(actor.destination);
-    if(celebration&&actor.destination==='中心广场'){const index=[...actors.keys()].indexOf(actor.id),a=index/Math.max(actors.size,1)*Math.PI*2;go(actor,point(Math.cos(a)*2.15,-1.3+Math.sin(a)*1.2),'celebrating')}
+    if(celebration&&!actor.outing&&actor.destination==='中心广场'){const index=[...actors.keys()].indexOf(actor.id),a=index/Math.max(actors.size,1)*Math.PI*2;go(actor,point(Math.cos(a)*2.15,-1.3+Math.sin(a)*1.2),'celebrating')}
     else if(d[3]){actor.inside=actor.destination;actor.position=point(0,2.6);const stations=actor.outing?[actor.id==='main'?-.5:.5,2]:actor.familyPartner?actor.familyStation:actor.action==='住院'?[-1.15,-.8]:actor.action==='睡觉'?cottageFurniture.bed:actor.action==='饮水'?cottageFurniture.water:actor.action==='进食'?cottageFurniture.bowl:d[5];go(actor,point(...stations),'using',true)}
     else if(actor.action==='社交'){actor.phase='meeting';actor.wait=35;actor.speech='等朋友一起聊聊';go(actor,point(-1.9+(actors.size?([...actors.keys()].indexOf(actor.id)%4)*.85:0),.1),'meeting')}
     else{actor.wait=0;if(actor.destination==='墓地')go(actor,point(d[1],d[2]),'using');else if(actor.action==='跑轮')go(actor,point(d[1],d[2]+.2),'using',true);else{actor.phase='using'}}

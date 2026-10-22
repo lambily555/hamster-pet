@@ -38877,7 +38877,7 @@ void main() {
           actor.place = actor.destination;
           onEvent({ id: actor.id, type: "status", action: actor.action === "\u7761\u89C9" ? "\u56DE\u5BB6\u7761\u89C9" : actor.action, place: actor.destination });
           const d = byName.get(actor.destination);
-          if (celebration && actor.destination === "\u4E2D\u5FC3\u5E7F\u573A") {
+          if (celebration && !actor.outing && actor.destination === "\u4E2D\u5FC3\u5E7F\u573A") {
             const index = [...actors.keys()].indexOf(actor.id), a = index / Math.max(actors.size, 1) * Math.PI * 2;
             go(actor, point(Math.cos(a) * 2.15, -1.3 + Math.sin(a) * 1.2), "celebrating");
           } else if (d[3]) {

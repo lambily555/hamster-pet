@@ -952,3 +952,5 @@ html[lang="es"] main>header::after{content:"🐾 Una pequeña vida con Hámster"
 /* Latin diary text uses natural word spacing and never adds hyphenation. */
 html:is([lang="en"],[lang="es"]) :is(.diary-paper,.diary-preview>p,.diary-archive span){font-family:"Segoe UI",Arial,sans-serif;letter-spacing:normal;word-spacing:normal;text-align:start;word-break:normal;overflow-wrap:normal;hyphens:none}
 html:is([lang="en"],[lang="es"]) .diary-paper p{font-family:"Segoe UI",Arial,sans-serif;letter-spacing:normal;word-spacing:normal;text-indent:0;text-align:start;word-break:normal;overflow-wrap:normal;hyphens:none}
+
+#townOutingNotice{position:absolute;top:22%;left:50%;translate:-50% 0;z-index:210;max-width:min(560px,86%);padding:12px 18px;border:1px solid #b5c4ab;border-radius:14px;background:#fffdf3f2;color:#344b35;box-shadow:0 4px 16px #26382625;font:600 16px/1.5 'Microsoft YaHei',sans-serif;pointer-events:none;text-align:center}#townOutingNotice[hidden]{display:none}

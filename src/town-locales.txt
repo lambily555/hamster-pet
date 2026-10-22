@@ -1390,3 +1390,5 @@
 可领养。|may adopt.|pueden adoptar.
 外围树木|Boundary Trees|Árboles del Perímetro
 物种|Species|Especie
+
+朋友正在赶往约定地点，请操控主鼠前往：|Your friend is on the way. Guide your hamster to: |Tu amigo va de camino. Lleva a tu hámster a:

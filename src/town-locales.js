@@ -1390,7 +1390,8 @@ TownI18n.add({
     "仅主鼠和本代选中的最多": "Only the main hamster and up to ",
     "可领养。": "may adopt.",
     "外围树木": "Boundary Trees",
-    "物种": "Species"
+    "物种": "Species",
+    "朋友正在赶往约定地点，请操控主鼠前往：": "Your friend is on the way. Guide your hamster to: "
   },
   "es": {
     "鼠鼠小镇": "Pueblo Hámster",
@@ -2782,6 +2783,7 @@ TownI18n.add({
     "仅主鼠和本代选中的最多": "Solo el hámster principal y hasta",
     "可领养。": "pueden adoptar.",
     "外围树木": "Árboles del Perímetro",
-    "物种": "Especie"
+    "物种": "Especie",
+    "朋友正在赶往约定地点，请操控主鼠前往：": "Tu amigo va de camino. Lleva a tu hámster a: "
   }
 });
