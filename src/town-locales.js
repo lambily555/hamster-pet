@@ -2784,6 +2784,6 @@ TownI18n.add({
     "可领养。": "pueden adoptar.",
     "外围树木": "Árboles del Perímetro",
     "物种": "Especie",
-    "朋友正在赶往约定地点，请操控主鼠前往：": "Tu amigo va de camino. Lleva a tu hámster a: "
+    "朋友正在赶往约定地点，请操控主鼠前往：": "Tu amigo va de camino. Lleva a tu hámster a:"
   }
 });
