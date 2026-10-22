@@ -3,8 +3,6 @@ const sprite = document.querySelector('.sprite');
 const bubble = document.querySelector('#bubble');
 const closeButton = document.querySelector('#close');
 const sizeTip = document.querySelector('#sizeTip');
-const realVideoCanvas = document.querySelector('#realVideo');
-const realVideoContext = realVideoCanvas.getContext('2d');
 const realCutout = document.querySelector('#realCutout');
 const aiDramaCutout = document.querySelector('#aiDramaCutout');
 const foodProp = document.querySelector('#foodProp');
@@ -348,64 +346,6 @@ function syncRealCutout(force=false) {
   realCutout.src = cutoutSource(action);
 }
 
-const realVideoSources = {
-  calm: '../assets/videos/raw/video-04.mp4',
-  groom: '../assets/videos/raw/video-01.mp4',
-  eat: '../assets/videos/raw/video-02.mp4',
-  sleep: '../assets/videos/raw/video-03.mp4',
-  interact: '../assets/videos/raw/video-05.mp4',
-  turn: '../assets/videos/raw/video-06.mp4'
-};
-const realVideoCrops = {
-  calm: { x:.12, y:.25, w:.76, h:.48 },
-  groom: { x:.13, y:.20, w:.74, h:.50 },
-  eat: { x:.02, y:.28, w:.67, h:.45 },
-  sleep: { x:.05, y:.03, w:.80, h:.92 },
-  interact: { x:.03, y:.02, w:.92, h:.74 },
-  turn: { x:.02, y:.22, w:.96, h:.47 }
-};
-const realStateClips = {
-  idle:'calm', typing:'groom', loafing:'eat', happy:'interact',
-  stretch:'interact', groom:'groom', look:'turn', sleep:'sleep', wheel:'interact'
-};
-const realVideos = {};
-let activeRealClip = '';
-for (const [name, src] of Object.entries(realVideoSources)) {
-  const video = document.createElement('video');
-  video.src = src; video.loop = true; video.muted = true; video.playsInline = true; video.preload = 'auto';
-  realVideos[name] = video;
-}
-function syncRealVideo(force=false) {
-  const clip = realStateClips[state] || 'calm';
-  if (!force && clip === activeRealClip) return;
-  if (realVideos[activeRealClip]) realVideos[activeRealClip].pause();
-  activeRealClip = clip;
-  const video = realVideos[clip];
-  if (video.ended || video.currentTime >= video.duration - .1) video.currentTime = 0;
-  if (appSettings.petForm === 'real') video.play().catch(()=>{});
-}
-function drawRealVideo() {
-  requestAnimationFrame(drawRealVideo);
-  if (appSettings.petForm !== 'real') return;
-  syncRealVideo();
-  const video = realVideos[activeRealClip];
-  if (!video || video.readyState < 2) return;
-  const crop = realVideoCrops[activeRealClip];
-  const sw=video.videoWidth*crop.w, sh=video.videoHeight*crop.h;
-  realVideoContext.clearRect(0,0,600,600);
-  realVideoContext.save();
-  realVideoContext.beginPath();
-  realVideoContext.ellipse(300,315,270,255,0,0,Math.PI*2);
-  realVideoContext.clip();
-  realVideoContext.drawImage(video,video.videoWidth*crop.x,video.videoHeight*crop.y,sw,sh,24,34,552,526);
-  realVideoContext.globalCompositeOperation='destination-in';
-  const edge=realVideoContext.createRadialGradient(300,300,205,300,300,292);
-  edge.addColorStop(0,'rgba(0,0,0,1)'); edge.addColorStop(.72,'rgba(0,0,0,.98)'); edge.addColorStop(1,'rgba(0,0,0,0)');
-  realVideoContext.fillStyle=edge; realVideoContext.fillRect(0,0,600,600);
-  realVideoContext.restore();
-}
-// The first prototype drew the raw rectangular video into a round canvas.
-// Keep that code dormant; the real mode now uses true alpha-matted actions.
 function say(text, duration = 1900) {
   bubble.textContent = text; bubble.classList.add('show'); clearTimeout(bubbleTimer);
   bubbleTimer = setTimeout(() => bubble.classList.remove('show'), duration);
@@ -517,7 +457,6 @@ function applySettings(next) {
   document.body.classList.toggle('mode-ai-drama', appSettings.petForm === 'ai-drama');
   document.body.classList.toggle('mode-3d', appSettings.petForm === '3d');
   realCutout.style.visibility='visible';
-  for (const video of Object.values(realVideos)) video.pause();
   if (appSettings.petForm === 'real') syncRealCutout(previousForm!=='real');
   if (appSettings.petForm === 'ai-drama') syncAiDramaCutout(true);
   const outfit = document.querySelector('#outfit');

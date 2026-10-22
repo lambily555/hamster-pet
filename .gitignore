@@ -10,3 +10,5 @@ Thumbs.db
 .capture-profile*/
 assets/videos/raw/
 assets/references/
+
+temp/

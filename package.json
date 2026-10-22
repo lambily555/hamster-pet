@@ -1,13 +1,15 @@
 {
   "name": "momo-desktop-pet",
-  "version": "1.0.0",
+  "version": "1.4.0",
   "private": true,
   "description": "A tiny privacy-friendly hamster desktop companion",
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
-    "check": "node --check src/main.js && node --check src/preload.js && node --check src/renderer.js",
-    "dist": "electron-builder --win portable nsis"
+    "check": "node scripts/check-release.js",
+    "dist": "node scripts/build.js && node scripts/check-release.js && electron-builder --win --x64 --publish never",
+    "build": "node scripts/build.js",
+    "test": "node scripts/test-ci.js"
   },
   "devDependencies": {
     "electron": "^37.2.0",
@@ -18,7 +20,6 @@
     "appId": "com.tuantuan.desktop.pet",
     "productName": "鼠鼠桌面小宠",
     "asar": false,
-    "electronDist": "node_modules/electron/dist",
     "directories": {
       "output": "release"
     },
@@ -26,7 +27,9 @@
       "src/**/*",
       "assets/**/*",
       "scripts/process-custom-action.py",
-      "package.json"
+      "package.json",
+      "LICENSE",
+      "ASSETS_LICENSE.md"
     ],
     "win": {
       "icon": "assets/mouse-real-icon-v2.ico",
@@ -36,18 +39,24 @@
       ]
     },
     "portable": {
-      "artifactName": "鼠鼠桌面小宠-免安装版-${version}.exe"
+      "artifactName": "hamster-pet-portable-${version}.exe"
     },
     "nsis": {
-      "artifactName": "鼠鼠桌面小宠-安装包-${version}.exe",
+      "artifactName": "hamster-pet-setup-${version}.exe",
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "鼠鼠桌面小宠"
+      "shortcutName": "鼠鼠桌面小宠",
+      "runAfterFinish": false
     }
   },
   "dependencies": {
     "three": "^0.185.1"
+  },
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=11 <12"
   }
 }

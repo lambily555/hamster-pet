@@ -53,7 +53,7 @@
 `assets/models/cube-pets/animal-*.glb`（全部24种动物）、`Textures/colormap.png` 来自 Kenney Cube Pets 2.0，按 CC0 使用及再分发，原始许可保存在同目录 `License.txt`。
 来源：https://kenney.nl/assets/cube-pets
 许可：https://creativecommons.org/publicdomain/zero/1.0/
-仅发布运行所需的猫、狗及共用颜色贴图，完整下载包和预览截图不包含在公开仓库。
+仅发布运行所需的24种动物及共用颜色贴图，原始下载包和预览截图不包含在公开仓库。
 
 玩家上传的定制贴图只保存在本机用户存档中，不随公开仓库分发。公开目录仅收录运行需要的24个GLB、配套色图及原始CC0许可，不收录原始下载压缩包。
 

@@ -1,50 +1,59 @@
 # hamster-pet · 鼠鼠桌面小宠
 
-一只会在 Windows 桌面陪伴你的小仓鼠。它能回应点击和键盘输入，在 3D、真实动态与仿真形态之间切换，还能跑跑轮、接受投喂、换装、说话，并拥有一个会在离线期间继续生活的 3D 鼠鼠小镇。
+Windows 桌面仓鼠与可互动的 3D 鼠鼠小镇。支持中文、English、Español。
+A Windows hamster companion with a living 3D town, three visual forms and Chinese, English and Spanish interfaces.
 
-A Windows desktop hamster companion with interactive 3D, real-motion, and lifelike forms, feeding, outfits, dialogue, a running wheel, daily journals, and a 3D hamster town prototype under development.
+![功能主页](assets/screenshots/home.png)
 
-## 主页展示 / Home Preview
+## 下载安装 / Download
 
-![鼠鼠桌面小宠主页 / Hamster Desktop Pet Home](assets/screenshots/home.png)
+打开 [最新发行版](https://github.com/lambily555/hamster-pet/releases/latest)：
 
-## 功能
+- **hamster-pet-setup-版本.exe**：Windows 10/11 x64 安装包，可选择安装位置并创建快捷方式。
+- **hamster-pet-portable-版本.exe**：免安装程序，双击运行。
+- **SHA256SUMS.txt**：用于核对下载文件完整性。
 
-- 透明桌面小宠窗口与系统托盘
-- 点击、键盘输入和闲置状态反馈
-- 真实动态动作库与自定义动作导入
-- 可在可旋转的 CC0 3D 模型、真实动态和仿真形态之间切换
-- 仿真形态包含待机呼吸、打字、睡眠、侧躺、开心、爬行、进食和跑轮等透明动画
-- 菜叶、面包虫、小饼干、营养糊糊投喂互动
-- 跑轮、装扮、自定义对话和开心叫声
-- 每日互动统计和小鼠日记
-- 鼠鼠小镇第一版：沉浸式场景、九个地点、九位 NPC、五个室内剖视布局与四个户外近景
-- 现实昼夜、本地天气、离线生活结算、回归亮点、小镇日记，以及饱食度、健康、粮仓、补粮、菜园和家具循环
-- 可独立开关成长、自然死亡与疾病；支持居民关系、繁育、特征继承、送别、墓碑、纪念记录和选择新宠
+安装包自带运行环境，不需要 Node.js、pnpm 或 Python。程序暂未购买代码签名证书，Windows 可能显示未知发布者。安装结束不会自动启动桌面宠物。
+GitHub 的 **Code → Download ZIP** 是源代码，不是安装包。个人设置、居民、宠物和自定义图片保存在本机，不随下载包分发；已有存档不因更新而主动清除，建议升级前备份。
 
-小镇目前采用程序骨骼步态与简化移动路线。复杂四足接地、完整避障、细致职业表演与连续进入建筑动画仍在精修；纪念相册当前保存生活事件文字，尚不支持导入照片。
-- 大小调节、位置拖动与开机后的快捷启动
+Download a setup or portable EXE from Releases; no developer tools are needed. Source ZIPs require the development setup below. Builds are currently unsigned. Personal saves are local and are not included in downloads.
 
-## Lifelike Form / 仿真形态
+## 当前功能
 
-The lifelike form includes transparent animations for idle breathing, typing, sleeping, lying down, happiness, crawling, feeding, and running on the wheel. Only final runtime WebP files and the manifest are published; source videos, frame projects, generation sheets, and test captures remain private.
+- 透明桌面仓鼠、系统托盘、快捷键；3D、真实动态和仿真形态，投喂、装扮、自定义动作、日记和聊天。
+- 小镇上帝视角与随时切换的第一视角，建筑进出、家具互动、居民与宠物聚焦跟随。
+- 小屋、学校、诊所、饭馆、零食铺、纪念馆、殡仪馆、名人堂、宠物之家，以及广场、菜园、跑轮公园和墓地。
+- 小镇时间、天气、广播、居民资料、生日与忌日日历；成长、体力、疾病、衰老、死亡、继任与遗产。
+- 居民交流、结伴剧情、伴侣、幼鼠与外来居民选择；居民人数不超过15时可挑选新居民。
+- 24种 Cube Pets 模型，主鼠最多新领养3只宠物，NPC邀请领养、跟随、继承及免费领养区。
+- 饭馆排队结账与收银效果；建筑、家具、地面与树木材质。
 
-仿真形态包含待机呼吸、打字、睡眠、侧躺、开心、爬行、进食和跑轮等透明动画。公开仓库只提供运行所需的最终 WebP 与动作清单，原始视频、逐帧工程、生成母版和测试截图不会公开。
+功能与建模仍在持续完善，文件检查和自动测试不等同于所有设备上的视觉、性能与安装验收。最新变更见[开发记录](docs/鼠鼠app开发记录.md)，历史设计文档不代表当前功能状态。
 
-## 快速开始
+## 从源码运行 / Development
 
-需要 Windows 10/11、Node.js 20 或更高版本，以及 pnpm。
+需要 Windows 10/11 x64、Node.js 22或更高版本、**pnpm 11.25.0**。首次安装依赖需联网。
 
 ```bash
-pnpm install
+npm install -g pnpm@11.25.0
+pnpm install --frozen-lockfile
+pnpm build
+pnpm check
+pnpm test
 pnpm start
 ```
 
-生成 Windows 安装包：
+`pnpm build` 生成语言字典和两份3D脚本包；`pnpm check` 检查语法、入口和运行素材；`pnpm test` 运行不启动 App 的回归测试。
 
 ```bash
 pnpm dist
 ```
+
+安装包输出到 `release/`。维护者必须从已审查的公开目录构建，不要将私人工作目录的原始素材打包。
+
+## 自动检查与发行
+
+`.github/workflows/check-release.yml` 是本项目维护的 GitHub Actions 配置：每次推送 main 或提交 PR，会在 GitHub 的 Windows 环境重新安装依赖、构建、检查素材和运行回归测试，并核对已提交的脚本包是否过时。推送与 package.json 版本一致的 `v版本号` 标签后，检查通过才制作并上传两个 EXE 和校验文件到 Releases。
 
 ## AI 聊天 API 兼容性
 
@@ -65,38 +74,8 @@ AI 聊天只支持采用 OpenAI **Chat Completions** 请求格式的接口。程
 
 API Key 保存在当前电脑的应用设置中，不会由本项目主动上传到其他位置。请勿在公共电脑保存 Key，也不要把配置文件、Key 或含 Key 的截图提交到 GitHub。
 
-## 自定义鼠鼠
+## 素材与贡献
 
-在“鼠鼠动作库”中可以导入透明背景的 WebP、GIF、APNG 或 PNG。为了获得自然效果，建议使用已经抠好主体、动作长度为 3 至 8 秒的素材。
+代码采用 [MIT License](LICENSE)。模型、照片、动画与声音分别适用 [素材许可说明](ASSETS_LICENSE.md)，不能把代码许可当成所有素材的许可。名人堂图片的授权状态见该说明。自定义上传素材仅存于本机。
 
-仓库包含由如月十二制作、以 CC0 发布的“ハムちゃん/Hamster”3D模型。来源与许可说明见 [MODEL_SETUP.md](MODEL_SETUP.md)。
-
-## 开源与素材
-
-程序代码使用 MIT License。仓库内的鼠鼠影像、声音和食物素材不属于 MIT 软件许可证；随仓库提供的仓鼠3D模型使用 CC0，具体见 [ASSETS_LICENSE.md](ASSETS_LICENSE.md)。
-
-## 参与贡献
-
-欢迎提交 Issue、功能建议和 Pull Request。请先阅读 [CONTRIBUTING.md](CONTRIBUTING.md)。
-
-## 鼠鼠小镇建设与开发记录
-
-- [鼠鼠小镇建设第一版](docs/鼠鼠小镇建设第一版.md)：完整设计、地图、建筑内部、离线生活、生命传承与验收条件。
-- [鼠鼠app开发记录](docs/鼠鼠app开发记录.md)：设计决策、本地实现及后续建设记录。
-
-速度及成长、死亡、疾病选项当前仅保存设置，不代表完整系统已实现；详细状态以建设文档为准。
-
-## 2026-09-27 广场庆典与第一视角
-
-菜园新增木围栏、分区菜床及不同蔬菜，成熟作物可点击收获。广场新增石板地面、雕像喷泉、长椅、花箱、交换摊和日历，占地约17.8，是普通建筑5.6的三倍以上；外围空间同步扩大。
-
-独立小镇日期随生活速度推进，写实、悠闲、标准、快速分别为365、90、30、7个现实日对应一个小镇年；时钟与昼夜按小镇时间，饥饿和饮水按现实时间。主鼠按2024-06-09出生日期重算年龄，NPC根据已有年龄确定固定生日，幼鼠记录出生当天。日历展示每只鼠鼠生日以及元旦、仓鼠日、春节、端午和中秋。
-
-节日与生日举办全天庆典，居民实际走到广场，寿星戴生日帽并出现蛋糕；离线跨过庆典日期会记入生活记录。每日交换每类一次：2粮食换3蔬菜、2蔬菜换4粮食、3蔬菜换1份垫料，实际扣减库存。
-
-庆典当天可选择第一视角：WASD移动、鼠标环顾、E互动与进出建筑、空格跳跃、按住Shift跑步（松开恢复步行）、Esc返回上帝视角。跑步速度约为步行的1.78倍，有建筑与家具碰撞限制，互动遵循原有资源和体力规则。操作说明位于小镇设置。
-
-
-2026-09-27 修复：地点卡片刷新时保留鼠鼠日历的展开或收起状态。小镇时钟、天气、昼夜与作息统一使用独立小镇时间，随生活速度推进，时间挂件每秒更新。饥饿与饮水的现实时间结算规则保持现有设计。
-
-2026-09-27 学校与小镇布局：新增参考圆形木楼的鼠鼠学校，包含分层木瓦、钟楼、学习庭院、秋千和可进入的教室（黑板、课桌、书柜）。小镇半径扩为18，各建筑分散在广场周围，正门统一朝向中心广场；广场交点铺设完整东西、南北十字主路，短支路连接正门。入口、建筑旋转碰撞、鼠鼠寻路、视野及路灯同步调整。居民与长大幼鼠可自主到学校学习。
+[模型说明](MODEL_SETUP.md) · [参与贡献](CONTRIBUTING.md) · [安全反馈](SECURITY.md) · [开发记录](docs/鼠鼠app开发记录.md)
