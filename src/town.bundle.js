@@ -44888,14 +44888,15 @@ void main() {
       host.appendChild(button);
       return { button, point: new Vector3(x2, name === "\u4E2D\u5FC3\u5E7F\u573A" ? 1.85 : name === "\u9F20\u9F20\u5B66\u6821" ? 4.4 : 2.1, z) };
     });
-    const futureRegions = [["\u5976\u519C\u9547", -22, 0], ["\u77E5\u8BC6\u68EE\u6797", 0, -23], ["\u672A\u77E5\u533A\u57DF", 22, 0]].map(([name, x2, z]) => {
+    const futureRegions = [["\u5976\u519C\u9547", -22, 0, Math.PI / 2], ["\u77E5\u8BC6\u68EE\u6797", 0, -23, 0], ["\u672A\u77E5\u533A\u57DF", 22, 0, -Math.PI / 2]].map(([name, x2, z, rotation]) => {
       const canvas2 = document.createElement("canvas");
       canvas2.width = 1024;
       canvas2.height = 256;
       const texture3 = new CanvasTexture(canvas2);
       texture3.colorSpace = SRGBColorSpace;
-      const mesh = new Mesh(new PlaneGeometry(9, 2.25), new MeshBasicMaterial({ map: texture3, transparent: true, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 }));
+      const mesh = new Mesh(new PlaneGeometry(18, 4.5), new MeshBasicMaterial({ map: texture3, transparent: true, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 }));
       mesh.rotation.x = -Math.PI / 2;
+      mesh.rotateZ(rotation);
       mesh.position.set(x2, -0.69, z);
       scene.add(mesh);
       return { name, canvas: canvas2, texture: texture3, text: "" };
