@@ -44710,6 +44710,7 @@ void main() {
     renderer.toneMappingExposure = 1;
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = PCFSoftShadowMap;
+    renderer.shadowMap.autoUpdate = false;
     const ambient = new HemisphereLight(16774367, 6714989, 2.4);
     scene.add(ambient);
     const sun = new DirectionalLight(16770237, 3.1);
@@ -44887,6 +44888,34 @@ void main() {
       host.appendChild(button);
       return { button, point: new Vector3(x2, name === "\u4E2D\u5FC3\u5E7F\u573A" ? 1.85 : name === "\u9F20\u9F20\u5B66\u6821" ? 4.4 : 2.1, z) };
     });
+    const futureRegions = [["\u5976\u519C\u9547", -22, 0], ["\u77E5\u8BC6\u68EE\u6797", 0, -23], ["\u672A\u77E5\u533A\u57DF", 22, 0]].map(([name, x2, z]) => {
+      const canvas2 = document.createElement("canvas");
+      canvas2.width = 1024;
+      canvas2.height = 256;
+      const texture3 = new CanvasTexture(canvas2);
+      texture3.colorSpace = SRGBColorSpace;
+      const mesh = new Mesh(new PlaneGeometry(9, 2.25), new MeshBasicMaterial({ map: texture3, transparent: true, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 }));
+      mesh.rotation.x = -Math.PI / 2;
+      mesh.position.set(x2, -0.69, z);
+      scene.add(mesh);
+      return { name, canvas: canvas2, texture: texture3, text: "" };
+    });
+    function refreshRegionNames() {
+      futureRegions.forEach((region) => {
+        const title = window.TownI18n.t(region.name), status = window.TownI18n.t("\u5C1A\u672A\u5F00\u653E"), text = title + "|" + status;
+        if (text === region.text) return;
+        region.text = text;
+        const ctx = region.canvas.getContext("2d");
+        ctx.clearRect(0, 0, 1024, 256);
+        ctx.textAlign = "center";
+        ctx.fillStyle = "#344b37";
+        ctx.font = '600 86px "Microsoft YaHei",sans-serif';
+        ctx.fillText(title, 512, 114, 960);
+        ctx.font = '34px "Microsoft YaHei",sans-serif';
+        ctx.fillText(status, 512, 188, 940);
+        region.texture.needsUpdate = true;
+      });
+    }
     const outdoorActions = window.TownInteractions.actions.filter((a) => a.point).map((a) => {
       const button = document.createElement("button");
       button.className = "town-label town-furniture-label";
@@ -46794,7 +46823,7 @@ void main() {
     roomCache.forEach((indoor) => indoor.visible = false);
     const roomBounds = new Map(indoorNames.map((name) => [name, new Box3().setFromObject(placeModels.get(name))]));
     const clock = new Clock(), viewArea = new Frustum(), viewMatrix = new Matrix4();
-    let previousTime = 0;
+    let previousTime = 0, lastShadowTime = -Infinity;
     function draw() {
       requestAnimationFrame(draw);
       const t = clock.getElapsedTime(), dt = Math.min(0.1, t - previousTime);
@@ -46917,6 +46946,10 @@ void main() {
       roomLabels.forEach(({ button, point: point2 }) => placeLabel(button, point2, occupied, true));
       layoutSpeech();
       if (firstPerson) pet.visible = false;
+      if (t - lastShadowTime >= 1 / 30) {
+        renderer.shadowMap.needsUpdate = true;
+        lastShadowTime = t;
+      }
       renderer.render(scene, camera);
     }
     draw();
@@ -46958,6 +46991,7 @@ void main() {
       return result;
     }
     function applyWorld(next = {}) {
+      refreshRegionNames();
       const oldWeather = worldState.weather?.name, oldBoard = worldState.schoolBoard;
       worldState = next;
       roomCache.get("\u5BA0\u7269\u4E4B\u5BB6")?.userData.syncPets(next.petHome);

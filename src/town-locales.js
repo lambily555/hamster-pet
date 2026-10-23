@@ -1392,7 +1392,11 @@ TownI18n.add({
     "外围树木": "Boundary Trees",
     "物种": "Species",
     "朋友正在赶往约定地点，请操控主鼠前往：": "Your friend is on the way. Guide your hamster to: ",
-    "本次鼠鼠会谈正式散场，剩下的话题先塞进腮帮子，下次见面接着聊。": "The hamster summit is adjourned. Any leftover topics go in the cheek pouches until next time."
+    "本次鼠鼠会谈正式散场，剩下的话题先塞进腮帮子，下次见面接着聊。": "The hamster summit is adjourned. Any leftover topics go in the cheek pouches until next time.",
+    "奶农镇": "Dairy Town",
+    "知识森林": "Forest of Knowledge",
+    "未知区域": "Unknown Region",
+    "尚未开放": "Not yet open"
   },
   "es": {
     "鼠鼠小镇": "Pueblo Hámster",
@@ -2786,6 +2790,10 @@ TownI18n.add({
     "外围树木": "Árboles del Perímetro",
     "物种": "Especie",
     "朋友正在赶往约定地点，请操控主鼠前往：": "Tu amigo va de camino. Lleva a tu hámster a:",
-    "本次鼠鼠会谈正式散场，剩下的话题先塞进腮帮子，下次见面接着聊。": "Se levanta la sesión del consejo hámster. Los temas pendientes van a las mejillas hasta la próxima."
+    "本次鼠鼠会谈正式散场，剩下的话题先塞进腮帮子，下次见面接着聊。": "Se levanta la sesión del consejo hámster. Los temas pendientes van a las mejillas hasta la próxima.",
+    "奶农镇": "Pueblo lechero",
+    "知识森林": "Bosque del conocimiento",
+    "未知区域": "Región desconocida",
+    "尚未开放": "Aún no disponible"
   }
 });
