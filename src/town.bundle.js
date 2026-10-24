@@ -38491,6 +38491,7 @@ void main() {
     result.push({ ...end });
     return result;
   }
+  var smallTalk = [["\u6211\u60F3\u901A\u4E86\uFF0C\u8DD1\u8F6E\u4E0D\u52A8\uFF0C\u662F\u4E16\u754C\u5728\u540E\u9000\u3002", "\u901A\u900F\u3002\u4F60\u5DF2\u7ECF\u80FD\u8DDF\u4E0A\u8DD1\u8F6E\u7684\u601D\u8DEF\u4E86\u3002", "\u8111\u5B50\u8DD1\u5B8C\u4E86\uFF0C\u817F\u660E\u5929\u518D\u8DD1\u3002"], ["\u6839\u672C\u6CA1\u6709\u8FD9\u79CD\u5403\u4E0D\u5B8C\u7684\u74DC\u5B50\u3002", "\u4F60\u53EA\u662F\u6015\u816E\u5E2E\u5B50\u88C5\u4E0D\u4E0B\u3002", "\u8FD9\u4E0D\u662F\u8D2A\u5403\uFF0C\u8FD9\u662F\u4ED3\u50A8\u89C4\u5212\u3002"], ["\u6700\u6015\u8001\u677F\u9001\u6211\u4E00\u888B\u74DC\u5B50\u4E86\u3002", "\u4E0D\u662F\u8BF4\u6015\u4EC0\u4E48\u6765\u4EC0\u4E48\u5417\uFF1F", "\u6211\u5148\u5BB3\u6015\u7740\uFF0C\u4F60\u5E2E\u6211\u62FF\u888B\u5B50\u3002"], ["\u6211\u4ECA\u5929\u51C6\u5907\u4EC0\u4E48\u4E5F\u4E0D\u5E72\u3002", "\u901A\u900F\uFF0C\u7ED9\u5FD9\u788C\u7684\u660E\u5929\u653E\u4E2A\u9E3D\u5B50\u3002", "\u660E\u5929\u7684\u6211\uFF1A\u8FD9\u5BF9\u5417\uFF1F"], ["\u6211\u542C\u61C2\u8001\u677F\u4E3A\u4EC0\u4E48\u8981\u6536\u74DC\u5B50\u4E86\u3002", "\u4F60\u4E5F\u5FEB\u4E86\uFF0C\u80FD\u8DDF\u4E0A\u6536\u94F6\u673A\u7684\u601D\u8DEF\u4E86\u3002", "\u5B83\u8D1F\u8D23\u53EE\uFF0C\u6211\u8D1F\u8D23\u5FC3\u75BC\u3002"], ["\u597D\u6D88\u606F\uFF0C\u6211\u5B66\u4F1A\u7231\u81EA\u5DF1\u4E86\u3002", "\u574F\u6D88\u606F\uFF0C\u4F60\u628A\u660E\u5929\u7684\u96F6\u98DF\u4E5F\u7231\u5B8C\u4E86\u3002", "\u7231\u4F60\u8001\u5DF1\uFF0C\u4E0B\u6B21\u8BB0\u5F97\u5206\u671F\u3002"], ["\u6211\u5728\u7814\u7A76\u4E00\u79CD\u5F88\u65B0\u7684\u6563\u6B65\u3002", "\u8D70\u5230\u996D\u9986\u5C31\u81EA\u52A8\u7ED3\u675F\u90A3\u79CD\uFF1F", "\u4F60\u61C2\u6211\uFF0C\u8DEF\u7EBF\u81EA\u5E26\u996D\u70B9\u3002"], ["\u672C\u9F20\u4ECA\u5929\u51B3\u5B9A\u63D0\u524D\u9000\u4F11\u3002", "\u5148\u4ECE\u957F\u6905\u4E0A\u9000\u4F11\u5341\u5206\u949F\uFF1F", "\u6CA1\u798F\u786C\u4EAB\u4E5F\u662F\u4E00\u79CD\u672C\u4E8B\u3002"]];
   function createTownLife(onEvent = () => {
   }) {
     const actors = /* @__PURE__ */ new Map();
@@ -38750,7 +38751,7 @@ void main() {
         actor.seated = true;
         actor.heading = restaurantSeats[actor.restaurantSeat].heading;
         actor.moving = false;
-        actor.speech = "\u56BC\u56BC\uFF0C\u597D\u9999\u5440";
+        actor.speech = "\u8FD9\u996D\u5403\u7740\u4E0D\u70E7\u5FC3\uFF0C\u7ED3\u8D26\u6709\u70B9\u5FC3\u75BC\u3002";
         actor.wait -= dt;
         if (actor.wait <= 0) {
           actor.seated = false;
@@ -38945,7 +38946,7 @@ void main() {
             actor.phase = "activity";
             if (actor.action === "\u7761\u89C9") onEvent({ id: actor.id, type: "status", action: "\u7761\u89C9", place: actor.destination });
             actor.heading = actor.inside ? Math.PI : facing(actor.destination) + Math.PI;
-            actor.speech = actor.action === "\u966A\u4F34\u5BA0\u7269" ? "\u966A\u5BA0\u7269\u73A9\u4E00\u4F1A\u513F\uFF0C\u5E2E\u8001\u677F\u7167\u987E\u65B0\u4F19\u4F34" : actor.action === "\u6B23\u8D4F\u5C55\u89C8" ? "\u770B\u770B\u559C\u6B22\u7684\u4E13\u8F91\u548C\u5531\u7247" : actor.action === "\u7528\u9910" ? "\u5750\u4E0B\u6765\uFF0C\u5C1D\u5C1D\u65B0\u9C9C\u852C\u83DC\u548C\u8C37\u7269" : actor.action === "\u4F4F\u9662" ? "\u5B89\u9759\u4F11\u517B\uFF0C\u7B49\u767D\u5927\u592B\u7167\u6599" : actor.action === "\u8D2D\u4E70\u7CAE\u98DF" ? "\u6311\u4E00\u70B9\u559C\u6B22\u7684\u7CAE\u98DF" : actor.action === "\u68C0\u67E5" ? "\u8BA4\u771F\u68C0\u67E5\u8EAB\u4F53" : actor.action === "\u996E\u6C34" ? "\u559D\u4E00\u70B9\u6C34" : actor.action === "\u8FDB\u98DF" ? "\u56BC\u56BC\uFF0C\u597D\u9999\u5440" : actor.action === "\u7167\u770B\u83DC\u56ED" ? "\u770B\u770B\u5AE9\u53F6\u957F\u597D\u4E86\u6CA1\u6709" : actor.action === "\u8DD1\u8F6E" ? "\u8DD1\u8D77\u6765\uFF01" : actor.action === "\u53C2\u89C2" ? "\u770B\u770B\u5927\u5BB6\u7559\u4E0B\u7684\u56DE\u5FC6" : actor.action === "\u5B66\u4E60" ? "\u7FFB\u5F00\u4E66\u672C\uFF0C\u8BA4\u8BC6\u65B0\u7684\u79CD\u5B50" : actor.action === "\u7EAA\u5FF5" ? "\u8F7B\u8F7B\u95EE\u597D\uFF0C\u8BB0\u4F4F\u5728\u8FD9\u91CC\u7684\u670B\u53CB" : actor.action === "\u5DE5\u4F5C" ? "\u6574\u7406\u9001\u522B\u7528\u54C1\uFF0C\u4FDD\u6301\u8FD9\u91CC\u5B89\u9759" : actor.action === "\u7761\u89C9" ? "\u547C\u2026\u2026" : "\u4F11\u606F\u4E00\u4F1A\u513F";
+            actor.speech = actor.action === "\u966A\u4F34\u5BA0\u7269" ? "\u4E0D\u662F\u6211\u9ECF\u5BA0\u7269\uFF0C\u662F\u5BA0\u7269\u9700\u8981\u672C\u9F20\u3002" : actor.action === "\u6B23\u8D4F\u5C55\u89C8" ? "\u770B\u770B\u559C\u6B22\u7684\u4E13\u8F91\u548C\u5531\u7247" : actor.action === "\u7528\u9910" ? "\u5148\u628A\u996D\u5403\u660E\u767D\uFF0C\u9F20\u751F\u6162\u6162\u901A\u900F\u3002" : actor.action === "\u4F4F\u9662" ? "\u5B89\u9759\u4F11\u517B\uFF0C\u7B49\u767D\u5927\u592B\u7167\u6599" : actor.action === "\u8D2D\u4E70\u7CAE\u98DF" ? "\u5148\u628A\u89C4\u77E9\u7ACB\u4F4F\uFF0C\u74DC\u5B50\u4E0D\u80FD\u7A7A\u58F3\u3002" : actor.action === "\u68C0\u67E5" ? "\u8BA4\u771F\u68C0\u67E5\u8EAB\u4F53" : actor.action === "\u996E\u6C34" ? "\u559D\u4E00\u70B9\u6C34" : actor.action === "\u8FDB\u98DF" ? "\u8FD9\u996D\u5403\u7740\u4E0D\u70E7\u5FC3\uFF0C\u7ED3\u8D26\u6709\u70B9\u5FC3\u75BC\u3002" : actor.action === "\u7167\u770B\u83DC\u56ED" ? "\u83DC\u8FD8\u6CA1\u719F\uFF0C\u6211\u5DF2\u7ECF\u66FF\u5B83\u7740\u6025\u4E86\u3002" : actor.action === "\u8DD1\u8F6E" ? "\u7EC3\u7684\u662F\u8584\u808C\uFF0C\u539A\u7684\u662F\u816E\u5E2E\u5B50\u3002" : actor.action === "\u53C2\u89C2" ? "\u770B\u770B\u5927\u5BB6\u7559\u4E0B\u7684\u56DE\u5FC6" : actor.action === "\u5B66\u4E60" ? "\u77E5\u8BC6\u8FDB\u8111\u5B50\u4E86\uFF0C\u6B63\u5728\u627E\u5EA7\u4F4D\u3002" : actor.action === "\u7EAA\u5FF5" ? "\u8F7B\u8F7B\u95EE\u597D\uFF0C\u8BB0\u4F4F\u5728\u8FD9\u91CC\u7684\u670B\u53CB" : actor.action === "\u5DE5\u4F5C" ? "\u6574\u7406\u9001\u522B\u7528\u54C1\uFF0C\u4FDD\u6301\u8FD9\u91CC\u5B89\u9759" : actor.action === "\u7761\u89C9" ? "\u672C\u9F20\u8FDB\u5165\u5927\u7761\u65F6\u4EE3\uFF0C\u9192\u6765\u518D\u8BAE\u3002" : "\u4F11\u606F\u4E00\u4F1A\u513F";
           }
         } else if (actor.phase === "family-wait") {
           const other = actors.get(actor.familyPartner);
@@ -39001,14 +39002,15 @@ void main() {
             actor.wait = other.wait = 10;
             actor.heading = Math.atan2(other.position.x - actor.position.x, other.position.z - actor.position.z);
             other.heading = actor.heading + Math.PI;
+            actor.chatIndex = other.chatIndex = conversations % smallTalk.length;
             conversations++;
             onEvent({ id: actor.id, otherId: other.id, type: "social", place: "\u4E2D\u5FC3\u5E7F\u573A" });
           }
         } else if (actor.phase === "talking") {
           actor.wait -= dt;
           const other = actors.get(actor.partner);
-          const first = actor.id < (other?.id || "");
-          actor.speech = actor.wait > 6 ? first ? `\u4F60\u597D\uFF0C${other?.name || "\u670B\u53CB"}\uFF01` : "" : actor.wait > 3 ? first ? "" : "\u662F\u5440\uFF0C\u8981\u4E0D\u8981\u4E00\u8D77\u53BB\u5C1D\u5C1D\uFF1F" : first ? "\u4E0B\u6B21\u4E00\u8D77\u53BB\u516C\u56ED\u5427\uFF01" : "";
+          const first = actor.id < (other?.id || ""), lines = smallTalk[actor.chatIndex || 0];
+          actor.speech = actor.wait > 6 ? first ? lines[0] : "" : actor.wait > 3 ? first ? "" : lines[1] : first ? lines[2] : "";
           if (actor.wait <= 0) {
             actor.partner = null;
             complete(actor);
