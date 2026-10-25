@@ -1434,8 +1434,6 @@
 菜还没熟，我已经替它着急了。|The greens are not ready. I am nervous on their behalf.|Las verduras no están listas. Me preocupo por ellas.
 
 顶豪鼠|Luxury hamster|Hámster de lujo
-这很贵吗？我家管家都拿这种布擦瓜子壳。|Is that expensive? My butler uses that cloth to polish seed shells.|¿Eso es caro? Mi mayordomo usa esa tela para pulir cáscaras.
-不谈价格，谈谈它配不配我的腮帮子。|Forget the price. Does it suit my cheeks?|Olvida el precio. ¿Está a la altura de mis mejillas?
 便便闹钟|Bathroom reminder|Recordatorio del baño
 你今天便便了吗？记得冲水，大便超人会查岗。|Pooped today? Remember to flush. Captain Poop checks on us.|¿Hiciste caca hoy? Tira de la cadena. El Capitán Caca vigila.
 别的事先放放，冲水这件事不能忘。|Other things can wait. Flushing cannot.|Lo demás puede esperar. Tirar de la cadena no.
@@ -1464,3 +1462,8 @@
 无厘头鼠|Nonsense hamster|Hámster disparatado
 意大利面，混凝土九成熟，拖拉机向左拌匀，星期四没有膝盖。|Spaghetti, medium-well concrete, stir the tractor left, Thursday has no knees.|Espaguetis, cemento al punto, remueve el tractor a la izquierda, el jueves no tiene rodillas.
 袜子正在孵化北极，电饭锅倒立，三公斤晚安，香蕉请走人工通道。|Socks are hatching the North Pole, upside-down rice cooker, three kilos of goodnight, bananas use the staffed lane.|Los calcetines incuban el Polo Norte, arrocera boca abajo, tres kilos de buenas noches, plátanos por el carril atendido.
+这很贵吗？我家管家都拿iv的小方巾擦瓜子壳。|Is that expensive? My butler uses iv scarves to polish seed shells.|¿Eso es caro? Mi mayordomo usa pañuelos de iv para pulir cáscaras.
+guci这季的小包？我拿来装瓜子皮的，正好配我家垃圾桶。|That little guci bag this season? I keep seed shells in it. It matches my bin.|¿Ese bolsito de guci de esta temporada? Lo uso para las cáscaras. Hace juego con mi papelera.
+这很贵吗？我家管家都拿|Is that expensive? My butler uses|¿Eso es caro? Mi mayordomo usa
+的小方巾擦瓜子壳。| scarves to polish seed shells.| pañuelos para pulir cáscaras.
+这季的小包？我拿来装瓜子皮的，正好配我家垃圾桶。| bag this season? I keep seed shells in it. It matches my bin.| de esta temporada? Lo uso para las cáscaras. Hace juego con mi papelera.

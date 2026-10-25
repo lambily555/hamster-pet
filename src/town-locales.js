@@ -1430,8 +1430,6 @@ TownI18n.add({
     "这饭吃着不烧心，结账有点心疼。": "The meal is comforting. Paying is less comforting.",
     "菜还没熟，我已经替它着急了。": "The greens are not ready. I am nervous on their behalf.",
     "顶豪鼠": "Luxury hamster",
-    "这很贵吗？我家管家都拿这种布擦瓜子壳。": "Is that expensive? My butler uses that cloth to polish seed shells.",
-    "不谈价格，谈谈它配不配我的腮帮子。": "Forget the price. Does it suit my cheeks?",
     "便便闹钟": "Bathroom reminder",
     "你今天便便了吗？记得冲水，大便超人会查岗。": "Pooped today? Remember to flush. Captain Poop checks on us.",
     "别的事先放放，冲水这件事不能忘。": "Other things can wait. Flushing cannot.",
@@ -1459,7 +1457,12 @@ TownI18n.add({
     "人设": "Personality",
     "无厘头鼠": "Nonsense hamster",
     "意大利面，混凝土九成熟，拖拉机向左拌匀，星期四没有膝盖。": "Spaghetti, medium-well concrete, stir the tractor left, Thursday has no knees.",
-    "袜子正在孵化北极，电饭锅倒立，三公斤晚安，香蕉请走人工通道。": "Socks are hatching the North Pole, upside-down rice cooker, three kilos of goodnight, bananas use the staffed lane."
+    "袜子正在孵化北极，电饭锅倒立，三公斤晚安，香蕉请走人工通道。": "Socks are hatching the North Pole, upside-down rice cooker, three kilos of goodnight, bananas use the staffed lane.",
+    "这很贵吗？我家管家都拿iv的小方巾擦瓜子壳。": "Is that expensive? My butler uses iv scarves to polish seed shells.",
+    "guci这季的小包？我拿来装瓜子皮的，正好配我家垃圾桶。": "That little guci bag this season? I keep seed shells in it. It matches my bin.",
+    "这很贵吗？我家管家都拿": "Is that expensive? My butler uses",
+    "的小方巾擦瓜子壳。": " scarves to polish seed shells.",
+    "这季的小包？我拿来装瓜子皮的，正好配我家垃圾桶。": " bag this season? I keep seed shells in it. It matches my bin."
   },
   "es": {
     "鼠鼠小镇": "Pueblo Hámster",
@@ -2891,8 +2894,6 @@ TownI18n.add({
     "这饭吃着不烧心，结账有点心疼。": "La comida reconforta. Pagar, un poco menos.",
     "菜还没熟，我已经替它着急了。": "Las verduras no están listas. Me preocupo por ellas.",
     "顶豪鼠": "Hámster de lujo",
-    "这很贵吗？我家管家都拿这种布擦瓜子壳。": "¿Eso es caro? Mi mayordomo usa esa tela para pulir cáscaras.",
-    "不谈价格，谈谈它配不配我的腮帮子。": "Olvida el precio. ¿Está a la altura de mis mejillas?",
     "便便闹钟": "Recordatorio del baño",
     "你今天便便了吗？记得冲水，大便超人会查岗。": "¿Hiciste caca hoy? Tira de la cadena. El Capitán Caca vigila.",
     "别的事先放放，冲水这件事不能忘。": "Lo demás puede esperar. Tirar de la cadena no.",
@@ -2920,6 +2921,11 @@ TownI18n.add({
     "人设": "Personalidad",
     "无厘头鼠": "Hámster disparatado",
     "意大利面，混凝土九成熟，拖拉机向左拌匀，星期四没有膝盖。": "Espaguetis, cemento al punto, remueve el tractor a la izquierda, el jueves no tiene rodillas.",
-    "袜子正在孵化北极，电饭锅倒立，三公斤晚安，香蕉请走人工通道。": "Los calcetines incuban el Polo Norte, arrocera boca abajo, tres kilos de buenas noches, plátanos por el carril atendido."
+    "袜子正在孵化北极，电饭锅倒立，三公斤晚安，香蕉请走人工通道。": "Los calcetines incuban el Polo Norte, arrocera boca abajo, tres kilos de buenas noches, plátanos por el carril atendido.",
+    "这很贵吗？我家管家都拿iv的小方巾擦瓜子壳。": "¿Eso es caro? Mi mayordomo usa pañuelos de iv para pulir cáscaras.",
+    "guci这季的小包？我拿来装瓜子皮的，正好配我家垃圾桶。": "¿Ese bolsito de guci de esta temporada? Lo uso para las cáscaras. Hace juego con mi papelera.",
+    "这很贵吗？我家管家都拿": "¿Eso es caro? Mi mayordomo usa",
+    "的小方巾擦瓜子壳。": " pañuelos para pulir cáscaras.",
+    "这季的小包？我拿来装瓜子皮的，正好配我家垃圾桶。": " de esta temporada? Lo uso para las cáscaras. Hace juego con mi papelera."
   }
 });
