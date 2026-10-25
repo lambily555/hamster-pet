@@ -1,5 +1,5 @@
 (() => {
-  // node_modules/.pnpm/three@0.185.1/node_modules/three/build/three.core.js
+  // ../../node_modules/.pnpm/three@0.185.1/node_modules/three/build/three.core.js
   var REVISION = "185";
   var CullFaceNone = 0;
   var CullFaceBack = 1;
@@ -20399,7 +20399,7 @@
     }
   }
 
-  // node_modules/.pnpm/three@0.185.1/node_modules/three/build/three.module.js
+  // ../../node_modules/.pnpm/three@0.185.1/node_modules/three/build/three.module.js
   function WebGLAnimation() {
     let context = null;
     let isAnimating = false;
@@ -31853,7 +31853,7 @@ void main() {
     }
   };
 
-  // node_modules/.pnpm/three@0.185.1/node_modules/three/examples/jsm/libs/fflate.module.js
+  // ../../node_modules/.pnpm/three@0.185.1/node_modules/three/examples/jsm/libs/fflate.module.js
   var u8 = Uint8Array;
   var u16 = Uint16Array;
   var i32 = Int32Array;
@@ -32225,7 +32225,7 @@ void main() {
   } catch (e) {
   }
 
-  // node_modules/.pnpm/three@0.185.1/node_modules/three/examples/jsm/curves/NURBSUtils.js
+  // ../../node_modules/.pnpm/three@0.185.1/node_modules/three/examples/jsm/curves/NURBSUtils.js
   function findSpan(p, u, U) {
     const n = U.length - p - 1;
     if (u >= U[n]) {
@@ -32417,7 +32417,7 @@ void main() {
     return calcRationalCurveDerivatives(Pders);
   }
 
-  // node_modules/.pnpm/three@0.185.1/node_modules/three/examples/jsm/curves/NURBSCurve.js
+  // ../../node_modules/.pnpm/three@0.185.1/node_modules/three/examples/jsm/curves/NURBSCurve.js
   var NURBSCurve = class extends Curve {
     /**
      * Constructs a new NURBS curve.
@@ -32492,7 +32492,7 @@ void main() {
     }
   };
 
-  // node_modules/.pnpm/three@0.185.1/node_modules/three/examples/jsm/loaders/FBXLoader.js
+  // ../../node_modules/.pnpm/three@0.185.1/node_modules/three/examples/jsm/loaders/FBXLoader.js
   var fbxTree;
   var connections;
   var sceneGraph;

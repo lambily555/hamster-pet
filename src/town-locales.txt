@@ -1484,3 +1484,42 @@ guci这季的小包？我拿来装瓜子皮的，正好配我家垃圾桶。|Tha
 好，下次再聊。|All right, talk next time.|Vale, hablamos otro día.
 正经回答增进好感，抽象回答轻松接话，退出不扣好感。|Sincere answers build affection; silly answers keep things light; leaving costs no affection.|Las respuestas sinceras mejoran el afecto; las disparatadas animan la charla; salir no resta afecto.
 请先结束当前结伴活动。|Please finish your current outing first.|Termina primero la salida actual.
+
+每日抽奖|Daily draw|Sorteo diario
+现实每天免费抽一次，三种奖品等概率：体力卡×2、瓜子×10、长寿卡×1。|One free draw per real day. Equal odds: 2 energy cards, 10 seeds, or 1 longevity card.|Un sorteo gratis por día real. Igual probabilidad: 2 tarjetas de energía, 10 semillas o 1 tarjeta de longevidad.
+抽一次|Draw once|Participar
+今日已抽|Draw claimed today|Sorteo de hoy realizado
+体力卡|Energy card|Tarjeta de energía
+长寿卡|Longevity card|Tarjeta de longevidad
+使用体力卡|Use energy card|Usar tarjeta de energía
+使用长寿卡|Use longevity card|Usar tarjeta de longevidad
+体力卡每张回满体力；长寿卡保护使用时的主鼠，3岁前不会离世，仍会生病和衰老。3岁后恢复正常判定，不自动传给下一代。|Each energy card fully restores stamina. A longevity card prevents the current main hamster from dying before age 3; illness and aging continue. Normal rules resume at 3. Protection does not pass to a successor.|Cada tarjeta de energía restaura toda la energía. La de longevidad impide que el hámster principal actual muera antes de los 3 años; sigue enfermando y envejeciendo. A los 3 vuelven las reglas normales. La protección no pasa al sucesor.
+今天已经抽过奖，明天再来。|You already drew today. Come back tomorrow.|Ya participaste hoy. Vuelve mañana.
+抽奖暂时失败，请重试。|The draw failed. Please try again.|El sorteo falló. Inténtalo de nuevo.
+抽中了体力卡×2！|You won 2 energy cards!|¡Ganaste 2 tarjetas de energía!
+抽中了瓜子×10！|You won 10 seeds!|¡Ganaste 10 semillas!
+抽中了长寿卡×1！|You won 1 longevity card!|¡Ganaste 1 tarjeta de longevidad!
+主鼠已离世，卡片不能复活鼠鼠。|The main hamster has passed away. Cards cannot revive them.|El hámster principal ha fallecido. Las tarjetas no pueden revivirlo.
+没有可用的体力卡。|No energy cards available.|No tienes tarjetas de energía.
+体力已满，暂不消耗卡片。|Stamina is full. No card was spent.|La energía está llena. No se gastó ninguna tarjeta.
+已使用体力卡，体力恢复至100。|Energy card used. Stamina restored to 100.|Tarjeta usada. Energía restaurada a 100.
+没有可用的长寿卡。|No longevity cards available.|No tienes tarjetas de longevidad.
+主鼠已经满3岁，无需使用长寿卡。|The main hamster is already 3. No longevity card is needed.|El hámster ya tiene 3 años. No necesita la tarjeta.
+这一代主鼠已受到长寿卡保护。|This main hamster already has longevity protection.|Este hámster principal ya tiene protección de longevidad.
+长寿卡已生效：这一代主鼠3岁前不会离世。|Longevity activated: this main hamster cannot die before age 3.|Longevidad activada: este hámster no morirá antes de los 3 años.
+请选择有效的卡片。|Choose a valid card.|Elige una tarjeta válida.
+长寿保护生效中：直到3岁|Longevity protection active until age 3|Protección activa hasta los 3 años
+当前未启用长寿保护|No longevity protection active|Sin protección de longevidad activa
+现实每天免费抽一次，三种奖品等概率：体力卡|One free draw per real day. Equal odds: energy cards|Un sorteo gratis por día real. Igual probabilidad: tarjetas de energía
+体力卡每张回满体力；长寿卡保护使用时的主鼠，|Each energy card restores stamina; longevity protects the current main hamster,|Cada tarjeta restaura la energía; la longevidad protege al hámster actual,
+岁前不会离世，仍会生病和衰老。| cannot die before this age; illness and aging continue.| no morirá antes de esta edad; sigue enfermando y envejeciendo.
+岁后恢复正常判定，不自动传给下一代。| normal rules resume; protection does not pass to a successor.| vuelven las reglas normales; la protección no pasa al sucesor.
+抽中了体力卡|You won energy cards|Ganaste tarjetas de energía
+抽中了瓜子|You won seeds|Ganaste semillas
+抽中了长寿卡|You won longevity cards|Ganaste tarjetas de longevidad
+已使用体力卡，体力恢复至|Energy card used. Stamina restored to|Tarjeta usada. Energía restaurada a
+主鼠已经满|The main hamster has reached|El hámster ya tiene
+岁，无需使用长寿卡。| years; no longevity card needed.| años; no necesita la tarjeta.
+长寿卡已生效：这一代主鼠|Longevity activated for this main hamster|Longevidad activada para este hámster
+岁前不会离世。| cannot die before this age.| no morirá antes de esta edad.
+长寿保护生效中：直到|Longevity active until|Protección activa hasta
