@@ -1429,9 +1429,6 @@ TownI18n.add({
     "先把规矩立住，瓜子不能空壳。": "First rule: no empty seed shells in this shop.",
     "这饭吃着不烧心，结账有点心疼。": "The meal is comforting. Paying is less comforting.",
     "菜还没熟，我已经替它着急了。": "The greens are not ready. I am nervous on their behalf.",
-    "混凝土哲学家": "Concrete philosopher",
-    "意大利面应该拌混凝土，拖拉机才有层次感。": "Pasta needs concrete so the tractor has more depth.",
-    "你先别急，等我的逻辑倒车入库。": "Hold on. My logic is reverse parking.",
     "顶豪鼠": "Luxury hamster",
     "这很贵吗？我家管家都拿这种布擦瓜子壳。": "Is that expensive? My butler uses that cloth to polish seed shells.",
     "不谈价格，谈谈它配不配我的腮帮子。": "Forget the price. Does it suit my cheeks?",
@@ -1459,7 +1456,10 @@ TownI18n.add({
     "清醒地发疯": "Sensibly unhinged",
     "我本来是来劝架的，怎么已经坐上主桌了？": "I came to calm everyone down. How did I end up hosting this?",
     "你们冷静一点，给我留个发疯的位置。": "Calm down, everyone. Leave some room for my nonsense.",
-    "人设": "Personality"
+    "人设": "Personality",
+    "无厘头鼠": "Nonsense hamster",
+    "意大利面，混凝土九成熟，拖拉机向左拌匀，星期四没有膝盖。": "Spaghetti, medium-well concrete, stir the tractor left, Thursday has no knees.",
+    "袜子正在孵化北极，电饭锅倒立，三公斤晚安，香蕉请走人工通道。": "Socks are hatching the North Pole, upside-down rice cooker, three kilos of goodnight, bananas use the staffed lane."
   },
   "es": {
     "鼠鼠小镇": "Pueblo Hámster",
@@ -2890,9 +2890,6 @@ TownI18n.add({
     "先把规矩立住，瓜子不能空壳。": "Primera regla: nada de cáscaras vacías en la tienda.",
     "这饭吃着不烧心，结账有点心疼。": "La comida reconforta. Pagar, un poco menos.",
     "菜还没熟，我已经替它着急了。": "Las verduras no están listas. Me preocupo por ellas.",
-    "混凝土哲学家": "Filósofo del cemento",
-    "意大利面应该拌混凝土，拖拉机才有层次感。": "La pasta necesita cemento para darle profundidad al tractor.",
-    "你先别急，等我的逻辑倒车入库。": "Espera. Mi lógica está aparcando marcha atrás.",
     "顶豪鼠": "Hámster de lujo",
     "这很贵吗？我家管家都拿这种布擦瓜子壳。": "¿Eso es caro? Mi mayordomo usa esa tela para pulir cáscaras.",
     "不谈价格，谈谈它配不配我的腮帮子。": "Olvida el precio. ¿Está a la altura de mis mejillas?",
@@ -2920,6 +2917,9 @@ TownI18n.add({
     "清醒地发疯": "Locura consciente",
     "我本来是来劝架的，怎么已经坐上主桌了？": "Vine a calmaros. ¿Cómo he acabado presidiendo esto?",
     "你们冷静一点，给我留个发疯的位置。": "Calmaos un poco. Dejad sitio para mis locuras.",
-    "人设": "Personalidad"
+    "人设": "Personalidad",
+    "无厘头鼠": "Hámster disparatado",
+    "意大利面，混凝土九成熟，拖拉机向左拌匀，星期四没有膝盖。": "Espaguetis, cemento al punto, remueve el tractor a la izquierda, el jueves no tiene rodillas.",
+    "袜子正在孵化北极，电饭锅倒立，三公斤晚安，香蕉请走人工通道。": "Los calcetines incuban el Polo Norte, arrocera boca abajo, tres kilos de buenas noches, plátanos por el carril atendido."
   }
 });
