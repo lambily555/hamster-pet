@@ -1467,3 +1467,20 @@ guci这季的小包？我拿来装瓜子皮的，正好配我家垃圾桶。|Tha
 这很贵吗？我家管家都拿|Is that expensive? My butler uses|¿Eso es caro? Mi mayordomo usa
 的小方巾擦瓜子壳。| scarves to polish seed shells.| pañuelos para pulir cáscaras.
 这季的小包？我拿来装瓜子皮的，正好配我家垃圾桶。| bag this season? I keep seed shells in it. It matches my bin.| de esta temporada? Lo uso para las cáscaras. Hace juego con mi papelera.
+
+先离开一会儿|Leave for a while|Irme un rato
+你怎么看？|What do you think?|¿Qué opinas?
+你慢慢说，我认真听着。|Take your time. I am listening.|Tómate tu tiempo. Te escucho.
+给脑袋放个假，让腮帮子代班。|Give your brain a break. Let your cheeks cover the shift.|Dale vacaciones al cerebro. Que cubran el turno las mejillas.
+先坐下，我给你的腿申请带薪休假。|Sit down. I will apply for paid leave for your legs.|Siéntate. Pediré vacaciones pagadas para tus patas.
+点心先别动，我来采访一下地板。|Leave the snack. I need to interview the floor.|No toques el aperitivo. Voy a entrevistar al suelo.
+让我的腮帮子导航，终点可能是饭馆。|Let my cheeks navigate. We may end up at the diner.|Que guíen mis mejillas. Puede que acabemos en el restaurante.
+放心，镜头今天归腮帮子管理。|Relax. The cheeks are managing the camera today.|Tranquilo. Hoy las mejillas dirigen la cámara.
+让跑轮投票，它转到哪里我们就玩哪里。|Let the wheel vote. We play wherever it lands.|Que vote la rueda. Jugaremos donde se pare.
+围巾先别起飞，我还没给它办登机牌。|Scarf, hold your flight. Your boarding pass is not ready.|Bufanda, no despegues. Falta tu tarjeta de embarque.
+全体小爪暂停营业，原地领取抱抱。|All paws closed for business. Collect your hugs here.|Patitas cerradas por descanso. Recoged abrazos aquí.
+把烦恼寄给跑轮，让它替你转两圈。|Mail your worries to the wheel. Let it spin them for you.|Manda tus penas a la rueda. Que les dé unas vueltas.
+哈哈，你这思路拐得比跑轮还急。|Ha! Your logic turns faster than the wheel.|¡Ja! Tu lógica gira más deprisa que la rueda.
+好，下次再聊。|All right, talk next time.|Vale, hablamos otro día.
+正经回答增进好感，抽象回答轻松接话，退出不扣好感。|Sincere answers build affection; silly answers keep things light; leaving costs no affection.|Las respuestas sinceras mejoran el afecto; las disparatadas animan la charla; salir no resta afecto.
+请先结束当前结伴活动。|Please finish your current outing first.|Termina primero la salida actual.
