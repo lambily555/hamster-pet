@@ -1,4 +1,56 @@
 (() => {
+  var __create = Object.create;
+  var __defProp = Object.defineProperty;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __getProtoOf = Object.getPrototypeOf;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __commonJS = (cb, mod) => function __require() {
+    try {
+      return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+    } catch (e) {
+      throw mod = 0, e;
+    }
+  };
+  var __copyProps = (to, from, except, desc) => {
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (let key of __getOwnPropNames(from))
+        if (!__hasOwnProp.call(to, key) && key !== except)
+          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+    }
+    return to;
+  };
+  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+    // If the importer is in node compatibility mode or this is not an ESM
+    // file that has been converted to a CommonJS file using a Babel-
+    // compatible transform (i.e. "__esModule" has not been set), then set
+    // "default" to the CommonJS "module.exports" for node compatibility.
+    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+    mod
+  ));
+
+  // src/town-personalities.js
+  var require_town_personalities = __commonJS({
+    "src/town-personalities.js"(exports, module) {
+      (function(root) {
+        const profiles2 = [{ "name": "\u6DF7\u51DD\u571F\u54F2\u5B66\u5BB6", "lines": ["\u610F\u5927\u5229\u9762\u5E94\u8BE5\u62CC\u6DF7\u51DD\u571F\uFF0C\u62D6\u62C9\u673A\u624D\u6709\u5C42\u6B21\u611F\u3002", "\u4F60\u5148\u522B\u6025\uFF0C\u7B49\u6211\u7684\u903B\u8F91\u5012\u8F66\u5165\u5E93\u3002"] }, { "name": "\u9876\u8C6A\u9F20", "lines": ["\u8FD9\u5F88\u8D35\u5417\uFF1F\u6211\u5BB6\u7BA1\u5BB6\u90FD\u62FF\u8FD9\u79CD\u5E03\u64E6\u74DC\u5B50\u58F3\u3002", "\u4E0D\u8C08\u4EF7\u683C\uFF0C\u8C08\u8C08\u5B83\u914D\u4E0D\u914D\u6211\u7684\u816E\u5E2E\u5B50\u3002"] }, { "name": "\u4FBF\u4FBF\u95F9\u949F", "lines": ["\u4F60\u4ECA\u5929\u4FBF\u4FBF\u4E86\u5417\uFF1F\u8BB0\u5F97\u51B2\u6C34\uFF0C\u5927\u4FBF\u8D85\u4EBA\u4F1A\u67E5\u5C97\u3002", "\u522B\u7684\u4E8B\u5148\u653E\u653E\uFF0C\u51B2\u6C34\u8FD9\u4EF6\u4E8B\u4E0D\u80FD\u5FD8\u3002"] }, { "name": "\u9EDB\u7389\u5F0F\u5634\u66FF", "lines": ["\u65E9\u77E5\u4F60\u5E26\u4E86\u74DC\u5B50\u6765\uFF0C\u6211\u5C31\u4E0D\u5E26\u8FD9\u4EFD\u77DC\u6301\u4E86\u3002", "\u5012\u662F\u6211\u591A\u8651\u4E86\uFF0C\u539F\u6765\u4F60\u7684\u96F6\u98DF\u4E5F\u6709\u522B\u7684\u77E5\u5DF1\u3002"] }, { "name": "\u4E1C\u5317\u8001\u5927\u54E5", "lines": ["\u8001\u94C1\uFF0C\u6401\u8FD9\u513F\u5BFB\u601D\u5565\u5462\uFF1F\u8D70\u554A\uFF0C\u6574\u4E24\u53E3\u53BB\uFF01", "\u8FD9\u4E8B\u513F\u6574\u5F97\uFF0C\u7ED9\u6211\u90FD\u542C\u4E50\u4E86\u3002"] }, { "name": "\u6367\u8179\u5927\u7B11\u9F20", "lines": ["\u54C8\u54C8\u54C8\u54C8\uFF01\u7B49\u4F1A\u513F\uFF0C\u5148\u8BA9\u6211\u628A\u816E\u5E2E\u5B50\u7B11\u5300\u4E86\uFF01", "\u4F60\u5148\u8BF4\uFF0C\u6211\u8D1F\u8D23\u54C8\u54C8\u54C8\u54C8\uFF01"] }, { "name": "\u9634\u8C0B\u8BBA\u4FA6\u63A2", "lines": ["\u74DC\u5B50\u5C11\u4E86\u4E00\u9897\u3002\u8FD9\u80CC\u540E\uFF0C\u6050\u6015\u6709\u4E00\u5F20\u5634\u3002", "\u5148\u522B\u4E0B\u7ED3\u8BBA\uFF0C\u8BA9\u8BC1\u636E\u5728\u816E\u5E2E\u5B50\u91CC\u5F85\u4E00\u4F1A\u513F\u3002"] }, { "name": "\u5F00\u4F1A\u4E13\u4E1A\u6237", "lines": ["\u54B1\u4EEC\u5148\u5F00\u4E2A\u4F1A\uFF0C\u8BA8\u8BBA\u4ECA\u5929\u80FD\u4E0D\u80FD\u4E0D\u5F00\u4F1A\u3002", "\u6536\u5230\uFF0C\u8FD9\u4E2A\u4E8B\u6211\u8EBA\u7740\u8DDF\u8FDB\u3002"] }, { "name": "\u4F4E\u7535\u91CF\u6446\u70C2\u9F20", "lines": ["\u672C\u9F20\u7535\u91CF\u4E0D\u8DB3\uFF0C\u68A6\u60F3\u5DF2\u5207\u6362\u7701\u7535\u6A21\u5F0F\u3002", "\u542C\u61C2\u4E86\uFF0C\u4F46\u662F\u6211\u7684\u817F\u8FD8\u6CA1\u6709\u540C\u610F\u3002"] }, { "name": "\u6E05\u9192\u5730\u53D1\u75AF", "lines": ["\u6211\u672C\u6765\u662F\u6765\u529D\u67B6\u7684\uFF0C\u600E\u4E48\u5DF2\u7ECF\u5750\u4E0A\u4E3B\u684C\u4E86\uFF1F", "\u4F60\u4EEC\u51B7\u9759\u4E00\u70B9\uFF0C\u7ED9\u6211\u7559\u4E2A\u53D1\u75AF\u7684\u4F4D\u7F6E\u3002"] }];
+        function index(id) {
+          if (id === "main") return 9;
+          const value = String(id || "resident"), original = /^npc-(\d+)$/.exec(value);
+          if (original) return Number(original[1]) % 9;
+          let hash2 = 0;
+          for (const ch of value) hash2 = hash2 * 31 + ch.codePointAt(0) >>> 0;
+          return hash2 % 9;
+        }
+        function profile(id) {
+          return profiles2[index(id)];
+        }
+        root.TownPersonalities = { profile, line: (id, turn = 0) => profile(id).lines[Math.abs(turn) % 2] };
+        if (typeof module === "object" && module.exports) module.exports = root.TownPersonalities;
+      })(globalThis);
+    }
+  });
+
   // node_modules/.pnpm/three@0.185.1/node_modules/three/build/three.core.js
   var REVISION = "185";
   var CullFaceNone = 0;
@@ -38404,6 +38456,9 @@ void main() {
     return geometry;
   }
 
+  // src/town-life.js
+  var import_town_personalities = __toESM(require_town_personalities());
+
   // src/town-plaza-seats.js
   var plazaSeats = [[-3.55, 0.8], [3.55, 0.8], [-1, 1.95], [1, 1.95]].map(([x2, z]) => ({ x: x2, z, y: 0.4625, heading: Math.atan2(-x2, -z) }));
   function plazaSeatBlocks(x2, z) {
@@ -38947,6 +39002,7 @@ void main() {
             if (actor.action === "\u7761\u89C9") onEvent({ id: actor.id, type: "status", action: "\u7761\u89C9", place: actor.destination });
             actor.heading = actor.inside ? Math.PI : facing(actor.destination) + Math.PI;
             actor.speech = actor.action === "\u966A\u4F34\u5BA0\u7269" ? "\u4E0D\u662F\u6211\u9ECF\u5BA0\u7269\uFF0C\u662F\u5BA0\u7269\u9700\u8981\u672C\u9F20\u3002" : actor.action === "\u6B23\u8D4F\u5C55\u89C8" ? "\u770B\u770B\u559C\u6B22\u7684\u4E13\u8F91\u548C\u5531\u7247" : actor.action === "\u7528\u9910" ? "\u5148\u628A\u996D\u5403\u660E\u767D\uFF0C\u9F20\u751F\u6162\u6162\u901A\u900F\u3002" : actor.action === "\u4F4F\u9662" ? "\u5B89\u9759\u4F11\u517B\uFF0C\u7B49\u767D\u5927\u592B\u7167\u6599" : actor.action === "\u8D2D\u4E70\u7CAE\u98DF" ? "\u5148\u628A\u89C4\u77E9\u7ACB\u4F4F\uFF0C\u74DC\u5B50\u4E0D\u80FD\u7A7A\u58F3\u3002" : actor.action === "\u68C0\u67E5" ? "\u8BA4\u771F\u68C0\u67E5\u8EAB\u4F53" : actor.action === "\u996E\u6C34" ? "\u559D\u4E00\u70B9\u6C34" : actor.action === "\u8FDB\u98DF" ? "\u8FD9\u996D\u5403\u7740\u4E0D\u70E7\u5FC3\uFF0C\u7ED3\u8D26\u6709\u70B9\u5FC3\u75BC\u3002" : actor.action === "\u7167\u770B\u83DC\u56ED" ? "\u83DC\u8FD8\u6CA1\u719F\uFF0C\u6211\u5DF2\u7ECF\u66FF\u5B83\u7740\u6025\u4E86\u3002" : actor.action === "\u8DD1\u8F6E" ? "\u7EC3\u7684\u662F\u8584\u808C\uFF0C\u539A\u7684\u662F\u816E\u5E2E\u5B50\u3002" : actor.action === "\u53C2\u89C2" ? "\u770B\u770B\u5927\u5BB6\u7559\u4E0B\u7684\u56DE\u5FC6" : actor.action === "\u5B66\u4E60" ? "\u77E5\u8BC6\u8FDB\u8111\u5B50\u4E86\uFF0C\u6B63\u5728\u627E\u5EA7\u4F4D\u3002" : actor.action === "\u7EAA\u5FF5" ? "\u8F7B\u8F7B\u95EE\u597D\uFF0C\u8BB0\u4F4F\u5728\u8FD9\u91CC\u7684\u670B\u53CB" : actor.action === "\u5DE5\u4F5C" ? "\u6574\u7406\u9001\u522B\u7528\u54C1\uFF0C\u4FDD\u6301\u8FD9\u91CC\u5B89\u9759" : actor.action === "\u7761\u89C9" ? "\u672C\u9F20\u8FDB\u5165\u5927\u7761\u65F6\u4EE3\uFF0C\u9192\u6765\u518D\u8BAE\u3002" : "\u4F11\u606F\u4E00\u4F1A\u513F";
+            if (actor.cycle % 3 === 0 && ["\u966A\u4F34\u5BA0\u7269", "\u6B23\u8D4F\u5C55\u89C8", "\u8D2D\u4E70\u7CAE\u98DF", "\u7167\u770B\u83DC\u56ED", "\u8DD1\u8F6E", "\u5B66\u4E60", "\u4F11\u606F"].includes(actor.action)) actor.speech = globalThis.TownPersonalities.line(actor.id, Math.floor(actor.cycle / 3));
           }
         } else if (actor.phase === "family-wait") {
           const other = actors.get(actor.familyPartner);
@@ -39009,7 +39065,7 @@ void main() {
         } else if (actor.phase === "talking") {
           actor.wait -= dt;
           const other = actors.get(actor.partner);
-          const first = actor.id < (other?.id || ""), lines = smallTalk[actor.chatIndex || 0];
+          const first = actor.id < (other?.id || ""), lines = actor.chatIndex % 2 === 0 ? smallTalk[actor.chatIndex || 0] : [globalThis.TownPersonalities.line(first ? actor.id : other?.id, actor.cycle), globalThis.TownPersonalities.line(first ? other?.id : actor.id, 1), globalThis.TownPersonalities.line(first ? actor.id : other?.id, actor.cycle + 1)];
           actor.speech = actor.wait > 6 ? first ? lines[0] : "" : actor.wait > 3 ? first ? "" : lines[1] : first ? lines[2] : "";
           if (actor.wait <= 0) {
             actor.partner = null;
