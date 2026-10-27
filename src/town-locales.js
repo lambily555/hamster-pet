@@ -1558,7 +1558,16 @@ TownI18n.add({
     "这条动态，腮帮子先点个赞。": "My cheek pouches approve this post.",
     "鼠鼠手机": "Hamster phone",
     "用手机联系": "Contact by phone",
-    "聊天、通话和邀请活动": "Messages, calls and outings"
+    "聊天、通话和邀请活动": "Messages, calls and outings",
+    "这热闹，我的腮帮子先来占个位。": "My cheek pouches are saving a front-row seat.",
+    "已阅，瓜子都忘记嗑了。": "Read it. Even forgot my sunflower seeds.",
+    "好家伙，小镇今天又有节目看。": "Well, another entertaining day in town!",
+    "我带瓜子来了，继续讲。": "I brought seeds. Tell me more.",
+    "主鼠已离世，暂时只能查看记录。": "Your hamster has passed away. You can still read the history.",
+    "主鼠正在休息，醒来后可以发消息。": "Your hamster is resting. Send messages after waking up.",
+    "先输入一点内容，再发送。": "Type something before sending.",
+    "消息未发送，对方已离线。": "Message not sent. This resident is offline.",
+    "有新动态，点击查看": "New posts · Tap to view"
   },
   "es": {
     "鼠鼠小镇": "Pueblo Hámster",
@@ -3118,6 +3127,15 @@ TownI18n.add({
     "这条动态，腮帮子先点个赞。": "Mis mejillas le dan un me gusta a esto.",
     "鼠鼠手机": "Teléfono hámster",
     "用手机联系": "Contactar por teléfono",
-    "聊天、通话和邀请活动": "Mensajes, llamadas y salidas"
+    "聊天、通话和邀请活动": "Mensajes, llamadas y salidas",
+    "这热闹，我的腮帮子先来占个位。": "Mis mofletes ya reservaron sitio en primera fila.",
+    "已阅，瓜子都忘记嗑了。": "Lo leí. Hasta olvidé mis pipas.",
+    "好家伙，小镇今天又有节目看。": "¡Vaya, otro día entretenido en el pueblo!",
+    "我带瓜子来了，继续讲。": "Traje pipas. Sigue contando.",
+    "主鼠已离世，暂时只能查看记录。": "Tu hámster ha fallecido. Puedes consultar el historial.",
+    "主鼠正在休息，醒来后可以发消息。": "Tu hámster descansa. Podrás enviar mensajes cuando despierte.",
+    "先输入一点内容，再发送。": "Escribe algo antes de enviar.",
+    "消息未发送，对方已离线。": "Mensaje no enviado. Este residente está desconectado.",
+    "有新动态，点击查看": "Novedades · Toca para ver"
   }
 });
