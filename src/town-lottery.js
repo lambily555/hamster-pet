@@ -1,0 +1,25 @@
+(function(){
+  const prizes=[{id:'energy',label:'体力卡',count:2},{id:'seeds',label:'瓜子',count:10},{id:'longevity',label:'长寿卡',count:1}];
+  const drawings={
+    energy:'<rect x="22" y="19" width="57" height="70" rx="10" fill="#d6dfbc" transform="rotate(-12 50 50)"/><rect x="31" y="13" width="56" height="73" rx="10" fill="#86aa87" stroke="#456951" stroke-width="3"/><path d="M62 26 44 53h14l-5 21 23-30H62z" fill="#fff3ad"/><path d="M41 23h8M74 75h4" stroke="#e7f3d5" stroke-width="3" stroke-linecap="round"/>',
+    seeds:'<path d="m32 24 6-13 14 5 14-5 5 15-8 11c23 29 22 49-12 50-35-1-38-22-15-50z" fill="#edbd77" stroke="#9d6c3d" stroke-width="3"/><path d="M36 32h31" stroke="#9d6c3d" stroke-width="5" stroke-linecap="round"/><path d="M50 42c-24 18-14 34 1 31 15-3 13-19-1-31z" fill="#68564a"/><path d="m50 46 1 23" stroke="#efe0b9" stroke-width="3"/><path d="M77 67c-10 12-5 22 4 18 8-4 5-11-4-18z" fill="#68564a" stroke="#f8e5bc" stroke-width="2"/>',
+    longevity:'<rect x="23" y="13" width="62" height="74" rx="11" fill="#e6b974" stroke="#a47744" stroke-width="3"/><rect x="29" y="19" width="50" height="62" rx="7" fill="#fff1d4"/><path d="M51 67V43m0 13L38 43m13 5 15-14" stroke="#67845b" stroke-width="4" stroke-linecap="round"/><path d="M50 48C30 50 31 29 31 29s21-2 19 19M53 41c-1-21 22-19 22-19s0 21-22 19" fill="#8fab72"/><path d="M39 72c7-8 11 8 18 0s10 0 10 0" fill="none" stroke="#b18450" stroke-width="3" stroke-linecap="round"/>'
+  };
+  const icon=id=>'<svg viewBox="0 0 104 100" aria-hidden="true" focusable="false">'+drawings[id]+'</svg>';
+  window.createTownLottery=function(root,draw,finish){
+    const t=s=>TownI18n.t(s);let busy=false,status={},startY=null,pulled=false;
+    root.innerHTML='<div class="lottery-cabinet"><div class="lottery-marquee"><i></i><b>每日抽奖</b><i></i></div><div class="lottery-window" aria-hidden="true">'+prizes.map((p,i)=>'<div class="lottery-reel"><div class="lottery-strip">'+[...prizes.slice(i),...prizes.slice(0,i),...prizes.slice(i),...prizes.slice(0,i)].map(p=>'<span>'+icon(p.id)+'</span>').join('')+'</div></div>').join('')+'</div><div class="lottery-tray"></div><p class="lottery-state" role="status"></p><div class="lottery-prizes">'+prizes.map(p=>'<div>'+icon(p.id)+'<span>'+p.label+' × '+p.count+'</span></div>').join('')+'</div></div><button type="button" class="lottery-lever" aria-label="拉动拉杆抽奖"><span class="lottery-arm"><span class="lottery-knob"></span></span><span class="lottery-lever-base"></span></button><p class="lottery-help">向下拉动拉杆，也可点击抽奖</p>';
+    const lever=root.querySelector('button'),label=root.querySelector('.lottery-state'),reels=[...root.querySelectorAll('.lottery-strip')];
+    function showPrize(id){reels.forEach((reel,i)=>{reel.style.transform='';reel.innerHTML='<span>'+icon(id||prizes[i].id)+'</span>'})}
+    function render(data){status=data;lever.disabled=busy||!data.available;root.setAttribute('aria-busy',String(busy));if(!busy){label.textContent=t(data.available?'拉下拉杆，看看今天的好运':'今日已抽，明天再来');if(!data.available&&data.lastPrize)showPrize(data.lastPrize)}TownI18n.render(root)}
+    function pull(){if(busy||!status.available)return;busy=true;render(status);let result;try{result=draw()}catch(error){busy=false;render(status);throw error}if(!result.ok){busy=false;render(status);finish(result.message);return}root.classList.add('is-spinning');label.textContent=t('好运转动中…');const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+      reels.forEach((reel,i)=>{reel.innerHTML=[...prizes,...prizes].map(p=>'<span>'+icon(p.id)+'</span>').join('');const animation=reduce?null:reel.animate([{transform:'translateY(0)'},{transform:'translateY(-50%)'}],{duration:230+i*45,iterations:Infinity,easing:'linear'});setTimeout(()=>{animation?.cancel();reel.innerHTML='<span>'+icon(result.prize)+'</span>';if(i===reels.length-1){busy=false;root.classList.remove('is-spinning');root.classList.add('has-result');render(status);const prize=prizes.find(p=>p.id===result.prize);label.textContent=t(prize.label)+' × '+TownI18n.number(prize.count);finish(result.message)}},reduce?100:1500+i*400)});
+    }
+    lever.addEventListener('pointerdown',e=>{if(lever.disabled||e.button!==0)return;startY=e.clientY;pulled=false;lever.setPointerCapture(e.pointerId)});
+    lever.addEventListener('pointermove',e=>{if(startY===null)return;const dy=Math.max(0,Math.min(60,e.clientY-startY));root.style.setProperty('--lever-pull',dy+'px');if(dy>=35&&!pulled){pulled=true;pull()}});
+    function release(){startY=null;root.style.removeProperty('--lever-pull')}
+    lever.addEventListener('pointerup',release);lever.addEventListener('pointercancel',release);lever.addEventListener('lostpointercapture',release);
+    lever.addEventListener('click',pull);
+    return {render};
+  };
+})();

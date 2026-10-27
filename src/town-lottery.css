@@ -1,0 +1,26 @@
+#townLotteryMachine{position:relative;max-width:410px;margin:20px auto 14px;padding-right:48px;color:#654833}
+#townLotteryMachine *{box-sizing:border-box}
+#townLotteryMachine .lottery-cabinet{padding:16px;border:3px solid #ad8056;border-radius:30px 30px 20px 20px;background:linear-gradient(145deg,#fff3da,#e8c597);box-shadow:inset 0 0 0 5px #ffefd1,0 7px 0 #b68a60,0 13px 18px #6e4d3320}
+#townLotteryMachine .lottery-marquee{display:flex;align-items:center;justify-content:center;gap:16px;padding:2px 0 16px;font-size:20px;letter-spacing:2px}
+#townLotteryMachine .lottery-marquee i{width:10px;height:10px;border-radius:50%;background:#fff5bb;box-shadow:0 0 0 3px #dbb77e}
+#townLotteryMachine .lottery-window{height:112px;display:flex;gap:5px;padding:6px;border:4px solid #78573f;border-radius:16px;background:#78573f;box-shadow:0 2px 0 #fff5df}
+#townLotteryMachine .lottery-reel{flex:1;min-width:0;overflow:hidden;border-radius:9px;background:#fffcf2;box-shadow:inset 0 8px 10px #b6936330}
+#townLotteryMachine .lottery-strip{width:100%}
+#townLotteryMachine .lottery-strip>span{display:flex;height:92px;justify-content:center;align-items:center}
+#townLotteryMachine svg{display:block;width:100%;height:100%;max-width:100px}
+#townLotteryMachine .lottery-tray{height:9px;margin:16px 24% 8px;border-radius:10px;background:#795b44;box-shadow:0 2px 0 #fff7e7,inset 0 3px 2px #3b2b2440}
+#townLotteryMachine .lottery-state{text-align:center;font-size:13px;line-height:1.5;min-height:38px;margin:8px 0;overflow-wrap:anywhere}
+#townLotteryMachine .lottery-prizes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;border-top:1px solid #b7895750;padding-top:9px}
+#townLotteryMachine .lottery-prizes>div{display:flex;flex-direction:column;align-items:center;text-align:center;font-size:11px;line-height:1.4}
+#townLotteryMachine .lottery-prizes svg{width:42px;height:42px}
+#townLotteryMachine .lottery-lever{position:absolute;right:0;top:50px;width:48px;height:150px;padding:0;border:0;background:transparent;box-shadow:none;touch-action:none;cursor:grab;overflow:visible}
+#townLotteryMachine .lottery-lever:disabled{cursor:default;opacity:.65}
+#townLotteryMachine .lottery-lever-base{position:absolute;bottom:10px;left:0;width:29px;height:40px;border:3px solid #926a48;border-radius:0 10px 10px 0;background:#be986b}
+#townLotteryMachine .lottery-arm{position:absolute;top:10px;left:16px;width:10px;height:112px;border:2px solid #a1876b;border-radius:8px;background:linear-gradient(90deg,#b6ad95,#fff6da,#b6ad95);transform:translateY(var(--lever-pull,0px));transition:transform .15s;z-index:1}
+#townLotteryMachine .lottery-knob{position:absolute;top:-10px;left:-13px;width:32px;height:32px;border:3px solid #985749;border-radius:50%;background:radial-gradient(circle at 30% 25%,#ffc5a7,#d37862 55%,#ad5e51);box-shadow:0 3px 2px #67482e25}
+#townLotteryMachine .lottery-help{text-align:center;font-size:12px;line-height:1.5;margin:16px 0 0;color:#81634d}
+#townLotteryMachine.is-spinning .lottery-marquee i{animation:lottery-light .5s alternate infinite}
+#townLotteryMachine.has-result .lottery-window{border-color:#aa8147}
+@keyframes lottery-light{to{background:#f4c768;box-shadow:0 0 12px #ffe29c}}
+@media(prefers-reduced-motion:reduce){#townLotteryMachine .lottery-arm{transition:none}#townLotteryMachine .lottery-marquee i{animation:none}}
+@media(max-width:420px){#townLotteryMachine{padding-right:40px}#townLotteryMachine .lottery-cabinet{padding:10px}#townLotteryMachine .lottery-marquee{font-size:17px}#townLotteryMachine .lottery-lever{width:40px}}

@@ -1567,7 +1567,12 @@ TownI18n.add({
     "主鼠正在休息，醒来后可以发消息。": "Your hamster is resting. Send messages after waking up.",
     "先输入一点内容，再发送。": "Type something before sending.",
     "消息未发送，对方已离线。": "Message not sent. This resident is offline.",
-    "有新动态，点击查看": "New posts · Tap to view"
+    "有新动态，点击查看": "New posts · Tap to view",
+    "拉动拉杆抽奖": "Pull the lever to draw",
+    "向下拉动拉杆，也可点击抽奖": "Pull down the lever or click to draw",
+    "拉下拉杆，看看今天的好运": "Pull for today's lucky prize",
+    "今日已抽，明天再来": "Today's draw is done. Come back tomorrow.",
+    "好运转动中…": "Spinning for good luck…"
   },
   "es": {
     "鼠鼠小镇": "Pueblo Hámster",
@@ -3136,6 +3141,11 @@ TownI18n.add({
     "主鼠正在休息，醒来后可以发消息。": "Tu hámster descansa. Podrás enviar mensajes cuando despierte.",
     "先输入一点内容，再发送。": "Escribe algo antes de enviar.",
     "消息未发送，对方已离线。": "Mensaje no enviado. Este residente está desconectado.",
-    "有新动态，点击查看": "Novedades · Toca para ver"
+    "有新动态，点击查看": "Novedades · Toca para ver",
+    "拉动拉杆抽奖": "Baja la palanca para sortear",
+    "向下拉动拉杆，也可点击抽奖": "Baja la palanca o haz clic para sortear",
+    "拉下拉杆，看看今天的好运": "Baja la palanca y prueba tu suerte",
+    "今日已抽，明天再来": "Ya sorteaste hoy. Vuelve mañana.",
+    "好运转动中…": "La suerte está girando…"
   }
 });
