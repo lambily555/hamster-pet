@@ -72,3 +72,29 @@
 @keyframes phone-sway{0%,100%{translate:0 0;rotate:-2deg}50%{translate:0 -4px;rotate:2deg}}
 @media(prefers-reduced-motion:reduce){#townPhone .phone-avatar *,#townPhone .phone-wallpaper-pet{animation:none}}
 @media(max-height:540px){#townPhone .phone-header{min-height:34px}#townPhone .phone-wallpaper-pet .phone-avatar{width:75px;height:75px;border-radius:25px}#townPhone .phone-messages{max-height:none}#townPhone .phone-content[data-app=thread]{padding:0 14px}#townPhone .phone-thread-tools{padding:0}#townPhone .phone-call-person{float:left;width:25%;margin:10px 0}#townPhone .phone-call-line,#townPhone .phone-call-choices{margin-left:28%}#townPhone .phone-new-posts{top:34px}}
+#townPhone .phone-content[data-app=lock],#townPhone .phone-content[data-app=home]{overflow:hidden;scrollbar-width:none}
+#townPhone .phone-content[data-app=lock]::-webkit-scrollbar,#townPhone .phone-content[data-app=home]::-webkit-scrollbar{display:none}
+#townPhone .phone-wallpaper{height:100%;min-height:0;gap:4px;padding:6px 0}
+#townPhone .phone-wallpaper-pet{flex:1;min-height:0;margin:0}
+#townPhone .phone-wallpaper-pet .phone-avatar{width:min(82px,12vh);height:min(82px,12vh);border-radius:28px}
+#townPhone .phone-unlock{padding:8px;flex-shrink:0}
+#townPhone .phone-apps{grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;margin-top:4px;flex-shrink:0}
+#townPhone .phone-apps button{font-size:10px;line-height:1.35;gap:5px;overflow-wrap:anywhere}
+#townPhone .phone-app-icon{width:38px;height:38px;border-radius:12px;font-size:25px}
+#townPhone .phone-app-icon.lottery{background:#ba8a52}
+#townPhone .phone-lottery-panel{padding:8px 0;font-size:11px;line-height:1.55}
+#townPhone .phone-lottery-panel>h3{display:none}
+#townPhone .phone-lottery-panel>p{margin:8px 0}
+#townPhone .phone-lottery-panel>button{border:1px solid #d4b89a;border-radius:9px;background:#f5e5cd;padding:6px 8px;font-size:11px;margin:2px}
+#townPhone #townLotteryMachine{margin:12px 0 16px;padding-right:34px}
+#townPhone #townLotteryMachine .lottery-cabinet{padding:9px;border-radius:22px 22px 16px 16px}
+#townPhone #townLotteryMachine .lottery-marquee{font-size:14px;gap:8px;padding-bottom:10px;letter-spacing:0}
+#townPhone #townLotteryMachine .lottery-window{height:82px;padding:4px;gap:3px;border-width:3px}
+#townPhone #townLotteryMachine .lottery-strip>span{height:68px}
+#townPhone #townLotteryMachine .lottery-lever{width:34px;top:34px;height:135px}
+#townPhone #townLotteryMachine .lottery-state{font-size:10px;min-height:30px}
+#townPhone #townLotteryMachine .lottery-prizes>div{font-size:9px}
+#townPhone #townLotteryMachine .lottery-prizes svg{width:32px;height:32px}
+#townPhone #townLotteryMachine .lottery-help{font-size:10px}
+@media(max-height:540px){#townPhone .phone-wallpaper{grid-template-rows:auto auto auto 1fr auto;padding:4px 10px}#townPhone .phone-apps{grid-column:2;grid-row:4/6;align-self:center}#townPhone .phone-wallpaper-pet .phone-avatar{width:62px;height:62px}#townPhone #townLotteryMachine{max-width:300px;margin:12px auto}}
+#townPhone #townLotteryMachine .lottery-knob{max-width:none}
