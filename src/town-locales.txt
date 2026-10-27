@@ -1523,3 +1523,45 @@ guci这季的小包？我拿来装瓜子皮的，正好配我家垃圾桶。|Tha
 长寿卡已生效：这一代主鼠|Longevity activated for this main hamster|Longevidad activada para este hámster
 岁前不会离世。| cannot die before this age.| no morirá antes de esta edad.
 长寿保护生效中：直到|Longevity active until|Protección activa hasta
+手机主页|Phone home|Inicio del teléfono
+收起手机|Put away phone|Guardar teléfono
+返回|Back|Volver
+请先结束当前对话。|Please finish the current conversation first.|Termina primero la conversación actual.
+鼠鼠牌手机|Hamster Phone|Teléfono Hámster
+向上滑动解锁|Swipe up to unlock|Desliza hacia arriba para desbloquear
+聊天鼠|HamChat|HámChat
+电话鼠|HamCall|HámLlamadas
+动态鼠|HamMoments|HámMomentos
+居民自动加入通讯录|Residents are added automatically|Los residentes se añaden automáticamente
+点击联系人拨打电话|Choose a contact to call|Elige un contacto para llamar
+离线|Offline|Sin conexión
+最近通话|Recent calls|Llamadas recientes
+模拟输入，发送预设话语|Type for fun; a prepared message will be sent|Escribe por diversión; se enviará un mensaje preparado
+输入消息|Type a message|Escribe un mensaje
+发送|Send|Enviar
+拨打电话|Call|Llamar
+离线，聊天记录仍在这里|Offline. Your conversation stays here.|Sin conexión. La conversación sigue aquí.
+约定地点|Meeting place|Lugar de encuentro
+发送邀请|Send invitation|Enviar invitación
+通话中|On a call|En llamada
+挂断|Hang up|Colgar
+小镇的每一天|Everyday town life|La vida diaria del pueblo
+只看收藏|Saved posts only|Solo publicaciones guardadas
+转发|Share|Compartir
+点赞|Like|Me gusta
+评论|Comment|Comentar
+收藏|Save|Guardar
+继续听|Keep listening|Seguir escuchando
+现在无法联系，请等鼠鼠醒来或选择在世居民。|Unavailable. Wait until your hamster wakes up or choose a living resident.|No disponible. Espera a que despierte tu hámster o elige un residente vivo.
+已接通|Connected|Conectado
+有你认真听着，今天又是好心情。|Having you listen has made my day.|Que me escuches me ha alegrado el día.
+前往小镇|Go to town|Ir al pueblo
+一起出去走走吧。|Let's go out for a walk.|Salgamos a pasear.
+收到，我正在赶往约定地点。|Got it! I'm on my way to our meeting place.|¡Entendido! Voy de camino al lugar de encuentro.
+输入评论|Type a comment|Escribe un comentario
+我来看看你，今天过得怎么样？|Just checking in. How is your day?|Pasaba a saludarte. ¿Qué tal tu día?
+脑袋放假了，腮帮子还在加班。|My brain is on holiday; my cheeks are working overtime.|Mi cerebro está de vacaciones; mis mejillas hacen horas extra.
+这条动态，腮帮子先点个赞。|My cheek pouches approve this post.|Mis mejillas le dan un me gusta a esto.
+鼠鼠手机|Hamster phone|Teléfono hámster
+用手机联系|Contact by phone|Contactar por teléfono
+聊天、通话和邀请活动|Messages, calls and outings|Mensajes, llamadas y salidas

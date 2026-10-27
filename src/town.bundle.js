@@ -34886,6 +34886,92 @@ void main() {
     }
   };
 
+  // src/town-phone-model.js
+  function createPhoneModel(canvas) {
+    const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+    renderer.setSize(400, 740, false);
+    renderer.outputColorSpace = SRGBColorSpace;
+    const scene = new Scene(), camera = new OrthographicCamera(-2.15, 2.15, 3.98, -3.98, 0.1, 30);
+    camera.position.set(0, 0, 12);
+    scene.add(new HemisphereLight(16774887, 12089685, 1.6));
+    const light = new DirectionalLight(16777215, 1.8);
+    light.position.set(-4, 5, 8);
+    scene.add(light);
+    const cream = new MeshStandardMaterial({ color: 16771017, roughness: 0.96 }), pink = new MeshStandardMaterial({ color: 16297889, roughness: 0.9 }), brown = new MeshStandardMaterial({ color: 6897193, roughness: 0.36 }), dark = new MeshStandardMaterial({ color: 3154715, roughness: 0.38 });
+    const grain = document.createElement("canvas");
+    grain.width = grain.height = 128;
+    const ctx = grain.getContext("2d"), pixels = ctx.createImageData(128, 128);
+    let seed = 7;
+    for (let i2 = 0; i2 < pixels.data.length; i2 += 4) {
+      seed = seed * 1664525 + 1013904223 >>> 0;
+      const c = 150 + seed % 100;
+      pixels.data.set([c, c, c, 255], i2);
+    }
+    ctx.putImageData(pixels, 0, 0);
+    const texture3 = new CanvasTexture(grain);
+    texture3.wrapS = texture3.wrapT = RepeatWrapping;
+    texture3.repeat.set(3, 6);
+    cream.bumpMap = texture3;
+    cream.bumpScale = 0.035;
+    function oval(mat2, x2, y, z, sx, sy, sz) {
+      const mesh = new Mesh(new SphereGeometry(1, 24, 16), mat2);
+      mesh.position.set(x2, y, z);
+      mesh.scale.set(sx, sy, sz);
+      scene.add(mesh);
+      return mesh;
+    }
+    function rounded(mat2, w, h, r, x2, y, z, depth) {
+      const s = new Shape(), a = -w / 2, b = -h / 2;
+      s.moveTo(a + r, b);
+      s.lineTo(a + w - r, b);
+      s.quadraticCurveTo(a + w, b, a + w, b + r);
+      s.lineTo(a + w, b + h - r);
+      s.quadraticCurveTo(a + w, b + h, a + w - r, b + h);
+      s.lineTo(a + r, b + h);
+      s.quadraticCurveTo(a, b + h, a, b + h - r);
+      s.lineTo(a, b + r);
+      s.quadraticCurveTo(a, b, a + r, b);
+      const mesh = new Mesh(new ExtrudeGeometry(s, { depth, bevelEnabled: true, bevelSize: 0.07, bevelThickness: 0.06, bevelSegments: 3, steps: 1, curveSegments: 12 }), mat2);
+      mesh.position.set(x2, y, z);
+      scene.add(mesh);
+      return mesh;
+    }
+    rounded(cream, 3.25, 6.38, 0.49, 0, -0.38, 0, 0.35);
+    rounded(brown, 2.99, 5.22, 0.37, 0, -0.82, 0.41, 0.02);
+    for (const side of [-1, 1]) {
+      oval(cream, side * 1.19, 2.97, 0.03, 0.73, 0.87, 0.25);
+      oval(pink, side * 1.19, 2.99, 0.23, 0.51, 0.63, 0.09);
+      oval(brown, side * 0.65, 2.23, 0.49, 0.18, 0.23, 0.08);
+      oval(new MeshBasicMaterial({ color: 16777215 }), side * 0.65 - 0.04, 2.31, 0.57, 0.045, 0.055, 0.02);
+      oval(pink, side * 1.02, 1.98, 0.46, 0.22, 0.1, 0.05);
+      oval(cream, side * 1.65, -0.8, 0.42, 0.22, 0.42, 0.22);
+      oval(cream, side * 1.1, -3.51, 0.4, 0.39, 0.19, 0.25);
+    }
+    oval(pink, 0, 2.16, 0.5, 0.13, 0.08, 0.06);
+    rounded(dark, 0.48, 0.09, 0.04, 0, 2.64, 0.45, 0.02);
+    oval(dark, 0.39, 2.64, 0.48, 0.055, 0.055, 0.03);
+    rounded(new MeshStandardMaterial({ color: 16775920 }), 0.24, 0.23, 0.06, 0, 1.94, 0.48, 0.02);
+    const tail = new CatmullRomCurve3([new Vector3(1.35, -3.3, -0.1), new Vector3(1.96, -3, -0.1), new Vector3(2, -2.5, -0.1), new Vector3(1.7, -2.55, -0.1)]);
+    scene.add(new Mesh(new TubeGeometry(tail, 28, 0.11, 10, false), pink));
+    for (const side of [-1, 1]) for (const offset of [-0.1, 0.1]) {
+      const curve = new CatmullRomCurve3([new Vector3(side * 1.12, 2.12 + offset, 0.5), new Vector3(side * 1.46, 2.15 + offset, 0.5), new Vector3(side * 1.7, 2.2 + offset, 0.47)]);
+      scene.add(new Mesh(new TubeGeometry(curve, 12, 0.018, 6, false), brown));
+    }
+    const mouth = new CatmullRomCurve3([new Vector3(-0.27, 2.1, 0.53), new Vector3(-0.15, 2, 0.56), new Vector3(0, 2.08, 0.56), new Vector3(0.15, 2, 0.56), new Vector3(0.27, 2.1, 0.53)]);
+    scene.add(new Mesh(new TubeGeometry(mouth, 20, 0.018, 6, false), brown));
+    renderer.render(scene, camera);
+    return { dispose() {
+      scene.traverse((o) => {
+        o.geometry?.dispose();
+      });
+      for (const m of new Set(scene.children.filter((o) => o.material).map((o) => o.material))) m.dispose();
+      texture3.dispose();
+      renderer.dispose();
+    } };
+  }
+  window.createTownPhoneModel = createPhoneModel;
+
   // src/town-world-surfaces.js
   var profiles = {
     wood: { span: 0.9, roughness: 0.64, relief: 3e-3, contrast: 0.24 },
@@ -46094,6 +46180,7 @@ void main() {
       else if (actor.mealBill && !actor.inside && activePlace) leavePlace(true);
       actor.cottageTableSlot = worldState.furniture?.table?.slot;
       actor.petFacilities = { ...worldState.petHome?.facilities, pets: worldState.petHome?.pets, food: worldState.petHome?.food, hasPets: !!worldState.petHome?.pets.length };
+      if (document.body.dataset.townPhone === "open") playerKeys.clear();
       let forward = (playerKeys.has("KeyW") || playerKeys.has("ArrowUp") ? 1 : 0) - (playerKeys.has("KeyS") || playerKeys.has("ArrowDown") ? 1 : 0), right = (playerKeys.has("KeyD") || playerKeys.has("ArrowRight") ? 1 : 0) - (playerKeys.has("KeyA") || playerKeys.has("ArrowLeft") ? 1 : 0);
       if (document.body.dataset.townDialogue === "active" || actor.mealBill) forward = right = 0;
       const speed = playerKeys.has("ShiftLeft") || playerKeys.has("ShiftRight") ? 1.3 : 0.75, norm = Math.hypot(forward, right) || 1;
@@ -46350,6 +46437,7 @@ void main() {
       }
       sayAsMain("\u518D\u9760\u8FD1\u4E00\u70B9\uFF0C\u5C31\u53EF\u4EE5\u4E92\u52A8\u5566\u3002");
     }
+    window.addEventListener("town-phone-open", () => playerKeys.clear());
     document.addEventListener("keydown", (e) => {
       if (!firstPerson || document.body.dataset.townDialogue === "active" || /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
       if (e.code === "Escape") {
