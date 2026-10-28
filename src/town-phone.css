@@ -98,3 +98,9 @@
 #townPhone #townLotteryMachine .lottery-help{font-size:10px}
 @media(max-height:540px){#townPhone .phone-wallpaper{grid-template-rows:auto auto auto 1fr auto;padding:4px 10px}#townPhone .phone-apps{grid-column:2;grid-row:4/6;align-self:center}#townPhone .phone-wallpaper-pet .phone-avatar{width:62px;height:62px}#townPhone #townLotteryMachine{max-width:300px;margin:12px auto}}
 #townPhone #townLotteryMachine .lottery-knob{max-width:none}
+
+.phone-status{touch-action:none}.phone-status button{position:relative;border:0;background:none;color:inherit;font-size:20px;padding:0 8px;line-height:22px}.phone-status i{position:absolute;right:0;top:1px;width:6px;height:6px;background:#cf493d;border-radius:50%}.phone-notifications{position:absolute;inset:32px 0 26px;background:#fff7e9;z-index:6;display:flex;flex-direction:column;overflow:hidden;border-radius:12px}.phone-notifications[hidden]{display:none}.phone-notification-list{overflow-y:auto;min-height:0;padding:8px 14px}.phone-notification-list button{display:flex;flex-direction:column;gap:5px;width:100%;min-width:0;text-align:left;white-space:normal;margin:0 0 10px;padding:12px;border:1px solid #dec7ad;border-radius:12px;background:#fffdf7;color:#60422c}.phone-notification-list span{font-size:13px;line-height:1.5}.town-visitor-attributes{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+
+.phone-topic-choices{display:grid;grid-template-columns:1fr 1fr;gap:5px;max-height:120px;overflow-y:auto}.phone-topic-choices button{font-size:12px;line-height:1.35;white-space:normal;padding:6px;min-width:0}.phone-topic-choices button:last-child{grid-column:1/-1}
+
+.phone-notifications>.phone-header{grid-template-columns:minmax(0,1fr) 32px;padding:10px 14px}.phone-notifications>.phone-header strong{text-align:left;white-space:normal}.phone-status button{min-height:0;min-width:24px;height:22px}

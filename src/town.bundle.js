@@ -45,7 +45,7 @@
         function profile(id) {
           return profiles2[index(id)];
         }
-        root.TownPersonalities = { profile, line: (id, turn = 0) => profile(id).lines[Math.abs(turn) % 2] };
+        root.TownPersonalities = { index, profile, line: (id, turn = 0) => profile(id).lines[Math.abs(turn) % 2] };
         if (typeof module === "object" && module.exports) module.exports = root.TownPersonalities;
       })(globalThis);
     }

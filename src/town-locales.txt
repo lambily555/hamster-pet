@@ -522,7 +522,6 @@
 游玩、点心、帮忙、合影或带宠出游；友善选择好感|Outings, snacks, helping, photos or pet walks. Kind choices add affection |Paseos, aperitivos, ayuda, fotos o mascotas. Las decisiones amables suman afinidad
 一般不变，冷淡会降低。每次|; neutral choices leave it unchanged, unkind ones lower it. Each outing has |; las neutras no cambian nada y las frías restan. Cada salida tiene
 个问题，每天|questions; daily limit: |preguntas; límite diario:
-邀请一起去|Invite Along|Invitar
 点可出发；点心需|stamina to depart; snacks cost |de energía para salir; los aperitivos cuestan
 份粮食| servings of food| raciones de comida
 回答刚才遇到的问题|Answer the pending question|Responder a la pregunta pendiente
@@ -1581,3 +1580,199 @@ guci这季的小包？我拿来装瓜子皮的，正好配我家垃圾桶。|Tha
 拉下拉杆，看看今天的好运|Pull for today's lucky prize|Baja la palanca y prueba tu suerte
 今日已抽，明天再来|Today's draw is done. Come back tomorrow.|Ya sorteaste hoy. Vuelve mañana.
 好运转动中…|Spinning for good luck…|La suerte está girando…
+
+在呢。我刚给枕头填了退休申请，它说工龄要按土豆算。|Hey. I filed my pillow's retirement form. Apparently service is measured in potatoes.|Aquí estoy. Pedí la jubilación de mi almohada. La antigüedad se mide en patatas.
+它昨晚梦见自己是一座桥，早上把我收了过路费。|It dreamed it was a bridge and charged me a toll this morning.|Soñó que era un puente y esta mañana me cobró peaje.
+我交了半颗瓜子。它找给我一个星期三，还是湿的。|I paid half a seed. My change was a Wednesday. A wet one.|Pagué media pipa. Me devolvió un miércoles. Mojado.
+我把星期三晾在窗台上，窗台说它恐高。|I put Wednesday on the windowsill to dry. The sill said it feared heights.|Puse el miércoles a secar en la ventana. El alféizar dijo que tenía vértigo.
+于是我请拖拉机来调解，拖拉机正在给意大利面做发型。|I called a tractor to mediate. It was styling some spaghetti.|Llamé a un tractor para mediar. Estaba peinando unos espaguetis.
+意大利面很不满意，说这个刘海挡住了它考驾照。|The spaghetti complained its fringe was blocking its driving test.|Los espaguetis dijeron que el flequillo les impedía sacarse el carné.
+我说先别考了，红绿灯刚被电饭锅认成了亲戚。|I said postpone it. A rice cooker had just adopted the traffic lights.|Dije que lo aplazaran. Una arrocera acababa de adoptar al semáforo.
+电饭锅给亲戚包了三斤晚安，快递员是一只逗号。|The cooker packed three kilos of good night. A comma delivered them.|La arrocera envió tres kilos de buenas noches. Los repartió una coma.
+逗号没走门，从我昨天掉的那根胡须里出去了。|The comma left through a whisker I shed yesterday.|La coma salió por un bigote que perdí ayer.
+枕头终于看不下去，要求返聘，岗位是北极烤面包。|The pillow demanded its job back. Baking toast at the North Pole.|La almohada pidió volver al trabajo: hacer tostadas en el Polo Norte.
+我批准了。现在床上只剩一张申请表，睡着有点公文味。|Approved. Now I sleep on the form. It smells vaguely bureaucratic.|Aprobado. Ahora duermo sobre el formulario. Huele un poco a burocracia.
+先不聊了，枕头叫我去领退休金。说是两根熟透的门铃，回来分你一根。|Gotta go. The pillow has my pension: two ripe doorbells. I'll save you one.|Me voy. La almohada tiene mi pensión: dos timbres maduros. Te guardo uno.
+给枕头办退休|Retiring a pillow|Jubilar una almohada
+在呢，刚收了个包裹。我买的瓜子皮收纳袋，好像买大了。|Hey, a parcel just arrived. My seed-shell bag seems a bit too big.|Hola, acaba de llegar un paquete. La bolsa para cáscaras parece enorme.
+店员说这叫旅行箱。我问，瓜子皮不能旅行吗？|The clerk called it a suitcase. Can't seed shells travel?|La dependienta lo llamó maleta. ¿Las cáscaras no pueden viajar?
+本来想买个小包，管家说小包已经拿去垫桌脚了。|I wanted a small bag. The butler had used it to level the table.|Quería un bolso pequeño. El mayordomo lo usó para calzar la mesa.
+我还以为所有鼠都这么垫。原来你们用纸？|I thought everyone did that. You use paper?|Pensaba que todos hacían eso. ¿Vosotros usáis papel?
+别笑，我是真不知道。上回我拿账单折船，管家追了我半条街。|Seriously, I didn't know. I folded a bill into a boat and the butler chased me.|En serio, no lo sabía. Hice un barco con una factura y el mayordomo me persiguió.
+他说那不是普通账单。我说那它是不是更防水？|He said it wasn't an ordinary bill. I asked if that made it waterproof.|Dijo que no era una factura normal. Pregunté si entonces resistía el agua.
+后来我去零食铺，第一次自己问了价钱。|Then I went to the snack shop and asked the price myself for once.|Luego fui a la tienda y pregunté el precio yo mismo por primera vez.
+老板说两颗瓜子。我准备找零，他让我把箱子收回去。|Two seeds, said the owner. I reached for change. He told me to put the suitcase away.|Dos pipas, dijo el dueño. Busqué cambio. Me pidió que guardara la maleta.
+我买了一小袋，坐门口慢慢吃，居然比宴会上的香。|I ate a small bag outside. Somehow it tasted better than banquet food.|Me comí una bolsita fuera. Sabía mejor que la comida de los banquetes.
+可能不用一边吃一边记谁家的窗帘多少钱吧。|Maybe because nobody was discussing the price of their curtains.|Quizá porque nadie hablaba del precio de sus cortinas.
+下次你带我去。我负责付自己的那份，保证只带两颗。|Take me next time. I'll pay my share. Two seeds, promise.|Llévame la próxima vez. Pago lo mío. Dos pipas, prometido.
+那说好了。我去找个正常大小的钱包，别又把枕套拿成了。回头见。|It's a plan. I'll find a normal wallet, not another pillowcase. See you.|Hecho. Voy a buscar una cartera normal, no otra funda de almohada. Nos vemos.
+一个装瓜子皮的包|A bag for seed shells|Un bolso para las cáscaras
+喂，在呢。先别紧张，今天不是问你便便，是我贴的小纸条出事了。|Hey. Relax, no bathroom questions today. My little bathroom sign caused trouble.|Hola. Tranquilo, hoy no pregunto por el baño. Mi cartelito ha causado un lío.
+我写的是记得冲水，下面画了个大便超人。|I wrote remember to flush, with a little poop superhero underneath.|Puse recuerda tirar de la cadena y dibujé un superhéroe caca.
+隔壁小鼠以为有演出，搬着板凳来占座了。|A little hamster thought it was a show and brought a stool.|Un ratoncito pensó que había un espectáculo y trajo un taburete.
+我说这是厕所，他说知道，沉浸式剧场嘛。|I said it's a bathroom. He said yes, immersive theatre.|Dije que era un baño. Respondió que sí, teatro inmersivo.
+我把超人擦了，只留冲水。他又问几点开演。|I erased the hero. He still asked when the show started.|Borré al superhéroe. Aun así preguntó a qué hora empezaba.
+后来才发现，他不识字，认的是那块布帘。|Turns out he couldn't read. He was looking at the curtain.|Resulta que no sabía leer. Se fijaba en la cortina.
+我给他看水箱，他特别认真地问，演员住这里吗？|I showed him the cistern. He asked if the actors lived inside.|Le enseñé la cisterna. Preguntó si los actores vivían dentro.
+我差点笑出声，忍住了。他是真想看，不是捣乱。|I nearly laughed. But he really wanted a show; he wasn't being naughty.|Casi me río. Pero de verdad quería ver una función, no molestar.
+最后我拿纸卷当话筒，讲了个洗手的小故事。|So I used a cardboard roll as a mic and told a handwashing story.|Usé un rollo de cartón de micrófono y conté una historia sobre lavarse las manos.
+观众就他一个，鼓掌拍得跟全镇都来了似的。|One audience member. He clapped like the whole town was there.|Un solo espectador. Aplaudió como si estuviera todo el pueblo.
+纸条没白贴，至少现在他洗完手会提醒我关水。|Not a wasted sign. Now he reminds me to turn off the tap.|El cartel sirvió de algo. Ahora él me recuerda cerrar el grifo.
+我去把板凳还了。你也忙你的，记得洗手。对，今天只查这一项。|Off to return the stool. Take care, wash your paws. That's today's only inspection.|Voy a devolver el taburete. Cuídate y lávate las patas. Hoy solo reviso eso.
+厕所门上的小纸条|The bathroom note|La nota del baño
+你倒是来了。我留的半块饼干，都快学会自己等人了。|There you are. The half biscuit I saved has almost learned to wait by itself.|Por fin. La media galleta que guardé casi ha aprendido a esperar sola.
+别急着解释，我又没说是在等你。只是这盘子空着不好看。|No need to explain. I never said it was for you. The plate looked empty.|No te justifiques. No dije que fuera para ti. El plato quedaba vacío.
+原本是一整块。我尝了尝，怕不脆，又尝了尝。|It was a whole biscuit. I tested the crunch. Then tested again.|Era una galleta entera. Comprobé si crujía. Y volví a comprobarlo.
+你看，现在脆不脆不知道，小倒是挺小的。|Still unsure about the crunch. Definitely sure it's smaller.|No sé si cruje. Lo que sí sé es que ha menguado.
+我想着再买一块，又怕显得我特意去买似的。|I could buy another. But then it would look like I went especially for it.|Podría comprar otra. Pero parecería que fui expresamente.
+所以我绕了半个广场，假装刚好路过零食铺。|So I walked round half the square to accidentally pass the snack shop.|Di media vuelta a la plaza para pasar por casualidad ante la tienda.
+老板直接问，还是给那个朋友留的？真是半点面子不给我。|The owner asked, saving one for that friend again? No mercy at all.|El dueño preguntó: ¿otra para ese amigo? Ni un poco de discreción.
+我说给自己。他给了两张纸，说你自己挺能吃。|I said it's for me. He gave me two napkins: quite an appetite, then.|Dije que era para mí. Me dio dos servilletas: menudo apetito tienes.
+回来路上风大，我护着饼干，倒把自己吹乱了。|It was windy. I protected the biscuit and got thoroughly windswept myself.|Hacía viento. Protegí la galleta y acabé completamente despeinada.
+你要是笑我，我就把大的那块也吃了。|Laugh and I'll eat the bigger half too.|Si te ríes, también me como la mitad grande.
+算了，已经给你包好了。下次来早点，不然我很难保证。|Fine, I've wrapped yours. Come earlier next time. No guarantees otherwise.|Bueno, ya envolví la tuya. Ven antes la próxima vez. No prometo nada.
+我先去泡水。你慢慢来，路上当心。饼干我看着，暂时不吃。|I'll put the kettle on. Take your time, travel safely. I'll guard it. Without eating. For now.|Voy a poner agua. Ven con cuidado. Vigilo la galleta. Sin comerla. De momento.
+分给谁的半块饼干|Half a biscuit|Media galleta
+哎，老铁！我这锅饭炖多了，你听我说，这事儿真不赖我。|Hey, buddy! I made too much stew. Hear me out, this one's not my fault.|¡Eh, colega! Hice demasiado guiso. Escucha, esta vez no es culpa mía.
+本来就想垫吧一口，抓了一把米，看着有点少。|Just wanted a bite. A handful of rice looked a bit lonely.|Solo quería picar algo. Un puñado de arroz parecía poca cosa.
+又加一把，水不够了；添点水，米又显少了。|More rice needed more water. More water made the rice look scarce again.|Añadí arroz y faltó agua. Añadí agua y volvió a faltar arroz.
+来回两趟，我家锅开始有自己的想法了。|Two rounds later, the pot developed ambitions of its own.|Tras dos vueltas, la olla empezó a tener ambiciones propias.
+隔壁闻着味儿问我，是不是要开分店。|The neighbour sniffed and asked if I was opening a restaurant.|El vecino olió aquello y preguntó si abría un restaurante.
+我说没有，他端着碗就进来了，说那先试营业。|I said no. He walked in with a bowl: soft opening, then.|Dije que no. Entró con un cuenco: pues inauguración de prueba.
+我给他盛了碗，他夸香，夸得我都不好意思让他洗碗。|I served him. He praised it so much I couldn't ask him to wash up.|Le serví. Lo elogió tanto que me dio apuro pedirle que fregara.
+结果人家自己卷袖子了。你说，处朋友不就图这个嘛。|Then he rolled up his sleeves anyway. That's a good friend right there.|Pero se remangó él solo. Eso sí que es un buen amigo.
+现在锅里还剩不少，我寻思给晚下班的留一份。|Still plenty left. I'll save some for whoever finishes work late.|Aún queda mucho. Guardaré una ración para quien salga tarde del trabajo.
+不整什么讲究的盒子，热乎的，吃着舒坦就行。|No fancy boxes. Hot and comforting is enough.|Nada de envases elegantes. Que esté caliente y siente bien.
+你要来就带个碗，别带礼。上回那礼盒我拆半天。|Bring a bowl, no gifts. That last gift box took ages to open.|Trae un cuenco, no regalos. La última caja tardé siglos en abrirla.
+行，先唠到这儿，锅叫我呢。回头见啊，给你留着！|Right, the pot's calling. Catch you later. Saved you a portion!|Bueno, me llama la olla. ¡Nos vemos! ¡Te guardo una ración!
+一锅越炖越多的饭|The ever-growing stew|El guiso que no deja de crecer
+你来得正好，哈哈，等会儿。我今天挑战不笑，已经失败了。|Perfect timing. Ha, hang on. I tried not laughing today. Failed already.|Llegas justo. Ja, espera. Hoy intenté no reírme. Ya he fracasado.
+起因是我觉得自己笑点太低，想练练稳重。|I thought I laughed too easily. Wanted to practise being serious.|Me reía con nada. Quería practicar eso de ser serio.
+我对着镜子说，从现在开始，我是一只成熟的鼠。|I told the mirror: from now on, I'm a mature hamster.|Le dije al espejo: desde ahora soy un hámster maduro.
+镜子里我嘴边挂了片菜叶，看着像个小胡子。|There was a leaf by my mouth. Looked like a tiny moustache.|Tenía una hoja junto a la boca. Parecía un bigotito.
+我想把它拿掉，手短，够了两下，像在给自己鼓掌。|I tried removing it. Two short-pawed attempts looked like applause.|Intenté quitarla. Con mis patas cortas parecía que me aplaudía.
+好，第一轮结束。本人笑得很不成熟。|Round one over. Extremely immature laughter.|Fin de la primera ronda. Risas muy poco maduras.
+第二轮我去广场，找了个没鼠的角落坐着。|Round two: a quiet corner of the square. Nobody around.|Segunda ronda: un rincón tranquilo de la plaza. Sin nadie.
+椅子吱了一声，我脑子自动给它配了句，你又来了。|The bench creaked. My brain supplied: you again.|Crujió el banco. Mi cabeza añadió: tú otra vez.
+我笑弯了腰，路过的鼠以为我捡着瓜子了。|I doubled over. Someone passing thought I'd found free seeds.|Me doblé de risa. Un vecino pensó que había encontrado pipas gratis.
+他低头找了半天，抬头一看我，也跟着笑了。|He searched the ground, looked at me, then started laughing too.|Buscó por el suelo, me miró y también se echó a reír.
+我突然觉得，不稳重就不稳重吧，至少今天有鼠被我传染了。|Maybe serious isn't for me. At least somebody caught the good mood.|Quizá lo serio no va conmigo. Al menos contagié el buen humor.
+不行，又想起那把椅子了。哈哈，我先缓缓，回头接着聊。|Oh no, that bench again. Ha! Give me a minute. Talk later.|Ay, otra vez ese banco. ¡Ja! Dame un momento. Hablamos luego.
+忍笑挑战翻车|The no-laugh challenge|El reto de no reírse
+在，正好缺个证人。我碟里最后一颗瓜子不见了。|Hey. I need a witness. The last seed on my plate vanished.|Hola. Necesito un testigo. Desapareció la última pipa del plato.
+门没开，窗没动，我盯着碟子整整三分钟。|Door shut, window untouched. I watched that plate for three minutes.|Puerta cerrada, ventana intacta. Vigilé el plato tres minutos.
+这说明嫌疑鼠相当熟悉作案环境，甚至可能住在我家。|The suspect knew the scene. Might even live in my house.|El sospechoso conoce el lugar. Quizá vive en mi casa.
+我先查了枕头底下，只有上个月藏的半块饼干。|Checked under the pillow. Just half a biscuit from last month.|Miré bajo la almohada. Solo media galleta del mes pasado.
+饼干先扣押。不能一边查案一边浪费粮食。|Biscuit confiscated. Investigations shouldn't waste food.|Galleta confiscada. Investigar no justifica desperdiciar comida.
+然后发现地上有瓜子壳，壳还挺新。|Then I found a fresh seed shell on the floor.|Después encontré una cáscara reciente en el suelo.
+我顺着壳往上看，是桌子；再往上，是我的嘴。|Followed it upwards. Table. Then my mouth.|Seguí la pista hacia arriba. Mesa. Luego mi boca.
+但是我没有印象。没有印象，不能直接认罪，对吧。|But I don't remember. No memory isn't a confession, right?|Pero no lo recuerdo. No recordar no es confesar, ¿verdad?
+我试着咂了下嘴。嗯，盐焗味，证据开始不利于我。|Smacked my lips. Salt-roasted. The evidence turned against me.|Me relamí. Salada. Las pruebas empiezan a ir en mi contra.
+更糟的是，碟子底下还压着我写的，留着等会儿吃。|Worse: my note under the plate said save this for later.|Peor aún: debajo había una nota mía que decía guardar para luego.
+案子破了。嫌疑鼠情绪稳定，就是有点想加餐。|Case solved. The suspect is calm. And still peckish.|Caso resuelto. El sospechoso está tranquilo. Y aún tiene hambre.
+谢谢你没立刻笑我。我去补充证物，下次再找你，先这样。|Thanks for not laughing immediately. Off to replenish the evidence. Talk later.|Gracias por no reírte enseguida. Voy a reponer las pruebas. Hablamos luego.
+失踪的最后一颗瓜子|The missing last seed|La última pipa desaparecida
+收到，人在。今天有个急事，我们要研究怎么少开会。|Here. Urgent matter: we need to discuss having fewer meetings.|Aquí estoy. Asunto urgente: estudiar cómo reunirnos menos.
+我先建了个群，群名叫不开会讨论群。|I made a group called Discussion Group for Not Having Meetings.|Creé el grupo Debate para No Hacer Reuniones.
+群里第一条消息是，大家什么时候有空开个短会？|First message: when is everyone free for a quick meeting?|Primer mensaje: ¿cuándo podéis hacer una reunión breve?
+我盯着它看了半天。感觉事情已经开始不对了。|I stared at it. Something had already gone wrong.|Me quedé mirando. Algo ya había salido mal.
+有人提议先做个表，统计每只鼠讨厌开会的原因。|Someone suggested a survey of why every hamster hates meetings.|Alguien propuso encuestar por qué todos odian las reuniones.
+我填了第一项，填表也很烦。然后把表关了。|My first answer: surveys are annoying too. Closed it.|Mi primera respuesta: las encuestas también cansan. La cerré.
+后来我直接问，有事现在说，没事各回各窝，行不行？|Then I asked: say what you need now, otherwise go home. Deal?|Pregunté: decid lo necesario ahora; si no, a casa. ¿Vale?
+群里安静了。不是不同意，是大家都去吃饭了。|Silence. Not disagreement. Everyone had gone to eat.|Silencio. No era desacuerdo. Todos se habían ido a comer.
+过了一会儿，有鼠发了张空碗照，说议题已消化。|Later someone sent an empty bowl photo: agenda digested.|Luego alguien mandó un cuenco vacío: orden del día digerido.
+我差点又想写个总结，爪子都伸出去了，忍住了。|Nearly wrote a summary. Paw poised. Resisted.|Casi escribo un resumen. Ya tenía la pata lista. Me contuve.
+最后就发了俩字，散会。那一刻我感觉自己升职了。|Finally wrote: meeting over. Felt like a promotion.|Al final escribí: reunión terminada. Sentí que me ascendían.
+好，我们这次也不留作业。我下线吃饭，回头见。|No homework from this chat either. Off to eat. See you.|Esta charla tampoco deja deberes. Voy a comer. Nos vemos.
+如何取消一场会议|Cancelling a meeting|Cancelar una reunión
+在。先说好，我今天的运动量已经用在翻身上了。|Here. Just so you know, rolling over used today's exercise budget.|Aquí. Aviso: darme la vuelta agotó mi ejercicio de hoy.
+早上本来想去公园，鞋都摆好了，摆得很有出息。|Planned to visit the park. Lined up my shoes very ambitiously.|Iba a ir al parque. Coloqué los zapatos con mucha ambición.
+然后我坐下想路线，想得特别深，直接睡着了。|Sat down to plan the route. Thought so deeply I fell asleep.|Me senté a pensar la ruta. Tan profundamente que me dormí.
+醒来觉得不能白准备，决定先出门到门口。|Woke up determined not to waste the prep. Destination: doorstep.|Al despertar no quise desperdiciar el plan. Destino: la puerta.
+别小看门口，有风，有阳光，还能随时撤退。|Don't knock the doorstep. Breeze, sun, immediate retreat available.|No subestimes la puerta. Brisa, sol y retirada inmediata.
+我把垫子搬过去，隔壁问我是不是在等快递。|Moved my cushion out. Neighbour asked if I was waiting for a parcel.|Saqué el cojín. El vecino preguntó si esperaba un paquete.
+我说等自己振作。他点点头，说那可能得坐久点。|I said waiting for motivation. He nodded: might take a while.|Dije que esperaba motivación. Asintió: quizá tarde bastante.
+说完他也坐下了。不是，怎么还有陪等服务。|Then he sat down too. Didn't know this came with company.|Y se sentó conmigo. No sabía que incluía compañía.
+我们看一片叶子翻了三个跟头，谁也没说话。|We watched a leaf tumble three times. Neither of us spoke.|Vimos una hoja dar tres vueltas. Nadie dijo nada.
+我忽然觉得，今天好像也没白过。叶子挺努力的。|Suddenly the day didn't feel wasted. That leaf worked hard.|De pronto el día no parecía perdido. La hoja se esforzó mucho.
+公园改天再去吧。今天这两步，走得还挺值。|Park another day. Today's two steps were worth it.|El parque, otro día. Estos dos pasos valieron la pena.
+我去把垫子收了，再躺一会儿。你有空再来，不用特意找话题。|I'll bring the cushion in and lie down. Drop by whenever. No topic required.|Guardo el cojín y me tumbo. Pásate cuando quieras. No hace falta traer tema.
+把出门计划挪到门口|The nearly-outside outing|La excursión casi fuera
+你慢慢说，我听着。|Go on, I am listening.|Sigue, te escucho.
+我耳朵到岗了，脑子还在路上。|Ears clocked in. Brain still commuting.|Las orejas ya ficharon. El cerebro sigue de camino.
+然后发生什么了？|What happened next?|¿Y qué pasó después?
+等下，这剧情开始拐弯了。|Wait, the plot just took a turn.|Espera, la historia acaba de dar un giro.
+这事确实有点出乎意料。|That is unexpected.|Eso sí que no me lo esperaba.
+我跟上了，但我的胡须没跟上。|I am following. My whiskers are not.|Yo te sigo. Mis bigotes no.
+你当时怎么处理的？|What did you do then?|¿Qué hiciste entonces?
+换我已经蹲下挠头了。|I would be crouching there scratching my head.|Yo ya estaría rascándome la cabeza.
+嗯，接着说。|Right, go on.|Vale, sigue.
+这下我不困了。|Well, I am awake now.|Pues ya se me quitó el sueño.
+你这么一说，我能想象那个场面。|I can picture it now.|Ahora me imagino la escena.
+脑子有画面了，撤不回的那种。|That mental image is not going away.|Esa imagen mental ya no se borra.
+后来有好一点吗？|Did it get any better?|¿Luego mejoró la cosa?
+先稳住，别让腮帮子替你做决定。|Stay calm. Do not let your cheeks make decisions.|Calma. Que no decidan los mofletes.
+这部分我倒是挺喜欢的。|I rather like that bit.|Esa parte sí me gusta.
+有点东西，我偷偷记一下。|That is something. Taking secret notes.|Tiene su punto. Tomo notas en secreto.
+听起来也不算白忙一场。|Sounds like it was worth something.|Parece que sirvió para algo.
+行，这波算你赢。|All right, you win this round.|Vale, esta ronda la ganas tú.
+那你接下来准备怎么办？|What will you do next?|¿Qué harás ahora?
+请问还能加我一个吗？|Can I join whatever this is?|¿Me puedo apuntar a lo que sea esto?
+好，那你先忙，回头聊。|All right, talk later. Take care.|Vale, hablamos luego. Cuídate.
+准了，本鼠也要去假装忙碌了。|Approved. I must go pretend to be busy too.|Aprobado. Me voy a fingir que estoy ocupado.
+
+消息栏|Notifications|Notificaciones
+挑选新邻居|Choose new neighbors|Elegir nuevos vecinos
+招募名额还在，点击继续挑选五位新邻居。|Recruitment is still available. Tap to choose five neighbors.|La convocatoria sigue disponible. Toca para elegir cinco vecinos.
+朋友已经到达，点击继续活动。|Your friend has arrived. Tap to continue.|Tu amigo ha llegado. Toca para continuar.
+正在赶往约定地点，点击查看进度。|On the way to the meeting place. Tap to check progress.|De camino al lugar acordado. Toca para ver el progreso.
+今天还没抽奖，点击前往老虎机。|Your daily draw is available. Tap to play.|Tu sorteo diario está disponible. Toca para jugar.
+暂时没有待办活动。|No pending activities.|No hay actividades pendientes.
+活动已结束或当前不可用。|This activity has ended or is unavailable.|La actividad ha terminado o no está disponible.
+主鼠正在休息，醒来后继续活动。|Your hamster is resting. Continue after waking up.|Tu hámster está descansando. Continúa cuando despierte.
+正在赶往约定地点，请稍候。|On the way to the meeting place. Please wait.|De camino al lugar acordado. Espera un momento.
+本小镇年已招募过，居民少于15只时可再次招募。|Already recruited this town year. Recruit again with fewer than 15 residents.|Ya reclutaste este año del pueblo. Puedes volver con menos de 15 residentes.
+居民少于15只，或每小镇年首次招募，可挑选5位新邻居。|Choose five neighbors with fewer than 15 residents or once per town year.|Elige cinco vecinos si hay menos de 15 residentes o una vez por año del pueblo.
+居民少于15只，或每小镇年首次招募，可从8位来访者中选择5位。|Choose five of eight visitors with fewer than 15 residents or once per town year.|Elige cinco de ocho visitantes si hay menos de 15 residentes o una vez por año del pueblo.
+力量|Strength|Fuerza
+智慧|Intelligence|Inteligencia
+体质|Constitution|Constitución
+胆量|Courage|Valentía
+天资|Aptitude|Aptitud
+才华|Talent|Talento
+音乐性|Musicality|Musicalidad
+魅力|Charisma|Carisma
+毅力|Perseverance|Perseverancia
+
+选择一句回复|Choose a reply|Elige una respuesta
+好，你先忙，回头再聊。|Sure, take care. Talk later.|Claro, sigue con lo tuyo. Hablamos luego.
+喂，听得见吗？是我。|Hey, can you hear me? It is me.|Hola, ¿me oyes? Soy yo.
+好，那先这样。你忙你的，回头再聊。|All right, I will let you go. Talk later.|Bueno, te dejo seguir. Hablamos luego.
+今天聊得挺开心，那就先这样，回头见。|I enjoyed our chat. See you around!|Me gustó nuestra charla. ¡Nos vemos!
+只居民。居民少于| residents. With fewer than | residentes. Con menos de
+只，或每小镇年首次招募，可挑选| residents, or once per town year, choose | residentes, o una vez por año del pueblo, elige
+位新邻居。| new neighbors.| nuevos vecinos.
+只，或每小镇年首次招募，可从| residents, or once per town year, choose from | residentes, o una vez por año del pueblo, elige entre
+本小镇年已招募过，居民少于|Already recruited this town year. With fewer than |Ya reclutaste este año. Con menos de
+只时可再次招募。| residents, recruitment is available again.| residentes, puedes volver a reclutar.
+只鼠鼠，居民少于| hamsters. With fewer than | hámsteres. Con menos de
+关闭|Close|Cerrar
+刚活动了一会儿，给自己留个记录。|Just finished a little activity. Saving a note for myself.|Acabo de hacer un poco de actividad. Lo dejo anotado.
+饭吃过了，账也结清了。|Meal finished, bill paid.|Comida terminada y cuenta pagada.
+先去补个觉，醒了再回消息。|Off for a nap. I will reply when I wake up.|Voy a dormir un poco. Respondo al despertar.
+今天又学了一点，先记下来。|Learned something today. Writing it down.|Hoy aprendí algo. Lo dejo anotado.
+今天有伴侣了，以后是两只鼠一起过日子。|I have a partner now. Life is a two-hamster adventure.|Ahora tengo pareja. La vida será una aventura de dos hámsteres.
+家里有了新变化，这一天得记住。|Something changed at home. A day to remember.|Hay novedades en casa. Un día para recordar.
+今天和朋友聊了聊，回来发个动态。|Had a chat with a friend. Posting now that I am back.|Charlé con un amigo. Publico ahora que he vuelto.
+顺便通知一下，枕头的拖拉机驾照到期了。|Also, my pillow needs to renew its tractor license.|Por cierto, mi almohada debe renovar su permiso de tractor.
+这条动态就不包金边了，管家还没下班。|No gold trim on this post. The butler is still working.|Esta publicación va sin borde de oro. El mayordomo sigue trabajando.
+刷到这里的朋友，记得洗手再吃东西。|If you are reading this, wash your paws before eating.|Si lees esto, lávate las patas antes de comer.
+也不知谁会惦记，倒是我先发出来了。|Not sure who will think of me, but here I am posting first.|No sé quién pensará en mí, pero aquí estoy publicando primero.
+老铁们，今儿就先唠到这儿。|All right, pals, that is enough chatter for today.|Bueno, amigos, por hoy basta de charla.
+哈哈哈哈，先笑两声再发！|Hahaha, laughing before I hit post!|¡Jajaja, me río antes de publicar!
+以上是本鼠口供，瓜子可以作证。|That is my statement. The seeds can testify.|Esa es mi declaración. Las semillas pueden testificar.
+本条无需开会，看到算收到。|No meeting needed. Reading counts as acknowledgment.|No hace falta reunión. Leer cuenta como acuse de recibo.
+剩下的话等我充满电再说。|The rest can wait until my battery is full.|El resto puede esperar a que recargue la batería.
+选择下一代主鼠|Choose the next main hamster|Elige al próximo hámster principal
+点击继续挑选接任的鼠鼠。|Tap to continue choosing a successor.|Toca para seguir eligiendo un sucesor.
+还有没聊完的话题，点击继续。|You have an unfinished conversation. Tap to continue.|Tienes una conversación pendiente. Toca para continuar.
