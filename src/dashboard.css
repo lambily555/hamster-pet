@@ -954,3 +954,34 @@ html:is([lang="en"],[lang="es"]) :is(.diary-paper,.diary-preview>p,.diary-archiv
 html:is([lang="en"],[lang="es"]) .diary-paper p{font-family:"Segoe UI",Arial,sans-serif;letter-spacing:normal;word-spacing:normal;text-indent:0;text-align:start;word-break:normal;overflow-wrap:normal;hyphens:none}
 
 #townOutingNotice{position:absolute;top:22%;left:50%;translate:-50% 0;z-index:210;max-width:min(560px,86%);padding:12px 18px;border:1px solid #b5c4ab;border-radius:14px;background:#fffdf3f2;color:#344b35;box-shadow:0 4px 16px #26382625;font:600 16px/1.5 'Microsoft YaHei',sans-serif;pointer-events:none;text-align:center}#townOutingNotice[hidden]{display:none}
+
+/* Recruitment: one resident per page; hidden cards retain selection and jobs. */
+#townImmigration .town-visitor-navigation{display:flex;align-items:center;justify-content:center;gap:24px;margin:14px 0}
+#townImmigration .town-visitor-navigation button{width:44px;height:40px;padding:0;border:1px solid #a7b89f;border-radius:12px;background:#fffef8;color:#425440;font-size:30px;line-height:1;cursor:pointer}
+#townVisitorPage{min-width:60px;text-align:center;font-variant-numeric:tabular-nums}
+#townVisitorCards{display:block}
+#townVisitorCards .town-visitor-card{display:grid;grid-template-columns:minmax(180px,.9fr) minmax(0,1.3fr);align-items:center;gap:28px;padding:24px;cursor:default;border-radius:20px}
+#townVisitorCards .town-visitor-card[hidden]{display:none}
+#townVisitorCards .town-visitor-card:has(input:disabled){opacity:1}
+#townVisitorCards .town-visitor-portrait{display:block;min-width:0;background:#eef0e3;border-radius:18px;overflow:hidden}
+#townVisitorCards .town-visitor-portrait img{display:block;width:100%;max-height:360px;object-fit:contain}
+#townVisitorCards .town-visitor-portrait img[hidden]{display:none}
+#townVisitorCards .town-visitor-profile{display:flex;flex-direction:column;gap:5px;min-width:0}
+#townVisitorCards .town-visitor-profile>b{font-size:26px;line-height:1.3}
+#townVisitorCards .town-visitor-profile>small{font-size:13px}
+#townVisitorCards .town-visitor-attributes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 18px;margin:12px 0}
+#townVisitorCards .town-visitor-stat{display:block;min-width:0}
+#townVisitorCards .town-visitor-stat>span{display:flex;justify-content:space-between;gap:8px;font-size:13px}
+#townVisitorCards .town-visitor-stat small{font-size:11px;color:#64755d;font-variant-numeric:tabular-nums}
+#townVisitorCards progress{display:block;width:100%;height:9px;margin-top:4px;appearance:none;border:0;border-radius:8px;overflow:hidden;background:#dce3d2;accent-color:#789267}
+#townVisitorCards progress::-webkit-progress-bar{background:#dce3d2;border-radius:8px}
+#townVisitorCards progress::-webkit-progress-value{background:#789267;border-radius:8px}
+#townVisitorCards progress::-moz-progress-bar{background:#789267;border-radius:8px}
+#townVisitorCards .town-visitor-pick{display:flex;align-items:center;gap:9px;margin-top:10px;font-size:14px;font-weight:600;cursor:pointer}
+#townVisitorCards .town-visitor-pick input{position:static;width:19px;height:19px;margin:0}
+#townVisitorCards .town-visitor-pick:has(input:disabled){opacity:.5;cursor:default}
+@media(max-width:600px){#townVisitorCards .town-visitor-card{grid-template-columns:1fr;gap:14px;padding:16px}#townVisitorCards .town-visitor-portrait img{max-height:170px}#townVisitorCards .town-visitor-profile>b{font-size:22px}}
+@media(max-height:500px) and (min-width:601px){#townVisitorCards .town-visitor-card{gap:16px;padding:14px}#townVisitorCards .town-visitor-portrait img{max-height:230px}}
+
+#townImmigration .town-recruit-help{margin-top:10px;font-size:12px;line-height:1.6}#townImmigration .town-recruit-help summary{cursor:pointer;color:#64755d}#townVisitorCards .town-visitor-pick{order:-1;margin:0 0 4px}#townImmigrationResult{margin:10px 0}
+@media(max-height:500px){#townImmigration{max-height:94vh;padding:12px}#townImmigration>header{padding:4px 0 8px}#townImmigration .town-visitor-navigation{margin:6px 0;gap:18px}#townImmigration .town-recruit-help{margin-top:4px}#townImmigration footer{bottom:-12px;padding:8px 0}}

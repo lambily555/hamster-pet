@@ -24,3 +24,15 @@ console.log('Population threshold, candidate validation, admissions, planned bir
 
 assert.equal(sim.scheduleNpcPair(planned.state,'npc-2','npc-3',now).ok,false,'only one nursery pair at a time');
 const automatic=sim.settle(adults,now+5*DAY);assert.ok(automatic.birthNews.length>0,'automatic daily eligibility schedules births');assert.ok(automatic.npcBreeding.pending.length<=1);
+
+// Exercise the actual confirmation handler with real recruitment validation.
+const vm=require('node:vm'),source=require('node:fs').readFileSync(require.resolve('../src/dashboard.js'),'utf8');
+const clickSource=source.slice(source.indexOf("$('#townAdmitVisitors').addEventListener"),source.indexOf("$('#townBirthPause').addEventListener"));
+const trial=sim.prepareImmigration(sim.defaults(Date.now())),selectedIds=trial.immigration.candidates.slice(0,5).map(n=>n.id),jobValues=Object.fromEntries(selectedIds.map(id=>[id,'']));
+let confirm,notice='',scrolled=false,saved=0;
+const nodes={'#townAdmitVisitors':{addEventListener:(_,fn)=>confirm=fn},'#townImmigrationResult':{textContent:'',scrollIntoView:()=>scrolled=true},'#townImmigration':{hidden:false},'#townStory':{textContent:''}};
+const context={townSim:sim,townState:trial,Date,TownI18n:{t:s=>s},saveTown:()=>saved++,renderTown:()=>{},showOutingNotice:s=>notice=s,$:selector=>nodes[selector],document:{querySelectorAll:()=>selectedIds.map(value=>({value}))}};
+nodes['#townVisitorCards']={querySelectorAll:()=>selectedIds.map(value=>({value})),querySelector:selector=>({value:jobValues[selector.match(/"(.*?)"/)[1]]})};vm.createContext(context);vm.runInContext(clickSource,context);
+confirm();assert.equal(sim.population(context.townState),10);assert.match(notice,/职业分配不符合要求/);assert(scrolled);assert.equal(nodes['#townImmigration'].hidden,false);
+const vacant=sim.jobCounts(context.townState).filter(j=>!j.count);selectedIds.forEach((id,i)=>jobValues[id]=vacant[i]?.place||'');confirm();assert.equal(sim.population(context.townState),15);assert.equal(nodes['#townImmigration'].hidden,true);assert.match(notice,/新邻居已加入/);assert(saved>=2);
+confirm();assert.equal(sim.population(context.townState),15);console.log('PASS actual confirm handler: visible failure reason, retained choices, successful admission feedback and duplicate protection.');

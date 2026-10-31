@@ -1765,7 +1765,12 @@ TownI18n.add({
     "剩下的话等我充满电再说。": "The rest can wait until my battery is full.",
     "选择下一代主鼠": "Choose the next main hamster",
     "点击继续挑选接任的鼠鼠。": "Tap to continue choosing a successor.",
-    "还有没聊完的话题，点击继续。": "You have an unfinished conversation. Tap to continue."
+    "还有没聊完的话题，点击继续。": "You have an unfinished conversation. Tap to continue.",
+    "浏览候选鼠鼠": "Browse candidates",
+    "上一只鼠鼠": "Previous hamster",
+    "下一只鼠鼠": "Next hamster",
+    "选择这只鼠鼠": "Choose this hamster",
+    "职业分配说明": "Job assignment guide"
   },
   "es": {
     "鼠鼠小镇": "Pueblo Hámster",
@@ -3532,6 +3537,11 @@ TownI18n.add({
     "剩下的话等我充满电再说。": "El resto puede esperar a que recargue la batería.",
     "选择下一代主鼠": "Elige al próximo hámster principal",
     "点击继续挑选接任的鼠鼠。": "Toca para seguir eligiendo un sucesor.",
-    "还有没聊完的话题，点击继续。": "Tienes una conversación pendiente. Toca para continuar."
+    "还有没聊完的话题，点击继续。": "Tienes una conversación pendiente. Toca para continuar.",
+    "浏览候选鼠鼠": "Ver candidatos",
+    "上一只鼠鼠": "Hámster anterior",
+    "下一只鼠鼠": "Siguiente hámster",
+    "选择这只鼠鼠": "Elegir este hámster",
+    "职业分配说明": "Guía de asignación de trabajos"
   }
 });

@@ -1776,3 +1776,8 @@ guci这季的小包？我拿来装瓜子皮的，正好配我家垃圾桶。|Tha
 选择下一代主鼠|Choose the next main hamster|Elige al próximo hámster principal
 点击继续挑选接任的鼠鼠。|Tap to continue choosing a successor.|Toca para seguir eligiendo un sucesor.
 还有没聊完的话题，点击继续。|You have an unfinished conversation. Tap to continue.|Tienes una conversación pendiente. Toca para continuar.
+浏览候选鼠鼠|Browse candidates|Ver candidatos
+上一只鼠鼠|Previous hamster|Hámster anterior
+下一只鼠鼠|Next hamster|Siguiente hámster
+选择这只鼠鼠|Choose this hamster|Elegir este hámster
+职业分配说明|Job assignment guide|Guía de asignación de trabajos
