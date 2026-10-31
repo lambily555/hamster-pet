@@ -24,3 +24,5 @@
 @keyframes lottery-light{to{background:#f4c768;box-shadow:0 0 12px #ffe29c}}
 @media(prefers-reduced-motion:reduce){#townLotteryMachine .lottery-arm{transition:none}#townLotteryMachine .lottery-marquee i{animation:none}}
 @media(max-width:420px){#townLotteryMachine{padding-right:40px}#townLotteryMachine .lottery-cabinet{padding:10px}#townLotteryMachine .lottery-marquee{font-size:17px}#townLotteryMachine .lottery-lever{width:40px}}
+
+#townLotteryMachine .lottery-draw-button{display:block;width:100%;margin:16px 0 0;padding:10px;border:1px solid #926a48;border-radius:10px;background:#79583e;color:#fff8e9;font:inherit;font-size:14px;font-weight:600;line-height:1.3;cursor:pointer}#townLotteryMachine .lottery-draw-button:disabled{opacity:.55;cursor:default}
