@@ -28,3 +28,14 @@ console.log('PASS: 24-message topics, stale choices, annual and low-population r
 for(let i=0;i<9;i++){const s=sim.defaults(now),n=s.npcs[i];assert(phone.startTopic(s,n.id,'start',now));let saved=JSON.parse(JSON.stringify(s));assert(phone.pending(saved,sim,now).some(p=>p.id==='chat:'+n.id));for(let step=0;step<11;step++)assert(phone.replyTopic(saved,n.id,1,step));assert.equal(phone.sync(saved).owner.threads[n.id].length,24);assert(!phone.pending(saved,sim,now).some(p=>p.id==='chat:'+n.id))}
 const social=sim.defaults(now),author=social.npcs[0];social.events=[{id:'social-post',type:'activity',text:author.name+'在中心广场完成了休息。',time:now}];const rendered=phone.socialPost(social,phone.sync(social).phone.feed[0]);assert.equal(rendered.authorId,author.id);assert(!rendered.socialText.includes(social.events[0].text));assert(phone.react(social,'social-post','share'));assert(phone.socialPost(social,phone.sync(social).phone.feed.at(-1)).socialText);assert.equal(phone.socialPost(social,{type:'death',text:'system notice'}),null);
 console.log('PASS nine saved conversations, first-person posts and sharing.');
+
+// Check complete phone conversations as well as individual interface labels.
+const phoneI18n=require('../src/town-i18n.js');require('node:vm').runInNewContext(require('node:fs').readFileSync(require.resolve('../src/town-locales.js'),'utf8'),{TownI18n:phoneI18n});
+const phoneStories=require('../src/town-phone-stories.js'),phonePersonalities=require('../src/town-personalities.js');
+for(const language of ['en','es']){
+  const lines=[...phoneStories.topics.flatMap(topic=>topic.lines),...phoneStories.choices.flat(),...Array.from({length:9},(_,i)=>'喂，听得见吗？是我。'+phonePersonalities.line('npc-'+i,0)),...Array.from({length:9},(_,i)=>phonePersonalities.line('npc-'+i,1)+'你怎么看？')];
+  for(const line of lines){const translated=phoneI18n.t(line,language);assert.ok(translated.trim());assert.equal(/[\u3400-\u9fff]/.test(translated),false,language+': '+line);}
+  const feedState=sim.defaults();feedState.events=[{id:'phone-language',mainId:feedState.mainId,type:'social',text:'鼠鼠今天和朋友聊天。',time:1}];
+  for(const post of phone.sync(feedState).phone.feed){const social=phone.socialPost(feedState,post);if(social)assert.equal(/[\u3400-\u9fff]/.test(social.socialText.split(' ').map(part=>phoneI18n.t(part,language)).join(' ')),false);for(const comment of phone.comments(feedState,post))assert.equal(/[\u3400-\u9fff]/.test(phoneI18n.t(comment.text,language)),false);}
+}
+console.log('Phone English/Spanish: complete topics, every reply, call openings/questions and social posts/comments passed.');
