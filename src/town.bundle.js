@@ -34890,9 +34890,9 @@ void main() {
   function createPhoneModel(canvas) {
     const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: true });
     renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
-    renderer.setSize(400, 740, false);
+    renderer.setSize(480, 740, false);
     renderer.outputColorSpace = SRGBColorSpace;
-    const scene = new Scene(), camera = new OrthographicCamera(-2.15, 2.15, 3.98, -3.98, 0.1, 30);
+    const scene = new Scene(), camera = new OrthographicCamera(-2.58, 2.58, 3.98, -3.98, 0.1, 30);
     camera.position.set(0, 0, 12);
     scene.add(new HemisphereLight(16774887, 12089685, 1.6));
     const light = new DirectionalLight(16777215, 1.8);
@@ -34938,7 +34938,7 @@ void main() {
       return mesh;
     }
     rounded(cream, 3.25, 6.38, 0.49, 0, -0.38, 0, 0.35);
-    rounded(brown, 2.99, 5.22, 0.37, 0, -0.82, 0.41, 0.02);
+    rounded(brown, 2.99, 5.63, 0.37, 0, -0.615, 0.41, 0.02);
     for (const side of [-1, 1]) {
       oval(cream, side * 1.19, 2.97, 0.03, 0.73, 0.87, 0.25);
       oval(pink, side * 1.19, 2.99, 0.23, 0.51, 0.63, 0.09);
@@ -34960,6 +34960,17 @@ void main() {
     }
     const mouth = new CatmullRomCurve3([new Vector3(-0.27, 2.1, 0.53), new Vector3(-0.15, 2, 0.56), new Vector3(0, 2.08, 0.56), new Vector3(0.15, 2, 0.56), new Vector3(0.27, 2.1, 0.53)]);
     scene.add(new Mesh(new TubeGeometry(mouth, 20, 0.018, 6, false), brown));
+    scene.traverse((o) => {
+      if (!o.isMesh) return;
+      o.position.x *= 1.2;
+      o.scale.x *= 1.2;
+      if (o.position.y > 1.8) o.position.y = 2.2 + (o.position.y - 1.79) * 0.8;
+      else if (o.geometry.type === "TubeGeometry") {
+        const a = o.geometry.attributes.position;
+        for (let i2 = 0; i2 < a.count; i2++) if (a.getY(i2) > 1.8) a.setY(i2, 2.2 + (a.getY(i2) - 1.79) * 0.8);
+        a.needsUpdate = true;
+      }
+    });
     renderer.render(scene, camera);
     return { dispose() {
       scene.traverse((o) => {
