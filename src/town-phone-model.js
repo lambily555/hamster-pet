@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 export function createPhoneModel(canvas){
-  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(480,740,false);renderer.outputColorSpace=THREE.SRGBColorSpace;
-  const scene=new THREE.Scene(),camera=new THREE.OrthographicCamera(-2.58,2.58,3.98,-3.98,.1,30);camera.position.set(0,0,12);
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(420,740,false);renderer.outputColorSpace=THREE.SRGBColorSpace;
+  const scene=new THREE.Scene(),camera=new THREE.OrthographicCamera(-2.2575,2.2575,3.98,-3.98,.1,30);camera.position.set(0,0,12);
   scene.add(new THREE.HemisphereLight(0xfff6e7,0xb87955,1.6));const light=new THREE.DirectionalLight(0xffffff,1.8);light.position.set(-4,5,8);scene.add(light);
   const cream=new THREE.MeshStandardMaterial({color:0xffe7c9,roughness:.96}),pink=new THREE.MeshStandardMaterial({color:0xf8afa1,roughness:.9}),brown=new THREE.MeshStandardMaterial({color:0x693e29,roughness:.36}),dark=new THREE.MeshStandardMaterial({color:0x30231b,roughness:.38});
   const grain=document.createElement('canvas');grain.width=grain.height=128;const ctx=grain.getContext('2d'),pixels=ctx.createImageData(128,128);let seed=7;for(let i=0;i<pixels.data.length;i+=4){seed=(seed*1664525+1013904223)>>>0;const c=150+seed%100;pixels.data.set([c,c,c,255],i)}ctx.putImageData(pixels,0,0);const texture=new THREE.CanvasTexture(grain);texture.wrapS=texture.wrapT=THREE.RepeatWrapping;texture.repeat.set(3,6);cream.bumpMap=texture;cream.bumpScale=.035;
@@ -14,7 +14,7 @@ export function createPhoneModel(canvas){
   for(const side of [-1,1])for(const offset of [-.1,.1]){const curve=new THREE.CatmullRomCurve3([new THREE.Vector3(side*1.12,2.12+offset,.5),new THREE.Vector3(side*1.46,2.15+offset,.5),new THREE.Vector3(side*1.7,2.2+offset,.47)]);scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve,12,.018,6,false),brown))}
   const mouth=new THREE.CatmullRomCurve3([new THREE.Vector3(-.27,2.1,.53),new THREE.Vector3(-.15,2,.56),new THREE.Vector3(0,2.08,.56),new THREE.Vector3(.15,2,.56),new THREE.Vector3(.27,2.1,.53)]);scene.add(new THREE.Mesh(new THREE.TubeGeometry(mouth,20,.018,6,false),brown));
   // Widen the handset while reserving more of its height for the screen.
-  scene.traverse(o=>{if(!o.isMesh)return;o.position.x*=1.2;o.scale.x*=1.2;if(o.position.y>1.8)o.position.y=2.2+(o.position.y-1.79)*.8;else if(o.geometry.type==='TubeGeometry'){const a=o.geometry.attributes.position;for(let i=0;i<a.count;i++)if(a.getY(i)>1.8)a.setY(i,2.2+(a.getY(i)-1.79)*.8);a.needsUpdate=true;}});
+  scene.traverse(o=>{if(!o.isMesh)return;o.position.x*=1.05;o.scale.x*=1.05;if(o.position.y>1.8)o.position.y=2.2+(o.position.y-1.79)*.8;else if(o.geometry.type==='TubeGeometry'){const a=o.geometry.attributes.position;for(let i=0;i<a.count;i++)if(a.getY(i)>1.8)a.setY(i,2.2+(a.getY(i)-1.79)*.8);a.needsUpdate=true;}});
   renderer.render(scene,camera);
   return {dispose(){scene.traverse(o=>{o.geometry?.dispose()});for(const m of new Set(scene.children.filter(o=>o.material).map(o=>o.material)))m.dispose();texture.dispose();renderer.dispose()}};
 }

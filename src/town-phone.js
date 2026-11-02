@@ -26,7 +26,7 @@
     function render(){
       clearTimeout(typingTimer);lotteryPanel.hidden=true;layer.append(lotteryPanel);content.dataset.app=app;content.scrollTop=0;const state=api.get(),{phone,owner}=D.sync(state),n=person();
       if(app==='lock'||app==='home'){
-        content.innerHTML='<div class="phone-wallpaper"><small>'+esc(t('鼠鼠牌手机'))+'</small><b class="phone-big-time" data-phone-clock></b><span data-phone-date></span><span data-phone-weather></span><div class="phone-wallpaper-pet" aria-hidden="true">'+avatar(phone.contacts[state.mainId]||{id:state.mainId})+'</div>'+(app==='lock'?'<button class="phone-unlock" data-phone="unlock">⌃<br>'+esc(t('向上滑动解锁'))+'</button>':'<div class="phone-apps">'+[['chat','聊天鼠','☏'],['calls','电话鼠','☎'],['feed','动态鼠','✿'],['lottery','每日抽奖','✦']].map(([id,label,icon])=>'<button data-phone="'+id+'"><span class="phone-app-icon '+id+'">'+icon+'<i data-badge="'+id+'"></i></span>'+esc(t(label))+'</button>').join('')+'</div>')+'</div>';
+        content.innerHTML='<div class="phone-wallpaper"><small>'+esc(t('鼠鼠牌手机'))+'</small><b class="phone-big-time" data-phone-clock></b><span data-phone-date></span><span data-phone-weather></span><div class="phone-wallpaper-pet" aria-hidden="true">'+avatar({id:state.mainId,name:state.mainName,coat:state.mainCoat,alive:true})+'</div>'+(app==='lock'?'<button class="phone-unlock" data-phone="unlock">⌃<br>'+esc(t('向上滑动解锁'))+'</button>':'<div class="phone-apps">'+[['chat','聊天鼠','☏'],['calls','电话鼠','☎'],['feed','动态鼠','✿'],['lottery','每日抽奖','✦']].map(([id,label,icon])=>'<button data-phone="'+id+'"><span class="phone-app-icon '+id+'">'+icon+'<i data-badge="'+id+'"></i></span>'+esc(t(label))+'</button>').join('')+'</div>')+'</div>';
       }else if(app==='lottery'){
         content.innerHTML=header('每日抽奖');content.append(lotteryPanel);lotteryPanel.hidden=false;
       }else if(app==='chat'||app==='calls'){
@@ -45,7 +45,7 @@
       }
       availability();TownI18n.render(layer);clock();badges();lastKey=contactKey();
     }
-    function contactKey(){return JSON.stringify([TownI18n.language,api.get().mainId,D.contacts(api.get()).map(n=>[n.id,n.name,n.alive])])}
+    function contactKey(){return JSON.stringify([TownI18n.language,api.get().mainId,api.get().mainCoat,api.get().mainName,D.contacts(api.get()).map(n=>[n.id,n.name,n.alive,n.coat])])}
     function typeCall(line,question){const node=content.querySelector('.phone-call-line'),text=t(line);let index=0;function tick(){if(layer.hidden||app!=='call')return;node.textContent=text.slice(0,++index);if(index<text.length)typingTimer=setTimeout(tick,28);else content.querySelector('.phone-call-choices').innerHTML=question?['你慢慢说，我认真听着。','给脑袋放个假，让腮帮子代班。','先离开一会儿'].map((s,i)=>buttons(s,'answer','data-answer="'+i+'"')).join(''):buttons('继续听','continue')}tick()}
     function allowed(){const state=api.get();if(!state.alive||api.sleeping()||!person()?.alive){feedback('现在无法联系，请等鼠鼠醒来或选择在世居民。');return false}return true}
     function dial(){if(!allowed())return;D.sync(api.get()).owner.calls.push({id:selected,time:Date.now(),status:'已接通'});D.sync(api.get()).owner.calls=D.sync(api.get()).owner.calls.slice(-40);api.save();call={step:0,line:'喂，听得见吗？是我。'+TownPersonalities.line(selected,0),question:false};go('call')}

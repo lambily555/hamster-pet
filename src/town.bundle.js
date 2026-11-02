@@ -34890,9 +34890,9 @@ void main() {
   function createPhoneModel(canvas) {
     const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: true });
     renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
-    renderer.setSize(480, 740, false);
+    renderer.setSize(420, 740, false);
     renderer.outputColorSpace = SRGBColorSpace;
-    const scene = new Scene(), camera = new OrthographicCamera(-2.58, 2.58, 3.98, -3.98, 0.1, 30);
+    const scene = new Scene(), camera = new OrthographicCamera(-2.2575, 2.2575, 3.98, -3.98, 0.1, 30);
     camera.position.set(0, 0, 12);
     scene.add(new HemisphereLight(16774887, 12089685, 1.6));
     const light = new DirectionalLight(16777215, 1.8);
@@ -34962,8 +34962,8 @@ void main() {
     scene.add(new Mesh(new TubeGeometry(mouth, 20, 0.018, 6, false), brown));
     scene.traverse((o) => {
       if (!o.isMesh) return;
-      o.position.x *= 1.2;
-      o.scale.x *= 1.2;
+      o.position.x *= 1.05;
+      o.scale.x *= 1.05;
       if (o.position.y > 1.8) o.position.y = 2.2 + (o.position.y - 1.79) * 0.8;
       else if (o.geometry.type === "TubeGeometry") {
         const a = o.geometry.attributes.position;
