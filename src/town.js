@@ -5,7 +5,7 @@ import {worldMaterial,applyWorldSurface,finishWorldSurfaces} from './town-world-
 import {createSpeechDirector} from './town-speech.js';
 import {restaurantTables} from './town-restaurant-layout.js';
 import {createRestaurantRegister} from './town-restaurant-register.js';
-import {furMaterial,setHamsterCoat} from './town-fur.js';
+import {furMaterial,setHamsterCoat,hamsterFurReady} from './town-fur.js';
 import {createPetCompanions} from './town-pet-companions.js';
 import {createPetHome,populatePetHome,populateCottagePets} from './town-pet-home.js';
 import {plazaSeats} from './town-plaza-seats.js';
@@ -94,7 +94,7 @@ function hamster(coat='three-line') {
   setHamsterCoat(rig,coat);
   const eye=new THREE.MeshPhysicalMaterial({color:0x080706,roughness:.08,clearcoat:1});
   const whisker=new THREE.MeshStandardMaterial({color:0xd8d4cc,transparent:true,opacity:.78,side:THREE.DoubleSide});
-  hamsterAsset.then(asset=>{
+  rig.userData.ready=hamsterAsset.then(asset=>{
     const model=clone(asset),joints=[],bones={};
     model.traverse(child=>{if(child.isBone){const name=child.name.startsWith('mixamorig')&&!child.name.startsWith('mixamorig:')?child.name.replace(/^mixamorig/,'mixamorig:'):child.name;bones[name]={bone:child,base:child.quaternion.clone()};if(/Arm|Leg|Hand|Foot/.test(name))joints.push(bones[name])}if(!child.isMesh)return;child.castShadow=true;child.receiveShadow=true;
       const material=original=>{const name=(child.name+' '+(original?.name||'')).toLowerCase();return name.includes('eye')?eye:name.includes('hige')||name.includes('whisk')?whisker:furMaterial(rig.userData.coat,rig.userData.furAge||0)};
@@ -113,6 +113,13 @@ function hamster(coat='three-line') {
   }).catch(()=>{document.querySelector('#townActivity').textContent='鼠鼠模型加载失败，请返回后重新进入。'});
   return rig;
 }
+
+  async function residentPortraits(candidates){
+    await Promise.all([hamsterAsset,hamsterFurReady()]);const rigs=candidates.map(n=>hamster(n.coat));await Promise.all(rigs.map(rig=>rig.userData.ready));
+    const preview=new THREE.Scene(),view=new THREE.PerspectiveCamera(32,1,.01,10),draw=new THREE.WebGLRenderer({alpha:true,antialias:true,preserveDrawingBuffer:true});draw.setSize(160,160,false);draw.toneMapping=THREE.ACESFilmicToneMapping;preview.add(new THREE.HemisphereLight(0xffffff,0xa1a7b0,2.2));const key=new THREE.DirectionalLight(0xffffff,2.5);key.position.set(-2,3,4);preview.add(key);view.position.set(.12,.4,1.25);view.lookAt(0,.3,0);const result=[];
+    try{for(const rig of rigs){rig.rotation.y=.15;preview.add(rig);draw.render(preview,view);result.push(draw.domElement.toDataURL('image/png'));preview.remove(rig)}}finally{draw.dispose();draw.forceContextLoss();for(const rig of rigs){const disposable=new Set();rig.traverse(o=>{if(o.isMesh)for(const m of Array.isArray(o.material)?o.material:[o.material])if(m&&!m.userData.hamsterFur)disposable.add(m)});disposable.forEach(m=>m.dispose())}}return result;
+  }
+window.createTownResidentPortraits=residentPortraits;
 
 function init() {
   const host=document.querySelector('#townScene'),canvas=host?.querySelector('canvas'); if(!host||!canvas)return;
@@ -377,11 +384,6 @@ function init() {
     if(firstPerson)pet.visible=false;if(t-lastShadowTime>=1/30){renderer.shadowMap.needsUpdate=true;lastShadowTime=t}renderer.render(scene,camera);
   }draw();
 
-  async function residentPortraits(candidates){
-    await hamsterAsset;const rigs=candidates.map(n=>hamster(n.coat));await Promise.resolve();
-    const preview=new THREE.Scene(),view=new THREE.PerspectiveCamera(32,1,.01,10),draw=new THREE.WebGLRenderer({alpha:true,antialias:true});draw.setSize(160,160,false);draw.toneMapping=THREE.ACESFilmicToneMapping;preview.add(new THREE.HemisphereLight(0xffffff,0xa1a7b0,2.2));const key=new THREE.DirectionalLight(0xffffff,2.5);key.position.set(-2,3,4);preview.add(key);view.position.set(.12,.4,1.25);view.lookAt(0,.3,0);const result=[];
-    try{for(const rig of rigs){rig.rotation.y=.15;preview.add(rig);draw.render(preview,view);result.push(draw.domElement.toDataURL('image/png'));preview.remove(rig)}}finally{draw.dispose();draw.forceContextLoss();for(const rig of rigs){const disposable=new Set();rig.traverse(o=>{if(o.isMesh)for(const m of Array.isArray(o.material)?o.material:[o.material])if(m&&!m.userData.hamsterFur)disposable.add(m)});disposable.forEach(m=>m.dispose())}}return result;
-  }
   function applyWorld(next={}){
     refreshRegionNames();const oldWeather=worldState.weather?.name,oldBoard=worldState.schoolBoard;worldState=next;roomCache.get('宠物之家')?.userData.syncPets(next.petHome);roomCache.get('鼠鼠小屋')?.userData.syncPets(next.petHome);petCompanions.sync(next);setLookSensitivity(next.lookSensitivity??1);if(oldBoard!==next.schoolBoard){buildRoom('鼠鼠学校',true);if(activePlace&&indoorNames.includes(activePlace))buildRoom(activePlace)}playerTools.hidden=false;playerTools.querySelector('[data-player-enter]').disabled=next.alive===false;const night=['夜晚','深夜'].includes(next.part),dusk=next.part==='傍晚',lampsOn=night||dusk,sky=new THREE.Color(next.weather?.sky||0xcbd7a9);if(night)sky.multiplyScalar(.22);else if(dusk)sky.multiplyScalar(.55);scene.background.copy(sky);scene.fog.color.copy(sky);ambient.intensity=(night?.65:dusk?1.1:1.3)*(next.weather?.light||1);sun.intensity=(night?.38:dusk?1.15:2.2)*(next.weather?.light||1);sun.color.set(night?0x7995c2:dusk?0xffb66f:0xffe4bd);lampBulbs.forEach(({material,light,pool})=>{material.emissiveIntensity=lampsOn?(night?1.8:1.6):0;light.intensity=lampsOn?(night?7:7):0;pool.material.opacity=lampsOn?(night?.035:.07):0});document.body.dataset.townPart=next.part||'';
     setHamsterCoat(pet,next.mainCoat,next.ageYears);syncResidents();syncPups();syncLife();life.setOuting(next.outing);life.setRestaurantBills(next.restaurant?.bills||{});if(window.TownSimulation.mainSleeping({...next,currentActivity:next.activity})&&firstPerson)stopFirstPerson();life.setResting(next.sleepRequested||next.autoSleep,!!next.hospitalized);life.setCelebration(next.celebration||null);life.setFamilyPlans(next.familyPlans||[]);life.setPetInvitations(next.petHome?.invites||[]);placeModels.get('中心广场').userData.setEvent(next.celebration);placeModels.get('小菜园').userData.setGrowth(next.gardenProgress??.5);pet.scale.setScalar(window.TownSimulation.growthScale(next.ageYears??.7));pet.visible=!firstPerson&&(next.alive!==false||next.pendingFarewell?.phase!=='buried');residents.forEach((resident,i)=>{const data=next.npcs?.[i],inside=indoorNames.includes(activePlace);setHamsterCoat(resident.rig,data?.coat,data?.ageYears);resident.rig.visible=data?.alive!==false&&(!inside||data?.place===activePlace);resident.tag.textContent=data?`${data.name} ${data.sex==='male'?'♂':'♀'}`:roles[i]});

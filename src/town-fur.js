@@ -1,12 +1,13 @@
 import * as THREE from 'three';
 
 const palettes={silver:[0xcdd0d5,0xfffdf7],pudding:[0xd1a04e,0xfffae9],'three-line':[0x41454d,0xe2e1d9],violet:[0x77758e,0xece9f0]};
-let texture;
+let texture,textureReady;
+export function hamsterFurReady(){furMaterial();return textureReady;}
 const materials=new Map();
 export function furMaterial(coat='three-line',age=0){
   if(!Object.hasOwn(palettes,coat))coat='three-line';
   const loss=Math.round(Math.max(0,Math.min(1,(age-1.5)/1.5))*20)/20,key=coat+':'+loss;if(materials.has(key))return materials.get(key);
-  if(!texture){texture=new THREE.TextureLoader().load('../assets/models/booth-hamster/restored/Assets/Ham/Texture/Ham.png');texture.colorSpace=THREE.SRGBColorSpace}
+  if(!texture){textureReady=new Promise((resolve,reject)=>{texture=new THREE.TextureLoader().load('../assets/models/booth-hamster/restored/Assets/Ham/Texture/Ham.png',resolve,undefined,reject)});textureReady.catch(()=>{});texture.colorSpace=THREE.SRGBColorSpace}
   const [dark,light]=palettes[coat],material=new THREE.MeshStandardMaterial({map:texture,roughness:.94});
   material.userData.hamsterFur=true;
   if(coat==='three-line')material.color.setHex(0x9b9d98);

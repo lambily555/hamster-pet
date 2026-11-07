@@ -35527,13 +35527,22 @@ void main() {
   // src/town-fur.js
   var palettes = { silver: [13488341, 16776695], pudding: [13738062, 16775913], "three-line": [4277581, 14868953], violet: [7828878, 15526384] };
   var texture2;
+  var textureReady;
+  function hamsterFurReady() {
+    furMaterial();
+    return textureReady;
+  }
   var materials2 = /* @__PURE__ */ new Map();
   function furMaterial(coat = "three-line", age = 0) {
     if (!Object.hasOwn(palettes, coat)) coat = "three-line";
     const loss = Math.round(Math.max(0, Math.min(1, (age - 1.5) / 1.5)) * 20) / 20, key = coat + ":" + loss;
     if (materials2.has(key)) return materials2.get(key);
     if (!texture2) {
-      texture2 = new TextureLoader().load("../assets/models/booth-hamster/restored/Assets/Ham/Texture/Ham.png");
+      textureReady = new Promise((resolve, reject) => {
+        texture2 = new TextureLoader().load("../assets/models/booth-hamster/restored/Assets/Ham/Texture/Ham.png", resolve, void 0, reject);
+      });
+      textureReady.catch(() => {
+      });
       texture2.colorSpace = SRGBColorSpace;
     }
     const [dark, light] = palettes[coat], material3 = new MeshStandardMaterial({ map: texture2, roughness: 0.94 });
@@ -44794,7 +44803,7 @@ void main() {
     setHamsterCoat(rig, coat);
     const eye = new MeshPhysicalMaterial({ color: 526086, roughness: 0.08, clearcoat: 1 });
     const whisker = new MeshStandardMaterial({ color: 14210252, transparent: true, opacity: 0.78, side: DoubleSide });
-    hamsterAsset.then((asset2) => {
+    rig.userData.ready = hamsterAsset.then((asset2) => {
       const model = clone(asset2), joints = [], bones = {};
       model.traverse((child) => {
         if (child.isBone) {
@@ -44850,6 +44859,44 @@ void main() {
     });
     return rig;
   }
+  async function residentPortraits(candidates) {
+    await Promise.all([hamsterAsset, hamsterFurReady()]);
+    const rigs = candidates.map((n) => hamster(n.coat));
+    await Promise.all(rigs.map((rig) => rig.userData.ready));
+    const preview = new Scene(), view = new PerspectiveCamera(32, 1, 0.01, 10), draw = new WebGLRenderer({ alpha: true, antialias: true, preserveDrawingBuffer: true });
+    draw.setSize(160, 160, false);
+    draw.toneMapping = ACESFilmicToneMapping;
+    preview.add(new HemisphereLight(16777215, 10594224, 2.2));
+    const key = new DirectionalLight(16777215, 2.5);
+    key.position.set(-2, 3, 4);
+    preview.add(key);
+    view.position.set(0.12, 0.4, 1.25);
+    view.lookAt(0, 0.3, 0);
+    const result = [];
+    try {
+      for (const rig of rigs) {
+        rig.rotation.y = 0.15;
+        preview.add(rig);
+        draw.render(preview, view);
+        result.push(draw.domElement.toDataURL("image/png"));
+        preview.remove(rig);
+      }
+    } finally {
+      draw.dispose();
+      draw.forceContextLoss();
+      for (const rig of rigs) {
+        const disposable = /* @__PURE__ */ new Set();
+        rig.traverse((o) => {
+          if (o.isMesh) {
+            for (const m of Array.isArray(o.material) ? o.material : [o.material]) if (m && !m.userData.hamsterFur) disposable.add(m);
+          }
+        });
+        disposable.forEach((m) => m.dispose());
+      }
+    }
+    return result;
+  }
+  window.createTownResidentPortraits = residentPortraits;
   function init() {
     const host = document.querySelector("#townScene"), canvas = host?.querySelector("canvas");
     if (!host || !canvas) return;
@@ -47111,43 +47158,6 @@ void main() {
       renderer.render(scene, camera);
     }
     draw();
-    async function residentPortraits(candidates) {
-      await hamsterAsset;
-      const rigs = candidates.map((n) => hamster(n.coat));
-      await Promise.resolve();
-      const preview = new Scene(), view = new PerspectiveCamera(32, 1, 0.01, 10), draw2 = new WebGLRenderer({ alpha: true, antialias: true });
-      draw2.setSize(160, 160, false);
-      draw2.toneMapping = ACESFilmicToneMapping;
-      preview.add(new HemisphereLight(16777215, 10594224, 2.2));
-      const key = new DirectionalLight(16777215, 2.5);
-      key.position.set(-2, 3, 4);
-      preview.add(key);
-      view.position.set(0.12, 0.4, 1.25);
-      view.lookAt(0, 0.3, 0);
-      const result = [];
-      try {
-        for (const rig of rigs) {
-          rig.rotation.y = 0.15;
-          preview.add(rig);
-          draw2.render(preview, view);
-          result.push(draw2.domElement.toDataURL("image/png"));
-          preview.remove(rig);
-        }
-      } finally {
-        draw2.dispose();
-        draw2.forceContextLoss();
-        for (const rig of rigs) {
-          const disposable = /* @__PURE__ */ new Set();
-          rig.traverse((o) => {
-            if (o.isMesh) {
-              for (const m of Array.isArray(o.material) ? o.material : [o.material]) if (m && !m.userData.hamsterFur) disposable.add(m);
-            }
-          });
-          disposable.forEach((m) => m.dispose());
-        }
-      }
-      return result;
-    }
     function applyWorld(next = {}) {
       refreshRegionNames();
       const oldWeather = worldState.weather?.name, oldBoard = worldState.schoolBoard;
