@@ -1,0 +1,28 @@
+#townPhone .phone-app-icon.games{background:#739693}
+#townPhone .phone-apps{grid-template-columns:repeat(3,minmax(0,1fr))}
+#townPhone .phone-game-list{display:grid;gap:12px;padding:14px 0}
+#townPhone .phone-game-list button{display:grid;gap:8px;text-align:left;white-space:normal;background:#f1e3cb;border:1px solid #c9b08d;border-radius:12px;padding:16px;font-size:14px}
+#townPhone .phone-game-list small{font-size:11px;line-height:1.5}
+#townPhone.phone-gaming>.mouse-phone{visibility:hidden;pointer-events:none}
+#townPhone .ham-games{position:fixed;inset:0;display:grid;place-items:center;background:#211f2c;z-index:10;touch-action:none;overscroll-behavior:none}
+#townPhone .ham-games[hidden]{display:none}
+#townPhone .ham-game-shell{position:relative;width:min(100vw,177.7778vh);aspect-ratio:16/9;background:#34374d;color:#fff0cf;overflow:hidden;font-family:ui-rounded,'Microsoft YaHei',sans-serif}
+#townPhone .ham-game-shell canvas{display:block;width:100%;height:100%;image-rendering:pixelated;outline:none}
+#townPhone .ham-game-toolbar{position:absolute;top:0;left:0;right:0;min-height:9%;display:flex;align-items:center;justify-content:space-between;padding:3px 12px;background:#302c43;gap:8px}
+#townPhone .ham-game-toolbar button,#townPhone .ham-game-overlay button{min-height:32px;border:1px solid #b69a86;background:#504655;color:#fff0cf;border-radius:5px;padding:5px 12px;font-size:13px}
+#townPhone .ham-game-title{font-size:14px;text-align:center}
+#townPhone .ham-game-overlay{position:absolute;inset:10% 0 0;display:grid;place-items:center;background:#252735aa;padding:12px;z-index:3}
+#townPhone .ham-game-overlay[hidden]{display:none}
+#townPhone .ham-game-overlay>div{max-width:520px;text-align:center;background:#36374b;border:3px solid #d2b487;padding:20px;box-shadow:6px 6px 0 #202333}
+#townPhone .ham-game-overlay b{display:block;font-size:22px;color:#ffdc9b}
+#townPhone .ham-game-overlay p{font-size:13px;line-height:1.6;margin:12px 0;color:#fff0cf}
+#townPhone .ham-game-overlay button{margin:3px}
+#townPhone .ham-game-controls{position:absolute;inset:auto 10px 10px;display:flex;justify-content:space-between;align-items:end;pointer-events:none}
+#townPhone .ham-game-controls button{pointer-events:auto;touch-action:none;user-select:none;border:2px solid #e5c79499;border-radius:8px;background:#302c4399;color:#fff0cf;min-width:44px;min-height:44px;font-size:15px;padding:6px}
+#townPhone .ham-game-pad{display:grid;grid-template-columns:repeat(3,44px);gap:4px}
+#townPhone [data-hold=up]{grid-column:2}#townPhone [data-hold=left]{grid-column:1;grid-row:2}#townPhone [data-hold=down]{grid-column:2;grid-row:2}#townPhone [data-hold=right]{grid-column:3;grid-row:2}
+#townPhone .ham-game-action{max-width:120px}
+#townPhone [data-mode=runner] [data-hold=up],#townPhone [data-mode=runner] [data-hold=down],#townPhone [data-mode=runner] [data-hold=fire],#townPhone [data-mode=shooter] [data-hold=jump]{display:none}
+@media(hover:hover) and (pointer:fine){#townPhone .ham-game-controls{opacity:.45}#townPhone .ham-game-controls:hover{opacity:1}}
+@media(orientation:portrait){#townPhone .ham-games{width:100vh;height:100vw;inset:auto;left:50%;top:50%;transform:translate(-50%,-50%) rotate(90deg)}#townPhone .ham-game-shell{width:min(100vh,177.7778vw)}}
+@media(max-height:540px){#townPhone .phone-apps{grid-template-columns:repeat(3,minmax(0,1fr))}#townPhone .ham-game-overlay>div{padding:12px}#townPhone .ham-game-overlay b{font-size:18px}}

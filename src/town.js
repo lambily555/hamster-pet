@@ -381,7 +381,7 @@ function init() {
     speech.classList.toggle('town-outing-speech',!!worldState.outing&&(focusedPup===worldState.outing.npcId||residents[focusedResident]?.lifeId===worldState.outing.npcId));const outingNpc=worldState.outing?.status==='ready'?life.actors.get(worldState.outing.npcId):null;outingMarker.hidden=!outingNpc||document.body.dataset.townDialogue==='active';if(outingNpc){const point=actorWorldPoint(outingNpc);point.y+=.62;const projected=point.clone().project(camera);outingMarker.hidden=outingMarker.hidden||projected.z>1||projected.z< -1||Math.abs(projected.x)>1||Math.abs(projected.y)>1;if(!outingMarker.hidden){outingMarker.style.left=(projected.x+1)*viewWidth/2+'px';outingMarker.style.top=(1-projected.y)*viewHeight/2+'px'}}
     roomLabels.forEach(({button,point})=>placeLabel(button,point,occupied,true));
     layoutSpeech();
-    if(firstPerson)pet.visible=false;if(t-lastShadowTime>=1/30){renderer.shadowMap.needsUpdate=true;lastShadowTime=t}renderer.render(scene,camera);
+    if(firstPerson)pet.visible=false;if(t-lastShadowTime>=1/30){renderer.shadowMap.needsUpdate=true;lastShadowTime=t}if(document.body.dataset.townGame!=='open')renderer.render(scene,camera);
   }draw();
 
   function applyWorld(next={}){

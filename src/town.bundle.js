@@ -47155,7 +47155,7 @@ void main() {
         renderer.shadowMap.needsUpdate = true;
         lastShadowTime = t;
       }
-      renderer.render(scene, camera);
+      if (document.body.dataset.townGame !== "open") renderer.render(scene, camera);
     }
     draw();
     function applyWorld(next = {}) {
