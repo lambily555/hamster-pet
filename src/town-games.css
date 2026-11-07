@@ -1,4 +1,6 @@
-#townPhone .phone-app-icon.games{background:#739693}
+#townPhone .phone-app-icon.play-runner{background:#447c60;color:#fff}
+#townPhone .phone-app-icon.play-shooter{background:#576b9b;color:#fff}
+#townPhone .phone-app-icon svg{width:28px;height:28px;display:block;fill:none;stroke:currentColor;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
 #townPhone .phone-apps{grid-template-columns:repeat(3,minmax(0,1fr))}
 #townPhone .phone-game-list{display:grid;gap:12px;padding:14px 0}
 #townPhone .phone-game-list button{display:grid;gap:8px;text-align:left;white-space:normal;background:#f1e3cb;border:1px solid #c9b08d;border-radius:12px;padding:16px;font-size:14px}
