@@ -1811,3 +1811,5 @@ guci这季的小包？我拿来装瓜子皮的，正好配我家垃圾桶。|Tha
 
 移动，鼠标瞄准，按住|to move, aim with the mouse and hold|para moverte, apunta con el ratón y mantén
 或鼠标左键射击；触屏按住射击自动瞄准。躲开敌人与弹幕，坚持三波。|or left click to fire; on touchscreens hold Fire to auto-aim. Survive three waves.|o el clic izquierdo para disparar; en pantallas táctiles mantén Disparar para apuntar automáticamente. Supera tres oleadas.
+
+在吗？想找你聊会儿。|Hey, got a minute to chat?|¿Estás? Me apetece charlar contigo.

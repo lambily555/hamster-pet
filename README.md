@@ -20,7 +20,7 @@ Download a setup or portable EXE from Releases; no developer tools are needed. S
 
 ## 当前功能
 
-- 鼠鼠手机新增“鼠鼠游戏”：原创像素横屏跑酷与三波射击。跑酷用左右键/A、D移动、空格跳跃；射击用方向键/WASD移动、鼠标瞄准并按住 E 或鼠标左键射击。手机配方向及跳跃/射击触控键，触屏射击自动瞄准；支持暂停、重试和返回手机，竖屏自动旋转游戏区。
+- 鼠鼠手机提供“鼠鼠跑酷”和“鼠鼠射击”两个独立软件：原创像素横屏跑酷与三波射击。跑酷用左右键/A、D移动、空格跳跃；射击用方向键/WASD移动、鼠标瞄准并按住 E 或鼠标左键射击。手机配方向及跳跃/射击触控键，触屏射击自动瞄准；支持暂停、重试和返回手机，竖屏自动旋转游戏区。
 - Hamster Arcade includes a pixel platformer and a three-wave shooter. Move with arrows/WASD, jump with Space, aim with the mouse and hold E or left click to shoot. Touch controls, auto-aim on touchscreens, pause/retry and a landscape playfield are included.
 
 - 手机老虎机支持点击或下拉拉杆，也可点击“抽一次”；按现实每天限抽一次，奖励即时保存。
@@ -108,3 +108,5 @@ API Key 保存在当前电脑的应用设置中，不会由本项目主动上传
 手机主页和锁屏完整适配屏幕，不显示滚动条；联系人、消息与动态按需滚动。居民头像按毛色、表情和配饰区分；主鼠休息时会提示暂不能发消息。
 
 这是游戏内模拟手机，使用本地小镇数据，不发送真实短信或拨打现实电话。
+
+手机聊天和评论采用模拟输入：任意输入逐步显示预设台词，聊天发送后通过三个回复选项继续话题。

@@ -1798,7 +1798,8 @@ TownI18n.add({
     "方向键或": "Arrow keys or",
     "移动，鼠标瞄准，按住 E 或鼠标左键射击；触屏按住射击自动瞄准。躲开敌人与弹幕，坚持三波。": "to move, mouse to aim, hold E or left click to fire; hold Fire on touchscreens to auto-aim. Survive three waves.",
     "移动，鼠标瞄准，按住": "to move, aim with the mouse and hold",
-    "或鼠标左键射击；触屏按住射击自动瞄准。躲开敌人与弹幕，坚持三波。": "or left click to fire; on touchscreens hold Fire to auto-aim. Survive three waves."
+    "或鼠标左键射击；触屏按住射击自动瞄准。躲开敌人与弹幕，坚持三波。": "or left click to fire; on touchscreens hold Fire to auto-aim. Survive three waves.",
+    "在吗？想找你聊会儿。": "Hey, got a minute to chat?"
   },
   "es": {
     "鼠鼠小镇": "Pueblo Hámster",
@@ -3598,6 +3599,7 @@ TownI18n.add({
     "方向键或": "Flechas o",
     "移动，鼠标瞄准，按住 E 或鼠标左键射击；触屏按住射击自动瞄准。躲开敌人与弹幕，坚持三波。": "para moverte, ratón para apuntar y clic izquierdo para disparar; en pantallas táctiles mantén Disparar para apuntar automáticamente. Supera tres oleadas.",
     "移动，鼠标瞄准，按住": "para moverte, apunta con el ratón y mantén",
-    "或鼠标左键射击；触屏按住射击自动瞄准。躲开敌人与弹幕，坚持三波。": "o el clic izquierdo para disparar; en pantallas táctiles mantén Disparar para apuntar automáticamente. Supera tres oleadas."
+    "或鼠标左键射击；触屏按住射击自动瞄准。躲开敌人与弹幕，坚持三波。": "o el clic izquierdo para disparar; en pantallas táctiles mantén Disparar para apuntar automáticamente. Supera tres oleadas.",
+    "在吗？想找你聊会儿。": "¿Estás? Me apetece charlar contigo."
   }
 });

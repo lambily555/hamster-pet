@@ -9,7 +9,7 @@ assert.equal(phone.startTopic(fresh,friend.id,'duplicate',now),false);
 for(let step=0;step<11;step++){assert(phone.replyTopic(fresh,friend.id,step%2,step,now+step+1));assert.equal(phone.replyTopic(fresh,friend.id,0,step),false)}
 assert.equal(phone.sync(fresh).owner.threads[friend.id].length,24);
 assert.equal(phone.topic(fresh,friend.id).active,false);
-assert.equal(phone.sync(fresh).owner.threads[friend.id][0].text,'hello');
+assert.equal(phone.sync(fresh).owner.threads[friend.id][0].text,phone.opening);
 let recruitment=sim.prepareImmigration(fresh,now);const chosen=recruitment.immigration.candidates.slice(0,5);
 assert(chosen.every(n=>Object.keys(n.attributes).length===9&&Object.values(n.attributes).every(v=>v>=20&&v<=100)));
 const admitted=sim.admitResidents(recruitment,chosen.map(n=>n.id),now);assert(admitted.ok);assert.equal(sim.population(admitted.state),15);

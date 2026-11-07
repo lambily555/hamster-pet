@@ -1,12 +1,13 @@
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.TownPhoneData=api})(typeof globalThis!=='undefined'?globalThis:this,()=>{
   const stories=typeof module==='object'?require('./town-phone-stories.js'):TownPhoneStories;
   const personalities=typeof module==='object'?require('./town-personalities.js'):TownPersonalities;
+  const opening='在吗？想找你聊会儿。';
   function topic(state,id){return sync(state).owner.topics?.[id]}
   function startTopic(state,id,opening,at=Date.now()){
     if(topic(state,id)?.active||!opening.trim()||!contacts(state).some(n=>n.id===id&&n.alive)||state.alive===false)return false;
     const {owner}=sync(state),story=stories.topics[personalities.index(id)%stories.topics.length];owner.topics||={};
     owner.topics[id]={story:story.id,step:0,active:true,startedAt:at};
-    return send(state,id,opening.trim().slice(0,160),story.lines[0],at);
+    return send(state,id,'在吗？想找你聊会儿。',story.lines[0],at);
   }
   function replyTopic(state,id,choice,step,at=Date.now()){
     const session=topic(state,id);if(!session?.active||session.step!==step||![0,1,2].includes(choice))return false;
@@ -54,5 +55,5 @@
     if(state.alive!==false&&sim.lotteryStatus(state,at).available)items.push({id:'lottery',title:'每日抽奖',text:'今天还没抽奖，点击前往老虎机。'});
     return items;
   }
-  return {socialPost,topic,startTopic,replyTopic,pending,sync,contacts,unread,read,send,react,hash,comments};
+  return {opening,socialPost,topic,startTopic,replyTopic,pending,sync,contacts,unread,read,send,react,hash,comments};
 });
