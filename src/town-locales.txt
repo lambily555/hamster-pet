@@ -1798,7 +1798,7 @@ guci这季的小包？我拿来装瓜子皮的，正好配我家垃圾桶。|Tha
 游戏已暂停|Game paused|Juego en pausa
 点击继续游戏，或返回手机。|Resume the game or return to your phone.|Continúa la partida o vuelve al teléfono.
 左右键或 A/D 移动，空格跳跃。避开尖刺、升降机关和怪物，到达树洞终点。|Move with Left/Right or A/D; jump with Space. Dodge spikes, moving traps and monsters to reach the tree hollow.|Muévete con las flechas o A/D y salta con Espacio. Esquiva pinchos, trampas móviles y monstruos hasta llegar al hueco del árbol.
-方向键或 WASD 移动，鼠标瞄准，按住左键射击；触屏按住射击自动瞄准。躲开敌人与弹幕，坚持三波。|Move with arrows or WASD, aim with the mouse and hold left click to fire. On touchscreens, hold Fire to auto-aim. Dodge enemies and bullets through three waves.|Muévete con flechas o WASD, apunta con el ratón y mantén el clic izquierdo para disparar. En pantalla táctil, mantén Disparar para apuntar automáticamente. Esquiva enemigos y balas durante tres oleadas.
+方向键或 WASD 移动，鼠标瞄准，按住 E 或鼠标左键射击；触屏按住射击自动瞄准。躲开敌人与弹幕，坚持三波。|Move with arrows or WASD, aim with the mouse and hold E or left click to fire. On touchscreens, hold Fire to auto-aim. Dodge enemies and bullets through three waves.|Muévete con flechas o WASD, apunta con el ratón y mantén E o el clic izquierdo para disparar. En pantalla táctil, mantén Disparar para apuntar automáticamente. Esquiva enemigos y balas durante tres oleadas.
 主鼠正在休息，醒来后可以继续游戏。|Your hamster is resting. Resume when they wake up.|Tu hámster está descansando. Continúa cuando despierte.
 闯关成功|Stage cleared!|¡Nivel superado!
 本次挑战结束|Game over|Fin de la partida
@@ -1807,4 +1807,7 @@ guci这季的小包？我拿来装瓜子皮的，正好配我家垃圾桶。|Tha
 左右键或|Left/Right or|Flechas izquierda/derecha o
 移动，空格跳跃。避开尖刺、升降机关和怪物，到达树洞终点。|to move, Space to jump. Dodge traps and monsters to reach the tree hollow.|para moverte y Espacio para saltar. Esquiva trampas y monstruos hasta llegar al árbol.
 方向键或|Arrow keys or|Flechas o
-移动，鼠标瞄准，按住左键射击；触屏按住射击自动瞄准。躲开敌人与弹幕，坚持三波。|to move, mouse to aim, hold left click to fire; hold Fire on touchscreens to auto-aim. Survive three waves.|para moverte, ratón para apuntar y clic izquierdo para disparar; en pantallas táctiles mantén Disparar para apuntar automáticamente. Supera tres oleadas.
+移动，鼠标瞄准，按住 E 或鼠标左键射击；触屏按住射击自动瞄准。躲开敌人与弹幕，坚持三波。|to move, mouse to aim, hold E or left click to fire; hold Fire on touchscreens to auto-aim. Survive three waves.|para moverte, ratón para apuntar y clic izquierdo para disparar; en pantallas táctiles mantén Disparar para apuntar automáticamente. Supera tres oleadas.
+
+移动，鼠标瞄准，按住|to move, aim with the mouse and hold|para moverte, apunta con el ratón y mantén
+或鼠标左键射击；触屏按住射击自动瞄准。躲开敌人与弹幕，坚持三波。|or left click to fire; on touchscreens hold Fire to auto-aim. Survive three waves.|o el clic izquierdo para disparar; en pantallas táctiles mantén Disparar para apuntar automáticamente. Supera tres oleadas.
