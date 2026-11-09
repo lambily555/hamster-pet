@@ -113,3 +113,21 @@
 #townPhone .phone-feed article>div>strong{font-size:13px}
 #townPhone .phone-feed nav button{font-size:11px;padding:4px 6px}
 @media(max-height:540px){#townPhone .phone-content[data-app=thread]{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);column-gap:14px}#townPhone .phone-content[data-app=thread]>.phone-header{grid-column:1/-1}#townPhone .phone-messages{height:100%}#townPhone .phone-compose{align-self:end;max-height:100%;overflow-y:auto;border-top:0}#townPhone .phone-topic-choices{max-height:none}#townPhone .phone-call-person{display:grid;grid-template-columns:1fr;justify-items:center}}
+
+/* Keep call controls anchored while the conversation grows. */
+#townPhone .phone-content[data-app=call]{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;overflow:hidden;gap:8px}
+#townPhone .phone-content[data-app=call] .phone-call-person{float:none;width:auto;grid-template-columns:1fr;justify-items:center;gap:4px;margin:4px 0;text-align:center}
+#townPhone .phone-content[data-app=call] .phone-call-person .phone-avatar{grid-row:auto;justify-self:center;width:52px;height:52px}
+#townPhone .phone-call-conversation{min-height:0;overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;padding:4px 0;scrollbar-width:thin}
+#townPhone .phone-call-conversation:before,#townPhone .phone-call-conversation:after{content:'';flex:1 0 8px}
+#townPhone .phone-call-conversation .phone-call-line{margin:0 0 12px;min-height:0;flex-shrink:0}
+#townPhone .phone-call-conversation .phone-call-choices{margin:0;flex-shrink:0;gap:7px}
+#townPhone .phone-content[data-app=call]>.phone-hangup{justify-self:center;width:52px;height:52px;min-height:52px;margin:10px 0 14px;padding:14px;border:0;border-radius:50%;background:#c6534e;display:grid;place-items:center}
+#townPhone .phone-hangup svg{width:24px;height:24px;fill:#fff}
+@media(max-height:540px){#townPhone .phone-content[data-app=call]{grid-template-columns:minmax(90px,.65fr) minmax(0,1.65fr);grid-template-rows:auto minmax(0,1fr) auto;column-gap:18px;gap:4px 18px}#townPhone .phone-content[data-app=call]>.phone-header{grid-column:1/-1}#townPhone .phone-content[data-app=call] .phone-call-person{grid-column:1;grid-row:2;align-self:center}#townPhone .phone-call-conversation{grid-column:2;grid-row:2/4}#townPhone .phone-content[data-app=call]>.phone-hangup{grid-column:1;grid-row:3;width:44px;height:44px;min-height:44px;padding:10px;margin:4px 0}}
+
+#townPhone .phone-feed nav{justify-content:space-between;gap:8px}
+#townPhone .phone-feed nav button{width:40px;min-height:40px;display:grid;place-items:center;padding:8px;border-radius:10px}
+#townPhone .phone-feed nav svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+#townPhone .phone-feed nav [data-phone=comment] circle{fill:currentColor;stroke:none}
+#townPhone .phone-feed nav [aria-pressed=true] svg{fill:currentColor}
