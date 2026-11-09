@@ -50,3 +50,8 @@ posts.alive=false;assert.equal(phone.publish(posts,'no'),false);
 console.log('PASS NPC daily game posts, no refresh spam, main publishing, media sharing, persistence and photo bounds.');
 
 }
+
+for(const [type,place] of Object.entries({buy:'鼠鼠饭馆',study:'鼠鼠学校',rest:'鼠鼠小屋',family:'鼠鼠小屋',partner:'中心广场',social:'中心广场',activity:'中心广场',game:'鼠鼠小屋'}))assert.equal(phone.scenePlace({type}),place);
+assert.equal(phone.scenePlace({type:'activity',text:'去了零食铺'}),'零食铺');
+assert.equal(phone.scenePlace({type:'social',place:'纪念馆'}),'纪念馆');
+console.log('PASS all feed types receive a scene and explicit event locations take priority.');

@@ -139,3 +139,5 @@
 #townPhone .phone-post-editor textarea{width:100%;min-height:100px;resize:vertical;border:1px solid #dcc4ac;border-radius:10px;padding:10px;background:#fffdfa;font:inherit;color:inherit}
 #townPhone .phone-post-editor>button{border:1px solid #d8bfa5;border-radius:10px;padding:10px;background:#f2e7d7;margin:6px 5px 6px 0}
 #townPhone .phone-post-editor [data-phone=publish]{background:#648165;color:white}
+
+#townPhone .phone-scene-photo{aspect-ratio:16/9;background:#e7dfce}

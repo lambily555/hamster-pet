@@ -47234,7 +47234,49 @@ void main() {
         buildRoom(activePlace);
       }
     }
-    window.TownApp = { capturePhoto: () => {
+    const feedPhotos = /* @__PURE__ */ new Map();
+    function capturePlacePhoto(name, variant = 0) {
+      const model = placeModels.get(name) || placeModels.get("\u4E2D\u5FC3\u5E7F\u573A");
+      if (!model) return null;
+      const key = model.uuid + ":" + variant % 2 + ":" + window.TownI18n.language;
+      if (feedPhotos.has(key)) return feedPhotos.get(key);
+      const view = new PerspectiveCamera(45, 16 / 9, 0.1, 100), center = model.getWorldPosition(new Vector3());
+      const angle = facing(name) + (variant % 2 ? 0.35 : -0.35);
+      view.position.set(center.x + Math.sin(angle) * 11, center.y + 7, center.z + Math.cos(angle) * 11);
+      view.lookAt(center.x, center.y + 1.1, center.z);
+      const target2 = new WebGLRenderTarget(480, 270), previous = renderer.getRenderTarget(), visibility = [];
+      for (const building of placeModels.values()) {
+        visibility.push([building, building.visible]);
+        building.visible = true;
+        building.traverse((o) => {
+          if (o.userData.petRoof || o.userData.cutawayRoof) {
+            visibility.push([o, o.visible]);
+            o.visible = true;
+          }
+        });
+      }
+      try {
+        renderer.setRenderTarget(target2);
+        renderer.render(scene, view);
+        const pixels = new Uint8Array(480 * 270 * 4);
+        renderer.readRenderTargetPixels(target2, 0, 0, 480, 270, pixels);
+        const shot = document.createElement("canvas");
+        shot.width = 480;
+        shot.height = 270;
+        const ctx = shot.getContext("2d"), data = ctx.createImageData(480, 270);
+        for (let y = 0; y < 270; y++) data.data.set(pixels.subarray((269 - y) * 480 * 4, (270 - y) * 480 * 4), y * 480 * 4);
+        ctx.putImageData(data, 0, 0);
+        const url = shot.toDataURL("image/jpeg", 0.7);
+        if (feedPhotos.size >= 28) feedPhotos.delete(feedPhotos.keys().next().value);
+        feedPhotos.set(key, url);
+        return url;
+      } finally {
+        for (const [object, visible] of visibility) object.visible = visible;
+        renderer.setRenderTarget(previous);
+        target2.dispose();
+      }
+    }
+    window.TownApp = { capturePlacePhoto, capturePhoto: () => {
       renderer.render(scene, camera);
       const shot = document.createElement("canvas");
       shot.width = 480;
