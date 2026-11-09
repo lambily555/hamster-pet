@@ -47,6 +47,8 @@
     function key(e){if(!state)return;e.stopImmediatePropagation();if(e.key==='Tab'){const nodes=[...root.querySelectorAll('button')].filter(n=>n.getClientRects().length&&!n.closest('[hidden]'));const at=nodes.indexOf(document.activeElement);e.preventDefault();nodes[(at+(e.shiftKey?-1:1)+nodes.length)%nodes.length]?.focus();return}if(e.code==='Escape'){e.preventDefault();if(!e.repeat)pause();return}if(e.code==='KeyP'){e.preventDefault();if(!e.repeat)pause();return}if(mapping[e.code]){e.preventDefault();keys.add(mapping[e.code]);}}
     window.addEventListener('keyup',e=>{if(!state)return;if(mapping[e.code]){keys.delete(mapping[e.code]);e.preventDefault();e.stopImmediatePropagation()}} ,true);
     window.addEventListener('blur',()=>{if(state)pause()});document.addEventListener('visibilitychange',()=>{if(document.hidden&&state)pause()});window.addEventListener('resize',()=>{if(state)pause()});
-    return {start,close,key,get active(){return !!state},inspect:()=>state?{mode:state.mode,status:state.status,paused,hp:state.player.hp,x:state.player.x,y:state.player.y,wave:state.wave,score:state.score,shots:state.bullets.length}:null};
+    const previews=new Map();
+    function preview(mode){const key=TownI18n.language+mode;if(previews.has(key))return previews.get(key);const saved=state,savedAim=aim;try{state=C.create(mode);for(let i=0;i<90;i++)C.update(state,{right:true,fire:true,jump:i===30},1/60);aim=null;render();const small=document.createElement('canvas');small.width=480;small.height=270;small.getContext('2d').drawImage(canvas,0,0,480,270);const url=small.toDataURL('image/png');previews.set(key,url);return url}finally{state=saved;aim=savedAim;if(state)render()}}
+    return {preview,start,close,key,get active(){return !!state},inspect:()=>state?{mode:state.mode,status:state.status,paused,hp:state.player.hp,x:state.player.x,y:state.player.y,wave:state.wave,score:state.score,shots:state.bullets.length}:null};
   };
 })();

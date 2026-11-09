@@ -47234,7 +47234,14 @@ void main() {
         buildRoom(activePlace);
       }
     }
-    window.TownApp = { mobileCamera: (dx, dy, zoom = 0) => {
+    window.TownApp = { capturePhoto: () => {
+      renderer.render(scene, camera);
+      const shot = document.createElement("canvas");
+      shot.width = 480;
+      shot.height = Math.round(480 * canvas.height / canvas.width);
+      shot.getContext("2d").drawImage(canvas, 0, 0, shot.width, shot.height);
+      return shot.toDataURL("image/jpeg", 0.65);
+    }, mobileCamera: (dx, dy, zoom = 0) => {
       if (!window.HamsterMobile) return;
       if (firstPerson) {
         if (document.body.dataset.townDialogue !== "active") {

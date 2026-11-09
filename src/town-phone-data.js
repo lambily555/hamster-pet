@@ -23,13 +23,18 @@
     for(const n of state.memorials||[])if(n.id)phone.contacts[n.id]={...phone.contacts[n.id],id:n.id,number:phone.contacts[n.id]?.number||String(10001+Object.keys(phone.contacts).length),name:n.name,role:n.role||'',alive:false};
     const owner=phone.owners[state.mainId]||(phone.owners[state.mainId]={threads:{},calls:[],reactions:{},seen:{chat:'',calls:'',feed:''}});
     const ids=new Map(phone.feed.map((e,i)=>[e.id,i]));for(const e of state.events||[]){const post={...e,authorId:e.mainId||'town'};if(ids.has(e.id))phone.feed[ids.get(e.id)]={...phone.feed[ids.get(e.id)],...post};else{ids.set(e.id,phone.feed.length);phone.feed.push(post)}}phone.feed=phone.feed.slice(-200);
+    const day=Math.floor((state.calendarTime||0)/86400000);
+    if(phone.gamePostDay!==day){
+      const residents=people.filter(n=>n.id&&n.id!==state.mainId&&n.alive!==false&&phone.contacts[n.id]?.alive);
+      if(residents.length){const n=residents[day%residents.length],game=day%2?'runner':'shooter';phone.feed.push({id:'game:'+day,authorId:n.id,type:'game',game,time:Date.now(),calendarTime:state.calendarTime});phone.feed=phone.feed.slice(-200);phone.gamePostDay=day;}
+    }
     return {phone,owner};
   }
   function contacts(state){const {phone}=sync(state);return Object.values(phone.contacts).filter(n=>n.id!==state.mainId).sort((a,b)=>Number(b.alive)-Number(a.alive)||a.name.localeCompare(b.name))}
   function unread(state){const {phone,owner}=sync(state),key=contacts(state).map(n=>n.id+':'+n.alive).sort().join('|');return {chat:owner.seen.chat!==key,calls:owner.seen.calls!==key,feed:owner.seen.feed!==(phone.feed.at(-1)?.id||'')};}
   function read(state,app){const {phone,owner}=sync(state);owner.seen[app]=app==='feed'?(phone.feed.at(-1)?.id||''):contacts(state).map(n=>n.id+':'+n.alive).sort().join('|')}
   function send(state,id,line,reply,at=Date.now()){const {owner}=sync(state);if(!contacts(state).find(n=>n.id===id&&n.alive)||state.alive===false)return false;const thread=owner.threads[id]||(owner.threads[id]=[]);thread.push({from:'main',text:line,time:at},{from:id,text:reply,time:at+1});owner.threads[id]=thread.slice(-60);return true}
-  function react(state,id,kind,text){const {phone,owner}=sync(state);if(!phone.feed.some(e=>e.id===id))return false;const r=owner.reactions[id]||(owner.reactions[id]={comments:[]});if(kind==='comment')r.comments.push({authorId:state.mainId,name:state.mainName,text});else if(kind==='share'){if(r.share)return false;r.share=true;const original=phone.feed.find(e=>e.id===id),view=socialPost(state,original);phone.feed.push({socialText:view?.socialText,id:'share:'+state.mainId+':'+id,authorId:state.mainId,time:Date.now(),calendarTime:state.calendarTime,text:original.text,shared:true});phone.feed=phone.feed.slice(-200)}else if(['like','save'].includes(kind))r[kind]=!r[kind];r.comments=r.comments.slice(-20);return true}
+  function react(state,id,kind,text){const {phone,owner}=sync(state);if(!phone.feed.some(e=>e.id===id))return false;const r=owner.reactions[id]||(owner.reactions[id]={comments:[]});if(kind==='comment')r.comments.push({authorId:state.mainId,name:state.mainName,text});else if(kind==='share'){if(r.share)return false;r.share=true;const original=phone.feed.find(e=>e.id===id),view=socialPost(state,original);phone.feed.push({socialText:view?.socialText,id:'share:'+state.mainId+':'+id,authorId:state.mainId,time:Date.now(),calendarTime:state.calendarTime,text:original.text,game:view?.game,image:view?.image,customText:view?.customText,shared:true});phone.feed=phone.feed.slice(-200)}else if(['like','save'].includes(kind))r[kind]=!r[kind];r.comments=r.comments.slice(-20);return true}
   function hash(id){let n=0;for(const c of String(id))n=(Math.imul(n,31)+c.charCodeAt(0))>>>0;return n}
   function comments(state,post){
     const {phone}=sync(state);post=phone.feed.find(e=>e.id===post.id)||post;if(post.npcComments)return post.npcComments;
@@ -37,13 +42,23 @@
     post.npcComments=[];if(seed%3!==0&&people.length){const count=1+seed%2;for(let i=0;i<Math.min(count,people.length);i++){const n=people[(seed+i)%people.length];post.npcComments.push({authorId:n.id,name:n.name,text:['这热闹，我的腮帮子先来占个位。','已阅，瓜子都忘记嗑了。','好家伙，小镇今天又有节目看。','我带瓜子来了，继续讲。'][(seed+i)%4]})}}return post.npcComments;
   }
   function socialPost(state,post){
-    if(post.shared&&post.socialText)return post;
+    if(post.socialText&&(post.shared||post.type==='post'))return post;
     const {phone}=sync(state),people=Object.values(phone.contacts).sort((a,b)=>b.name.length-a.name.length);
     const author=phone.contacts[post.authorId]||people.find(n=>post.text?.startsWith(n.name));if(!author)return null;
     const lines={activity:'刚活动了一会儿，给自己留个记录。',buy:'饭吃过了，账也结清了。',rest:'先去补个觉，醒了再回消息。',study:'今天又学了一点，先记下来。',partner:'今天有伴侣了，以后是两只鼠一起过日子。',family:'家里有了新变化，这一天得记住。',social:'今天和朋友聊了聊，回来发个动态。'};
-    const base=lines[post.type];if(!base)return null;
+    const games={runner:['刚跳过一个坑，下一秒又掉进另一个。我这叫雨露均沾。','跑酷不用包场，整条赛道都在看我摔。','跑完一圈，建议先洗爪再碰瓜子。','早知这坑这么深，我就不跳了。','老铁，这腿归我管，落哪儿可不归我管。','哈哈哈哈，刚才那一跤不算，我笑得没按到跳。','今日运动：手指两公里，身体原地待命。','申请把坑填平，赛道说不接受调休。','说好最后一局。上一局也是这么说的。'],shooter:['子弹从耳边飞过，我的拖拉机正在办理退学。','装备可以买，走位这事管家暂时不会。','躲完弹幕再上厕所，别一紧张忘了冲水。','你只顾着瞄准，倒把我晾在弹幕里。','老铁别慌，先躲！不是让你往子弹上躲！','哈哈哈哈，敌人还没动，我先笑歪了准星。','战术很清楚：活着回来。执行起来另说。','这波不是失误，是给敌人一个就业机会。','眼睛看见了，爪子还在加载。']};
+    if(post.type==='game'&&games[post.game])return {...post,socialText:games[post.game][personalities.index(author.id)%9]};
+    const variants={activity:['出门溜达一圈，没办成大事，倒是把自己哄高兴了。','今天的运动量达标了：从窝走到饭桌。'],study:['学到了。会不会用，咱们下次再议。','脑袋今天上班了，先奖励它休息一会儿。'],rest:['今日营业结束，被窝已经给我留位了。','电量告急。不是手机，是我。']};
+    const base=variants[post.type]?.[hash(post.id)%2]||lines[post.type];if(!base)return null;
     const voices=['顺便通知一下，枕头的拖拉机驾照到期了。','这条动态就不包金边了，管家还没下班。','刷到这里的朋友，记得洗手再吃东西。','也不知谁会惦记，倒是我先发出来了。','老铁们，今儿就先唠到这儿。','哈哈哈哈，先笑两声再发！','以上是本鼠口供，瓜子可以作证。','本条无需开会，看到算收到。','剩下的话等我充满电再说。'];
     return {...post,authorId:author.id,socialText:base+' '+voices[personalities.index(author.id)%voices.length]};
+  }
+  function publish(state,text,game=null,image=null,at=Date.now()){
+    if(state.alive===false||!String(text).trim())return false;
+    const {phone}=sync(state);phone.postSequence=(phone.postSequence||0)+1;
+    phone.feed.push({id:'post:'+state.mainId+':'+phone.postSequence,authorId:state.mainId,type:'post',socialText:String(text).trim().slice(0,300),customText:true,game:['runner','shooter'].includes(game)?game:null,image:typeof image==='string'&&/^data:image\/jpeg;base64,/.test(image)&&image.length<100000?image:null,time:at,calendarTime:state.calendarTime});
+    phone.feed=phone.feed.slice(-200);let photos=0;for(let i=phone.feed.length-1;i>=0;i--)if(phone.feed[i].image&&++photos>12)delete phone.feed[i].image;
+    return true;
   }
   function pending(state,sim,at=Date.now()){
     const items=[];
@@ -55,5 +70,5 @@
     if(state.alive!==false&&sim.lotteryStatus(state,at).available)items.push({id:'lottery',title:'每日抽奖',text:'今天还没抽奖，点击前往老虎机。'});
     return items;
   }
-  return {opening,socialPost,topic,startTopic,replyTopic,pending,sync,contacts,unread,read,send,react,hash,comments};
+  return {publish,opening,socialPost,topic,startTopic,replyTopic,pending,sync,contacts,unread,read,send,react,hash,comments};
 });

@@ -39,3 +39,14 @@ for(const language of ['en','es']){
   for(const post of phone.sync(feedState).phone.feed){const social=phone.socialPost(feedState,post);if(social)assert.equal(/[\u3400-\u9fff]/.test(social.socialText.split(' ').map(part=>phoneI18n.t(part,language)).join(' ')),false);for(const comment of phone.comments(feedState,post))assert.equal(/[\u3400-\u9fff]/.test(phoneI18n.t(comment.text,language)),false);}
 }
 console.log('Phone English/Spanish: complete topics, every reply, call openings/questions and social posts/comments passed.');
+
+{const posts=sim.defaults(now);phone.sync(posts);const firstGames=posts.phone.feed.filter(p=>p.type==='game');assert.equal(firstGames.length,1);for(let i=0;i<10;i++)phone.sync(posts);assert.equal(posts.phone.feed.filter(p=>p.type==='game').length,1);
+posts.calendarTime+=86400000;phone.sync(posts);assert.equal(posts.phone.feed.filter(p=>p.type==='game').length,2);
+assert.equal(phone.publish(posts,'   '),false);assert(phone.publish(posts,'我的随手拍','runner','data:image/jpeg;base64,AA',now));let own=posts.phone.feed.at(-1);assert.equal(own.authorId,posts.mainId);assert.equal(phone.socialPost(posts,own).socialText,'我的随手拍');assert.equal(own.game,'runner');
+assert(phone.react(posts,own.id,'share'));assert.equal(posts.phone.feed.at(-1).image,own.image);assert.equal(posts.phone.feed.at(-1).game,'runner');
+const savedPosts=JSON.parse(JSON.stringify(posts));phone.sync(savedPosts);assert(savedPosts.phone.feed.some(p=>p.id===own.id));
+for(let i=0;i<15;i++)phone.publish(posts,'photo '+i,null,'data:image/jpeg;base64,AA');assert.equal(posts.phone.feed.filter(p=>p.image).length,12);
+posts.alive=false;assert.equal(phone.publish(posts,'no'),false);
+console.log('PASS NPC daily game posts, no refresh spam, main publishing, media sharing, persistence and photo bounds.');
+
+}

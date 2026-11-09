@@ -126,8 +126,16 @@
 #townPhone .phone-hangup svg{width:24px;height:24px;fill:#fff}
 @media(max-height:540px){#townPhone .phone-content[data-app=call]{grid-template-columns:minmax(90px,.65fr) minmax(0,1.65fr);grid-template-rows:auto minmax(0,1fr) auto;column-gap:18px;gap:4px 18px}#townPhone .phone-content[data-app=call]>.phone-header{grid-column:1/-1}#townPhone .phone-content[data-app=call] .phone-call-person{grid-column:1;grid-row:2;align-self:center}#townPhone .phone-call-conversation{grid-column:2;grid-row:2/4}#townPhone .phone-content[data-app=call]>.phone-hangup{grid-column:1;grid-row:3;width:44px;height:44px;min-height:44px;padding:10px;margin:4px 0}}
 
-#townPhone .phone-feed nav{justify-content:space-between;gap:8px}
-#townPhone .phone-feed nav button{width:40px;min-height:40px;display:grid;place-items:center;padding:8px;border-radius:10px}
+#townPhone .phone-feed nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+#townPhone .phone-feed nav button{width:100%;min-width:0;min-height:40px;display:grid;place-items:center;padding:8px;border-radius:10px}
 #townPhone .phone-feed nav svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
 #townPhone .phone-feed nav [data-phone=comment] circle{fill:currentColor;stroke:none}
 #townPhone .phone-feed nav [aria-pressed=true] svg{fill:currentColor}
+
+#townPhone .phone-post-image,#townPhone .phone-game-card img{display:block;width:100%;height:auto;border-radius:9px;object-fit:cover;margin:8px 0}
+#townPhone .phone-game-card{display:block;width:100%;padding:0;border:1px solid #dec9b2;border-radius:10px;background:#f2e7d7;text-align:left;overflow:hidden;margin:10px 0}
+#townPhone .phone-game-card img{margin:0;border-radius:0;aspect-ratio:16/9;image-rendering:pixelated}
+#townPhone .phone-game-card span{display:block;padding:8px;font-size:11px}
+#townPhone .phone-post-editor textarea{width:100%;min-height:100px;resize:vertical;border:1px solid #dcc4ac;border-radius:10px;padding:10px;background:#fffdfa;font:inherit;color:inherit}
+#townPhone .phone-post-editor>button{border:1px solid #d8bfa5;border-radius:10px;padding:10px;background:#f2e7d7;margin:6px 5px 6px 0}
+#townPhone .phone-post-editor [data-phone=publish]{background:#648165;color:white}

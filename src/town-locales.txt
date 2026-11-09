@@ -1813,3 +1813,40 @@ guci这季的小包？我拿来装瓜子皮的，正好配我家垃圾桶。|Tha
 或鼠标左键射击；触屏按住射击自动瞄准。躲开敌人与弹幕，坚持三波。|or left click to fire; on touchscreens hold Fire to auto-aim. Survive three waves.|o el clic izquierdo para disparar; en pantallas táctiles mantén Disparar para apuntar automáticamente. Supera tres oleadas.
 
 在吗？想找你聊会儿。|Hey, got a minute to chat?|¿Estás? Me apetece charlar contigo.
+
+发动态|Create a post|Crear publicación
+分享今天的小事|Share a little moment from today|Comparte un momento de hoy
+附上游戏|Attach a game|Adjuntar juego
+不附游戏|No game|Sin juego
+拍下当前小镇|Take a town photo|Fotografiar el pueblo
+移除图片|Remove photo|Quitar foto
+发布动态|Publish post|Publicar
+小镇随手拍|Town snapshot|Foto del pueblo
+点击游玩|Tap to play|Toca para jugar
+暂时无法拍照，请稍后再试。|Cannot take a photo right now. Try again shortly.|No se puede tomar la foto ahora. Inténtalo luego.
+写点什么再发布吧。|Write something before posting.|Escribe algo antes de publicar.
+动态已发布。|Post published.|Publicación enviada.
+刚跳过一个坑，下一秒又掉进另一个。我这叫雨露均沾。|Cleared one pit, fell into the next. Equal treatment.|Salté un hoyo y caí en otro. Trato igualitario.
+跑酷不用包场，整条赛道都在看我摔。|No need to rent the track. Everyone is already watching me fall.|No hace falta reservar la pista. Todos me miran caer.
+跑完一圈，建议先洗爪再碰瓜子。|After a lap, wash your paws before touching the seeds.|Tras una vuelta, lávate las patitas antes de tocar las pipas.
+早知这坑这么深，我就不跳了。|Had I known the pit was this deep, I would have stayed home.|De saber que el hoyo era tan profundo, no habría saltado.
+老铁，这腿归我管，落哪儿可不归我管。|Buddy, I control the legs. Landing is another department.|Colega, controlo las piernas. El aterrizaje es otro departamento.
+哈哈哈哈，刚才那一跤不算，我笑得没按到跳。|Hahaha, that fall does not count. I was laughing too hard to jump.|Jajaja, esa caída no cuenta. Me reía tanto que no salté.
+今日运动：手指两公里，身体原地待命。|Exercise today: fingers ran two miles. Body stayed on standby.|Ejercicio de hoy: dedos dos kilómetros. Cuerpo en espera.
+申请把坑填平，赛道说不接受调休。|Requested filled pits. The track denied my leave request.|Pedí rellenar los hoyos. La pista rechazó mis vacaciones.
+说好最后一局。上一局也是这么说的。|One last round. I said that last round too.|Una última partida. También lo dije en la anterior.
+子弹从耳边飞过，我的拖拉机正在办理退学。|Bullets past my ears. My tractor is dropping out of school.|Balas junto a mis orejas. Mi tractor está dejando la escuela.
+装备可以买，走位这事管家暂时不会。|Gear is for sale. My butler has not learned dodging yet.|El equipo se compra. Mi mayordomo aún no sabe esquivar.
+躲完弹幕再上厕所，别一紧张忘了冲水。|Dodge first, bathroom later. And remember to flush.|Primero esquiva, luego ve al baño. Y tira de la cadena.
+你只顾着瞄准，倒把我晾在弹幕里。|You kept aiming and left me out here in the crossfire.|Tú apuntando y yo aquí, en pleno fuego cruzado.
+老铁别慌，先躲！不是让你往子弹上躲！|Easy, buddy. Dodge! Not INTO the bullets!|¡Tranquilo, colega! ¡Esquiva! ¡No hacia las balas!
+哈哈哈哈，敌人还没动，我先笑歪了准星。|Hahaha, the enemy stood still. My laughter moved the crosshair.|Jajaja, el enemigo quieto y mi risa desviando la mira.
+战术很清楚：活着回来。执行起来另说。|The plan is clear: return alive. Execution is another matter.|El plan: volver con vida. Ejecutarlo ya es otra cosa.
+这波不是失误，是给敌人一个就业机会。|Not a mistake. I was giving the enemy a job opportunity.|No fue un error. Le di una oportunidad laboral al enemigo.
+眼睛看见了，爪子还在加载。|Eyes saw it. Paws are still loading.|Los ojos lo vieron. Las patitas siguen cargando.
+出门溜达一圈，没办成大事，倒是把自己哄高兴了。|Went for a wander. Got nothing done, felt great anyway.|Salí a pasear. No hice nada importante, pero volví feliz.
+今天的运动量达标了：从窝走到饭桌。|Exercise goal reached: walked from bed to the dinner table.|Ejercicio cumplido: de la cama a la mesa.
+学到了。会不会用，咱们下次再议。|Learned it. Using it? A discussion for another day.|Lo aprendí. ¿Sabré usarlo? Lo hablamos otro día.
+脑袋今天上班了，先奖励它休息一会儿。|Brain clocked in today. Rewarding it with a break.|El cerebro trabajó hoy. Le daré un descanso de premio.
+今日营业结束，被窝已经给我留位了。|Closed for today. My blanket saved me a spot.|Cerrado por hoy. Mi manta me guardó sitio.
+电量告急。不是手机，是我。|Battery low. Not the phone. Me.|Batería baja. No la del móvil. La mía.
