@@ -8,3 +8,9 @@ s=C.create('shooter');s.player.hp=1;s.enemyBullets=[{x:s.player.x,y:s.player.y,w
 // Every terrain gap is within a full jump and every raised step is reachable.
 s=C.create('runner');const floors=s.platforms.filter(p=>p.h>12);for(let i=1;i<floors.length;i++)assert(floors[i].x-(floors[i-1].x+floors[i-1].w)<145*(2*340/820));
 console.log('Arcade: jumping, collision, immunity, checkpoints, enemy fire, hit detection, waves and end states passed.');
+
+const town={lottery:{energyCards:2,lastDay:'2026-11-15'}};
+for(const mode of ['runner','shooter']){const run=C.create(mode);run.status='won';run.score=mode==='runner'?240:450;if(mode==='runner')run.coins.forEach(c=>c.taken=true);else{run.wave=3;run.enemies=[]}assert(C.perfect(run));run.damageTaken=1;assert(!C.claimPerfect(town,run));run.damageTaken=0;run.score--;assert(!C.claimPerfect(town,run));run.score++;run.status='playing';assert(!C.claimPerfect(town,run));run.status='won';assert(C.claimPerfect(town,run));assert(!C.claimPerfect(town,run));const restored=JSON.parse(JSON.stringify(town));restored.mainId='next-generation';assert(!C.claimPerfect(restored,run));}
+assert.equal(town.lottery.energyCards,12);assert.equal(town.lottery.lastDay,'2026-11-15');
+const damaged=C.create('runner');damaged.player.x=350;damaged.player.y=278;step(damaged);assert.equal(damaged.damageTaken,1);damaged.player.hp=5;damaged.status='won';damaged.score=240;damaged.coins.forEach(c=>c.taken=true);assert(!C.perfect(damaged));
+console.log('PASS separate first-perfect rewards, damage history, partial score, non-win, repeat claims and successor persistence');

@@ -1835,7 +1835,18 @@ TownI18n.add({
     "学到了。会不会用，咱们下次再议。": "Learned it. Using it? A discussion for another day.",
     "脑袋今天上班了，先奖励它休息一会儿。": "Brain clocked in today. Rewarding it with a break.",
     "今日营业结束，被窝已经给我留位了。": "Closed for today. My blanket saved me a spot.",
-    "电量告急。不是手机，是我。": "Battery low. Not the phone. Me."
+    "电量告急。不是手机，是我。": "Battery low. Not the phone. Me.",
+    "完美通关": "Perfect clear",
+    "首次完美通关：获得5张体力卡！": "First perfect clear: 5 energy cards earned!",
+    "本游戏的首次完美奖励已领取。": "The first perfect-clear reward for this game has already been claimed.",
+    "完美通关需满分且全程无伤。": "A perfect clear requires the maximum score and no damage throughout.",
+    "首次全程无伤并获得240分，奖励5张体力卡。": "First clear with 240 points and no damage earns 5 energy cards.",
+    "首次全程无伤并获得450分，奖励5张体力卡。": "First clear with 450 points and no damage earns 5 energy cards.",
+    "首次全程无伤并获得": "First damage-free clear with",
+    "分，奖励": "points earns",
+    "张体力卡。": "energy cards.",
+    "首次完美通关：获得": "First perfect clear: earned",
+    "张体力卡！": "energy cards!"
   },
   "es": {
     "鼠鼠小镇": "Pueblo Hámster",
@@ -3672,6 +3683,17 @@ TownI18n.add({
     "学到了。会不会用，咱们下次再议。": "Lo aprendí. ¿Sabré usarlo? Lo hablamos otro día.",
     "脑袋今天上班了，先奖励它休息一会儿。": "El cerebro trabajó hoy. Le daré un descanso de premio.",
     "今日营业结束，被窝已经给我留位了。": "Cerrado por hoy. Mi manta me guardó sitio.",
-    "电量告急。不是手机，是我。": "Batería baja. No la del móvil. La mía."
+    "电量告急。不是手机，是我。": "Batería baja. No la del móvil. La mía.",
+    "完美通关": "Victoria perfecta",
+    "首次完美通关：获得5张体力卡！": "¡Primera victoria perfecta: 5 tarjetas de energía!",
+    "本游戏的首次完美奖励已领取。": "Ya recibiste la recompensa por la primera victoria perfecta de este juego.",
+    "完美通关需满分且全程无伤。": "Una victoria perfecta requiere puntuación máxima y no recibir daño.",
+    "首次全程无伤并获得240分，奖励5张体力卡。": "La primera victoria con 240 puntos y sin daño otorga 5 tarjetas de energía.",
+    "首次全程无伤并获得450分，奖励5张体力卡。": "La primera victoria con 450 puntos y sin daño otorga 5 tarjetas de energía.",
+    "首次全程无伤并获得": "Primera victoria sin daño con",
+    "分，奖励": "puntos otorga",
+    "张体力卡。": "tarjetas de energía.",
+    "首次完美通关：获得": "Primera victoria perfecta: recibes",
+    "张体力卡！": "¡tarjetas de energía!"
   }
 });

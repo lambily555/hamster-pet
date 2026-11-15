@@ -3,7 +3,7 @@
   const hit=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
   const box=(x,y,w,h)=>({x,y,w,h});
   function create(mode){
-    const s={mode,time:0,status:'playing',score:0,player:{x:40,y:240,w:18,h:24,vx:0,vy:0,hp:5,inv:0,ground:false,face:1},camera:0,checkpoint:40,jumpHeld:false,bullets:[],enemyBullets:[],particles:[],wave:0,delay:0,fire:0};
+    const s={mode,time:0,status:'playing',score:0,damageTaken:0,player:{x:40,y:240,w:18,h:24,vx:0,vy:0,hp:5,inv:0,ground:false,face:1},camera:0,checkpoint:40,jumpHeld:false,bullets:[],enemyBullets:[],particles:[],wave:0,delay:0,fire:0};
     if(mode==='runner'){
       s.platforms=[[0,302,430,58],[490,302,400,58],[950,302,400,58],[1410,302,410,58],[1880,302,450,58],[2390,302,810,58],[240,250,72,12],[600,246,86,12],[760,198,82,12],[1120,247,85,12],[1510,250,90,12],[1670,204,82,12],[2090,246,82,12],[2510,250,100,12],[2680,206,85,12],[2850,248,90,12]].map(r=>box(...r));
       s.spikes=[350,700,1210,1760,2190,2600,2980].map(x=>box(x,288,26,14));
@@ -14,7 +14,7 @@
   }
   function spawn(s){s.wave++;s.delay=1.1;s.enemyBullets=[];const points=[[45,66],[575,66],[45,285],[575,285],[310,60],[310,290],[45,175],[575,175]];s.enemies=points.slice(0,2+s.wave*2).map(([x,y],i)=>({...box(x,y,20,20),hp:2,cool:.6+i*.22,kind:i%2}));}
   function burst(s,x,y,color){for(let i=0;i<8;i++)s.particles.push({x,y,vx:Math.cos(i*Math.PI/4)*40,vy:Math.sin(i*Math.PI/4)*40,life:.35,color})}
-  function hurt(s,pit=false){const p=s.player;if(p.inv>0&&!pit)return;p.hp--;p.inv=1.3;burst(s,p.x+9,p.y+12,'#f5998b');if(pit){p.x=s.checkpoint;p.y=230;p.vy=0;}if(p.hp<=0)s.status='lost';}
+  function hurt(s,pit=false){const p=s.player;if(p.inv>0&&!pit)return;p.hp--;s.damageTaken++;p.inv=1.3;burst(s,p.x+9,p.y+12,'#f5998b');if(pit){p.x=s.checkpoint;p.y=230;p.vy=0;}if(p.hp<=0)s.status='lost';}
   function move(p,dx,dy,solids){p.x+=dx;for(const b of solids)if(hit(p,b))p.x=dx>0?b.x-p.w:b.x+b.w;p.y+=dy;p.ground=false;for(const b of solids)if(hit(p,b)){if(dy>=0){p.y=b.y-p.h;p.ground=true}else p.y=b.y+b.h;p.vy=0;}}
   function update(s,input,dt){if(s.status!=='playing')return;dt=clamp(dt,0,.025);s.time+=dt;const p=s.player;p.inv=Math.max(0,p.inv-dt);s.particles=s.particles.filter(q=>(q.life-=dt)>0);for(const q of s.particles){q.x+=q.vx*dt;q.y+=q.vy*dt;}
     if(s.mode==='runner'){
@@ -26,7 +26,7 @@
       for(const hazard of [...s.spikes,...s.gates])if(hit(p,hazard))hurt(s);
       for(const c of s.coins)if(!c.taken&&hit(p,box(c.x-5,c.y-6,10,12))){c.taken=true;s.score+=10;burst(s,c.x,c.y,'#ffdc82');}
       for(const x of [980,1920])if(p.x>=x&&p.ground&&s.checkpoint<x)s.checkpoint=x;
-      s.camera=clamp(p.x-145,0,2560);if(p.x>3140){s.status='won';s.score+=100;}
+      s.camera=clamp(p.x-145,0,2560);if(p.x>3140&&s.status==='playing'){s.status='won';s.score+=100;}
     }else{
       s.delay=Math.max(0,s.delay-dt);let dx=(input.right?1:0)-(input.left?1:0),dy=(input.down?1:0)-(input.up?1:0),length=Math.hypot(dx,dy)||1;move(p,dx/length*135*dt,dy/length*135*dt,s.walls);p.x=clamp(p.x,16,W-16-p.w);p.y=clamp(p.y,49,H-18-p.h);
       if(dx)p.face=Math.sign(dx);s.fire=Math.max(0,s.fire-dt);
@@ -36,5 +36,10 @@
       s.bullets=s.bullets.filter(b=>b.life>0);s.enemyBullets=s.enemyBullets.filter(b=>b.life>0);s.enemies=s.enemies.filter(e=>e.hp>0);if(!s.enemies.length&&s.status==='playing'){if(s.wave===3)s.status='won';else spawn(s);}
     }return s;
   }
-  return {create,update,hit,W,H};
+  function perfect(s){return !!s&&s.status==='won'&&s.damageTaken===0&&s.player.hp===5&&(s.mode==='runner'?s.score===240&&s.coins.length===14&&s.coins.every(c=>c.taken):s.mode==='shooter'&&s.score===450&&s.wave===3&&s.enemies.length===0)}
+  function claimPerfect(town,run){
+    if(!perfect(run)||town.gameRewards?.[run.mode])return false;
+    town.gameRewards={...town.gameRewards,[run.mode]:true};town.lottery||={};const cards=Number(town.lottery.energyCards);town.lottery.energyCards=(Number.isFinite(cards)?Math.max(0,Math.floor(cards)):0)+5;return true;
+  }
+  return {create,update,hit,perfect,claimPerfect,W,H};
 });
