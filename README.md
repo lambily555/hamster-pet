@@ -18,6 +18,8 @@ GitHub 的 **Code → Download ZIP** 是源代码，不是安装包。个人设�
 
 Download a setup or portable EXE from Releases; no developer tools are needed. Source ZIPs require the development setup below. Builds are currently unsigned. Personal saves are local and are not included in downloads.
 
+> 截至2026-11-15，Releases最新安装包为2026-10-22发布的v1.4.0；下方功能描述以main源码为准，最近更新尚未制作新安装包。公开仓库目前未包含移动端工程或APK/IPA。
+
 ## 当前功能
 
 - 鼠鼠手机提供“鼠鼠跑酷”和“鼠鼠射击”两个独立软件：原创像素横屏跑酷与三波射击。跑酷用左右键/A、D移动、空格跳跃；射击用方向键/WASD移动、鼠标瞄准并按住 E 或鼠标左键射击。手机配方向及跳跃/射击触控键，触屏射击自动瞄准；支持暂停、重试和返回手机，竖屏自动旋转游戏区。
