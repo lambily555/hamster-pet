@@ -1,7 +1,7 @@
-## 鼠鼠桌面小宠 1.4.0 / Hamster Pet 1.4.0
+## 鼠鼠桌面小宠 1.5.0 / Hamster Pet 1.5.0
 
-首次提供 GitHub Windows x64 安装包和免安装 EXE，包含当前桌面宠物、三语界面、小镇、宠物之家和建筑材质更新。修复源码安装配置，移除失效实验页面与原始视频加载，增加自动检查和可复现脚本构建。
+汇总近期桌面更新：鼠鼠手机、聊天与电话、图文动态、两个独立像素游戏、每日抽奖、首次完美通关奖励、居民招募与多语言改进。
 
-下载 setup EXE 安装，或 portable EXE 直接运行。安装包不含个人存档，不会在安装完成后自动启动。当前程序未签名；SHA256SUMS.txt 可核对完整性。构建及自动测试不包含真实用户界面的安装和视觉验收。
+新用户从程序初始状态开始，不附带维护者的设置、小镇存档、居民进度、宠物、自定义图片或密钥。已有用户更新保留本机存档。提供Windows x64安装版与便携版以及SHA256校验文件；程序未签名，安装结束不会自动启动。
 
-First Windows x64 setup and portable executables, including the current desktop companion and town. Installation configuration, runtime cleanup and CI checks are included. No Node.js or pnpm is required to use the EXEs. Personal saves are not included. Builds are unsigned and do not auto-launch after setup. See SHA256SUMS.txt for checksums; automated checks do not replace interactive visual and installation testing.
+Includes the latest phone, conversations, illustrated feed, independent pixel games, lottery, perfect-clear rewards, recruitment and localization updates. New users start with default data; personal settings and saves are excluded. Existing local saves are retained. Windows x64 setup and portable executables are unsigned and do not auto-launch after setup. Android/iOS packages are not included.

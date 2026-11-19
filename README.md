@@ -18,7 +18,7 @@ GitHub 的 **Code → Download ZIP** 是源代码，不是安装包。个人设�
 
 Download a setup or portable EXE from Releases; no developer tools are needed. Source ZIPs require the development setup below. Builds are currently unsigned. Personal saves are local and are not included in downloads.
 
-> 截至2026-11-15，Releases最新安装包为2026-10-22发布的v1.4.0；下方功能描述以main源码为准，最近更新尚未制作新安装包。公开仓库目前未包含移动端工程或APK/IPA。
+> Windows v1.5.0发行包包含截至2026-11-19的最新桌面功能。新用户从初始资料和初始小镇开始，发行包不包含维护者个人数据。Android/iOS安装包尚未发布。
 
 ## 当前功能
 
