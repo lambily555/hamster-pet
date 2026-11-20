@@ -72,3 +72,7 @@
 2026-10-21补充：门窗/家具木纹及烤漆纹理由程序生成；外围树干、分枝、树冠与叶片由`src/town-trees.js`原创生成，随项目代码许可分发，无新增第三方素材。
 
 - 每日老虎机的体力卡、瓜子袋和长寿卡为本项目原创内联SVG绘图，位于src/town-lottery.js，无外部图片依赖，随项目代码许可发布。
+
+
+## Knowledge Forest (2026-11-20)
+Forest geometry, guide characters and question text are original project content. Materials reuse the project-generated town surface textures. docs/knowledge-forest.png is an in-app render of these assets. Care sources are credited in src/forest-knowledge.js and README; no third-party photos or game models were downloaded.

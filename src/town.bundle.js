@@ -14,9 +14,9 @@
   };
   var __copyProps = (to, from, except, desc) => {
     if (from && typeof from === "object" || typeof from === "function") {
-      for (let key of __getOwnPropNames(from))
-        if (!__hasOwnProp.call(to, key) && key !== except)
-          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+      for (let key2 of __getOwnPropNames(from))
+        if (!__hasOwnProp.call(to, key2) && key2 !== except)
+          __defProp(to, key2, { get: () => from[key2], enumerable: !(desc = __getOwnPropDesc(from, key2)) || desc.enumerable });
     }
     return to;
   };
@@ -3878,15 +3878,15 @@
      * @param {Object} values - A container with texture parameters.
      */
     setValues(values) {
-      for (const key in values) {
-        const newValue = values[key];
+      for (const key2 in values) {
+        const newValue = values[key2];
         if (newValue === void 0) {
-          warn(`Texture.setValues(): parameter '${key}' has value of undefined.`);
+          warn(`Texture.setValues(): parameter '${key2}' has value of undefined.`);
           continue;
         }
-        const currentValue = this[key];
+        const currentValue = this[key2];
         if (currentValue === void 0) {
-          warn(`Texture.setValues(): property '${key}' does not exist.`);
+          warn(`Texture.setValues(): property '${key2}' does not exist.`);
           continue;
         }
         if (currentValue && newValue && (currentValue.isVector2 && newValue.isVector2)) {
@@ -3896,7 +3896,7 @@
         } else if (currentValue && newValue && (currentValue.isMatrix3 && newValue.isMatrix3)) {
           currentValue.copy(newValue);
         } else {
-          this[key] = newValue;
+          this[key2] = newValue;
         }
       }
     }
@@ -7429,8 +7429,8 @@
       return output;
       function extractFromCache(cache) {
         const values = [];
-        for (const key in cache) {
-          const data = cache[key];
+        for (const key2 in cache) {
+          const data = cache[key2];
           delete data.metadata;
           values.push(data);
         }
@@ -10883,8 +10883,8 @@
       if (Object.keys(this.userData).length > 0) data.userData = this.userData;
       if (this.parameters !== void 0 && this._transformed !== true) {
         const parameters = this.parameters;
-        for (const key in parameters) {
-          if (parameters[key] !== void 0) data[key] = parameters[key];
+        for (const key2 in parameters) {
+          if (parameters[key2] !== void 0) data[key2] = parameters[key2];
         }
         return data;
       }
@@ -10897,21 +10897,21 @@
         };
       }
       const attributes = this.attributes;
-      for (const key in attributes) {
-        const attribute = attributes[key];
-        data.data.attributes[key] = attribute.toJSON(data.data);
+      for (const key2 in attributes) {
+        const attribute = attributes[key2];
+        data.data.attributes[key2] = attribute.toJSON(data.data);
       }
       const morphAttributes = {};
       let hasMorphAttributes = false;
-      for (const key in this.morphAttributes) {
-        const attributeArray = this.morphAttributes[key];
+      for (const key2 in this.morphAttributes) {
+        const attributeArray = this.morphAttributes[key2];
         const array = [];
         for (let i2 = 0, il = attributeArray.length; i2 < il; i2++) {
           const attribute = attributeArray[i2];
           array.push(attribute.toJSON(data.data));
         }
         if (array.length > 0) {
-          morphAttributes[key] = array;
+          morphAttributes[key2] = array;
           hasMorphAttributes = true;
         }
       }
@@ -11622,15 +11622,15 @@
      */
     setValues(values) {
       if (values === void 0) return;
-      for (const key in values) {
-        const newValue = values[key];
+      for (const key2 in values) {
+        const newValue = values[key2];
         if (newValue === void 0) {
-          warn(`Material: parameter '${key}' has value of undefined.`);
+          warn(`Material: parameter '${key2}' has value of undefined.`);
           continue;
         }
-        const currentValue = this[key];
+        const currentValue = this[key2];
         if (currentValue === void 0) {
-          warn(`Material: '${key}' is not a property of THREE.${this.type}.`);
+          warn(`Material: '${key2}' is not a property of THREE.${this.type}.`);
           continue;
         }
         if (currentValue && currentValue.isColor) {
@@ -11638,7 +11638,7 @@
         } else if (currentValue && currentValue.isVector2 && (newValue && newValue.isVector2) || currentValue && currentValue.isEuler && (newValue && newValue.isEuler) || currentValue && currentValue.isVector3 && (newValue && newValue.isVector3)) {
           currentValue.copy(newValue);
         } else {
-          this[key] = newValue;
+          this[key2] = newValue;
         }
       }
     }
@@ -11814,8 +11814,8 @@
       if (Object.keys(this.userData).length > 0) data.userData = this.userData;
       function extractFromCache(cache) {
         const values = [];
-        for (const key in cache) {
-          const data2 = cache[key];
+        for (const key2 in cache) {
+          const data2 = cache[key2];
           delete data2.metadata;
           values.push(data2);
         }
@@ -14846,6 +14846,180 @@
       return new _ConeGeometry(data.radius, data.height, data.radialSegments, data.heightSegments, data.openEnded, data.thetaStart, data.thetaLength);
     }
   };
+  var PolyhedronGeometry = class _PolyhedronGeometry extends BufferGeometry {
+    /**
+     * Constructs a new polyhedron geometry.
+     *
+     * @param {Array<number>} [vertices] - A flat array of vertices describing the base shape.
+     * @param {Array<number>} [indices] - A flat array of indices describing the base shape.
+     * @param {number} [radius=1] - The radius of the shape.
+     * @param {number} [detail=0] - How many levels to subdivide the geometry. The more detail, the smoother the shape.
+     */
+    constructor(vertices = [], indices = [], radius = 1, detail2 = 0) {
+      super();
+      this.type = "PolyhedronGeometry";
+      this.parameters = {
+        vertices,
+        indices,
+        radius,
+        detail: detail2
+      };
+      const vertexBuffer = [];
+      const uvBuffer = [];
+      subdivide(detail2);
+      applyRadius(radius);
+      generateUVs();
+      this.setAttribute("position", new Float32BufferAttribute(vertexBuffer, 3));
+      this.setAttribute("normal", new Float32BufferAttribute(vertexBuffer.slice(), 3));
+      this.setAttribute("uv", new Float32BufferAttribute(uvBuffer, 2));
+      if (detail2 === 0) {
+        this.computeVertexNormals();
+      } else {
+        this.normalizeNormals();
+      }
+      function subdivide(detail3) {
+        const a = new Vector3();
+        const b = new Vector3();
+        const c = new Vector3();
+        for (let i2 = 0; i2 < indices.length; i2 += 3) {
+          getVertexByIndex(indices[i2 + 0], a);
+          getVertexByIndex(indices[i2 + 1], b);
+          getVertexByIndex(indices[i2 + 2], c);
+          subdivideFace(a, b, c, detail3);
+        }
+      }
+      function subdivideFace(a, b, c, detail3) {
+        const cols = detail3 + 1;
+        const v = [];
+        for (let i2 = 0; i2 <= cols; i2++) {
+          v[i2] = [];
+          const aj = a.clone().lerp(c, i2 / cols);
+          const bj = b.clone().lerp(c, i2 / cols);
+          const rows = cols - i2;
+          for (let j = 0; j <= rows; j++) {
+            if (j === 0 && i2 === cols) {
+              v[i2][j] = aj;
+            } else {
+              v[i2][j] = aj.clone().lerp(bj, j / rows);
+            }
+          }
+        }
+        for (let i2 = 0; i2 < cols; i2++) {
+          for (let j = 0; j < 2 * (cols - i2) - 1; j++) {
+            const k = Math.floor(j / 2);
+            if (j % 2 === 0) {
+              pushVertex(v[i2][k + 1]);
+              pushVertex(v[i2 + 1][k]);
+              pushVertex(v[i2][k]);
+            } else {
+              pushVertex(v[i2][k + 1]);
+              pushVertex(v[i2 + 1][k + 1]);
+              pushVertex(v[i2 + 1][k]);
+            }
+          }
+        }
+      }
+      function applyRadius(radius2) {
+        const vertex2 = new Vector3();
+        for (let i2 = 0; i2 < vertexBuffer.length; i2 += 3) {
+          vertex2.x = vertexBuffer[i2 + 0];
+          vertex2.y = vertexBuffer[i2 + 1];
+          vertex2.z = vertexBuffer[i2 + 2];
+          vertex2.normalize().multiplyScalar(radius2);
+          vertexBuffer[i2 + 0] = vertex2.x;
+          vertexBuffer[i2 + 1] = vertex2.y;
+          vertexBuffer[i2 + 2] = vertex2.z;
+        }
+      }
+      function generateUVs() {
+        const vertex2 = new Vector3();
+        for (let i2 = 0; i2 < vertexBuffer.length; i2 += 3) {
+          vertex2.x = vertexBuffer[i2 + 0];
+          vertex2.y = vertexBuffer[i2 + 1];
+          vertex2.z = vertexBuffer[i2 + 2];
+          const u = azimuth(vertex2) / 2 / Math.PI + 0.5;
+          const v = inclination(vertex2) / Math.PI + 0.5;
+          uvBuffer.push(u, 1 - v);
+        }
+        correctUVs();
+        correctSeam();
+      }
+      function correctSeam() {
+        for (let i2 = 0; i2 < uvBuffer.length; i2 += 6) {
+          const x0 = uvBuffer[i2 + 0];
+          const x1 = uvBuffer[i2 + 2];
+          const x2 = uvBuffer[i2 + 4];
+          const max2 = Math.max(x0, x1, x2);
+          const min = Math.min(x0, x1, x2);
+          if (max2 > 0.9 && min < 0.1) {
+            if (x0 < 0.2) uvBuffer[i2 + 0] += 1;
+            if (x1 < 0.2) uvBuffer[i2 + 2] += 1;
+            if (x2 < 0.2) uvBuffer[i2 + 4] += 1;
+          }
+        }
+      }
+      function pushVertex(vertex2) {
+        vertexBuffer.push(vertex2.x, vertex2.y, vertex2.z);
+      }
+      function getVertexByIndex(index, vertex2) {
+        const stride = index * 3;
+        vertex2.x = vertices[stride + 0];
+        vertex2.y = vertices[stride + 1];
+        vertex2.z = vertices[stride + 2];
+      }
+      function correctUVs() {
+        const a = new Vector3();
+        const b = new Vector3();
+        const c = new Vector3();
+        const centroid = new Vector3();
+        const uvA = new Vector2();
+        const uvB = new Vector2();
+        const uvC = new Vector2();
+        for (let i2 = 0, j = 0; i2 < vertexBuffer.length; i2 += 9, j += 6) {
+          a.set(vertexBuffer[i2 + 0], vertexBuffer[i2 + 1], vertexBuffer[i2 + 2]);
+          b.set(vertexBuffer[i2 + 3], vertexBuffer[i2 + 4], vertexBuffer[i2 + 5]);
+          c.set(vertexBuffer[i2 + 6], vertexBuffer[i2 + 7], vertexBuffer[i2 + 8]);
+          uvA.set(uvBuffer[j + 0], uvBuffer[j + 1]);
+          uvB.set(uvBuffer[j + 2], uvBuffer[j + 3]);
+          uvC.set(uvBuffer[j + 4], uvBuffer[j + 5]);
+          centroid.copy(a).add(b).add(c).divideScalar(3);
+          const azi = azimuth(centroid);
+          correctUV(uvA, j + 0, a, azi);
+          correctUV(uvB, j + 2, b, azi);
+          correctUV(uvC, j + 4, c, azi);
+        }
+      }
+      function correctUV(uv, stride, vector, azimuth2) {
+        if (azimuth2 < 0 && uv.x === 1) {
+          uvBuffer[stride] = uv.x - 1;
+        }
+        if (vector.x === 0 && vector.z === 0) {
+          uvBuffer[stride] = azimuth2 / 2 / Math.PI + 0.5;
+        }
+      }
+      function azimuth(vector) {
+        return Math.atan2(vector.z, -vector.x);
+      }
+      function inclination(vector) {
+        return Math.atan2(-vector.y, Math.sqrt(vector.x * vector.x + vector.z * vector.z));
+      }
+    }
+    copy(source) {
+      super.copy(source);
+      this.parameters = Object.assign({}, source.parameters);
+      return this;
+    }
+    /**
+     * Factory method for creating an instance of this class from the given
+     * JSON object.
+     *
+     * @param {Object} data - A JSON object representing the serialized geometry.
+     * @return {PolyhedronGeometry} A new instance.
+     */
+    static fromJSON(data) {
+      return new _PolyhedronGeometry(data.vertices, data.indices, data.radius, data.detail);
+    }
+  };
   var Curve = class {
     /**
      * Constructs a new curve.
@@ -17231,6 +17405,133 @@
     if (options.extrudePath !== void 0) data.options.extrudePath = options.extrudePath.toJSON();
     return data;
   }
+  var IcosahedronGeometry = class _IcosahedronGeometry extends PolyhedronGeometry {
+    /**
+     * Constructs a new icosahedron geometry.
+     *
+     * @param {number} [radius=1] - Radius of the icosahedron.
+     * @param {number} [detail=0] - Setting this to a value greater than `0` adds vertices making it no longer a icosahedron.
+     */
+    constructor(radius = 1, detail2 = 0) {
+      const t = (1 + Math.sqrt(5)) / 2;
+      const vertices = [
+        -1,
+        t,
+        0,
+        1,
+        t,
+        0,
+        -1,
+        -t,
+        0,
+        1,
+        -t,
+        0,
+        0,
+        -1,
+        t,
+        0,
+        1,
+        t,
+        0,
+        -1,
+        -t,
+        0,
+        1,
+        -t,
+        t,
+        0,
+        -1,
+        t,
+        0,
+        1,
+        -t,
+        0,
+        -1,
+        -t,
+        0,
+        1
+      ];
+      const indices = [
+        0,
+        11,
+        5,
+        0,
+        5,
+        1,
+        0,
+        1,
+        7,
+        0,
+        7,
+        10,
+        0,
+        10,
+        11,
+        1,
+        5,
+        9,
+        5,
+        11,
+        4,
+        11,
+        10,
+        2,
+        10,
+        7,
+        6,
+        7,
+        1,
+        8,
+        3,
+        9,
+        4,
+        3,
+        4,
+        2,
+        3,
+        2,
+        6,
+        3,
+        6,
+        8,
+        3,
+        8,
+        9,
+        4,
+        9,
+        5,
+        2,
+        4,
+        11,
+        6,
+        2,
+        10,
+        8,
+        6,
+        7,
+        9,
+        8,
+        1
+      ];
+      super(vertices, indices, radius, detail2);
+      this.type = "IcosahedronGeometry";
+      this.parameters = {
+        radius,
+        detail: detail2
+      };
+    }
+    /**
+     * Factory method for creating an instance of this class from the given
+     * JSON object.
+     *
+     * @param {Object} data - A JSON object representing the serialized geometry.
+     * @return {IcosahedronGeometry} A new instance.
+     */
+    static fromJSON(data) {
+      return new _IcosahedronGeometry(data.radius, data.detail);
+    }
+  };
   var LatheGeometry = class _LatheGeometry extends BufferGeometry {
     /**
      * Constructs a new lathe geometry.
@@ -18068,8 +18369,8 @@
       data.lights = this.lights;
       data.clipping = this.clipping;
       const extensions = {};
-      for (const key in this.extensions) {
-        if (this.extensions[key] === true) extensions[key] = true;
+      for (const key2 in this.extensions) {
+        if (this.extensions[key2] === true) extensions[key2] = true;
       }
       if (Object.keys(extensions).length > 0) data.extensions = extensions;
       return data;
@@ -18119,8 +18420,8 @@
       if (json.fragmentShader !== void 0) this.fragmentShader = json.fragmentShader;
       if (json.glslVersion !== void 0) this.glslVersion = json.glslVersion;
       if (json.extensions !== void 0) {
-        for (const key in json.extensions) {
-          this.extensions[key] = json.extensions[key];
+        for (const key2 in json.extensions) {
+          this.extensions[key2] = json.extensions[key2];
         }
       }
       if (json.lights !== void 0) this.lights = json.lights;
@@ -18696,40 +18997,40 @@
     return result;
   }
   function flattenJSON(jsonKeys, times, values, valuePropertyName) {
-    let i2 = 1, key = jsonKeys[0];
-    while (key !== void 0 && key[valuePropertyName] === void 0) {
-      key = jsonKeys[i2++];
+    let i2 = 1, key2 = jsonKeys[0];
+    while (key2 !== void 0 && key2[valuePropertyName] === void 0) {
+      key2 = jsonKeys[i2++];
     }
-    if (key === void 0) return;
-    let value = key[valuePropertyName];
+    if (key2 === void 0) return;
+    let value = key2[valuePropertyName];
     if (value === void 0) return;
     if (Array.isArray(value)) {
       do {
-        value = key[valuePropertyName];
+        value = key2[valuePropertyName];
         if (value !== void 0) {
-          times.push(key.time);
+          times.push(key2.time);
           values.push(...value);
         }
-        key = jsonKeys[i2++];
-      } while (key !== void 0);
+        key2 = jsonKeys[i2++];
+      } while (key2 !== void 0);
     } else if (value.toArray !== void 0) {
       do {
-        value = key[valuePropertyName];
+        value = key2[valuePropertyName];
         if (value !== void 0) {
-          times.push(key.time);
+          times.push(key2.time);
           value.toArray(values, values.length);
         }
-        key = jsonKeys[i2++];
-      } while (key !== void 0);
+        key2 = jsonKeys[i2++];
+      } while (key2 !== void 0);
     } else {
       do {
-        value = key[valuePropertyName];
+        value = key2[valuePropertyName];
         if (value !== void 0) {
-          times.push(key.time);
+          times.push(key2.time);
           values.push(value);
         }
-        key = jsonKeys[i2++];
-      } while (key !== void 0);
+        key2 = jsonKeys[i2++];
+      } while (key2 !== void 0);
     }
   }
   var Interpolant = class {
@@ -19798,10 +20099,10 @@
      * @param {string} key - The key to reference the cached file.
      * @param {Object} file -  The file to be cached.
      */
-    add: function(key, file) {
+    add: function(key2, file) {
       if (this.enabled === false) return;
-      if (isBlobURL(key)) return;
-      this.files[key] = file;
+      if (isBlobURL(key2)) return;
+      this.files[key2] = file;
     },
     /**
      * Gets the cached value for the given key.
@@ -19810,10 +20111,10 @@
      * @param {string} key - The key to reference the cached file.
      * @return {Object|undefined} The cached file. If the key does not exist `undefined` is returned.
      */
-    get: function(key) {
+    get: function(key2) {
       if (this.enabled === false) return;
-      if (isBlobURL(key)) return;
-      return this.files[key];
+      if (isBlobURL(key2)) return;
+      return this.files[key2];
     },
     /**
      * Removes the cached file associated with the given key.
@@ -19821,8 +20122,8 @@
      * @static
      * @param {string} key - The key to reference the cached file.
      */
-    remove: function(key) {
-      delete this.files[key];
+    remove: function(key2) {
+      delete this.files[key2];
     },
     /**
      * Remove all values from the cache.
@@ -19833,9 +20134,9 @@
       this.files = {};
     }
   };
-  function isBlobURL(key) {
+  function isBlobURL(key2) {
     try {
-      const urlString = key.slice(key.indexOf(":") + 1);
+      const urlString = key2.slice(key2.indexOf(":") + 1);
       const url = new URL(urlString);
       return url.protocol === "blob:";
     } catch (e) {
@@ -28473,8 +28774,8 @@
     function remove(object) {
       properties.delete(object);
     }
-    function update(object, key, value) {
-      properties.get(object)[key] = value;
+    function update(object, key2, value) {
+      properties.get(object)[key2] = value;
     }
     function dispose() {
       properties = /* @__PURE__ */ new WeakMap();
@@ -31801,8 +32102,8 @@ void main() {
         _currentDepthNear = null;
         _currentDepthFar = null;
         depthSensing.reset();
-        for (const key in cameraAccessTextures) {
-          delete cameraAccessTextures[key];
+        for (const key2 in cameraAccessTextures) {
+          delete cameraAccessTextures[key2];
         }
         renderer.setRenderTarget(initialRenderTarget);
         glBaseLayer = null;
@@ -34886,102 +35187,48 @@ void main() {
     }
   };
 
-  // src/town-phone-model.js
-  function createPhoneModel(canvas) {
-    const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: true });
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
-    renderer.setSize(420, 740, false);
-    renderer.outputColorSpace = SRGBColorSpace;
-    const scene = new Scene(), camera = new OrthographicCamera(-2.2575, 2.2575, 3.98, -3.98, 0.1, 30);
-    camera.position.set(0, 0, 12);
-    scene.add(new HemisphereLight(16774887, 12089685, 1.6));
-    const light = new DirectionalLight(16777215, 1.8);
-    light.position.set(-4, 5, 8);
-    scene.add(light);
-    const cream = new MeshStandardMaterial({ color: 16771017, roughness: 0.96 }), pink = new MeshStandardMaterial({ color: 16297889, roughness: 0.9 }), brown = new MeshStandardMaterial({ color: 6897193, roughness: 0.36 }), dark = new MeshStandardMaterial({ color: 3154715, roughness: 0.38 });
-    const grain = document.createElement("canvas");
-    grain.width = grain.height = 128;
-    const ctx = grain.getContext("2d"), pixels = ctx.createImageData(128, 128);
-    let seed = 7;
-    for (let i2 = 0; i2 < pixels.data.length; i2 += 4) {
-      seed = seed * 1664525 + 1013904223 >>> 0;
-      const c = 150 + seed % 100;
-      pixels.data.set([c, c, c, 255], i2);
-    }
-    ctx.putImageData(pixels, 0, 0);
-    const texture3 = new CanvasTexture(grain);
-    texture3.wrapS = texture3.wrapT = RepeatWrapping;
-    texture3.repeat.set(3, 6);
-    cream.bumpMap = texture3;
-    cream.bumpScale = 0.035;
-    function oval(mat2, x2, y, z, sx, sy, sz) {
-      const mesh = new Mesh(new SphereGeometry(1, 24, 16), mat2);
-      mesh.position.set(x2, y, z);
-      mesh.scale.set(sx, sy, sz);
-      scene.add(mesh);
-      return mesh;
-    }
-    function rounded(mat2, w, h, r, x2, y, z, depth) {
-      const s = new Shape(), a = -w / 2, b = -h / 2;
-      s.moveTo(a + r, b);
-      s.lineTo(a + w - r, b);
-      s.quadraticCurveTo(a + w, b, a + w, b + r);
-      s.lineTo(a + w, b + h - r);
-      s.quadraticCurveTo(a + w, b + h, a + w - r, b + h);
-      s.lineTo(a + r, b + h);
-      s.quadraticCurveTo(a, b + h, a, b + h - r);
-      s.lineTo(a, b + r);
-      s.quadraticCurveTo(a, b, a + r, b);
-      const mesh = new Mesh(new ExtrudeGeometry(s, { depth, bevelEnabled: true, bevelSize: 0.07, bevelThickness: 0.06, bevelSegments: 3, steps: 1, curveSegments: 12 }), mat2);
-      mesh.position.set(x2, y, z);
-      scene.add(mesh);
-      return mesh;
-    }
-    rounded(cream, 3.25, 6.38, 0.49, 0, -0.38, 0, 0.35);
-    rounded(brown, 2.99, 5.63, 0.37, 0, -0.615, 0.41, 0.02);
-    for (const side of [-1, 1]) {
-      oval(cream, side * 1.19, 2.97, 0.03, 0.73, 0.87, 0.25);
-      oval(pink, side * 1.19, 2.99, 0.23, 0.51, 0.63, 0.09);
-      oval(brown, side * 0.65, 2.23, 0.49, 0.18, 0.23, 0.08);
-      oval(new MeshBasicMaterial({ color: 16777215 }), side * 0.65 - 0.04, 2.31, 0.57, 0.045, 0.055, 0.02);
-      oval(pink, side * 1.02, 1.98, 0.46, 0.22, 0.1, 0.05);
-      oval(cream, side * 1.65, -0.8, 0.42, 0.22, 0.42, 0.22);
-      oval(cream, side * 1.1, -3.51, 0.4, 0.39, 0.19, 0.25);
-    }
-    oval(pink, 0, 2.16, 0.5, 0.13, 0.08, 0.06);
-    rounded(dark, 0.48, 0.09, 0.04, 0, 2.64, 0.45, 0.02);
-    oval(dark, 0.39, 2.64, 0.48, 0.055, 0.055, 0.03);
-    rounded(new MeshStandardMaterial({ color: 16775920 }), 0.24, 0.23, 0.06, 0, 1.94, 0.48, 0.02);
-    const tail = new CatmullRomCurve3([new Vector3(1.35, -3.3, -0.1), new Vector3(1.96, -3, -0.1), new Vector3(2, -2.5, -0.1), new Vector3(1.7, -2.55, -0.1)]);
-    scene.add(new Mesh(new TubeGeometry(tail, 28, 0.11, 10, false), pink));
-    for (const side of [-1, 1]) for (const offset of [-0.1, 0.1]) {
-      const curve = new CatmullRomCurve3([new Vector3(side * 1.12, 2.12 + offset, 0.5), new Vector3(side * 1.46, 2.15 + offset, 0.5), new Vector3(side * 1.7, 2.2 + offset, 0.47)]);
-      scene.add(new Mesh(new TubeGeometry(curve, 12, 0.018, 6, false), brown));
-    }
-    const mouth = new CatmullRomCurve3([new Vector3(-0.27, 2.1, 0.53), new Vector3(-0.15, 2, 0.56), new Vector3(0, 2.08, 0.56), new Vector3(0.15, 2, 0.56), new Vector3(0.27, 2.1, 0.53)]);
-    scene.add(new Mesh(new TubeGeometry(mouth, 20, 0.018, 6, false), brown));
-    scene.traverse((o) => {
-      if (!o.isMesh) return;
-      o.position.x *= 1.05;
-      o.scale.x *= 1.05;
-      if (o.position.y > 1.8) o.position.y = 2.2 + (o.position.y - 1.79) * 0.8;
-      else if (o.geometry.type === "TubeGeometry") {
-        const a = o.geometry.attributes.position;
-        for (let i2 = 0; i2 < a.count; i2++) if (a.getY(i2) > 1.8) a.setY(i2, 2.2 + (a.getY(i2) - 1.79) * 0.8);
-        a.needsUpdate = true;
-      }
-    });
-    renderer.render(scene, camera);
-    return { dispose() {
-      scene.traverse((o) => {
-        o.geometry?.dispose();
-      });
-      for (const m of new Set(scene.children.filter((o) => o.material).map((o) => o.material))) m.dispose();
-      texture3.dispose();
-      renderer.dispose();
-    } };
+  // src/forest-knowledge.js
+  var sources = [
+    ["AVS", "https://avs.nparks.gov.sg/pets/caring-for-a-pet/hamster/"],
+    ["RSPCA", "https://www.rspca.org.uk/adviceandwelfare/pets/rodents/hamsters/environment"],
+    ["PDSA", "https://www.pdsa.org.uk/pet-help-and-advice/looking-after-your-pet/small-pets/hamsters-as-pets"],
+    ["Merck Veterinary Manual", "https://www.merckvetmanual.com/all-other-pets/hamsters/providing-a-home-for-a-hamster"]
+  ];
+  var glades = [
+    { id: "food", name: ["\u8C37\u7A57\u98DF\u5802", "Seed Kitchen", "Cocina de semillas"], guide: ["\u8C37\u7C92", "Grain", "Granito"], x: -7, z: 4, color: 15317099 },
+    { id: "home", name: ["\u6811\u6839\u5C0F\u5C4B", "Root Hideaway", "Refugio de ra\xEDces"], guide: ["\u6728\u6728", "Twig", "Ramita"], x: -7, z: -5, color: 12884083 },
+    { id: "habits", name: ["\u6708\u5149\u8425\u5730", "Moonlight Camp", "Campamento lunar"], guide: ["\u665A\u665A", "Dusk", "Ocaso"], x: 0, z: -9, color: 10861014 },
+    { id: "exercise", name: ["\u677E\u679C\u4E50\u56ED", "Pinecone Playground", "Parque de pi\xF1as"], guide: ["\u8E66\u8E66", "Bounce", "Saltito"], x: 7, z: -5, color: 11914884 },
+    { id: "care", name: ["\u5AE9\u53F6\u9A7F\u7AD9", "Leaf Care Lodge", "Puesto de las hojas"], guide: ["\u53F6\u53F6", "Leaf", "Hojita"], x: 7, z: 4, color: 9291440 }
+  ];
+  var questions = [
+    ["food-1", "food", 0, ["\u4ED3\u9F20\u7684\u4E3B\u98DF\u600E\u4E48\u9009\uFF1F", "What should form a hamster\u2019s main diet?", "\xBFCu\xE1l debe ser la base de su dieta?"], [["\u9002\u5408\u4ED3\u9F20\u7684\u5747\u8861\u4E3B\u7CAE", "Balanced hamster food", "Alimento equilibrado para h\xE1msteres"], ["\u53EA\u5403\u74DC\u5B50", "Only sunflower seeds", "Solo pipas"], ["\u6BCF\u5929\u5403\u751C\u997C\u5E72", "Sweet biscuits every day", "Galletas dulces a diario"]], 0, ["\u74DC\u5B50\u53EA\u662F\u642D\u914D\uFF0C\u4E0D\u80FD\u5305\u529E\u8425\u517B\u3002\u4E3B\u7CAE\u8981\u5747\u8861\uFF0C\u96F6\u98DF\u5C11\u91CF\u3002", "Seeds alone are not a balanced diet. Choose suitable complete food and keep treats small.", "Las semillas solas no aportan una dieta equilibrada. Elige alimento completo y pocos premios."]],
+    ["food-2", "food", 0, ["\u6C34\u58F6\u91CC\u8FD8\u6709\u6C34\uFF0C\u4ECA\u5929\u5C31\u4E0D\u7528\u7BA1\u4E86\uFF1F", "The bottle still has water. Can we skip checking it?", "A\xFAn queda agua. \xBFPodemos dejar de revisarla?"], [["\u7B49\u7A7A\u4E86\u518D\u8BF4", "Wait until empty", "Esperar a que se vac\xEDe"], ["\u6BCF\u5929\u6362\u6E05\u6C34\u5E76\u68C0\u67E5\u51FA\u6C34", "Refresh water and check flow daily", "Renovar el agua y revisar la salida a diario"], ["\u7528\u679C\u6C41\u4EE3\u66FF", "Replace it with juice", "Cambiarla por zumo"]], 1, ["\u6BCF\u5929\u63D0\u4F9B\u5E72\u51C0\u996E\u6C34\uFF0C\u4E5F\u8981\u786E\u8BA4\u6C34\u5634\u6CA1\u6709\u5835\u4F4F\u6216\u6F0F\u6C34\u3002", "Provide clean water daily and check that the nozzle is neither blocked nor leaking.", "Ofrece agua limpia a diario y comprueba que la boquilla no est\xE9 obstruida ni gotee."]],
+    ["food-3", "food", 2, ["\u85CF\u8D77\u6765\u7684\u65B0\u9C9C\u852C\u83DC\u5F00\u59CB\u53D8\u8D28\u4E86\uFF0C\u600E\u4E48\u529E\uFF1F", "Fresh food in the stash is spoiling. What now?", "La verdura escondida se est\xE1 estropeando. \xBFQu\xE9 hacemos?"], [["\u7EE7\u7EED\u7559\u7740", "Leave it there", "Dejarla"], ["\u53EA\u55B7\u9999\u6C34", "Spray perfume", "Rociar perfume"], ["\u62FF\u8D70\u53D8\u8D28\u98DF\u7269", "Remove spoiled food", "Retirar la comida estropeada"]], 2, ["\u68C0\u67E5\u50A8\u7CAE\u5904\uFF0C\u53CA\u65F6\u53D6\u8D70\u6613\u8150\u98DF\u7269\uFF0C\u4E0D\u8BA9\u5C0F\u7CAE\u4ED3\u53D8\u6210\u9709\u83CC\u9910\u5385\u3002", "Check stored food and remove perishables before they spoil. No mould caf\xE9, please.", "Revisa la despensa y retira lo perecedero. No queremos un restaurante de moho."]],
+    ["home-1", "home", 1, ["\u60F3\u8BA9\u4ED3\u9F20\u6316\u96A7\u9053\uFF0C\u5E94\u8BE5\u51C6\u5907\u4EC0\u4E48\uFF1F", "What helps a hamster build tunnels?", "\xBFQu\xE9 le ayuda a excavar t\xFAneles?"], [["\u53EA\u6709\u4E00\u5F20\u8584\u7EB8", "One thin sheet of paper", "Una hoja fina de papel"], ["\u8DB3\u591F\u6DF1\u7684\u5B89\u5168\u3001\u4F4E\u5C18\u57AB\u6599", "Deep, safe, low-dust bedding", "Sustrato profundo, seguro y con poco polvo"], ["\u5149\u6ED1\u7684\u7A7A\u5730\u677F", "An empty slippery floor", "Un suelo vac\xEDo y resbaladizo"]], 1, ["\u6316\u6398\u662F\u81EA\u7136\u884C\u4E3A\u3002\u63D0\u4F9B\u53EF\u6316\u6398\u7684\u6DF1\u57AB\u6599\u548C\u8EB2\u85CF\u5904\uFF0C\u8BA9\u9F20\u9F20\u81EA\u5DF1\u5F53\u88C5\u4FEE\u961F\u3002", "Burrowing is natural. Deep suitable bedding and hiding places let your hamster be its own builder.", "Excavar es natural. El sustrato profundo y los refugios le permiten construir su hogar."]],
+    ["home-2", "home", 3, ["\u54EA\u79CD\u7A9D\u6750\u66F4\u5408\u9002\uFF1F", "Which nesting material is more suitable?", "\xBFQu\xE9 material es m\xE1s adecuado para el nido?"], [["\u68C9\u82B1\u7403\u548C\u957F\u7EA4\u7EF4\u68C9", "Cotton wool and long fibres", "Algod\xF3n y fibras largas"], ["\u9999\u5473\u5F88\u91CD\u7684\u586B\u5145\u7269", "Strongly scented stuffing", "Relleno muy perfumado"], ["\u65E0\u9999\u3001\u67D4\u8F6F\u7684\u7EB8\u8D28\u7A9D\u6750", "Unscented soft paper nesting material", "Papel suave sin perfume"]], 2, ["\u957F\u7EA4\u7EF4\u53EF\u80FD\u7F20\u4F4F\u811A\u8DBE\u3002\u9009\u62E9\u9002\u5408\u4ED3\u9F20\u7684\u5B89\u5168\u7EB8\u8D28\u7A9D\u6750\u3002", "Long fibres can entangle toes. Use safe paper-based nesting material suitable for hamsters.", "Las fibras largas pueden enredarse en los dedos. Usa material de papel seguro para h\xE1msteres."]],
+    ["home-3", "home", 1, ["\u7B3C\u5B50\u653E\u5728\u54EA\u91CC\u66F4\u8212\u670D\uFF1F", "Where is a comfortable place for the enclosure?", "\xBFD\xF3nde estar\xE1 mejor el recinto?"], [["\u5B89\u9759\u901A\u98CE\uFF0C\u907F\u5F00\u66B4\u6652\u548C\u7A7F\u5802\u98CE", "Quiet and ventilated, away from direct sun and draughts", "En un lugar tranquilo y ventilado, sin sol directo ni corrientes"], ["\u70C8\u65E5\u76F4\u6652\u7684\u7A97\u53F0", "A sunny hot windowsill", "En una ventana al sol intenso"], ["\u97F3\u7BB1\u65C1\u8FB9", "Beside loud speakers", "Junto a altavoces"]], 0, ["\u907F\u5F00\u5F3A\u5149\u3001\u566A\u58F0\u548C\u6E29\u5EA6\u9AA4\u53D8\u3002\u5C0F\u623F\u5B50\u8981\u5B89\u7A33\uFF0C\u4E0D\u662F\u97F3\u4E50\u8282\u524D\u6392\u3002", "Avoid intense light, noise and sudden temperature changes. A calm home beats front-row concert seats.", "Evita la luz intensa, el ruido y los cambios bruscos de temperatura. Mejor calma que primera fila de un concierto."]],
+    ["habits-1", "habits", 2, ["\u767D\u5929\u7761\u5F97\u6B63\u9999\u7684\u4ED3\u9F20\uFF0C\u8BE5\u600E\u4E48\u76F8\u5904\uFF1F", "How should we treat a hamster sleeping during the day?", "\xBFQu\xE9 hacemos si duerme durante el d\xEDa?"], [["\u6572\u7A9D\u53EB\u9192", "Tap the nest to wake it", "Golpear el nido para despertarlo"], ["\u8BA9\u5B83\u4F11\u606F\uFF0C\u9192\u6765\u518D\u4E92\u52A8", "Let it sleep and interact when awake", "Dejarlo dormir e interactuar cuando despierte"], ["\u6447\u6643\u7B3C\u5B50", "Shake the cage", "Sacudir la jaula"]], 1, ["\u4ED3\u9F20\u5E38\u5728\u508D\u665A\u548C\u591C\u95F4\u6D3B\u8DC3\u3002\u5C0A\u91CD\u7761\u7720\uFF0C\u522B\u5F53\u5B83\u7684\u5F3A\u5236\u5F00\u673A\u952E\u3002", "Hamsters are often active in the evening and at night. Respect their sleep; you are not a power button.", "Suelen estar activos al atardecer y de noche. Respeta su sue\xF1o: no eres un bot\xF3n de encendido."]],
+    ["habits-2", "habits", 0, ["\u6E38\u620F\u91CC\u4E00\u8D77\u4F4F\u5F88\u70ED\u95F9\uFF0C\u73B0\u5B9E\u4E5F\u5E94\u5408\u7B3C\u5417\uFF1F", "Town life is social. Should real hamsters share a cage?", "En el juego viven juntos. \xBFDeben compartir jaula en la realidad?"], [["\u4E0D\u7167\u642C\u6E38\u620F\uFF0C\u91C7\u7528\u5355\u72EC\u9972\u517B", "Do not copy the game; house them separately", "No copies el juego: al\xF3jalos por separado"], ["\u968F\u4FBF\u653E\u4E00\u8D77", "Put any hamsters together", "Juntarlos sin m\xE1s"], ["\u6253\u67B6\u540E\u518D\u89C2\u5BDF\u51E0\u5929", "Watch fights for a few days", "Esperar unos d\xEDas si se pelean"]], 0, ["\u5C0F\u9547\u662F\u62DF\u4EBA\u6E38\u620F\u3002\u73B0\u5B9E\u4ED3\u9F20\u6709\u9886\u5730\u6027\uFF0C\u5355\u72EC\u9972\u517B\u53EF\u907F\u514D\u540C\u7B3C\u51B2\u7A81\u3002", "The town is make-believe. Real hamsters are territorial; separate housing avoids cage-mate conflicts.", "El pueblo es ficci\xF3n. Los h\xE1msteres son territoriales; alojarlos por separado evita conflictos."]],
+    ["habits-3", "habits", 2, ["\u521A\u5230\u5BB6\u7684\u9F20\u9F20\u8EB2\u8D77\u6765\u4E86\uFF0C\u4F60\u4F1A\uFF1F", "A new hamster hides after arriving. What do you do?", "Un h\xE1mster reci\xE9n llegado se esconde. \xBFQu\xE9 haces?"], [["\u628A\u5B83\u6293\u51FA\u6765\u89C1\u5BA2", "Pull it out to meet everyone", "Sacarlo para presentarlo"], ["\u4E0D\u505C\u8FFD\u7740\u6478", "Keep chasing it to stroke it", "Perseguirlo para acariciarlo"], ["\u7ED9\u5B83\u5B89\u9759\u9002\u5E94\uFF0C\u518D\u6162\u6162\u5EFA\u7ACB\u4FE1\u4EFB", "Allow a calm settling-in period and build trust slowly", "Darle tranquilidad y ganar su confianza poco a poco"]], 2, ["\u964C\u751F\u73AF\u5883\u9700\u8981\u9002\u5E94\u3002\u6E29\u548C\u3001\u5FAA\u5E8F\u6E10\u8FDB\u7684\u63A5\u89E6\u6BD4\u5F3A\u884C\u62B1\u8D77\u66F4\u5408\u9002\u3002", "A new home takes getting used to. Gentle, gradual contact is better than forcing a cuddle.", "Necesita adaptarse al nuevo hogar. El contacto suave y gradual es mejor que forzar un abrazo."]],
+    ["exercise-1", "exercise", 3, ["\u8DD1\u8F6E\u7684\u8DD1\u9053\u5E94\u8BE5\u662F\u4EC0\u4E48\u6837\uFF1F", "What running surface should a wheel have?", "\xBFC\xF3mo debe ser la superficie de la rueda?"], [["\u6709\u5F88\u591A\u7F51\u683C\u7F1D\u9699", "Wire mesh with gaps", "De rejilla con huecos"], ["\u5B8C\u6574\u5B9E\u5FC3\uFF0C\u5927\u5C0F\u9002\u5408\u8EAB\u4F53", "Solid and sized to fit the hamster", "S\xF3lida y de tama\xF1o adecuado"], ["\u8D8A\u5C0F\u8D8A\u7701\u5730\u65B9", "As tiny as possible", "Lo m\xE1s peque\xF1a posible"]], 1, ["\u5B9E\u5FC3\u8DD1\u9053\u53EF\u51CF\u5C11\u811A\u8DBE\u88AB\u5361\u4F4F\u7684\u98CE\u9669\uFF1B\u5927\u5C0F\u8981\u8BA9\u8DD1\u6B65\u59FF\u52BF\u81EA\u7136\uFF0C\u80CC\u90E8\u4E0D\u5F13\u8D77\u3002", "A solid surface helps prevent trapped toes. The wheel should allow a natural running posture without an arched back.", "Una superficie s\xF3lida ayuda a evitar dedos atrapados. Debe correr con postura natural, sin arquear el lomo."]],
+    ["exercise-2", "exercise", 0, ["\u54EA\u79CD\u6D3B\u52A8\u66F4\u9002\u5408\u4E30\u5BCC\u751F\u6D3B\uFF1F", "Which activity provides useful enrichment?", "\xBFQu\xE9 actividad enriquece su vida?"], [["\u5F3A\u8FEB\u5B83\u4E0D\u65AD\u8DD1\u8F6E", "Force nonstop running", "Obligarlo a correr sin parar"], ["\u4E00\u76F4\u5173\u5728\u7A7A\u76D2\u5B50\u91CC", "Keep it in an empty box", "Dejarlo en una caja vac\xEDa"], ["\u63D0\u4F9B\u8EB2\u85CF\u3001\u89C5\u98DF\u548C\u63A2\u7D22\u673A\u4F1A", "Provide hiding, foraging and exploring opportunities", "Ofrecer refugios, b\xFAsqueda de alimento y exploraci\xF3n"]], 2, ["\u8BA9\u9F20\u9F20\u81EA\u5DF1\u9009\u62E9\u63A2\u7D22\u548C\u4F11\u606F\u3002\u73A9\u5177\u662F\u9080\u8BF7\uFF0C\u4E0D\u662F\u5065\u8EAB\u623F\u5F3A\u5236\u6253\u5361\u3002", "Let the hamster choose when to explore and rest. Toys are invitations, not compulsory gym attendance.", "D\xE9jalo elegir cu\xE1ndo explorar y descansar. Los juguetes invitan; no son una obligaci\xF3n deportiva."]],
+    ["exercise-3", "exercise", 2, ["\u4E3A\u4EC0\u4E48\u8981\u63D0\u4F9B\u5B89\u5168\u7684\u5543\u54AC\u7269\uFF1F", "Why provide safe things to gnaw?", "\xBFPor qu\xE9 ofrecer objetos seguros para roer?"], [["\u5E2E\u52A9\u78E8\u8017\u6301\u7EED\u751F\u957F\u7684\u95E8\u9F7F", "To help wear down continuously growing incisors", "Para ayudar a desgastar los incisivos, que siguen creciendo"], ["\u8BA9\u5B83\u5543\u7535\u7EBF", "So it can chew cables", "Para que muerda cables"], ["\u4EE3\u66FF\u6240\u6709\u98DF\u7269", "To replace all food", "Para sustituir toda su comida"]], 0, ["\u95E8\u9F7F\u4F1A\u6301\u7EED\u751F\u957F\u3002\u5B89\u5168\u7684\u5543\u54AC\u6750\u6599\u662F\u73AF\u5883\u4E30\u5BCC\u5316\u7684\u4E00\u90E8\u5206\uFF0C\u4E0D\u80FD\u4EE3\u66FF\u6B63\u5E38\u996E\u98DF\u3002", "Incisors keep growing. Safe gnawing materials are enrichment, not a replacement for a proper diet.", "Los incisivos siguen creciendo. Los materiales seguros para roer enriquecen su entorno, pero no sustituyen su dieta."]],
+    ["care-1", "care", 0, ["\u53D1\u73B0\u6301\u7EED\u4E0D\u5403\u4E1C\u897F\u3001\u660E\u663E\u7CBE\u795E\u5DEE\uFF0C\u5E94\u8BE5\uFF1F", "A hamster is persistently not eating and seems very unwell. What next?", "No come y est\xE1 claramente deca\xEDdo. \xBFQu\xE9 hacemos?"], [["\u5C3D\u5FEB\u8054\u7CFB\u80FD\u8BCA\u6CBB\u4ED3\u9F20\u7684\u517D\u533B", "Promptly contact a vet who treats hamsters", "Contactar pronto con un veterinario que atienda h\xE1msteres"], ["\u81EA\u884C\u5582\u4EBA\u7528\u836F", "Give human medicine yourself", "Darle medicamentos humanos"], ["\u53EA\u9760\u6E38\u620F\u91CC\u7684\u8BCA\u6240", "Use only the in-game clinic", "Usar solo la cl\xEDnica del juego"]], 0, ["\u660E\u663E\u7684\u5F02\u5E38\u9700\u8981\u517D\u533B\u8BC4\u4F30\u3002\u6E38\u620F\u95EE\u7B54\u4E0D\u662F\u8BCA\u65AD\u5DE5\u5177\uFF0C\u4E0D\u8981\u81EA\u884C\u7528\u836F\u3002", "Significant changes need veterinary assessment. This quiz cannot diagnose illness; do not self-medicate.", "Los cambios importantes requieren valoraci\xF3n veterinaria. Este cuestionario no diagnostica; no lo mediques por tu cuenta."]],
+    ["care-2", "care", 1, ["\u7A9D\u91CC\u6709\u4E00\u70B9\u719F\u6089\u6C14\u5473\uFF0C\u9700\u8981\u5168\u90E8\u6D17\u6389\u5417\uFF1F", "Must every familiar smell be removed from the nest?", "\xBFHay que eliminar todo olor familiar del nido?"], [["\u6BCF\u5929\u5168\u90E8\u6362\u6389", "Replace everything daily", "Cambiarlo todo a diario"], ["\u4EE5\u5C40\u90E8\u6E05\u6D01\u4E3A\u4E3B\uFF0C\u4FDD\u7559\u5E72\u51C0\u65E7\u7A9D\u6750", "Spot-clean and retain some clean familiar nesting material", "Limpiar las zonas sucias y conservar parte del material limpio"], ["\u4EFB\u4F55\u810F\u4E1C\u897F\u90FD\u4E0D\u6E05\u7406", "Never remove dirty material", "No retirar nunca lo sucio"]], 1, ["\u53CA\u65F6\u6E05\u9664\u6F6E\u6E7F\u3001\u6C61\u67D3\u7684\u57AB\u6599\uFF1B\u4FDD\u7559\u90E8\u5206\u5E72\u51C0\u7684\u719F\u6089\u7A9D\u6750\u6709\u52A9\u4E8E\u51CF\u5C11\u6E05\u6D01\u5E26\u6765\u7684\u538B\u529B\u3002", "Remove wet or dirty bedding promptly. Keeping some clean familiar nesting material can reduce cleaning stress.", "Retira pronto el sustrato h\xFAmedo o sucio. Conservar parte del material limpio y familiar puede reducir el estr\xE9s."]],
+    ["care-3", "care", 2, ["\u600E\u6837\u62B1\u8D77\u9F20\u9F20\u66F4\u7A33\u59A5\uFF1F", "How can you pick up a hamster more safely?", "\xBFC\xF3mo puedes cogerlo de forma m\xE1s segura?"], [["\u4ECE\u9AD8\u5904\u5355\u624B\u634F\u8D77", "Pinch it with one hand high above the ground", "Pellizcarlo con una mano en alto"], ["\u8D81\u5B83\u7761\u89C9\u7A81\u7136\u6293\u4F4F", "Grab it suddenly while asleep", "Agarrarlo mientras duerme"], ["\u6E05\u9192\u65F6\u8F7B\u67D4\u6258\u8D77\uFF0C\u8D34\u8FD1\u4F4E\u5904", "Gently scoop it while awake and stay close to a low surface", "Recogerlo suavemente despierto y cerca de una superficie baja"]], 2, ["\u8BA9\u5B83\u5148\u9002\u5E94\u4F60\u7684\u624B\uFF0C\u6258\u4F4F\u8EAB\u4F53\u5E76\u964D\u4F4E\u8DCC\u843D\u9AD8\u5EA6\u3002\u4E92\u52A8\u5E94\u7531\u4FE1\u4EFB\u5F00\u59CB\u3002", "Let it get used to your hands, support its body and minimise fall height. Start with trust.", "Deja que se acostumbre a tus manos, sujeta su cuerpo y minimiza la altura de ca\xEDda. Empieza por la confianza."]]
+  ].map(([id, glade, source, q, answers, correct, explanation]) => ({ id, glade, source, q, answers, correct, explanation }));
+  function cleanProgress(raw) {
+    const ids = new Set(questions.map((q) => q.id));
+    return { learned: [...new Set(Array.isArray(raw?.learned) ? raw.learned.filter((id) => ids.has(id)) : [])] };
   }
-  window.createTownPhoneModel = createPhoneModel;
+  function recordAnswer(progress, id, choice) {
+    const q = questions.find((q2) => q2.id === id);
+    if (!q || !Number.isInteger(choice) || choice < 0 || choice > 2) return false;
+    if (choice !== q.correct) return false;
+    if (!progress.learned.includes(id)) progress.learned.push(id);
+    return true;
+  }
 
   // src/town-world-surfaces.js
   var profiles = {
@@ -35108,6 +35355,646 @@ void main() {
     });
   }
 
+  // src/knowledge-forest.js
+  var copy = {
+    title: ["\u77E5\u8BC6\u68EE\u6797", "Forest of Knowledge", "Bosque del conocimiento"],
+    field: ["\u68EE\u6797\u89C2\u5BDF\u624B\u8BB0 / 01", "FOREST FIELD NOTES / 01", "CUADERNO DEL BOSQUE / 01"],
+    subtitle: ["\u628A\u5C0F\u5E38\u8BC6\uFF0C\u8D70\u6210\u4E00\u7247\u68EE\u6797\u3002", "Little discoveries. A whole forest.", "Peque\xF1os descubrimientos. Todo un bosque."],
+    enter: ["\u63A2\u7D22\u77E5\u8BC6\u68EE\u6797", "Explore the forest", "Explorar el bosque"],
+    back: ["\u8FD4\u56DE\u5C0F\u9547", "Back to town", "Volver al pueblo"],
+    walk: ["\u7B2C\u4E00\u89C6\u89D2", "First person", "Primera persona"],
+    map: ["\u4FEF\u77B0\u5730\u56FE", "Forest map", "Mapa del bosque"],
+    journal: ["\u77E5\u8BC6\u624B\u518C", "Field journal", "Cuaderno de campo"],
+    leaves: ["\u77E5\u8BC6\u53F6\u7247", "Knowledge leaves", "Hojas de conocimiento"],
+    hint: ["\u70B9\u51FB\u6797\u95F4\u8425\u5730\u5F00\u59CB\u63A2\u7D22 \xB7 \u65B9\u5411\u952E\u4E5F\u53EF\u9009\u62E9\u8425\u5730", "Select a forest camp to explore \xB7 Arrow keys select a camp too", "Elige un campamento \xB7 Tambi\xE9n puedes usar las flechas"],
+    walkHint: ["WASD / \u65B9\u5411\u952E\u884C\u8D70 \xB7 \u62D6\u52A8\u753B\u9762\u8F6C\u5411 \xB7 \u9760\u8FD1\u8425\u5730\u6309 E", "WASD / arrows to walk \xB7 Drag to look \xB7 E near a camp", "WASD / flechas para caminar \xB7 Arrastra para mirar \xB7 E junto a un campamento"],
+    start: ["\u548C\u5411\u5BFC\u804A\u804A", "Talk to the guide", "Hablar con el gu\xEDa"],
+    close: ["\u6536\u8D77", "Close", "Cerrar"],
+    next: ["\u4E0B\u4E00\u9898", "Next question", "Siguiente pregunta"],
+    retry: ["\u518D\u60F3\u4E00\u60F3", "Try again", "Intentar de nuevo"],
+    correct: ["\u53F6\u7247\u6536\u597D\uFF0C\u8FD9\u6B21\u771F\u7684\u5B66\u4F1A\u4E86\uFF01", "A new leaf of knowledge. Nicely done!", "\xA1Una hoja de conocimiento! Muy bien."],
+    incorrect: ["\u5DEE\u4E00\u70B9\uFF0C\u542C\u542C\u5411\u5BFC\u600E\u4E48\u8BF4\u3002", "Not quite. Here is the guide\u2019s explanation.", "Casi. Escucha la explicaci\xF3n del gu\xEDa."],
+    done: ["\u8FD9\u7247\u6797\u5730\u5B66\u5B8C\u5566\uFF0C\u53BB\u4E0B\u4E00\u7AD9\u6563\u6563\u6B65\u3002", "This clearing is complete. Take a stroll to the next one.", "Has completado este claro. Pasea hasta el siguiente."],
+    complete: ["\u77E5\u8BC6\u6811\u5DF2\u70B9\u4EAE \xB7 \u68EE\u6797\u5C0F\u5C0F\u5B88\u62A4\u8005", "Knowledge tree awakened \xB7 Forest Guardian", "\xC1rbol del saber iluminado \xB7 Guardi\xE1n del bosque"],
+    source: ["\u77E5\u8BC6\u6765\u6E90", "Care reference", "Fuente"],
+    empty: ["\u8FD8\u6CA1\u6709\u53F6\u7247\u3002\u5148\u627E\u4E00\u4F4D\u5411\u5BFC\u804A\u804A\u5427\u3002", "No leaves yet. Meet a guide to get started.", "A\xFAn no tienes hojas. Visita a un gu\xEDa."],
+    note: ["\u5C0F\u9547\u662F\u62DF\u4EBA\u6E38\u620F\uFF1B\u73B0\u5B9E\u7167\u62A4\u4EE5\u52A8\u7269\u798F\u5229\u548C\u517D\u533B\u5EFA\u8BAE\u4E3A\u51C6\u3002", "The town is fictional. Follow animal-welfare guidance and veterinary advice for real pets.", "El pueblo es ficticio. Para mascotas reales, sigue las pautas de bienestar y el consejo veterinario."],
+    storage: ["\u8FDB\u5EA6\u6682\u65F6\u65E0\u6CD5\u4FDD\u5B58\uFF0C\u672C\u6B21\u4ECD\u53EF\u7EE7\u7EED\u5B66\u4E60\u3002", "Progress could not be saved. You can still keep learning.", "No se pudo guardar el progreso. Puedes seguir aprendiendo."],
+    error: ["\u68EE\u6797\u52A0\u8F7D\u5931\u8D25\uFF0C\u8BF7\u8FD4\u56DE\u5C0F\u9547\u540E\u91CD\u8BD5\u3002", "The forest could not load. Return to town and try again.", "El bosque no se ha cargado. Vuelve al pueblo e int\xE9ntalo de nuevo."]
+  };
+  var language = () => ({ zh: 0, en: 1, es: 2 })[window.TownI18n?.language] ?? 0;
+  var tr = (key2) => copy[key2][language()];
+  var localized = (value) => value[language()];
+  var key = "shushu.knowledge-forest.v1";
+  function installKnowledgeForest() {
+    if (document.getElementById("forestEntry")) return;
+    const toolbar = document.querySelector(".town-cards");
+    if (!toolbar) return;
+    const entry = document.createElement("button");
+    entry.id = "forestEntry";
+    entry.setAttribute("data-i18n-user", "");
+    entry.type = "button";
+    entry.textContent = tr("enter");
+    toolbar.appendChild(entry);
+    const overlay = document.createElement("section");
+    overlay.id = "knowledgeForest";
+    overlay.setAttribute("data-i18n-user", "");
+    overlay.hidden = true;
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute("aria-label", tr("title"));
+    overlay.tabIndex = -1;
+    overlay.innerHTML = '<canvas class="forest-canvas"></canvas><div class="forest-header"><div><small>FOREST FIELD NOTES / 01</small><h1></h1><p></p></div><button data-action="exit"></button></div><div class="forest-tools"><span class="forest-progress"></span><button data-action="view"></button><button data-action="journal"></button></div><nav class="forest-stations"></nav><div class="forest-caption"></div><div class="forest-touch"><button data-move="forward">\u2191</button><button data-move="left">\u2190</button><button data-move="back">\u2193</button><button data-move="right">\u2192</button><button data-action="interact">E</button></div><section class="forest-card" hidden></section><div class="forest-toast" role="status"></div>';
+    document.body.appendChild(overlay);
+    const canvas = overlay.querySelector("canvas"), card = overlay.querySelector(".forest-card"), toast = overlay.querySelector(".forest-toast");
+    let progress = cleanProgress(null);
+    try {
+      progress = cleanProgress(JSON.parse(localStorage.getItem(key) || "null"));
+    } catch {
+    }
+    let draw = null, scene = null, camera = null, frame = 0, resize = null, clock = 0, mode = "map", yaw = 0, drag = null, active = -1, question = null, answered = false, view = "map", lastFocus = null, toastTimer = 0;
+    const keys = /* @__PURE__ */ new Set(), player = new Vector3(0, 0.1, 10), colliders = [], markers = [], decorations = [], look = new Vector3(), raycaster = new Raycaster();
+    const targetCamera = new Vector3(20, 25, 29), targetLook = new Vector3(0, 0, -1);
+    let avatar = null, treeCrown = null;
+    function notify(text) {
+      toast.textContent = text;
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.textContent = "", 4500);
+    }
+    function save() {
+      try {
+        localStorage.setItem(key, JSON.stringify(progress));
+      } catch {
+        notify(tr("storage"));
+      }
+    }
+    function button(label, fn, className = "") {
+      const el = document.createElement("button");
+      el.type = "button";
+      el.textContent = label;
+      el.className = className;
+      el.onclick = fn;
+      return el;
+    }
+    function count(g) {
+      return questions.filter((q) => q.glade === g.id && progress.learned.includes(q.id)).length;
+    }
+    function refresh() {
+      entry.textContent = tr("enter");
+      if (overlay.hidden) return;
+      overlay.setAttribute("aria-label", tr("title"));
+      overlay.querySelector(".forest-header small").textContent = tr("field");
+      overlay.querySelector("h1").textContent = tr("title");
+      overlay.querySelector(".forest-header p").textContent = tr("subtitle");
+      overlay.querySelector('[data-action="exit"]').textContent = "\u2190 " + tr("back");
+      overlay.querySelector('[data-action="view"]').textContent = tr(mode === "map" ? "walk" : "map");
+      overlay.querySelector('[data-action="journal"]').textContent = tr("journal");
+      overlay.querySelector(".forest-progress").textContent = `\u2726 ${progress.learned.length} / ${questions.length} \xB7 ${tr("leaves")}`;
+      overlay.querySelector(".forest-caption").textContent = progress.learned.length === questions.length ? tr("complete") : tr(mode === "map" ? "hint" : "walkHint");
+      overlay.querySelector(".forest-touch").hidden = mode !== "walk";
+      const nav = overlay.querySelector("nav");
+      nav.replaceChildren();
+      glades.forEach((g, i2) => {
+        const b = button(`${String(i2 + 1).padStart(2, "0")}  ${localized(g.name)}  ${count(g)}/3`, () => select(i2));
+        b.classList.toggle("learned", count(g) === 3);
+        b.classList.toggle("active", active === i2);
+        nav.appendChild(b);
+      });
+      if (treeCrown) {
+        treeCrown.material.emissive.setHex(progress.learned.length === questions.length ? 16764259 : 2314033);
+        treeCrown.material.emissiveIntensity = progress.learned.length === questions.length ? 0.45 : 0.08;
+      }
+    }
+    function panel(title) {
+      card.replaceChildren();
+      card.hidden = false;
+      const header = document.createElement("div"), h = document.createElement("h2");
+      header.className = "forest-card-head";
+      h.textContent = title;
+      header.append(h, button("\xD7", closeCard));
+      header.lastChild.setAttribute("aria-label", tr("close"));
+      card.append(header);
+      keys.clear();
+      return card;
+    }
+    function paragraph(text, className = "") {
+      const p = document.createElement("p");
+      p.textContent = text;
+      p.className = className;
+      card.appendChild(p);
+      return p;
+    }
+    function closeCard() {
+      card.hidden = true;
+      view = "map";
+      question = null;
+      keys.clear();
+      overlay.focus({ preventScroll: true });
+    }
+    function select(i2) {
+      active = i2;
+      refresh();
+      const g = glades[i2];
+      if (mode === "walk" && Math.hypot(player.x - g.x, player.z - g.z) > 3.5) {
+        notify(localized(g.name) + " \xB7 " + tr("walkHint"));
+        return;
+      }
+      if (mode === "map") {
+        targetLook.set(g.x, 0.5, g.z);
+        targetCamera.set(g.x + 7, 10, g.z + 11);
+      }
+      const available = questions.filter((q) => q.glade === g.id);
+      showQuestion(available.find((q) => !progress.learned.includes(q.id)) || available[0]);
+    }
+    function showQuestion(q) {
+      question = q;
+      view = "quiz";
+      answered = false;
+      const g = glades.find((g2) => g2.id === q.glade), group = questions.filter((item) => item.glade === g.id);
+      panel(localized(g.guide) + " \xB7 " + localized(g.name));
+      paragraph(`${group.indexOf(q) + 1} / ${group.length}`, "forest-eyebrow");
+      paragraph(localized(q.q), "forest-question");
+      const options = document.createElement("div");
+      options.className = "forest-options";
+      q.answers.forEach((answer, i2) => options.appendChild(button(`${String.fromCharCode(65 + i2)}  ${localized(answer)}`, () => answerQuestion(i2))));
+      card.append(options);
+      card.querySelector(".forest-options button").focus({ preventScroll: true });
+    }
+    function answerQuestion(choice) {
+      if (answered || !question) return;
+      answered = true;
+      const q = question, correct = recordAnswer(progress, q.id, choice);
+      if (correct) save();
+      refresh();
+      const buttons = [...card.querySelectorAll(".forest-options button")];
+      buttons.forEach((b, i2) => {
+        b.disabled = true;
+        b.classList.toggle("correct", i2 === q.correct);
+        b.classList.toggle("incorrect", i2 === choice && !correct);
+      });
+      const feedback = paragraph(tr(correct ? "correct" : "incorrect"), "forest-feedback");
+      feedback.setAttribute("role", "status");
+      paragraph(localized(q.explanation));
+      paragraph(`${tr("source")}: ${sources[q.source][0]}`, "forest-source");
+      const list = questions.filter((item) => item.glade === q.glade), index = list.indexOf(q);
+      const next = button(tr(correct ? "next" : "retry"), () => {
+        if (!correct) {
+          showQuestion(q);
+          return;
+        }
+        if (index < list.length - 1) {
+          showQuestion(list[index + 1]);
+          return;
+        }
+        closeCard();
+        notify(tr("done"));
+        if (mode === "map") {
+          targetCamera.set(20, 25, 29);
+          targetLook.set(0, 0, -1);
+        }
+      }, "forest-primary");
+      card.append(next);
+      next.focus({ preventScroll: true });
+    }
+    function journal() {
+      view = "journal";
+      panel(tr("journal"));
+      paragraph(tr("note"));
+      if (!progress.learned.length) paragraph(tr("empty"));
+      for (const q of questions.filter((q2) => progress.learned.includes(q2.id))) {
+        const details = document.createElement("details"), summary = document.createElement("summary"), body = document.createElement("p");
+        summary.textContent = localized(q.q);
+        body.textContent = localized(q.explanation);
+        details.append(summary, body);
+        card.append(details);
+      }
+      paragraph(tr("source"), "forest-eyebrow");
+      sources.forEach(([name, url]) => {
+        const p = paragraph(name + ": " + url, "forest-source");
+        p.style.overflowWrap = "anywhere";
+      });
+    }
+    function mesh(geometry, color, x2, y, z, parent = scene) {
+      const kind = [7952445, 8545093].includes(color) ? "bark" : [9992526, 13216631, 10519381, 9595459, 11043411, 10977871, 8676164].includes(color) ? "wood" : color === 9149545 ? "grass" : color === 9138770 ? "soil" : [14271643, 13023885].includes(color) ? "gravel" : [5799500, 7311443, 4746828, 9021790, 11191162, 7510098].includes(color) ? "foliage" : null;
+      const material3 = kind ? worldMaterial(kind, color) : new MeshStandardMaterial({ color, roughness: 0.9 }), m = new Mesh(geometry, material3);
+      if (kind) {
+        applyWorldSurface(m, kind);
+        if (m.geometry !== geometry) geometry.dispose();
+      }
+      m.position.set(x2, y, z);
+      m.castShadow = true;
+      m.receiveShadow = true;
+      parent.add(m);
+      return m;
+    }
+    function box3(w, h, d, color, x2, y, z, parent) {
+      return mesh(new BoxGeometry(w, h, d), color, x2, y, z, parent);
+    }
+    function sphere(r, color, x2, y, z, parent) {
+      return mesh(new IcosahedronGeometry(r, 1), color, x2, y, z, parent);
+    }
+    function guide(x2, z, color) {
+      const g = new Group();
+      g.position.set(x2, 0, z);
+      scene.add(g);
+      sphere(0.42, color, 0, 0.5, 0, g).scale.set(0.85, 1, 0.72);
+      sphere(0.32, color, 0, 0.94, 0, g);
+      [-1, 1].forEach((s) => {
+        sphere(0.16, color, s * 0.23, 1.17, 0, g);
+        sphere(0.105, 15315875, s * 0.23, 1.17, 0.1, g);
+        sphere(0.047, 3352608, s * 0.12, 1, 0.26, g);
+        sphere(0.1, color, s * 0.19, 0.13, 0.1, g);
+      });
+      sphere(0.045, 11956577, 0, 0.91, 0.31, g);
+      return g;
+    }
+    function tree(x2, z, size = 1, color = 5799500) {
+      box3(0.38 * size, 2 * size, 0.38 * size, 7952445, x2, size, z);
+      sphere(1.35 * size, color, x2, 2.4 * size, z);
+      sphere(0.95 * size, color, x2 - 0.5 * size, 3.2 * size, z);
+      colliders.push({ x: x2, z, r: 0.5 * size });
+    }
+    function makeScene() {
+      if (!draw) draw = new WebGLRenderer({ canvas, antialias: true });
+      draw.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+      draw.toneMapping = ACESFilmicToneMapping;
+      draw.shadowMap.enabled = true;
+      draw.shadowMap.type = PCFSoftShadowMap;
+      draw.shadowMap.autoUpdate = false;
+      scene = new Scene();
+      scene.background = new Color(14411725);
+      scene.fog = new Fog(14411725, 32, 65);
+      camera = new PerspectiveCamera(43, 1, 0.1, 90);
+      camera.position.copy(targetCamera);
+      look.copy(targetLook);
+      scene.add(new HemisphereLight(16774622, 7571304, 2.4));
+      const sun = new DirectionalLight(16770737, 3.2);
+      sun.position.set(-10, 25, 12);
+      sun.castShadow = true;
+      sun.shadow.mapSize.set(1024, 1024);
+      Object.assign(sun.shadow.camera, { left: -21, right: 21, top: 21, bottom: -21 });
+      sun.shadow.normalBias = 0.04;
+      scene.add(sun);
+      mesh(new CylinderGeometry(16, 16.6, 0.8, 64), 9149545, 0, -0.45, 0);
+      mesh(new CylinderGeometry(16.7, 17, 1, 64), 9138770, 0, -1.3, 0);
+      const pathPoints = [new Vector3(0, 0.035, 12), ...glades.map((g) => new Vector3(g.x, 0.035, g.z)), new Vector3(0, 0.035, 12)];
+      const curve = new CatmullRomCurve3(pathPoints);
+      for (let i2 = 0; i2 < 120; i2++) {
+        const v = curve.getPoint(i2 / 119);
+        mesh(new CylinderGeometry(0.8, 0.8, 0.045, 12), 14271643, v.x, 0.03, v.z);
+      }
+      const pond = mesh(new CylinderGeometry(2.3, 2.3, 0.035, 40), 7843237, 3, 0.035, 7);
+      pond.scale.z = 0.6;
+      colliders.push({ x: 3, z: 7, r: 2.35 });
+      for (let i2 = 0; i2 < 12; i2++) box3(0.32, 0.15, 1.5, 9992526, 1.05 + i2 * 0.36, 0.17, 7);
+      for (const z of [6.25, 7.75]) {
+        box3(4.3, 0.1, 0.1, 13216631, 3, 0.85, z);
+        for (const x2 of [1, 3, 5]) box3(0.1, 0.9, 0.1, 10519381, x2, 0.5, z);
+      }
+      for (let i2 = 0; i2 < 34; i2++) {
+        const a = i2 * Math.PI * 2 / 34, r = 14.2 + i2 % 3 * 0.25;
+        tree(Math.cos(a) * r, Math.sin(a) * r, 0.7 + i2 % 4 * 0.13, [5799500, 7311443, 4746828][i2 % 3]);
+      }
+      for (const [x2, z] of [[-11, 0], [11, 0], [-3, -12], [3, -12], [-11, 8], [10, 9]]) tree(x2, z, 0.8);
+      box3(1.5, 4, 1.3, 8545093, 0, 2, -1);
+      treeCrown = sphere(3.1, 9021790, 0, 5, -1);
+      sphere(2.2, 11191162, -1.8, 4.5, -1);
+      sphere(2.2, 7510098, 1.8, 4.8, -1);
+      colliders.push({ x: 0, z: -1, r: 1.45 });
+      const ring = mesh(new TorusGeometry(1.7, 0.12, 8, 40), 15124609, 0, 0.22, -1);
+      ring.rotation.x = Math.PI / 2;
+      glades.forEach((g, i2) => {
+        mesh(new CylinderGeometry(2.1, 2.2, 0.12, 28), 13023885, g.x, 0.06, g.z);
+        const m = mesh(new CylinderGeometry(0.85, 0.95, 0.35, 24), g.color, g.x, 0.25, g.z);
+        m.userData.station = i2;
+        markers.push(m);
+        const npc = guide(g.x, g.z, g.color);
+        decorations.push(npc);
+        box3(1.45, 0.14, 0.58, 9595459, g.x - 1.1, 0.6, g.z - 0.8);
+        box3(0.15, 0.7, 0.15, 7952445, g.x - 1.6, 0.3, g.z - 0.8);
+        box3(0.15, 0.7, 0.15, 7952445, g.x - 0.6, 0.3, g.z - 0.8);
+        colliders.push({ x: g.x - 1.1, z: g.z - 0.8, r: 0.9 });
+        colliders.push({ x: g.x, z: g.z, r: 0.65 });
+        if (i2 === 0) {
+          for (let n = 0; n < 5; n++) sphere(0.15, 15056741, g.x - 1.5 + n * 0.2, 0.8, g.z - 0.8);
+        }
+        if (i2 === 1) {
+          box3(1.4, 0.8, 1.1, 11043411, g.x + 1, 0.5, g.z - 1);
+          const roof = mesh(new ConeGeometry(1.2, 0.8, 4), 7700813, g.x + 1, 1.25, g.z - 1);
+          roof.rotation.y = Math.PI / 4;
+          colliders.push({ x: g.x + 1, z: g.z - 1, r: 1 });
+        }
+        if (i2 === 2) {
+          const moon = mesh(new TorusGeometry(0.45, 0.13, 8, 24, Math.PI * 1.5), 16770723, g.x, 2.5, g.z - 1);
+          moon.rotation.z = -0.7;
+          box3(0.08, 2, 0.08, 9402195, g.x, 1, g.z - 1);
+        }
+        if (i2 === 3) {
+          const wheel = mesh(new TorusGeometry(0.65, 0.09, 8, 32), 10977871, g.x + 1, 1, g.z - 1);
+          box3(0.2, 0.9, 0.2, 8676164, g.x + 1, 0.45, g.z - 1);
+          wheel.userData.wheel = true;
+          colliders.push({ x: g.x + 1, z: g.z - 1, r: 0.8 });
+        }
+        if (i2 === 4) {
+          box3(1.1, 0.7, 0.7, 10795936, g.x + 1, 0.45, g.z - 1);
+          box3(0.4, 0.1, 0.1, 16773847, g.x + 1, 0.85, g.z - 1);
+          box3(0.1, 0.1, 0.4, 16773847, g.x + 1, 0.85, g.z - 1);
+        }
+      });
+      const flowers = new InstancedMesh(new IcosahedronGeometry(0.09, 0), new MeshStandardMaterial({ color: 15783321 }), 120), dummy = new Object3D();
+      for (let i2 = 0; i2 < 120; i2++) {
+        const a = i2 * 2.399, r = 11 + Math.sin(i2 * 3.7) * 1.5;
+        dummy.position.set(Math.cos(a) * r, 0.16, Math.sin(a) * r);
+        dummy.updateMatrix();
+        flowers.setMatrixAt(i2, dummy.matrix);
+      }
+      scene.add(flowers);
+      avatar = guide(player.x, player.z, 14993310);
+      resize = () => {
+        const w = overlay.clientWidth, h = overlay.clientHeight;
+        if (!w || !h) return;
+        draw.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      };
+      window.addEventListener("resize", resize);
+      resize();
+      draw.shadowMap.needsUpdate = true;
+    }
+    function canWalk2(x2, z) {
+      if (Math.hypot(x2, z) > 13) return false;
+      return !colliders.some((c) => {
+        if (c.x === 3 && c.z === 7 && x2 >= 0.8 && x2 <= 5.2 && z >= 6.55 && z <= 7.45) return false;
+        return Math.hypot(x2 - c.x, z - c.z) < c.r + 0.22;
+      });
+    }
+    function tick(now) {
+      if (overlay.hidden) return;
+      frame = requestAnimationFrame(tick);
+      const dt = Math.min((now - clock) / 1e3, 0.04);
+      clock = now;
+      if (mode === "walk" && card.hidden) {
+        const f = Number(keys.has("KeyW") || keys.has("ArrowUp") || keys.has("forward")) - Number(keys.has("KeyS") || keys.has("ArrowDown") || keys.has("back")), s = Number(keys.has("KeyD") || keys.has("ArrowRight") || keys.has("right")) - Number(keys.has("KeyA") || keys.has("ArrowLeft") || keys.has("left")), scale = dt * 3 / Math.max(1, Math.hypot(f, s)), dx = (-Math.sin(yaw) * f + Math.cos(yaw) * s) * scale, dz = (-Math.cos(yaw) * f - Math.sin(yaw) * s) * scale;
+        if (canWalk2(player.x + dx, player.z)) player.x += dx;
+        if (canWalk2(player.x, player.z + dz)) player.z += dz;
+        camera.position.set(player.x, 1.05, player.z);
+        camera.lookAt(player.x - Math.sin(yaw) * 4, 1, player.z - Math.cos(yaw) * 4);
+      } else if (mode === "map") {
+        camera.position.lerp(targetCamera, 1 - Math.exp(-5 * dt));
+        look.lerp(targetLook, 1 - Math.exp(-5 * dt));
+        camera.lookAt(look);
+      }
+      avatar.visible = mode === "map";
+      avatar.position.set(player.x, 0, player.z);
+      decorations.forEach((g, i2) => g.rotation.y = Math.sin(now * 5e-4 + i2) * 0.12);
+      draw.render(scene, camera);
+    }
+    function open() {
+      if (!overlay.hidden) return;
+      lastFocus = document.activeElement;
+      window.TownApp?.stopFirstPerson();
+      document.exitPointerLock?.();
+      keys.clear();
+      overlay.hidden = false;
+      document.body.dataset.forestOpen = "true";
+      mode = "map";
+      targetCamera.set(20, 25, 29);
+      targetLook.set(0, 0, -1);
+      try {
+        makeScene();
+        refresh();
+        overlay.focus();
+        clock = performance.now();
+        frame = requestAnimationFrame(tick);
+      } catch {
+        notify(tr("error"));
+      }
+    }
+    function exit() {
+      if (overlay.hidden) return;
+      overlay.hidden = true;
+      delete document.body.dataset.forestOpen;
+      cancelAnimationFrame(frame);
+      keys.clear();
+      closeCard();
+      if (resize) window.removeEventListener("resize", resize);
+      if (scene) {
+        const geometry = /* @__PURE__ */ new Set(), materials3 = /* @__PURE__ */ new Set();
+        scene.traverse((o) => {
+          if (o.geometry) geometry.add(o.geometry);
+          if (o.material) (Array.isArray(o.material) ? o.material : [o.material]).forEach((m) => materials3.add(m));
+          if (o.shadow?.map) o.shadow.map.dispose();
+        });
+        geometry.forEach((g) => g.dispose());
+        materials3.forEach((m) => m.dispose());
+      }
+      draw?.renderLists.dispose();
+      scene = null;
+      treeCrown = null;
+      markers.length = colliders.length = decorations.length = 0;
+      lastFocus?.focus({ preventScroll: true });
+    }
+    function interact() {
+      let i2 = -1, dist = 3.5;
+      glades.forEach((g, index) => {
+        const d = Math.hypot(player.x - g.x, player.z - g.z);
+        if (d < dist) {
+          i2 = index;
+          dist = d;
+        }
+      });
+      if (i2 >= 0) select(i2);
+      else notify(tr("walkHint"));
+    }
+    entry.onclick = open;
+    window.addEventListener("town-open-forest", open);
+    overlay.querySelector('[data-action="exit"]').onclick = exit;
+    overlay.querySelector('[data-action="journal"]').onclick = journal;
+    overlay.querySelector('[data-action="view"]').onclick = () => {
+      closeCard();
+      mode = mode === "map" ? "walk" : "map";
+      if (mode === "map") {
+        targetCamera.set(20, 25, 29);
+        targetLook.set(0, 0, -1);
+      }
+      refresh();
+    };
+    overlay.querySelector('[data-action="interact"]').onclick = interact;
+    overlay.querySelectorAll("[data-move]").forEach((b) => {
+      b.onpointerdown = (e) => {
+        e.preventDefault();
+        b.setPointerCapture(e.pointerId);
+        keys.add(b.dataset.move);
+      };
+      b.onpointerup = b.onpointercancel = b.onlostpointercapture = () => keys.delete(b.dataset.move);
+    });
+    canvas.onpointerdown = (e) => {
+      drag = { x: e.clientX, y: e.clientY, moved: false };
+      canvas.setPointerCapture(e.pointerId);
+    };
+    canvas.onpointermove = (e) => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x;
+      drag.moved ||= Math.abs(dx) + Math.abs(e.clientY - drag.y) > 3;
+      if (mode === "walk" && card.hidden) yaw -= dx * 6e-3;
+      drag.x = e.clientX;
+      drag.y = e.clientY;
+    };
+    canvas.onpointerup = (e) => {
+      if (drag && !drag.moved && mode === "map" && card.hidden) {
+        const r = canvas.getBoundingClientRect();
+        raycaster.setFromCamera(new Vector2((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1), camera);
+        const hit = raycaster.intersectObjects(markers)[0];
+        if (hit) select(hit.object.userData.station);
+      }
+      drag = null;
+    };
+    canvas.onpointercancel = () => drag = null;
+    window.addEventListener("keydown", (e) => {
+      if (overlay.hidden) return;
+      e.stopImmediatePropagation();
+      if (e.code === "Escape") {
+        e.preventDefault();
+        if (!card.hidden) closeCard();
+        else exit();
+        return;
+      }
+      if (e.code === "Tab") {
+        const focusable = [...overlay.querySelectorAll("button:not(:disabled),summary")].filter((el) => el.getClientRects().length);
+        const first = focusable[0], last = focusable.at(-1);
+        if (e.shiftKey && (document.activeElement === first || document.activeElement === overlay)) {
+          e.preventDefault();
+          last?.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+        return;
+      }
+      if (!card.hidden) return;
+      if (["KeyW", "KeyA", "KeyS", "KeyD", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space", "KeyE"].includes(e.code)) {
+        e.preventDefault();
+        if (mode === "walk") {
+          keys.add(e.code);
+          if (e.code === "KeyE" && !e.repeat) interact();
+        } else if (e.code.startsWith("Arrow")) {
+          active = (active + (e.code === "ArrowLeft" || e.code === "ArrowUp" ? -1 : 1) + glades.length) % glades.length;
+          refresh();
+          overlay.querySelectorAll("nav button")[active].focus();
+        }
+      }
+    }, true);
+    window.addEventListener("keyup", (e) => {
+      if (overlay.hidden) return;
+      keys.delete(e.code);
+      e.stopImmediatePropagation();
+    }, true);
+    window.addEventListener("blur", () => keys.clear());
+    const observer = new MutationObserver(() => {
+      refresh();
+      if (!overlay.hidden && view === "quiz" && question) showQuestion(question);
+      else if (!overlay.hidden && view === "journal") journal();
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
+  }
+
+  // src/town-phone-model.js
+  function createPhoneModel(canvas) {
+    const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+    renderer.setSize(420, 740, false);
+    renderer.outputColorSpace = SRGBColorSpace;
+    const scene = new Scene(), camera = new OrthographicCamera(-2.2575, 2.2575, 3.98, -3.98, 0.1, 30);
+    camera.position.set(0, 0, 12);
+    scene.add(new HemisphereLight(16774887, 12089685, 1.6));
+    const light = new DirectionalLight(16777215, 1.8);
+    light.position.set(-4, 5, 8);
+    scene.add(light);
+    const cream = new MeshStandardMaterial({ color: 16771017, roughness: 0.96 }), pink = new MeshStandardMaterial({ color: 16297889, roughness: 0.9 }), brown = new MeshStandardMaterial({ color: 6897193, roughness: 0.36 }), dark = new MeshStandardMaterial({ color: 3154715, roughness: 0.38 });
+    const grain = document.createElement("canvas");
+    grain.width = grain.height = 128;
+    const ctx = grain.getContext("2d"), pixels = ctx.createImageData(128, 128);
+    let seed = 7;
+    for (let i2 = 0; i2 < pixels.data.length; i2 += 4) {
+      seed = seed * 1664525 + 1013904223 >>> 0;
+      const c = 150 + seed % 100;
+      pixels.data.set([c, c, c, 255], i2);
+    }
+    ctx.putImageData(pixels, 0, 0);
+    const texture3 = new CanvasTexture(grain);
+    texture3.wrapS = texture3.wrapT = RepeatWrapping;
+    texture3.repeat.set(3, 6);
+    cream.bumpMap = texture3;
+    cream.bumpScale = 0.035;
+    function oval(mat2, x2, y, z, sx, sy, sz) {
+      const mesh = new Mesh(new SphereGeometry(1, 24, 16), mat2);
+      mesh.position.set(x2, y, z);
+      mesh.scale.set(sx, sy, sz);
+      scene.add(mesh);
+      return mesh;
+    }
+    function rounded(mat2, w, h, r, x2, y, z, depth) {
+      const s = new Shape(), a = -w / 2, b = -h / 2;
+      s.moveTo(a + r, b);
+      s.lineTo(a + w - r, b);
+      s.quadraticCurveTo(a + w, b, a + w, b + r);
+      s.lineTo(a + w, b + h - r);
+      s.quadraticCurveTo(a + w, b + h, a + w - r, b + h);
+      s.lineTo(a + r, b + h);
+      s.quadraticCurveTo(a, b + h, a, b + h - r);
+      s.lineTo(a, b + r);
+      s.quadraticCurveTo(a, b, a + r, b);
+      const mesh = new Mesh(new ExtrudeGeometry(s, { depth, bevelEnabled: true, bevelSize: 0.07, bevelThickness: 0.06, bevelSegments: 3, steps: 1, curveSegments: 12 }), mat2);
+      mesh.position.set(x2, y, z);
+      scene.add(mesh);
+      return mesh;
+    }
+    rounded(cream, 3.25, 6.38, 0.49, 0, -0.38, 0, 0.35);
+    rounded(brown, 2.99, 5.63, 0.37, 0, -0.615, 0.41, 0.02);
+    for (const side of [-1, 1]) {
+      oval(cream, side * 1.19, 2.97, 0.03, 0.73, 0.87, 0.25);
+      oval(pink, side * 1.19, 2.99, 0.23, 0.51, 0.63, 0.09);
+      oval(brown, side * 0.65, 2.23, 0.49, 0.18, 0.23, 0.08);
+      oval(new MeshBasicMaterial({ color: 16777215 }), side * 0.65 - 0.04, 2.31, 0.57, 0.045, 0.055, 0.02);
+      oval(pink, side * 1.02, 1.98, 0.46, 0.22, 0.1, 0.05);
+      oval(cream, side * 1.65, -0.8, 0.42, 0.22, 0.42, 0.22);
+      oval(cream, side * 1.1, -3.51, 0.4, 0.39, 0.19, 0.25);
+    }
+    oval(pink, 0, 2.16, 0.5, 0.13, 0.08, 0.06);
+    rounded(dark, 0.48, 0.09, 0.04, 0, 2.64, 0.45, 0.02);
+    oval(dark, 0.39, 2.64, 0.48, 0.055, 0.055, 0.03);
+    rounded(new MeshStandardMaterial({ color: 16775920 }), 0.24, 0.23, 0.06, 0, 1.94, 0.48, 0.02);
+    const tail = new CatmullRomCurve3([new Vector3(1.35, -3.3, -0.1), new Vector3(1.96, -3, -0.1), new Vector3(2, -2.5, -0.1), new Vector3(1.7, -2.55, -0.1)]);
+    scene.add(new Mesh(new TubeGeometry(tail, 28, 0.11, 10, false), pink));
+    for (const side of [-1, 1]) for (const offset of [-0.1, 0.1]) {
+      const curve = new CatmullRomCurve3([new Vector3(side * 1.12, 2.12 + offset, 0.5), new Vector3(side * 1.46, 2.15 + offset, 0.5), new Vector3(side * 1.7, 2.2 + offset, 0.47)]);
+      scene.add(new Mesh(new TubeGeometry(curve, 12, 0.018, 6, false), brown));
+    }
+    const mouth = new CatmullRomCurve3([new Vector3(-0.27, 2.1, 0.53), new Vector3(-0.15, 2, 0.56), new Vector3(0, 2.08, 0.56), new Vector3(0.15, 2, 0.56), new Vector3(0.27, 2.1, 0.53)]);
+    scene.add(new Mesh(new TubeGeometry(mouth, 20, 0.018, 6, false), brown));
+    scene.traverse((o) => {
+      if (!o.isMesh) return;
+      o.position.x *= 1.05;
+      o.scale.x *= 1.05;
+      if (o.position.y > 1.8) o.position.y = 2.2 + (o.position.y - 1.79) * 0.8;
+      else if (o.geometry.type === "TubeGeometry") {
+        const a = o.geometry.attributes.position;
+        for (let i2 = 0; i2 < a.count; i2++) if (a.getY(i2) > 1.8) a.setY(i2, 2.2 + (a.getY(i2) - 1.79) * 0.8);
+        a.needsUpdate = true;
+      }
+    });
+    renderer.render(scene, camera);
+    return { dispose() {
+      scene.traverse((o) => {
+        o.geometry?.dispose();
+      });
+      for (const m of new Set(scene.children.filter((o) => o.material).map((o) => o.material))) m.dispose();
+      texture3.dispose();
+      renderer.dispose();
+    } };
+  }
+  window.createTownPhoneModel = createPhoneModel;
+
   // src/town-trees.js
   function createBoundaryTrees() {
     const group = new Group();
@@ -35165,13 +36052,13 @@ void main() {
   var maps2 = /* @__PURE__ */ new Map();
   var loader = new TextureLoader();
   function texture(kind, channel) {
-    const key = kind + "-" + channel;
-    if (maps2.has(key)) return maps2.get(key);
-    const map = loader.load("../assets/town-materials/" + key + ".jpg");
+    const key2 = kind + "-" + channel;
+    if (maps2.has(key2)) return maps2.get(key2);
+    const map = loader.load("../assets/town-materials/" + key2 + ".jpg");
     map.wrapS = map.wrapT = RepeatWrapping;
     map.anisotropy = 4;
     if (channel === "Color") map.colorSpace = SRGBColorSpace;
-    maps2.set(key, map);
+    maps2.set(key2, map);
     return map;
   }
   var buildingSurfaceStyles = {
@@ -35268,14 +36155,14 @@ void main() {
     material3.metalness = 0;
     material3.map = kind === "wood" ? texture(kind, "Color") : surfaceTexture(kind);
     if (kind !== "wood") {
-      const key = kind + "-height";
-      if (!maps2.has(key)) {
+      const key2 = kind + "-height";
+      if (!maps2.has(key2)) {
         const height = material3.map.clone();
         height.colorSpace = NoColorSpace;
         height.needsUpdate = true;
-        maps2.set(key, height);
+        maps2.set(key2, height);
       }
-      material3.bumpMap = maps2.get(key);
+      material3.bumpMap = maps2.get(key2);
       material3.bumpScale = ["ceramic", "terracotta", "subway", "brick", "slate", "limestone", "fluted", "wainscot"].includes(kind) ? 8e-3 : 3e-3;
     }
     if (kind === "wood") {
@@ -35535,8 +36422,8 @@ void main() {
   var materials2 = /* @__PURE__ */ new Map();
   function furMaterial(coat = "three-line", age = 0) {
     if (!Object.hasOwn(palettes, coat)) coat = "three-line";
-    const loss = Math.round(Math.max(0, Math.min(1, (age - 1.5) / 1.5)) * 20) / 20, key = coat + ":" + loss;
-    if (materials2.has(key)) return materials2.get(key);
+    const loss = Math.round(Math.max(0, Math.min(1, (age - 1.5) / 1.5)) * 20) / 20, key2 = coat + ":" + loss;
+    if (materials2.has(key2)) return materials2.get(key2);
     if (!texture2) {
       textureReady = new Promise((resolve, reject) => {
         texture2 = new TextureLoader().load("../assets/models/booth-hamster/restored/Assets/Ham/Texture/Ham.png", resolve, void 0, reject);
@@ -35549,7 +36436,7 @@ void main() {
     material3.userData.hamsterFur = true;
     if (coat === "three-line") material3.color.setHex(10198424);
     if (coat === "three-line" && !loss) {
-      materials2.set(key, material3);
+      materials2.set(key2, material3);
       return material3;
     }
     if (coat !== "three-line") material3.onBeforeCompile = (shader) => {
@@ -35581,8 +36468,8 @@ void main() {
     `);
       };
     }
-    material3.customProgramCacheKey = () => "hamster-coat-v2-" + key;
-    materials2.set(key, material3);
+    material3.customProgramCacheKey = () => "hamster-coat-v2-" + key2;
+    materials2.set(key2, material3);
     return material3;
   }
   function setHamsterCoat(rig, coat = "three-line", age = 0) {
@@ -35956,14 +36843,14 @@ void main() {
   function GLTFRegistry() {
     let objects = {};
     return {
-      get: function(key) {
-        return objects[key];
+      get: function(key2) {
+        return objects[key2];
       },
-      add: function(key, object) {
-        objects[key] = object;
+      add: function(key2, object) {
+        objects[key2] = object;
       },
-      remove: function(key) {
-        delete objects[key];
+      remove: function(key2) {
+        delete objects[key2];
       },
       removeAll: function() {
         objects = {};
@@ -36504,10 +37391,10 @@ void main() {
       const attributesDef = extensionDef.attributes;
       const pending = [];
       const attributes = {};
-      for (const key in attributesDef) {
-        pending.push(this.parser.getDependency("accessor", attributesDef[key]).then((accessor) => {
-          attributes[key] = accessor;
-          return attributes[key];
+      for (const key2 in attributesDef) {
+        pending.push(this.parser.getDependency("accessor", attributesDef[key2]).then((accessor) => {
+          attributes[key2] = accessor;
+          return attributes[key2];
         }));
       }
       if (pending.length < 1) {
@@ -38041,9 +38928,9 @@ void main() {
         }
         const reduceAssociations = (node) => {
           const reducedAssociations = /* @__PURE__ */ new Map();
-          for (const [key, value] of parser.associations) {
-            if (key instanceof Material || key instanceof Texture) {
-              reducedAssociations.set(key, value);
+          for (const [key2, value] of parser.associations) {
+            if (key2 instanceof Material || key2 instanceof Texture) {
+              reducedAssociations.set(key2, value);
             }
           }
           node.traverse((node2) => {
@@ -38618,12 +39505,12 @@ void main() {
     }) || Math.hypot(x2, z + 1.3) < 0.9;
   }
   function route(start, end) {
-    const unit = 0.4, toGrid = (p) => [Math.round(p.x / unit), Math.round(p.z / unit)], key = (x2, z) => `${x2},${z}`;
-    const [sx, sz] = toGrid(start), [ex, ez] = toGrid(end), open = [{ x: sx, z: sz, g: 0, f: 0 }], cost = /* @__PURE__ */ new Map([[key(sx, sz), 0]]), parent = /* @__PURE__ */ new Map();
+    const unit = 0.4, toGrid = (p) => [Math.round(p.x / unit), Math.round(p.z / unit)], key2 = (x2, z) => `${x2},${z}`;
+    const [sx, sz] = toGrid(start), [ex, ez] = toGrid(end), open = [{ x: sx, z: sz, g: 0, f: 0 }], cost = /* @__PURE__ */ new Map([[key2(sx, sz), 0]]), parent = /* @__PURE__ */ new Map();
     let found = null;
     while (open.length) {
       open.sort((a, b) => a.f - b.f);
-      const n = open.shift(), nk = key(n.x, n.z);
+      const n = open.shift(), nk = key2(n.x, n.z);
       if (n.g !== cost.get(nk)) continue;
       if (n.x === ex && n.z === ez) {
         found = n;
@@ -38633,7 +39520,7 @@ void main() {
         const x2 = n.x + dx, z = n.z + dz;
         if (x2 < -44 || x2 > 44 || z < -44 || z > 44) continue;
         if (blocked(x2 * unit, z * unit) || dx && dz && (blocked(n.x * unit + dx * unit, n.z * unit) || blocked(n.x * unit, n.z * unit + dz * unit))) continue;
-        const g = n.g + Math.hypot(dx, dz), k2 = key(x2, z);
+        const g = n.g + Math.hypot(dx, dz), k2 = key2(x2, z);
         if (g >= (cost.get(k2) ?? Infinity)) continue;
         cost.set(k2, g);
         parent.set(k2, nk);
@@ -38642,7 +39529,7 @@ void main() {
     }
     if (!found) return [];
     const result = [point(ex * unit, ez * unit)];
-    let k = key(ex, ez);
+    let k = key2(ex, ez);
     while (parent.has(k)) {
       k = parent.get(k);
       const [x2, z] = k.split(",").map(Number);
@@ -39409,9 +40296,9 @@ void main() {
     mesh.geometry = geometry;
     const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
     mesh.material = mats.map((m) => {
-      const copy = m.clone();
-      copy.side = layout.cottage ? FrontSide : DoubleSide;
-      return copy;
+      const copy2 = m.clone();
+      copy2.side = layout.cottage ? FrontSide : DoubleSide;
+      return copy2;
     });
     if (!Array.isArray(mesh.material) || mesh.material.length === 1) mesh.material = mesh.material[0];
   }
@@ -39586,7 +40473,7 @@ void main() {
     return true;
   }
   function petPath(actor, target) {
-    const indoors = !!actor.inside, unit = indoors ? 0.2 : 0.4, key = (x2, z) => `${x2},${z}`;
+    const indoors = !!actor.inside, unit = indoors ? 0.2 : 0.4, key2 = (x2, z) => `${x2},${z}`;
     function anchor(point2) {
       const x2 = Math.round(point2.x / unit), z = Math.round(point2.z / unit), choices = [];
       for (let dx = -1; dx <= 1; dx++) for (let dz = -1; dz <= 1; dz++) {
@@ -39597,18 +40484,18 @@ void main() {
     }
     const start = anchor(actor.position), end = anchor(target);
     if (!start || !end) return [];
-    const queue = [{ ...start, g: 0, f: 0 }], cost = /* @__PURE__ */ new Map([[key(start.x, start.z), 0]]), parents = /* @__PURE__ */ new Map();
+    const queue = [{ ...start, g: 0, f: 0 }], cost = /* @__PURE__ */ new Map([[key2(start.x, start.z), 0]]), parents = /* @__PURE__ */ new Map();
     let found = false;
     while (queue.length) {
       queue.sort((a, b) => a.f - b.f);
-      const n = queue.shift(), nk = key(n.x, n.z);
+      const n = queue.shift(), nk = key2(n.x, n.z);
       if (n.g !== cost.get(nk)) continue;
       if (n.x === end.x && n.z === end.z) {
         found = true;
         break;
       }
       for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [-1, 1], [1, -1]]) {
-        const x2 = n.x + dx, z = n.z + dz, k = key(x2, z);
+        const x2 = n.x + dx, z = n.z + dz, k = key2(x2, z);
         if (indoors ? Math.abs(x2) > 20 || z < -15 || z > 22 : Math.abs(x2) > 44 || Math.abs(z) > 44) continue;
         const g = n.g + Math.hypot(dx, dz);
         if (g >= (cost.get(k) ?? Infinity) || !segmentClear(actor, { x: n.x * unit, z: n.z * unit }, { x: x2 * unit, z: z * unit })) continue;
@@ -39619,7 +40506,7 @@ void main() {
     }
     if (!found) return [];
     const path = [];
-    for (let k = key(end.x, end.z); k; k = parents.get(k)) {
+    for (let k = key2(end.x, end.z); k; k = parents.get(k)) {
       const [x2, z] = k.split(",").map(Number);
       path.unshift({ x: x2 * unit, z: z * unit });
     }
@@ -39897,11 +40784,11 @@ void main() {
   }
   function createTownVerges() {
     const group = new Group(), batches = /* @__PURE__ */ new Map(), matrix = new Matrix4(), rotation = new Quaternion();
-    const add = (key, geometry, color, x2, y, z, sx, sy, sz, yaw = 0) => {
-      if (!batches.has(key)) batches.set(key, { geometry, color, matrices: [] });
+    const add = (key2, geometry, color, x2, y, z, sx, sy, sz, yaw = 0) => {
+      if (!batches.has(key2)) batches.set(key2, { geometry, color, matrices: [] });
       rotation.setFromAxisAngle(new Vector3(0, 1, 0), yaw);
       matrix.compose(new Vector3(x2, y, z), rotation, new Vector3(sx, sy, sz));
-      batches.get(key).matrices.push(matrix.clone());
+      batches.get(key2).matrices.push(matrix.clone());
     };
     const blade = new ConeGeometry(1, 1, 4), sphere = new SphereGeometry(1, 7, 5), branch = new CylinderGeometry(1, 1, 1, 5);
     branch.rotateZ(Math.PI / 2);
@@ -39927,8 +40814,8 @@ void main() {
         add("twig", branch, 8809296, p.x + 0.035, 0.037, p.z, 0.14 * s, 0.012 * s, 0.012 * s, p.yaw + 0.7);
       }
     }
-    for (const [key, { geometry, color, matrices }] of batches) {
-      const mesh = new InstancedMesh(geometry, worldMaterial(key === "stone" ? "stone" : key === "twig" ? "bark" : "foliage", color), matrices.length);
+    for (const [key2, { geometry, color, matrices }] of batches) {
+      const mesh = new InstancedMesh(geometry, worldMaterial(key2 === "stone" ? "stone" : key2 === "twig" ? "bark" : "foliage", color), matrices.length);
       matrices.forEach((m, i2) => mesh.setMatrixAt(i2, m));
       mesh.receiveShadow = true;
       group.add(mesh);
@@ -40579,15 +41466,15 @@ void main() {
     const target = new Object3D();
     target.position.set(0, 1.3, 0.1);
     statue.add(target);
-    const key = new SpotLight(16768154, 13, 7, 0.43, 0.65, 2);
-    key.position.set(-1.45, 3.15, 2);
-    key.target = target;
-    statue.add(key);
+    const key2 = new SpotLight(16768154, 13, 7, 0.43, 0.65, 2);
+    key2.position.set(-1.45, 3.15, 2);
+    key2.target = target;
+    statue.add(key2);
     const rim = new SpotLight(16762225, 9, 5, 0.48, 0.75, 2);
     rim.position.set(1.15, 2.35, -1.35);
     rim.target = target;
     statue.add(rim);
-    statue.userData.lights = [key, rim];
+    statue.userData.lights = [key2, rim];
     return statue;
   }
 
@@ -41214,9 +42101,9 @@ void main() {
       allRecords = [...new Map(items.map((m) => [m.id, m])).values()];
       const records = allRecords.slice(0, 8), overflow = allRecords.slice(8);
       wallPage = Math.min(wallPage, Math.max(0, Math.ceil(overflow.length / 15) - 1));
-      const key = JSON.stringify([allRecords.map((m) => [m.id, m.name]), wallPage]);
-      if (key === signature) return;
-      signature = key;
+      const key2 = JSON.stringify([allRecords.map((m) => [m.id, m.name]), wallPage]);
+      if (key2 === signature) return;
+      signature = key2;
       while (graves.children.length) {
         const child = graves.children[0];
         child.traverse((o) => {
@@ -43532,8 +44419,8 @@ void main() {
       const animationClips = [];
       const rawClips = this.parseClips();
       if (rawClips !== void 0) {
-        for (const key in rawClips) {
-          const rawClip = rawClips[key];
+        for (const key2 in rawClips) {
+          const rawClip = rawClips[key2];
           const clip = this.addClip(rawClip);
           animationClips.push(clip);
         }
@@ -44193,8 +45080,8 @@ void main() {
         node.connections.push(array);
       } else if (subNode.name === "Properties70") {
         const keys = Object.keys(subNode);
-        keys.forEach(function(key) {
-          node[key] = subNode[key];
+        keys.forEach(function(key2) {
+          node[key2] = subNode[key2];
         });
       } else if (name === "Properties70" && subNode.name === "P") {
         let innerPropName = subNode.propertyList[0];
@@ -44442,8 +45329,8 @@ void main() {
     }
   };
   var FBXTree = class {
-    add(key, val) {
-      this[key] = val;
+    add(key2, val) {
+      this[key2] = val;
     }
   };
   function isFbxFormatBinary(buffer) {
@@ -44867,9 +45754,9 @@ void main() {
     draw.setSize(160, 160, false);
     draw.toneMapping = ACESFilmicToneMapping;
     preview.add(new HemisphereLight(16777215, 10594224, 2.2));
-    const key = new DirectionalLight(16777215, 2.5);
-    key.position.set(-2, 3, 4);
-    preview.add(key);
+    const key2 = new DirectionalLight(16777215, 2.5);
+    key2.position.set(-2, 3, 4);
+    preview.add(key2);
     view.position.set(0.12, 0.4, 1.25);
     view.lookAt(0, 0.3, 0);
     const result = [];
@@ -44898,6 +45785,7 @@ void main() {
   }
   window.createTownResidentPortraits = residentPortraits;
   function init() {
+    installKnowledgeForest();
     const host = document.querySelector("#townScene"), canvas = host?.querySelector("canvas");
     if (!host || !canvas) return;
     const scene = new Scene();
@@ -45105,7 +45993,7 @@ void main() {
     });
     function refreshRegionNames() {
       futureRegions.forEach((region) => {
-        const title = window.TownI18n.t(region.name), status = window.TownI18n.t("\u5C1A\u672A\u5F00\u653E"), text = title + "|" + status;
+        const title = window.TownI18n.t(region.name), status = region.name === "\u77E5\u8BC6\u68EE\u6797" ? window.TownI18n.t("\u4ECE\u5C0F\u9547\u6309\u94AE\u8FDB\u5165") : window.TownI18n.t("\u5C1A\u672A\u5F00\u653E"), text = title + "|" + status;
         if (text === region.text) return;
         region.text = text;
         const ctx = region.canvas.getContext("2d");
@@ -47033,7 +47921,7 @@ void main() {
       requestAnimationFrame(draw);
       const t = clock.getElapsedTime(), dt = Math.min(0.1, t - previousTime);
       previousTime = t;
-      if (document.body.dataset.currentPanel !== "town") return;
+      if (document.body.dataset.currentPanel !== "town" || document.body.dataset.forestOpen === "true") return;
       roomCache.get("\u9F20\u9F20\u996D\u9986").userData.register.tick(dt);
       roomCache.get("\u5BA0\u7269\u4E4B\u5BB6").userData.tickPets(dt);
       placeModels.get("\u8DD1\u8F6E\u516C\u56ED").userData.setRunning(dt, [...life.actors.values()].some((a) => a.place === "\u8DD1\u8F6E\u516C\u56ED" && a.phase === "activity" && a.action === "\u8DD1\u8F6E"));
@@ -47238,8 +48126,8 @@ void main() {
     function capturePlacePhoto(name, variant = 0) {
       const model = placeModels.get(name) || placeModels.get("\u4E2D\u5FC3\u5E7F\u573A");
       if (!model) return null;
-      const key = model.uuid + ":" + variant % 2 + ":" + window.TownI18n.language;
-      if (feedPhotos.has(key)) return feedPhotos.get(key);
+      const key2 = model.uuid + ":" + variant % 2 + ":" + window.TownI18n.language;
+      if (feedPhotos.has(key2)) return feedPhotos.get(key2);
       const view = new PerspectiveCamera(45, 16 / 9, 0.1, 100), center = model.getWorldPosition(new Vector3());
       const angle = facing(name) + (variant % 2 ? 0.35 : -0.35);
       view.position.set(center.x + Math.sin(angle) * 11, center.y + 7, center.z + Math.cos(angle) * 11);
@@ -47268,7 +48156,7 @@ void main() {
         ctx.putImageData(data, 0, 0);
         const url = shot.toDataURL("image/jpeg", 0.7);
         if (feedPhotos.size >= 28) feedPhotos.delete(feedPhotos.keys().next().value);
-        feedPhotos.set(key, url);
+        feedPhotos.set(key2, url);
         return url;
       } finally {
         for (const [object, visible] of visibility) object.visible = visible;
