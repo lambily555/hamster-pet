@@ -35187,6 +35187,210 @@ void main() {
     }
   };
 
+  // node_modules/.pnpm/three@0.185.1/node_modules/three/examples/jsm/utils/BufferGeometryUtils.js
+  function mergeGeometries(geometries, useGroups = false) {
+    const isIndexed = geometries[0].index !== null;
+    const attributesUsed = new Set(Object.keys(geometries[0].attributes));
+    const morphAttributesUsed = new Set(Object.keys(geometries[0].morphAttributes));
+    const attributes = {};
+    const morphAttributes = {};
+    const morphTargetsRelative = geometries[0].morphTargetsRelative;
+    const mergedGeometry = new BufferGeometry();
+    let offset = 0;
+    for (let i2 = 0; i2 < geometries.length; ++i2) {
+      const geometry = geometries[i2];
+      let attributesCount = 0;
+      if (isIndexed !== (geometry.index !== null)) {
+        console.error("THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index " + i2 + ". All geometries must have compatible attributes; make sure index attribute exists among all geometries, or in none of them.");
+        return null;
+      }
+      for (const name in geometry.attributes) {
+        if (!attributesUsed.has(name)) {
+          console.error("THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index " + i2 + '. All geometries must have compatible attributes; make sure "' + name + '" attribute exists among all geometries, or in none of them.');
+          return null;
+        }
+        if (attributes[name] === void 0) attributes[name] = [];
+        attributes[name].push(geometry.attributes[name]);
+        attributesCount++;
+      }
+      if (attributesCount !== attributesUsed.size) {
+        console.error("THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index " + i2 + ". Make sure all geometries have the same number of attributes.");
+        return null;
+      }
+      if (morphTargetsRelative !== geometry.morphTargetsRelative) {
+        console.error("THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index " + i2 + ". .morphTargetsRelative must be consistent throughout all geometries.");
+        return null;
+      }
+      for (const name in geometry.morphAttributes) {
+        if (!morphAttributesUsed.has(name)) {
+          console.error("THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index " + i2 + ".  .morphAttributes must be consistent throughout all geometries.");
+          return null;
+        }
+        if (morphAttributes[name] === void 0) morphAttributes[name] = [];
+        morphAttributes[name].push(geometry.morphAttributes[name]);
+      }
+      if (useGroups) {
+        let count;
+        if (isIndexed) {
+          count = geometry.index.count;
+        } else if (geometry.attributes.position !== void 0) {
+          count = geometry.attributes.position.count;
+        } else {
+          console.error("THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index " + i2 + ". The geometry must have either an index or a position attribute");
+          return null;
+        }
+        mergedGeometry.addGroup(offset, count, i2);
+        offset += count;
+      }
+    }
+    if (isIndexed) {
+      let indexOffset = 0;
+      const mergedIndex = [];
+      for (let i2 = 0; i2 < geometries.length; ++i2) {
+        const index = geometries[i2].index;
+        for (let j = 0; j < index.count; ++j) {
+          mergedIndex.push(index.getX(j) + indexOffset);
+        }
+        indexOffset += geometries[i2].attributes.position.count;
+      }
+      mergedGeometry.setIndex(mergedIndex);
+    }
+    for (const name in attributes) {
+      const mergedAttribute = mergeAttributes(attributes[name]);
+      if (!mergedAttribute) {
+        console.error("THREE.BufferGeometryUtils: .mergeGeometries() failed while trying to merge the " + name + " attribute.");
+        return null;
+      }
+      mergedGeometry.setAttribute(name, mergedAttribute);
+    }
+    for (const name in morphAttributes) {
+      const numMorphTargets = morphAttributes[name][0].length;
+      if (numMorphTargets === 0) continue;
+      mergedGeometry.morphAttributes = mergedGeometry.morphAttributes || {};
+      mergedGeometry.morphAttributes[name] = [];
+      for (let i2 = 0; i2 < numMorphTargets; ++i2) {
+        const morphAttributesToMerge = [];
+        for (let j = 0; j < morphAttributes[name].length; ++j) {
+          morphAttributesToMerge.push(morphAttributes[name][j][i2]);
+        }
+        const mergedMorphAttribute = mergeAttributes(morphAttributesToMerge);
+        if (!mergedMorphAttribute) {
+          console.error("THREE.BufferGeometryUtils: .mergeGeometries() failed while trying to merge the " + name + " morphAttribute.");
+          return null;
+        }
+        mergedGeometry.morphAttributes[name].push(mergedMorphAttribute);
+      }
+    }
+    return mergedGeometry;
+  }
+  function mergeAttributes(attributes) {
+    let TypedArray;
+    let itemSize;
+    let normalized;
+    let gpuType = -1;
+    let arrayLength = 0;
+    for (let i2 = 0; i2 < attributes.length; ++i2) {
+      const attribute = attributes[i2];
+      if (TypedArray === void 0) TypedArray = attribute.array.constructor;
+      if (TypedArray !== attribute.array.constructor) {
+        console.error("THREE.BufferGeometryUtils: .mergeAttributes() failed. BufferAttribute.array must be of consistent array types across matching attributes.");
+        return null;
+      }
+      if (itemSize === void 0) itemSize = attribute.itemSize;
+      if (itemSize !== attribute.itemSize) {
+        console.error("THREE.BufferGeometryUtils: .mergeAttributes() failed. BufferAttribute.itemSize must be consistent across matching attributes.");
+        return null;
+      }
+      if (normalized === void 0) normalized = attribute.normalized;
+      if (normalized !== attribute.normalized) {
+        console.error("THREE.BufferGeometryUtils: .mergeAttributes() failed. BufferAttribute.normalized must be consistent across matching attributes.");
+        return null;
+      }
+      if (gpuType === -1) gpuType = attribute.gpuType;
+      if (gpuType !== attribute.gpuType) {
+        console.error("THREE.BufferGeometryUtils: .mergeAttributes() failed. BufferAttribute.gpuType must be consistent across matching attributes.");
+        return null;
+      }
+      arrayLength += attribute.count * itemSize;
+    }
+    const array = new TypedArray(arrayLength);
+    const result = new BufferAttribute(array, itemSize, normalized);
+    let offset = 0;
+    for (let i2 = 0; i2 < attributes.length; ++i2) {
+      const attribute = attributes[i2];
+      if (attribute.isInterleavedBufferAttribute) {
+        const tupleOffset = offset / itemSize;
+        for (let j = 0, l = attribute.count; j < l; j++) {
+          for (let c = 0; c < itemSize; c++) {
+            const value = attribute.getComponent(j, c);
+            result.setComponent(j + tupleOffset, c, value);
+          }
+        }
+      } else {
+        array.set(attribute.array, offset);
+      }
+      offset += attribute.count * itemSize;
+    }
+    if (gpuType !== void 0) {
+      result.gpuType = gpuType;
+    }
+    return result;
+  }
+  function toTrianglesDrawMode(geometry, drawMode) {
+    if (drawMode === TrianglesDrawMode) {
+      console.warn("THREE.BufferGeometryUtils.toTrianglesDrawMode(): Geometry already defined as triangles.");
+      return geometry;
+    }
+    if (drawMode === TriangleFanDrawMode || drawMode === TriangleStripDrawMode) {
+      let index = geometry.getIndex();
+      if (index === null) {
+        const indices = [];
+        const position = geometry.getAttribute("position");
+        if (position !== void 0) {
+          for (let i2 = 0; i2 < position.count; i2++) {
+            indices.push(i2);
+          }
+          geometry.setIndex(indices);
+          index = geometry.getIndex();
+        } else {
+          console.error("THREE.BufferGeometryUtils.toTrianglesDrawMode(): Undefined position attribute. Processing not possible.");
+          return geometry;
+        }
+      }
+      const numberOfTriangles = index.count - 2;
+      const newIndices = [];
+      if (drawMode === TriangleFanDrawMode) {
+        for (let i2 = 1; i2 <= numberOfTriangles; i2++) {
+          newIndices.push(index.getX(0));
+          newIndices.push(index.getX(i2));
+          newIndices.push(index.getX(i2 + 1));
+        }
+      } else {
+        for (let i2 = 0; i2 < numberOfTriangles; i2++) {
+          if (i2 % 2 === 0) {
+            newIndices.push(index.getX(i2));
+            newIndices.push(index.getX(i2 + 1));
+            newIndices.push(index.getX(i2 + 2));
+          } else {
+            newIndices.push(index.getX(i2 + 2));
+            newIndices.push(index.getX(i2 + 1));
+            newIndices.push(index.getX(i2));
+          }
+        }
+      }
+      if (newIndices.length / 3 !== numberOfTriangles) {
+        console.error("THREE.BufferGeometryUtils.toTrianglesDrawMode(): Unable to generate correct amount of triangles.");
+      }
+      const newGeometry = geometry.clone();
+      newGeometry.setIndex(newIndices);
+      newGeometry.clearGroups();
+      return newGeometry;
+    } else {
+      console.error("THREE.BufferGeometryUtils.toTrianglesDrawMode(): Unknown draw mode:", drawMode);
+      return geometry;
+    }
+  }
+
   // src/forest-knowledge.js
   var sources = [
     ["AVS", "https://avs.nparks.gov.sg/pets/caring-for-a-pet/hamster/"],
@@ -35386,16 +35590,158 @@ void main() {
   var tr = (key2) => copy[key2][language()];
   var localized = (value) => value[language()];
   var key = "shushu.knowledge-forest.v1";
+  function createKnowledgeForestLandscape(compact = false) {
+    const scene = new Group(), colliders = [], markers = [], decorations = [];
+    let treeCrown;
+    function mesh(geometry, color, x2, y, z, parent = scene) {
+      const kind = [7952445, 8545093].includes(color) ? "bark" : [9992526, 13216631, 10519381, 9595459, 11043411, 10977871, 8676164].includes(color) ? "wood" : color === 9149545 ? "grass" : color === 9138770 ? "soil" : [14271643, 13023885].includes(color) ? "gravel" : [5799500, 7311443, 4746828, 9021790, 11191162, 7510098].includes(color) ? "foliage" : null;
+      const material3 = kind ? worldMaterial(kind, color) : new MeshStandardMaterial({ color, roughness: 0.9 }), m = new Mesh(geometry, material3);
+      if (kind) {
+        applyWorldSurface(m, kind);
+        if (m.geometry !== geometry) geometry.dispose();
+      }
+      m.position.set(x2, y, z);
+      m.castShadow = true;
+      m.receiveShadow = true;
+      parent.add(m);
+      return m;
+    }
+    function box3(w, h, d, color, x2, y, z, parent) {
+      return mesh(new BoxGeometry(w, h, d), color, x2, y, z, parent);
+    }
+    function sphere(r, color, x2, y, z, parent) {
+      return mesh(new IcosahedronGeometry(r, 1), color, x2, y, z, parent);
+    }
+    function guide(x2, z, color) {
+      const g = new Group();
+      g.position.set(x2, 0, z);
+      scene.add(g);
+      sphere(0.42, color, 0, 0.5, 0, g).scale.set(0.85, 1, 0.72);
+      sphere(0.32, color, 0, 0.94, 0, g);
+      [-1, 1].forEach((s) => {
+        sphere(0.16, color, s * 0.23, 1.17, 0, g);
+        sphere(0.105, 15315875, s * 0.23, 1.17, 0.1, g);
+        sphere(0.047, 3352608, s * 0.12, 1, 0.26, g);
+        sphere(0.1, color, s * 0.19, 0.13, 0.1, g);
+      });
+      sphere(0.045, 11956577, 0, 0.91, 0.31, g);
+      return g;
+    }
+    function tree(x2, z, size = 1, color = 5799500) {
+      box3(0.38 * size, 2 * size, 0.38 * size, 7952445, x2, size, z);
+      sphere(1.35 * size, color, x2, 2.4 * size, z);
+      sphere(0.95 * size, color, x2 - 0.5 * size, 3.2 * size, z);
+      colliders.push({ x: x2, z, r: 0.5 * size });
+    }
+    mesh(new CylinderGeometry(16, 16.6, 0.8, 64), 9149545, 0, -0.45, 0);
+    mesh(new CylinderGeometry(16.7, 17, 1, 64), 9138770, 0, -1.3, 0);
+    const pathPoints = [new Vector3(0, 0.035, 12), ...glades.map((g) => new Vector3(g.x, 0.035, g.z)), new Vector3(0, 0.035, 12)];
+    const curve = new CatmullRomCurve3(pathPoints);
+    for (let i2 = 0; i2 < 120; i2++) {
+      const v = curve.getPoint(i2 / 119);
+      mesh(new CylinderGeometry(0.8, 0.8, 0.045, 12), 14271643, v.x, 0.03, v.z);
+    }
+    const pond = mesh(new CylinderGeometry(2.3, 2.3, 0.035, 40), 7843237, 3, 0.035, 7);
+    pond.scale.z = 0.6;
+    colliders.push({ x: 3, z: 7, r: 2.35 });
+    for (let i2 = 0; i2 < 12; i2++) box3(0.32, 0.15, 1.5, 9992526, 1.05 + i2 * 0.36, 0.17, 7);
+    for (const z of [6.25, 7.75]) {
+      box3(4.3, 0.1, 0.1, 13216631, 3, 0.85, z);
+      for (const x2 of [1, 3, 5]) box3(0.1, 0.9, 0.1, 10519381, x2, 0.5, z);
+    }
+    for (let i2 = 0; i2 < 34; i2++) {
+      const a = i2 * Math.PI * 2 / 34, r = 14.2 + i2 % 3 * 0.25;
+      tree(Math.cos(a) * r, Math.sin(a) * r, 0.7 + i2 % 4 * 0.13, [5799500, 7311443, 4746828][i2 % 3]);
+    }
+    for (const [x2, z] of [[-11, 0], [11, 0], [-3, -12], [3, -12], [-11, 8], [10, 9]]) tree(x2, z, 0.8);
+    box3(1.5, 4, 1.3, 8545093, 0, 2, -1);
+    treeCrown = sphere(3.1, 9021790, 0, 5, -1);
+    sphere(2.2, 11191162, -1.8, 4.5, -1);
+    sphere(2.2, 7510098, 1.8, 4.8, -1);
+    colliders.push({ x: 0, z: -1, r: 1.45 });
+    const ring = mesh(new TorusGeometry(1.7, 0.12, 8, 40), 15124609, 0, 0.22, -1);
+    ring.rotation.x = Math.PI / 2;
+    glades.forEach((g, i2) => {
+      mesh(new CylinderGeometry(2.1, 2.2, 0.12, 28), 13023885, g.x, 0.06, g.z);
+      const m = mesh(new CylinderGeometry(0.85, 0.95, 0.35, 24), g.color, g.x, 0.25, g.z);
+      m.userData.station = i2;
+      markers.push(m);
+      const npc = guide(g.x, g.z, g.color);
+      decorations.push(npc);
+      box3(1.45, 0.14, 0.58, 9595459, g.x - 1.1, 0.6, g.z - 0.8);
+      box3(0.15, 0.7, 0.15, 7952445, g.x - 1.6, 0.3, g.z - 0.8);
+      box3(0.15, 0.7, 0.15, 7952445, g.x - 0.6, 0.3, g.z - 0.8);
+      colliders.push({ x: g.x - 1.1, z: g.z - 0.8, r: 0.9 });
+      colliders.push({ x: g.x, z: g.z, r: 0.65 });
+      if (i2 === 0) {
+        for (let n = 0; n < 5; n++) sphere(0.15, 15056741, g.x - 1.5 + n * 0.2, 0.8, g.z - 0.8);
+      }
+      if (i2 === 1) {
+        box3(1.4, 0.8, 1.1, 11043411, g.x + 1, 0.5, g.z - 1);
+        const roof = mesh(new ConeGeometry(1.2, 0.8, 4), 7700813, g.x + 1, 1.25, g.z - 1);
+        roof.rotation.y = Math.PI / 4;
+        colliders.push({ x: g.x + 1, z: g.z - 1, r: 1 });
+      }
+      if (i2 === 2) {
+        const moon = mesh(new TorusGeometry(0.45, 0.13, 8, 24, Math.PI * 1.5), 16770723, g.x, 2.5, g.z - 1);
+        moon.rotation.z = -0.7;
+        box3(0.08, 2, 0.08, 9402195, g.x, 1, g.z - 1);
+      }
+      if (i2 === 3) {
+        const wheel = mesh(new TorusGeometry(0.65, 0.09, 8, 32), 10977871, g.x + 1, 1, g.z - 1);
+        box3(0.2, 0.9, 0.2, 8676164, g.x + 1, 0.45, g.z - 1);
+        wheel.userData.wheel = true;
+        colliders.push({ x: g.x + 1, z: g.z - 1, r: 0.8 });
+      }
+      if (i2 === 4) {
+        box3(1.1, 0.7, 0.7, 10795936, g.x + 1, 0.45, g.z - 1);
+        box3(0.4, 0.1, 0.1, 16773847, g.x + 1, 0.85, g.z - 1);
+        box3(0.1, 0.1, 0.4, 16773847, g.x + 1, 0.85, g.z - 1);
+      }
+    });
+    const flowers = new InstancedMesh(new IcosahedronGeometry(0.09, 0), new MeshStandardMaterial({ color: 15783321 }), 120), dummy = new Object3D();
+    for (let i2 = 0; i2 < 120; i2++) {
+      const a = i2 * 2.399, r = 11 + Math.sin(i2 * 3.7) * 1.5;
+      dummy.position.set(Math.cos(a) * r, 0.16, Math.sin(a) * r);
+      dummy.updateMatrix();
+      flowers.setMatrixAt(i2, dummy.matrix);
+    }
+    scene.add(flowers);
+    const avatar = guide(0, 10, 14993310);
+    if (compact) {
+      scene.updateMatrixWorld(true);
+      const batches = /* @__PURE__ */ new Map(), oldGeometry = /* @__PURE__ */ new Set(), oldMaterials = /* @__PURE__ */ new Set(), keep = [];
+      scene.traverse((o) => {
+        if (o.isInstancedMesh) {
+          keep.push(o);
+          return;
+        }
+        if (!o.isMesh) return;
+        const m = o.material, id = [m.color.getHex(), m.map?.uuid, m.normalMap?.uuid, m.roughness].join(":");
+        if (!batches.has(id)) batches.set(id, { material: m, parts: [] });
+        const g = o.geometry.index ? o.geometry.toNonIndexed() : o.geometry.clone();
+        g.applyMatrix4(o.matrixWorld);
+        batches.get(id).parts.push(g);
+        oldGeometry.add(o.geometry);
+        oldMaterials.add(m);
+      });
+      scene.clear();
+      for (const { material: material3, parts } of batches.values()) {
+        const merged = mergeGeometries(parts);
+        parts.forEach((g) => g.dispose());
+        const mesh2 = new Mesh(merged, material3);
+        mesh2.receiveShadow = true;
+        scene.add(mesh2);
+        oldMaterials.delete(material3);
+      }
+      keep.forEach((o) => scene.add(o));
+      oldGeometry.forEach((g) => g.dispose());
+      oldMaterials.forEach((m) => m.dispose());
+    }
+    return { root: scene, colliders, markers, decorations, treeCrown, avatar };
+  }
   function installKnowledgeForest() {
-    if (document.getElementById("forestEntry")) return;
-    const toolbar = document.querySelector(".town-cards");
-    if (!toolbar) return;
-    const entry = document.createElement("button");
-    entry.id = "forestEntry";
-    entry.setAttribute("data-i18n-user", "");
-    entry.type = "button";
-    entry.textContent = tr("enter");
-    toolbar.appendChild(entry);
+    if (document.getElementById("knowledgeForest")) return;
     const overlay = document.createElement("section");
     overlay.id = "knowledgeForest";
     overlay.setAttribute("data-i18n-user", "");
@@ -35440,7 +35786,6 @@ void main() {
       return questions.filter((q) => q.glade === g.id && progress.learned.includes(q.id)).length;
     }
     function refresh() {
-      entry.textContent = tr("enter");
       if (overlay.hidden) return;
       overlay.setAttribute("aria-label", tr("title"));
       overlay.querySelector(".forest-header small").textContent = tr("field");
@@ -35574,46 +35919,6 @@ void main() {
         p.style.overflowWrap = "anywhere";
       });
     }
-    function mesh(geometry, color, x2, y, z, parent = scene) {
-      const kind = [7952445, 8545093].includes(color) ? "bark" : [9992526, 13216631, 10519381, 9595459, 11043411, 10977871, 8676164].includes(color) ? "wood" : color === 9149545 ? "grass" : color === 9138770 ? "soil" : [14271643, 13023885].includes(color) ? "gravel" : [5799500, 7311443, 4746828, 9021790, 11191162, 7510098].includes(color) ? "foliage" : null;
-      const material3 = kind ? worldMaterial(kind, color) : new MeshStandardMaterial({ color, roughness: 0.9 }), m = new Mesh(geometry, material3);
-      if (kind) {
-        applyWorldSurface(m, kind);
-        if (m.geometry !== geometry) geometry.dispose();
-      }
-      m.position.set(x2, y, z);
-      m.castShadow = true;
-      m.receiveShadow = true;
-      parent.add(m);
-      return m;
-    }
-    function box3(w, h, d, color, x2, y, z, parent) {
-      return mesh(new BoxGeometry(w, h, d), color, x2, y, z, parent);
-    }
-    function sphere(r, color, x2, y, z, parent) {
-      return mesh(new IcosahedronGeometry(r, 1), color, x2, y, z, parent);
-    }
-    function guide(x2, z, color) {
-      const g = new Group();
-      g.position.set(x2, 0, z);
-      scene.add(g);
-      sphere(0.42, color, 0, 0.5, 0, g).scale.set(0.85, 1, 0.72);
-      sphere(0.32, color, 0, 0.94, 0, g);
-      [-1, 1].forEach((s) => {
-        sphere(0.16, color, s * 0.23, 1.17, 0, g);
-        sphere(0.105, 15315875, s * 0.23, 1.17, 0.1, g);
-        sphere(0.047, 3352608, s * 0.12, 1, 0.26, g);
-        sphere(0.1, color, s * 0.19, 0.13, 0.1, g);
-      });
-      sphere(0.045, 11956577, 0, 0.91, 0.31, g);
-      return g;
-    }
-    function tree(x2, z, size = 1, color = 5799500) {
-      box3(0.38 * size, 2 * size, 0.38 * size, 7952445, x2, size, z);
-      sphere(1.35 * size, color, x2, 2.4 * size, z);
-      sphere(0.95 * size, color, x2 - 0.5 * size, 3.2 * size, z);
-      colliders.push({ x: x2, z, r: 0.5 * size });
-    }
     function makeScene() {
       if (!draw) draw = new WebGLRenderer({ canvas, antialias: true });
       draw.setPixelRatio(Math.min(devicePixelRatio, 1.5));
@@ -35635,81 +35940,13 @@ void main() {
       Object.assign(sun.shadow.camera, { left: -21, right: 21, top: 21, bottom: -21 });
       sun.shadow.normalBias = 0.04;
       scene.add(sun);
-      mesh(new CylinderGeometry(16, 16.6, 0.8, 64), 9149545, 0, -0.45, 0);
-      mesh(new CylinderGeometry(16.7, 17, 1, 64), 9138770, 0, -1.3, 0);
-      const pathPoints = [new Vector3(0, 0.035, 12), ...glades.map((g) => new Vector3(g.x, 0.035, g.z)), new Vector3(0, 0.035, 12)];
-      const curve = new CatmullRomCurve3(pathPoints);
-      for (let i2 = 0; i2 < 120; i2++) {
-        const v = curve.getPoint(i2 / 119);
-        mesh(new CylinderGeometry(0.8, 0.8, 0.045, 12), 14271643, v.x, 0.03, v.z);
-      }
-      const pond = mesh(new CylinderGeometry(2.3, 2.3, 0.035, 40), 7843237, 3, 0.035, 7);
-      pond.scale.z = 0.6;
-      colliders.push({ x: 3, z: 7, r: 2.35 });
-      for (let i2 = 0; i2 < 12; i2++) box3(0.32, 0.15, 1.5, 9992526, 1.05 + i2 * 0.36, 0.17, 7);
-      for (const z of [6.25, 7.75]) {
-        box3(4.3, 0.1, 0.1, 13216631, 3, 0.85, z);
-        for (const x2 of [1, 3, 5]) box3(0.1, 0.9, 0.1, 10519381, x2, 0.5, z);
-      }
-      for (let i2 = 0; i2 < 34; i2++) {
-        const a = i2 * Math.PI * 2 / 34, r = 14.2 + i2 % 3 * 0.25;
-        tree(Math.cos(a) * r, Math.sin(a) * r, 0.7 + i2 % 4 * 0.13, [5799500, 7311443, 4746828][i2 % 3]);
-      }
-      for (const [x2, z] of [[-11, 0], [11, 0], [-3, -12], [3, -12], [-11, 8], [10, 9]]) tree(x2, z, 0.8);
-      box3(1.5, 4, 1.3, 8545093, 0, 2, -1);
-      treeCrown = sphere(3.1, 9021790, 0, 5, -1);
-      sphere(2.2, 11191162, -1.8, 4.5, -1);
-      sphere(2.2, 7510098, 1.8, 4.8, -1);
-      colliders.push({ x: 0, z: -1, r: 1.45 });
-      const ring = mesh(new TorusGeometry(1.7, 0.12, 8, 40), 15124609, 0, 0.22, -1);
-      ring.rotation.x = Math.PI / 2;
-      glades.forEach((g, i2) => {
-        mesh(new CylinderGeometry(2.1, 2.2, 0.12, 28), 13023885, g.x, 0.06, g.z);
-        const m = mesh(new CylinderGeometry(0.85, 0.95, 0.35, 24), g.color, g.x, 0.25, g.z);
-        m.userData.station = i2;
-        markers.push(m);
-        const npc = guide(g.x, g.z, g.color);
-        decorations.push(npc);
-        box3(1.45, 0.14, 0.58, 9595459, g.x - 1.1, 0.6, g.z - 0.8);
-        box3(0.15, 0.7, 0.15, 7952445, g.x - 1.6, 0.3, g.z - 0.8);
-        box3(0.15, 0.7, 0.15, 7952445, g.x - 0.6, 0.3, g.z - 0.8);
-        colliders.push({ x: g.x - 1.1, z: g.z - 0.8, r: 0.9 });
-        colliders.push({ x: g.x, z: g.z, r: 0.65 });
-        if (i2 === 0) {
-          for (let n = 0; n < 5; n++) sphere(0.15, 15056741, g.x - 1.5 + n * 0.2, 0.8, g.z - 0.8);
-        }
-        if (i2 === 1) {
-          box3(1.4, 0.8, 1.1, 11043411, g.x + 1, 0.5, g.z - 1);
-          const roof = mesh(new ConeGeometry(1.2, 0.8, 4), 7700813, g.x + 1, 1.25, g.z - 1);
-          roof.rotation.y = Math.PI / 4;
-          colliders.push({ x: g.x + 1, z: g.z - 1, r: 1 });
-        }
-        if (i2 === 2) {
-          const moon = mesh(new TorusGeometry(0.45, 0.13, 8, 24, Math.PI * 1.5), 16770723, g.x, 2.5, g.z - 1);
-          moon.rotation.z = -0.7;
-          box3(0.08, 2, 0.08, 9402195, g.x, 1, g.z - 1);
-        }
-        if (i2 === 3) {
-          const wheel = mesh(new TorusGeometry(0.65, 0.09, 8, 32), 10977871, g.x + 1, 1, g.z - 1);
-          box3(0.2, 0.9, 0.2, 8676164, g.x + 1, 0.45, g.z - 1);
-          wheel.userData.wheel = true;
-          colliders.push({ x: g.x + 1, z: g.z - 1, r: 0.8 });
-        }
-        if (i2 === 4) {
-          box3(1.1, 0.7, 0.7, 10795936, g.x + 1, 0.45, g.z - 1);
-          box3(0.4, 0.1, 0.1, 16773847, g.x + 1, 0.85, g.z - 1);
-          box3(0.1, 0.1, 0.4, 16773847, g.x + 1, 0.85, g.z - 1);
-        }
-      });
-      const flowers = new InstancedMesh(new IcosahedronGeometry(0.09, 0), new MeshStandardMaterial({ color: 15783321 }), 120), dummy = new Object3D();
-      for (let i2 = 0; i2 < 120; i2++) {
-        const a = i2 * 2.399, r = 11 + Math.sin(i2 * 3.7) * 1.5;
-        dummy.position.set(Math.cos(a) * r, 0.16, Math.sin(a) * r);
-        dummy.updateMatrix();
-        flowers.setMatrixAt(i2, dummy.matrix);
-      }
-      scene.add(flowers);
-      avatar = guide(player.x, player.z, 14993310);
+      const forest = createKnowledgeForestLandscape();
+      scene.add(forest.root);
+      colliders.push(...forest.colliders);
+      markers.push(...forest.markers);
+      decorations.push(...forest.decorations);
+      treeCrown = forest.treeCrown;
+      avatar = forest.avatar;
       resize = () => {
         const w = overlay.clientWidth, h = overlay.clientHeight;
         if (!w || !h) return;
@@ -35806,7 +36043,6 @@ void main() {
       if (i2 >= 0) select(i2);
       else notify(tr("walkHint"));
     }
-    entry.onclick = open;
     window.addEventListener("town-open-forest", open);
     overlay.querySelector('[data-action="exit"]').onclick = exit;
     overlay.querySelector('[data-action="journal"]').onclick = journal;
@@ -36489,62 +36725,6 @@ void main() {
         child.material = Array.isArray(child.material) ? child.material.map(replace) : replace(child.material);
       }
     });
-  }
-
-  // node_modules/.pnpm/three@0.185.1/node_modules/three/examples/jsm/utils/BufferGeometryUtils.js
-  function toTrianglesDrawMode(geometry, drawMode) {
-    if (drawMode === TrianglesDrawMode) {
-      console.warn("THREE.BufferGeometryUtils.toTrianglesDrawMode(): Geometry already defined as triangles.");
-      return geometry;
-    }
-    if (drawMode === TriangleFanDrawMode || drawMode === TriangleStripDrawMode) {
-      let index = geometry.getIndex();
-      if (index === null) {
-        const indices = [];
-        const position = geometry.getAttribute("position");
-        if (position !== void 0) {
-          for (let i2 = 0; i2 < position.count; i2++) {
-            indices.push(i2);
-          }
-          geometry.setIndex(indices);
-          index = geometry.getIndex();
-        } else {
-          console.error("THREE.BufferGeometryUtils.toTrianglesDrawMode(): Undefined position attribute. Processing not possible.");
-          return geometry;
-        }
-      }
-      const numberOfTriangles = index.count - 2;
-      const newIndices = [];
-      if (drawMode === TriangleFanDrawMode) {
-        for (let i2 = 1; i2 <= numberOfTriangles; i2++) {
-          newIndices.push(index.getX(0));
-          newIndices.push(index.getX(i2));
-          newIndices.push(index.getX(i2 + 1));
-        }
-      } else {
-        for (let i2 = 0; i2 < numberOfTriangles; i2++) {
-          if (i2 % 2 === 0) {
-            newIndices.push(index.getX(i2));
-            newIndices.push(index.getX(i2 + 1));
-            newIndices.push(index.getX(i2 + 2));
-          } else {
-            newIndices.push(index.getX(i2 + 2));
-            newIndices.push(index.getX(i2 + 1));
-            newIndices.push(index.getX(i2));
-          }
-        }
-      }
-      if (newIndices.length / 3 !== numberOfTriangles) {
-        console.error("THREE.BufferGeometryUtils.toTrianglesDrawMode(): Unable to generate correct amount of triangles.");
-      }
-      const newGeometry = geometry.clone();
-      newGeometry.setIndex(newIndices);
-      newGeometry.clearGroups();
-      return newGeometry;
-    } else {
-      console.error("THREE.BufferGeometryUtils.toTrianglesDrawMode(): Unknown draw mode:", drawMode);
-      return geometry;
-    }
   }
 
   // node_modules/.pnpm/three@0.185.1/node_modules/three/examples/jsm/utils/SkeletonUtils.js
@@ -45794,7 +45974,7 @@ void main() {
     const scene = new Scene();
     scene.background = new Color(14477791);
     scene.fog = new Fog(14477791, 45, 85);
-    const camera = new PerspectiveCamera(38, 1, 0.1, 100);
+    const camera = new PerspectiveCamera(38, 1, 0.1, 240);
     camera.position.set(13, 15, 17);
     camera.lookAt(0, 0, 1);
     const renderer = new WebGLRenderer({ canvas, antialias: true, alpha: false });
@@ -45981,7 +46161,15 @@ void main() {
       host.appendChild(button);
       return { button, point: new Vector3(x2, name === "\u4E2D\u5FC3\u5E7F\u573A" ? 1.85 : name === "\u9F20\u9F20\u5B66\u6821" ? 4.4 : 2.1, z) };
     });
-    const futureRegions = [["\u5976\u519C\u9547", -27, 0, Math.PI / 2], ["\u77E5\u8BC6\u68EE\u6797", 0, -29, 0], ["\u672A\u77E5\u533A\u57DF", 27, 0, -Math.PI / 2]].map(([name, x2, z, rotation]) => {
+    const forestLandscape = createKnowledgeForestLandscape(true).root;
+    forestLandscape.position.set(0, 0, -47);
+    forestLandscape.userData.townAction = "knowledge-forest";
+    scene.add(forestLandscape);
+    clickable.push(forestLandscape);
+    const forestTrail = new Mesh(new BoxGeometry(2.4, 0.06, 12), worldMaterial("gravel", 14271643));
+    forestTrail.position.set(0, -0.65, -25);
+    scene.add(forestTrail);
+    const futureRegions = [["\u5976\u519C\u9547", -27, 0, Math.PI / 2], ["\u77E5\u8BC6\u68EE\u6797", 0, -25, 0], ["\u672A\u77E5\u533A\u57DF", 27, 0, -Math.PI / 2]].map(([name, x2, z, rotation]) => {
       const canvas2 = document.createElement("canvas");
       canvas2.width = 1024;
       canvas2.height = 256;
@@ -45992,11 +46180,15 @@ void main() {
       mesh.rotateZ(rotation);
       mesh.position.set(x2, -0.69, z);
       scene.add(mesh);
+      if (name === "\u77E5\u8BC6\u68EE\u6797") {
+        mesh.userData.townAction = "knowledge-forest";
+        clickable.push(mesh);
+      }
       return { name, canvas: canvas2, texture: texture3, text: "" };
     });
     function refreshRegionNames() {
       futureRegions.forEach((region) => {
-        const title = window.TownI18n.t(region.name), status = region.name === "\u77E5\u8BC6\u68EE\u6797" ? window.TownI18n.t("\u4ECE\u5C0F\u9547\u6309\u94AE\u8FDB\u5165") : window.TownI18n.t("\u5C1A\u672A\u5F00\u653E"), text = title + "|" + status;
+        const title = window.TownI18n.t(region.name), status = region.name === "\u77E5\u8BC6\u68EE\u6797" ? window.TownI18n.t("\u70B9\u51FB\u6797\u5730\u8FDB\u5165\u63A2\u7D22") : window.TownI18n.t("\u5C1A\u672A\u5F00\u653E"), text = title + "|" + status;
         if (text === region.text) return;
         region.text = text;
         const ctx = region.canvas.getContext("2d");
@@ -46904,6 +47096,8 @@ void main() {
       }
     }).observe(document.body, { attributes: true, attributeFilter: ["data-current-panel"] });
     function positionCamera() {
+      scene.fog.near = Math.max(45, distance3 * 1.2);
+      scene.fog.far = Math.max(85, distance3 * 2.2);
       camera.position.set(Math.sin(yaw) * Math.cos(pitch) * distance3, Math.sin(pitch) * distance3, Math.cos(yaw) * Math.cos(pitch) * distance3);
       camera.position.add(target);
       camera.lookAt(target);
@@ -47763,7 +47957,8 @@ void main() {
         if (hit) {
           let object = hit.object;
           while (object && !Number.isInteger(object.userData.npcIndex) && !object.userData.mainPet && !object.userData.pupId && !object.userData.roomAction && !object.userData.townAction && !object.userData.place) object = object.parent;
-          if (object?.userData.roomAction === "classroom-seat") toggleClassroomSeat(object.userData.seatIndex);
+          if (object?.userData.townAction === "knowledge-forest" && !activePlace) window.dispatchEvent(new CustomEvent("town-open-forest"));
+          else if (object?.userData.roomAction === "classroom-seat") toggleClassroomSeat(object.userData.seatIndex);
           else if (object?.userData.townAction === "plaza-seat") togglePlazaSeat(object.userData.seatIndex);
           else if (object?.userData.roomAction === "memorial-seat" || object?.userData.townAction === "memorial-seat") toggleMemorialSeat(object.userData.seatLocation);
           else if (object?.userData.roomAction === "restaurant-seat") toggleRestaurantSeat(object.userData.seatIndex);
@@ -47785,7 +47980,7 @@ void main() {
     canvas.addEventListener("wheel", (e) => {
       e.preventDefault();
       if (firstPerson) return;
-      distance3 = Math.max(focusedExhibit !== null ? 0.6 : activePlace ? 5 : 14, Math.min(activePlace ? 20 : 38, distance3 + e.deltaY * 0.015));
+      distance3 = Math.max(focusedExhibit !== null ? 0.6 : activePlace ? 5 : 14, Math.min(activePlace ? 20 : 120, distance3 + e.deltaY * 0.015));
       positionCamera();
     }, { passive: false });
     let viewWidth = host.clientWidth, viewHeight = host.clientHeight;
@@ -48183,7 +48378,7 @@ void main() {
         }
       } else {
         drag = null;
-        distance3 = Math.max(activePlace ? 5 : 14, Math.min(activePlace ? 20 : 38, distance3 + zoom));
+        distance3 = Math.max(activePlace ? 5 : 14, Math.min(activePlace ? 20 : 120, distance3 + zoom));
         positionCamera();
       }
     }, finishRestaurantPayment: (id, result) => {

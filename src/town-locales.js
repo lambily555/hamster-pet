@@ -1847,7 +1847,7 @@ TownI18n.add({
     "张体力卡。": "energy cards.",
     "首次完美通关：获得": "First perfect clear: earned",
     "张体力卡！": "energy cards!",
-    "从小镇按钮进入": "Enter from the town toolbar"
+    "点击林地进入探索": "Click the forest to explore"
   },
   "es": {
     "鼠鼠小镇": "Pueblo Hámster",
@@ -3696,6 +3696,6 @@ TownI18n.add({
     "张体力卡。": "tarjetas de energía.",
     "首次完美通关：获得": "Primera victoria perfecta: recibes",
     "张体力卡！": "¡tarjetas de energía!",
-    "从小镇按钮进入": "Entra desde la barra del pueblo"
+    "点击林地进入探索": "Pulsa el bosque para explorar"
   }
 });

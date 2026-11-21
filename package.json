@@ -1,6 +1,6 @@
 {
   "name": "momo-desktop-pet",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "private": true,
   "description": "A tiny privacy-friendly hamster desktop companion",
   "main": "src/main.js",

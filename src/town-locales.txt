@@ -1863,4 +1863,4 @@ guci这季的小包？我拿来装瓜子皮的，正好配我家垃圾桶。|Tha
 张体力卡。|energy cards.|tarjetas de energía.
 首次完美通关：获得|First perfect clear: earned|Primera victoria perfecta: recibes
 张体力卡！|energy cards!|¡tarjetas de energía!
-从小镇按钮进入|Enter from the town toolbar|Entra desde la barra del pueblo
+点击林地进入探索|Click the forest to explore|Pulsa el bosque para explorar

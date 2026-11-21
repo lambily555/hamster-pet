@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import {glades,questions,sources,cleanProgress,recordAnswer} from './forest-knowledge.js';
 import {worldMaterial,applyWorldSurface} from './town-world-surfaces.js';
 
@@ -33,10 +34,49 @@ const tr=key=>copy[key][language()];
 const localized=value=>value[language()];
 const key='shushu.knowledge-forest.v1';
 
+export function createKnowledgeForestLandscape(compact=false){
+  const scene=new THREE.Group(),colliders=[],markers=[],decorations=[];let treeCrown;
+  function mesh(geometry,color,x,y,z,parent=scene){
+    const kind=[0x79583d,0x826345].includes(color)?'bark':[0x98794e,0xc9ab77,0xa08355,0x926a43,0xa88253,0xa7824f,0x846344].includes(color)?'wood':color===0x8b9c69?'grass':color===0x8b7252?'soil':[0xd9c49b,0xc6ba8d].includes(color)?'gravel':[0x587e4c,0x6f9053,0x486e4c,0x89a95e,0xaac37a,0x729852].includes(color)?'foliage':null;
+    const material=kind?worldMaterial(kind,color):new THREE.MeshStandardMaterial({color,roughness:.9}),m=new THREE.Mesh(geometry,material);if(kind){applyWorldSurface(m,kind);if(m.geometry!==geometry)geometry.dispose()}m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m;
+  }
+  function box(w,h,d,color,x,y,z,parent){return mesh(new THREE.BoxGeometry(w,h,d),color,x,y,z,parent)}
+  function sphere(r,color,x,y,z,parent){return mesh(new THREE.IcosahedronGeometry(r,1),color,x,y,z,parent)}
+  function guide(x,z,color){const g=new THREE.Group();g.position.set(x,0,z);scene.add(g);sphere(.42,color,0,.5,0,g).scale.set(.85,1,.72);sphere(.32,color,0,.94,0,g);[-1,1].forEach(s=>{sphere(.16,color,s*.23,1.17,0,g);sphere(.105,0xe9b3a3,s*.23,1.17,.1,g);sphere(.047,0x332820,s*.12,1,.26,g);sphere(.1,color,s*.19,.13,.1,g)});sphere(.045,0xb67161,0,.91,.31,g);return g}
+  function tree(x,z,size=1,color=0x587e4c){box(.38*size,2*size,.38*size,0x79583d,x,size,z);sphere(1.35*size,color,x,2.4*size,z);sphere(.95*size,color,x-.5*size,3.2*size,z);colliders.push({x,z,r:.5*size})}
+    mesh(new THREE.CylinderGeometry(16,16.6,.8,64),0x8b9c69,0,-.45,0);mesh(new THREE.CylinderGeometry(16.7,17,1,64),0x8b7252,0,-1.3,0);
+    const pathPoints=[new THREE.Vector3(0,.035,12),...glades.map(g=>new THREE.Vector3(g.x,.035,g.z)),new THREE.Vector3(0,.035,12)];
+    const curve=new THREE.CatmullRomCurve3(pathPoints);for(let i=0;i<120;i++){const v=curve.getPoint(i/119);mesh(new THREE.CylinderGeometry(.8,.8,.045,12),0xd9c49b,v.x,.03,v.z)}
+    // Shallow pond has a solid bank; the footbridge is a continuous walkable surface.
+    const pond=mesh(new THREE.CylinderGeometry(2.3,2.3,.035,40),0x77ada5,3,.035,7);pond.scale.z=.6;colliders.push({x:3,z:7,r:2.35});
+    for(let i=0;i<12;i++)box(.32,.15,1.5,0x98794e,1.05+i*.36,.17,7);
+    for(const z of [6.25,7.75]){box(4.3,.1,.1,0xc9ab77,3,.85,z);for(const x of [1,3,5])box(.1,.9,.1,0xa08355,x,.5,z)}
+    for(let i=0;i<34;i++){const a=i*Math.PI*2/34,r=14.2+(i%3)*.25;tree(Math.cos(a)*r,Math.sin(a)*r,.7+(i%4)*.13,[0x587e4c,0x6f9053,0x486e4c][i%3])}
+    for(const [x,z] of [[-11,0],[11,0],[-3,-12],[3,-12],[-11,8],[10,9]])tree(x,z,.8);
+    box(1.5,4,1.3,0x826345,0,2,-1);treeCrown=sphere(3.1,0x89a95e,0,5,-1);sphere(2.2,0xaac37a,-1.8,4.5,-1);sphere(2.2,0x729852,1.8,4.8,-1);colliders.push({x:0,z:-1,r:1.45});
+    const ring=mesh(new THREE.TorusGeometry(1.7,.12,8,40),0xe6c881,0,.22,-1);ring.rotation.x=Math.PI/2;
+    glades.forEach((g,i)=>{mesh(new THREE.CylinderGeometry(2.1,2.2,.12,28),0xc6ba8d,g.x,.06,g.z);const m=mesh(new THREE.CylinderGeometry(.85,.95,.35,24),g.color,g.x,.25,g.z);m.userData.station=i;markers.push(m);const npc=guide(g.x,g.z,g.color);decorations.push(npc);
+      box(1.45,.14,.58,0x926a43,g.x-1.1,.6,g.z-.8);box(.15,.7,.15,0x79583d,g.x-1.6,.3,g.z-.8);box(.15,.7,.15,0x79583d,g.x-.6,.3,g.z-.8);
+      colliders.push({x:g.x-1.1,z:g.z-.8,r:.9});colliders.push({x:g.x,z:g.z,r:.65});
+      if(i===0){for(let n=0;n<5;n++)sphere(.15,0xe5bf65,g.x-1.5+n*.2,.8,g.z-.8)}
+      if(i===1){box(1.4,.8,1.1,0xa88253,g.x+1,.5,g.z-1);const roof=mesh(new THREE.ConeGeometry(1.2,.8,4),0x75814d,g.x+1,1.25,g.z-1);roof.rotation.y=Math.PI/4;colliders.push({x:g.x+1,z:g.z-1,r:1})}
+      if(i===2){const moon=mesh(new THREE.TorusGeometry(.45,.13,8,24,Math.PI*1.5),0xffe6a3,g.x,2.5,g.z-1);moon.rotation.z=-.7;box(.08,2,.08,0x8f7753,g.x,1,g.z-1)}
+      if(i===3){const wheel=mesh(new THREE.TorusGeometry(.65,.09,8,32),0xa7824f,g.x+1,1,g.z-1);box(.2,.9,.2,0x846344,g.x+1,.45,g.z-1);wheel.userData.wheel=true;colliders.push({x:g.x+1,z:g.z-1,r:.8})}
+      if(i===4){box(1.1,.7,.7,0xa4bba0,g.x+1,.45,g.z-1);box(.4,.1,.1,0xfff2d7,g.x+1,.85,g.z-1);box(.1,.1,.4,0xfff2d7,g.x+1,.85,g.z-1)}
+    });
+    // Ground cover uses deterministic positions, shared geometry and one instanced draw.
+    const flowers=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(.09,0),new THREE.MeshStandardMaterial({color:0xf0d599}),120),dummy=new THREE.Object3D();for(let i=0;i<120;i++){const a=i*2.399,r=11+Math.sin(i*3.7)*1.5;dummy.position.set(Math.cos(a)*r,.16,Math.sin(a)*r);dummy.updateMatrix();flowers.setMatrixAt(i,dummy.matrix)}scene.add(flowers);
+  const avatar=guide(0,10,0xe4c79e);
+  if(compact){
+    scene.updateMatrixWorld(true);const batches=new Map(),oldGeometry=new Set(),oldMaterials=new Set(),keep=[];
+    scene.traverse(o=>{if(o.isInstancedMesh){keep.push(o);return}if(!o.isMesh)return;const m=o.material,id=[m.color.getHex(),m.map?.uuid,m.normalMap?.uuid,m.roughness].join(':');if(!batches.has(id))batches.set(id,{material:m,parts:[]});const g=o.geometry.index?o.geometry.toNonIndexed():o.geometry.clone();g.applyMatrix4(o.matrixWorld);batches.get(id).parts.push(g);oldGeometry.add(o.geometry);oldMaterials.add(m)});
+    scene.clear();for(const {material,parts} of batches.values()){const merged=mergeGeometries(parts);parts.forEach(g=>g.dispose());const mesh=new THREE.Mesh(merged,material);mesh.receiveShadow=true;scene.add(mesh);oldMaterials.delete(material)}keep.forEach(o=>scene.add(o));oldGeometry.forEach(g=>g.dispose());oldMaterials.forEach(m=>m.dispose());
+  }
+  return {root:scene,colliders,markers,decorations,treeCrown,avatar};
+}
+
 export function installKnowledgeForest(){
-  if(document.getElementById('forestEntry'))return;
-  const toolbar=document.querySelector('.town-cards');if(!toolbar)return;
-  const entry=document.createElement('button');entry.id='forestEntry';entry.setAttribute('data-i18n-user','');entry.type='button';entry.textContent=tr('enter');toolbar.appendChild(entry);
+  if(document.getElementById('knowledgeForest'))return;
   const overlay=document.createElement('section');overlay.id='knowledgeForest';overlay.setAttribute('data-i18n-user','');overlay.hidden=true;overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label',tr('title'));overlay.tabIndex=-1;
   overlay.innerHTML='<canvas class="forest-canvas"></canvas><div class="forest-header"><div><small>FOREST FIELD NOTES / 01</small><h1></h1><p></p></div><button data-action="exit"></button></div><div class="forest-tools"><span class="forest-progress"></span><button data-action="view"></button><button data-action="journal"></button></div><nav class="forest-stations"></nav><div class="forest-caption"></div><div class="forest-touch"><button data-move="forward">↑</button><button data-move="left">←</button><button data-move="back">↓</button><button data-move="right">→</button><button data-action="interact">E</button></div><section class="forest-card" hidden></section><div class="forest-toast" role="status"></div>';
   document.body.appendChild(overlay);
@@ -51,7 +91,7 @@ export function installKnowledgeForest(){
   function button(label,fn,className=''){const el=document.createElement('button');el.type='button';el.textContent=label;el.className=className;el.onclick=fn;return el}
   function count(g){return questions.filter(q=>q.glade===g.id&&progress.learned.includes(q.id)).length}
   function refresh(){
-    entry.textContent=tr('enter');if(overlay.hidden)return;
+    if(overlay.hidden)return;
     overlay.setAttribute('aria-label',tr('title'));overlay.querySelector('.forest-header small').textContent=tr('field');overlay.querySelector('h1').textContent=tr('title');overlay.querySelector('.forest-header p').textContent=tr('subtitle');
     overlay.querySelector('[data-action="exit"]').textContent='← '+tr('back');overlay.querySelector('[data-action="view"]').textContent=tr(mode==='map'?'walk':'map');overlay.querySelector('[data-action="journal"]').textContent=tr('journal');
     overlay.querySelector('.forest-progress').textContent=`✦ ${progress.learned.length} / ${questions.length} · ${tr('leaves')}`;
@@ -85,41 +125,12 @@ export function installKnowledgeForest(){
     for(const q of questions.filter(q=>progress.learned.includes(q.id))){const details=document.createElement('details'),summary=document.createElement('summary'),body=document.createElement('p');summary.textContent=localized(q.q);body.textContent=localized(q.explanation);details.append(summary,body);card.append(details)}
     paragraph(tr('source'),'forest-eyebrow');sources.forEach(([name,url])=>{const p=paragraph(name+': '+url,'forest-source');p.style.overflowWrap='anywhere'});
   }
-  function mesh(geometry,color,x,y,z,parent=scene){
-    const kind=[0x79583d,0x826345].includes(color)?'bark':[0x98794e,0xc9ab77,0xa08355,0x926a43,0xa88253,0xa7824f,0x846344].includes(color)?'wood':color===0x8b9c69?'grass':color===0x8b7252?'soil':[0xd9c49b,0xc6ba8d].includes(color)?'gravel':[0x587e4c,0x6f9053,0x486e4c,0x89a95e,0xaac37a,0x729852].includes(color)?'foliage':null;
-    const material=kind?worldMaterial(kind,color):new THREE.MeshStandardMaterial({color,roughness:.9}),m=new THREE.Mesh(geometry,material);if(kind){applyWorldSurface(m,kind);if(m.geometry!==geometry)geometry.dispose()}m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m;
-  }
-  function box(w,h,d,color,x,y,z,parent){return mesh(new THREE.BoxGeometry(w,h,d),color,x,y,z,parent)}
-  function sphere(r,color,x,y,z,parent){return mesh(new THREE.IcosahedronGeometry(r,1),color,x,y,z,parent)}
-  function guide(x,z,color){const g=new THREE.Group();g.position.set(x,0,z);scene.add(g);sphere(.42,color,0,.5,0,g).scale.set(.85,1,.72);sphere(.32,color,0,.94,0,g);[-1,1].forEach(s=>{sphere(.16,color,s*.23,1.17,0,g);sphere(.105,0xe9b3a3,s*.23,1.17,.1,g);sphere(.047,0x332820,s*.12,1,.26,g);sphere(.1,color,s*.19,.13,.1,g)});sphere(.045,0xb67161,0,.91,.31,g);return g}
-  function tree(x,z,size=1,color=0x587e4c){box(.38*size,2*size,.38*size,0x79583d,x,size,z);sphere(1.35*size,color,x,2.4*size,z);sphere(.95*size,color,x-.5*size,3.2*size,z);colliders.push({x,z,r:.5*size})}
   function makeScene(){
     if(!draw)draw=new THREE.WebGLRenderer({canvas,antialias:true});draw.setPixelRatio(Math.min(devicePixelRatio,1.5));draw.toneMapping=THREE.ACESFilmicToneMapping;draw.shadowMap.enabled=true;draw.shadowMap.type=THREE.PCFSoftShadowMap;draw.shadowMap.autoUpdate=false;
     scene=new THREE.Scene();scene.background=new THREE.Color(0xdbe7cd);scene.fog=new THREE.Fog(0xdbe7cd,32,65);camera=new THREE.PerspectiveCamera(43,1,.1,90);camera.position.copy(targetCamera);look.copy(targetLook);
     scene.add(new THREE.HemisphereLight(0xfff5de,0x738768,2.4));const sun=new THREE.DirectionalLight(0xffe6b1,3.2);sun.position.set(-10,25,12);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-21,right:21,top:21,bottom:-21});sun.shadow.normalBias=.04;scene.add(sun);
-    mesh(new THREE.CylinderGeometry(16,16.6,.8,64),0x8b9c69,0,-.45,0);mesh(new THREE.CylinderGeometry(16.7,17,1,64),0x8b7252,0,-1.3,0);
-    const pathPoints=[new THREE.Vector3(0,.035,12),...glades.map(g=>new THREE.Vector3(g.x,.035,g.z)),new THREE.Vector3(0,.035,12)];
-    const curve=new THREE.CatmullRomCurve3(pathPoints);for(let i=0;i<120;i++){const v=curve.getPoint(i/119);mesh(new THREE.CylinderGeometry(.8,.8,.045,12),0xd9c49b,v.x,.03,v.z)}
-    // Shallow pond has a solid bank; the footbridge is a continuous walkable surface.
-    const pond=mesh(new THREE.CylinderGeometry(2.3,2.3,.035,40),0x77ada5,3,.035,7);pond.scale.z=.6;colliders.push({x:3,z:7,r:2.35});
-    for(let i=0;i<12;i++)box(.32,.15,1.5,0x98794e,1.05+i*.36,.17,7);
-    for(const z of [6.25,7.75]){box(4.3,.1,.1,0xc9ab77,3,.85,z);for(const x of [1,3,5])box(.1,.9,.1,0xa08355,x,.5,z)}
-    for(let i=0;i<34;i++){const a=i*Math.PI*2/34,r=14.2+(i%3)*.25;tree(Math.cos(a)*r,Math.sin(a)*r,.7+(i%4)*.13,[0x587e4c,0x6f9053,0x486e4c][i%3])}
-    for(const [x,z] of [[-11,0],[11,0],[-3,-12],[3,-12],[-11,8],[10,9]])tree(x,z,.8);
-    box(1.5,4,1.3,0x826345,0,2,-1);treeCrown=sphere(3.1,0x89a95e,0,5,-1);sphere(2.2,0xaac37a,-1.8,4.5,-1);sphere(2.2,0x729852,1.8,4.8,-1);colliders.push({x:0,z:-1,r:1.45});
-    const ring=mesh(new THREE.TorusGeometry(1.7,.12,8,40),0xe6c881,0,.22,-1);ring.rotation.x=Math.PI/2;
-    glades.forEach((g,i)=>{mesh(new THREE.CylinderGeometry(2.1,2.2,.12,28),0xc6ba8d,g.x,.06,g.z);const m=mesh(new THREE.CylinderGeometry(.85,.95,.35,24),g.color,g.x,.25,g.z);m.userData.station=i;markers.push(m);const npc=guide(g.x,g.z,g.color);decorations.push(npc);
-      box(1.45,.14,.58,0x926a43,g.x-1.1,.6,g.z-.8);box(.15,.7,.15,0x79583d,g.x-1.6,.3,g.z-.8);box(.15,.7,.15,0x79583d,g.x-.6,.3,g.z-.8);
-      colliders.push({x:g.x-1.1,z:g.z-.8,r:.9});colliders.push({x:g.x,z:g.z,r:.65});
-      if(i===0){for(let n=0;n<5;n++)sphere(.15,0xe5bf65,g.x-1.5+n*.2,.8,g.z-.8)}
-      if(i===1){box(1.4,.8,1.1,0xa88253,g.x+1,.5,g.z-1);const roof=mesh(new THREE.ConeGeometry(1.2,.8,4),0x75814d,g.x+1,1.25,g.z-1);roof.rotation.y=Math.PI/4;colliders.push({x:g.x+1,z:g.z-1,r:1})}
-      if(i===2){const moon=mesh(new THREE.TorusGeometry(.45,.13,8,24,Math.PI*1.5),0xffe6a3,g.x,2.5,g.z-1);moon.rotation.z=-.7;box(.08,2,.08,0x8f7753,g.x,1,g.z-1)}
-      if(i===3){const wheel=mesh(new THREE.TorusGeometry(.65,.09,8,32),0xa7824f,g.x+1,1,g.z-1);box(.2,.9,.2,0x846344,g.x+1,.45,g.z-1);wheel.userData.wheel=true;colliders.push({x:g.x+1,z:g.z-1,r:.8})}
-      if(i===4){box(1.1,.7,.7,0xa4bba0,g.x+1,.45,g.z-1);box(.4,.1,.1,0xfff2d7,g.x+1,.85,g.z-1);box(.1,.1,.4,0xfff2d7,g.x+1,.85,g.z-1)}
-    });
-    // Ground cover uses deterministic positions, shared geometry and one instanced draw.
-    const flowers=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(.09,0),new THREE.MeshStandardMaterial({color:0xf0d599}),120),dummy=new THREE.Object3D();for(let i=0;i<120;i++){const a=i*2.399,r=11+Math.sin(i*3.7)*1.5;dummy.position.set(Math.cos(a)*r,.16,Math.sin(a)*r);dummy.updateMatrix();flowers.setMatrixAt(i,dummy.matrix)}scene.add(flowers);
-    avatar=guide(player.x,player.z,0xe4c79e);resize=()=>{const w=overlay.clientWidth,h=overlay.clientHeight;if(!w||!h)return;draw.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()};window.addEventListener('resize',resize);resize();draw.shadowMap.needsUpdate=true;
+    const forest=createKnowledgeForestLandscape();scene.add(forest.root);colliders.push(...forest.colliders);markers.push(...forest.markers);decorations.push(...forest.decorations);treeCrown=forest.treeCrown;avatar=forest.avatar;
+    resize=()=>{const w=overlay.clientWidth,h=overlay.clientHeight;if(!w||!h)return;draw.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()};window.addEventListener('resize',resize);resize();draw.shadowMap.needsUpdate=true;
   }
   function canWalk(x,z){if(Math.hypot(x,z)>13)return false;return !colliders.some(c=>{if(c.x===3&&c.z===7&&x>=.8&&x<=5.2&&z>=6.55&&z<=7.45)return false;return Math.hypot(x-c.x,z-c.z)<c.r+.22})}
   function tick(now){if(overlay.hidden)return;frame=requestAnimationFrame(tick);const dt=Math.min((now-clock)/1000,.04);clock=now;
@@ -130,7 +141,7 @@ export function installKnowledgeForest(){
   function open(){if(!overlay.hidden)return;lastFocus=document.activeElement;window.TownApp?.stopFirstPerson();document.exitPointerLock?.();keys.clear();overlay.hidden=false;document.body.dataset.forestOpen='true';mode='map';targetCamera.set(20,25,29);targetLook.set(0,0,-1);try{makeScene();refresh();overlay.focus();clock=performance.now();frame=requestAnimationFrame(tick)}catch{notify(tr('error'))}}
   function exit(){if(overlay.hidden)return;overlay.hidden=true;delete document.body.dataset.forestOpen;cancelAnimationFrame(frame);keys.clear();closeCard();if(resize)window.removeEventListener('resize',resize);if(scene){const geometry=new Set(),materials=new Set();scene.traverse(o=>{if(o.geometry)geometry.add(o.geometry);if(o.material)(Array.isArray(o.material)?o.material:[o.material]).forEach(m=>materials.add(m));if(o.shadow?.map)o.shadow.map.dispose()});geometry.forEach(g=>g.dispose());materials.forEach(m=>m.dispose())}draw?.renderLists.dispose();scene=null;treeCrown=null;markers.length=colliders.length=decorations.length=0;lastFocus?.focus({preventScroll:true})}
   function interact(){let i=-1,dist=3.5;glades.forEach((g,index)=>{const d=Math.hypot(player.x-g.x,player.z-g.z);if(d<dist){i=index;dist=d}});if(i>=0)select(i);else notify(tr('walkHint'))}
-  entry.onclick=open;window.addEventListener('town-open-forest',open);
+  window.addEventListener('town-open-forest',open);
   overlay.querySelector('[data-action="exit"]').onclick=exit;
   overlay.querySelector('[data-action="journal"]').onclick=journal;
   overlay.querySelector('[data-action="view"]').onclick=()=>{closeCard();mode=mode==='map'?'walk':'map';if(mode==='map'){targetCamera.set(20,25,29);targetLook.set(0,0,-1)}refresh()};
