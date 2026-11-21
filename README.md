@@ -18,7 +18,7 @@ GitHub 的 **Code → Download ZIP** 是源代码，不是安装包。个人设�
 
 Download a setup or portable EXE from Releases; no developer tools are needed. Source ZIPs require the development setup below. Builds are currently unsigned. Personal saves are local and are not included in downloads.
 
-> Windows v1.6.1发行包包含截至2026-11-19的最新桌面功能。新用户从初始资料和初始小镇开始，发行包不包含维护者个人数据。Android/iOS安装包尚未发布。
+> Windows v1.6.1发行包包含截至2026-11-21的最新桌面功能与知识森林。新用户从初始资料和初始小镇开始，发行包不包含维护者个人数据。Android/iOS安装包尚未发布。
 
 ## 当前功能
 
