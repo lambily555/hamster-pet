@@ -35890,7 +35890,10 @@ void main() {
       e.stopImmediatePropagation();
     }, true);
     window.addEventListener("blur", () => keys.clear());
+    let shownLanguage = language();
     const observer = new MutationObserver(() => {
+      if (shownLanguage === language()) return;
+      shownLanguage = language();
       refresh();
       if (!overlay.hidden && view === "quiz" && question) showQuestion(question);
       else if (!overlay.hidden && view === "journal") journal();

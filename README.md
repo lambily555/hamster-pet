@@ -18,7 +18,7 @@ GitHub 的 **Code → Download ZIP** 是源代码，不是安装包。个人设�
 
 Download a setup or portable EXE from Releases; no developer tools are needed. Source ZIPs require the development setup below. Builds are currently unsigned. Personal saves are local and are not included in downloads.
 
-> Windows v1.6.0发行包包含截至2026-11-19的最新桌面功能。新用户从初始资料和初始小镇开始，发行包不包含维护者个人数据。Android/iOS安装包尚未发布。
+> Windows v1.6.1发行包包含截至2026-11-19的最新桌面功能。新用户从初始资料和初始小镇开始，发行包不包含维护者个人数据。Android/iOS安装包尚未发布。
 
 ## 当前功能
 
@@ -119,7 +119,7 @@ NPC日常动态也会按活动地点配小镇实景图；图片按需生成并�
 
 
 ## 便携版创建桌面快捷方式
-将 Release 中的 create-desktop-shortcut.cmd 与 hamster-pet-portable-1.6.0.exe 放在同一文件夹后，双击 create-desktop-shortcut.cmd。脚本只创建当前用户的桌面快捷方式，不启动程序；已有同名快捷方式时会提示，不会覆盖。请先把便携程序放到固定位置，移动文件夹后需删除旧快捷方式再重新创建。便携版是 Windows 免安装版，不是手机版。
+将 Release 中的 create-desktop-shortcut.cmd 与 hamster-pet-portable-1.6.1.exe 放在同一文件夹后，双击 create-desktop-shortcut.cmd。脚本只创建当前用户的桌面快捷方式，不启动程序；已有同名快捷方式时会提示，不会覆盖。请先把便携程序放到固定位置，移动文件夹后需删除旧快捷方式再重新创建。便携版是 Windows 免安装版，不是手机版。
 
 
 ## 知识森林 / Forest of Knowledge
