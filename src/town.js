@@ -123,7 +123,8 @@ function hamster(coat='three-line') {
 window.createTownResidentPortraits=residentPortraits;
 
 function init() {
-  const forestUI=installKnowledgeForest();
+  const forestModels={create:hamster,appearance:(rig,n)=>{setHamsterCoat(rig,n.coat,n.ageYears);rig.scale.setScalar(window.TownSimulation.growthScale(n.ageYears??.7))},animate:(rig,time,moving)=>{const {x,y,z}=rig.position,heading=rig.rotation.y;walk(rig,time,0,x,z,{moving,heading});rig.position.y+=y}};
+  const forestUI=installKnowledgeForest(forestModels);
   const host=document.querySelector('#townScene'),canvas=host?.querySelector('canvas'); if(!host||!canvas)return;
   const scene=new THREE.Scene(); scene.background=new THREE.Color(0xdce9df); scene.fog=new THREE.Fog(0xdce9df,45,85);
   const camera=new THREE.PerspectiveCamera(38,1,.1,240); camera.position.set(13,15,17);camera.lookAt(0,0,1);
@@ -171,7 +172,7 @@ function init() {
     rig.userData.gaitSample={moving,blend:Number(blend.toFixed(2)),frontLeft:Number(frontLeft.toFixed(2)),hindLeft:Number(hindLeft.toFixed(2)),lift:Number(Math.max(lift(frontLeft),lift(frontRight),lift(hindLeft),lift(hindRight)).toFixed(2))};
   }
   const labels=places.map(([name,x,z])=>{const button=document.createElement('button');button.className='town-label';button.textContent=name;button.title=name;button.onclick=()=>enterPlace(name);host.appendChild(button);return {button,point:new THREE.Vector3(x,name==='中心广场'?1.85:name==='鼠鼠学校'?4.4:2.1,z)}});
-  const forestLandscape=createKnowledgeForestLandscape(true).root;forestLandscape.position.set(0,0,-47);forestLandscape.userData.townAction='knowledge-forest';scene.add(forestLandscape);clickable.push(forestLandscape);
+  const forestLandscape=createKnowledgeForestLandscape(true,{...forestModels,onReady:()=>renderer.shadowMap.needsUpdate=true}).root;forestLandscape.position.set(0,0,-47);forestLandscape.userData.townAction='knowledge-forest';scene.add(forestLandscape);clickable.push(forestLandscape);
   const forestTrail=new THREE.Mesh(new THREE.BoxGeometry(2.4,.06,12),worldMaterial('gravel',0xd9c49b));forestTrail.position.set(0,-.65,-25);scene.add(forestTrail);
   const futureRegions=[['奶农镇',-27,0,Math.PI/2],['知识森林',0,-25,0],['未知区域',27,0,-Math.PI/2]].map(([name,x,z,rotation])=>{const canvas=document.createElement('canvas');canvas.width=1024;canvas.height=256;const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;const mesh=new THREE.Mesh(new THREE.PlaneGeometry(36,9),new THREE.MeshBasicMaterial({map:texture,transparent:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-1}));mesh.rotation.x=-Math.PI/2;mesh.rotateZ(rotation);mesh.position.set(x,-.69,z);scene.add(mesh);if(name==='知识森林'){mesh.userData.townAction='knowledge-forest';clickable.push(mesh)}return {name,canvas,texture,text:''}});
   function refreshRegionNames(){futureRegions.forEach(region=>{const title=window.TownI18n.t(region.name),status=region.name==='知识森林'?window.TownI18n.t('点击林地进入探索') : window.TownI18n.t('尚未开放'),text=title+'|'+status;if(text===region.text)return;region.text=text;const ctx=region.canvas.getContext('2d');ctx.clearRect(0,0,1024,256);ctx.textAlign='center';ctx.fillStyle='#344b37';ctx.font='600 86px "Microsoft YaHei",sans-serif';ctx.fillText(title,512,114,960);ctx.font='34px "Microsoft YaHei",sans-serif';ctx.fillText(status,512,188,940);region.texture.needsUpdate=true})}

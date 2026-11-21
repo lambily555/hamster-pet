@@ -75,4 +75,4 @@
 
 
 ## Knowledge Forest (2026-11-20)
-Forest geometry, guide characters and question text are original project content. Materials reuse the project-generated town surface textures. docs/knowledge-forest.png is an in-app render of these assets. Care sources are credited in src/forest-knowledge.js and README; no third-party photos or game models were downloaded.
+Forest terrain geometry and question text are original project content. Forest hamsters reuse the existing licensed hamster FBX and textures documented above. src/forest-surfaces.js generates original shared color and normal maps for grass, soil, gravel, stone, wood, bark, foliage, roof, enamel, metal and rippled water; no new external textures are included. docs/knowledge-forest.png is an in-app render of these assets. Care sources are credited in src/forest-knowledge.js and README.

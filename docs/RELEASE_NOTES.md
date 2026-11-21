@@ -1,9 +1,7 @@
-## 鼠鼠桌面小宠 1.6.4 / Hamster Pet 1.6.4
+## 鼠鼠桌面小宠 1.6.5 / Hamster Pet 1.6.5
 
-森林向主鼠和全部居民开放：NPC可自主来访并返回，主鼠第一视角在北侧入口按E进入。
+森林向导、营地居民、来访鼠及主鼠统一复用小镇FBX模型、毛发材质与行走动作，尺寸与第一视角眼高协调。森林草土、砂石、木材、树皮、叶面、营地平台与设施材质细化，池水加入轻微波纹，远近视图复用共享颜色/法线贴图。五处答题点支持鼠标悬停显示营地和居民名称，中英西三语同步；退出森林保留小镇共享模型资源。
 
-修复知识森林鼠标旋转、平移和缩放；加入在世居民担任的向导与首次到访指引。第一视角走近按E，上帝视角点击聚焦；听完介绍解锁营地，保留旧知识叶片。删除知识手册按钮，向导提供复习与来源。
+Forest residents now use the same hamster model, fur and walking animation as the town. Hover over camp facilities or hosts to see localized camp and resident names. Shared model resources remain intact when leaving the forest.
 
-Fix forest mouse orbit, pan and zoom. Living town residents now host the forest. First-time visitors meet the guide on foot or by clicking in map view before unlocking camps. Existing knowledge leaves are retained. Review learned answers with the guide.
-
-Windows安装版和便携版；Android/iOS共享功能同步，手机安装包尚未发布；未人工安装实测。
+Windows安装版和便携版；Android/iOS共享资源同步，手机安装包尚未发布。未人工安装实测。

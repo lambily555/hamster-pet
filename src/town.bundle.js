@@ -33,17 +33,17 @@
   var require_town_personalities = __commonJS({
     "src/town-personalities.js"(exports, module) {
       (function(root) {
-        const profiles2 = [{ "name": "\u65E0\u5398\u5934\u9F20", "lines": ["\u610F\u5927\u5229\u9762\uFF0C\u6DF7\u51DD\u571F\u4E5D\u6210\u719F\uFF0C\u62D6\u62C9\u673A\u5411\u5DE6\u62CC\u5300\uFF0C\u661F\u671F\u56DB\u6CA1\u6709\u819D\u76D6\u3002", "\u889C\u5B50\u6B63\u5728\u5B75\u5316\u5317\u6781\uFF0C\u7535\u996D\u9505\u5012\u7ACB\uFF0C\u4E09\u516C\u65A4\u665A\u5B89\uFF0C\u9999\u8549\u8BF7\u8D70\u4EBA\u5DE5\u901A\u9053\u3002"] }, { "name": "\u9876\u8C6A\u9F20", "lines": ["\u8FD9\u5F88\u8D35\u5417\uFF1F\u6211\u5BB6\u7BA1\u5BB6\u90FD\u62FFiv\u7684\u5C0F\u65B9\u5DFE\u64E6\u74DC\u5B50\u58F3\u3002", "guci\u8FD9\u5B63\u7684\u5C0F\u5305\uFF1F\u6211\u62FF\u6765\u88C5\u74DC\u5B50\u76AE\u7684\uFF0C\u6B63\u597D\u914D\u6211\u5BB6\u5783\u573E\u6876\u3002"] }, { "name": "\u4FBF\u4FBF\u95F9\u949F", "lines": ["\u4F60\u4ECA\u5929\u4FBF\u4FBF\u4E86\u5417\uFF1F\u8BB0\u5F97\u51B2\u6C34\uFF0C\u5927\u4FBF\u8D85\u4EBA\u4F1A\u67E5\u5C97\u3002", "\u522B\u7684\u4E8B\u5148\u653E\u653E\uFF0C\u51B2\u6C34\u8FD9\u4EF6\u4E8B\u4E0D\u80FD\u5FD8\u3002"] }, { "name": "\u9EDB\u7389\u5F0F\u5634\u66FF", "lines": ["\u65E9\u77E5\u4F60\u5E26\u4E86\u74DC\u5B50\u6765\uFF0C\u6211\u5C31\u4E0D\u5E26\u8FD9\u4EFD\u77DC\u6301\u4E86\u3002", "\u5012\u662F\u6211\u591A\u8651\u4E86\uFF0C\u539F\u6765\u4F60\u7684\u96F6\u98DF\u4E5F\u6709\u522B\u7684\u77E5\u5DF1\u3002"] }, { "name": "\u4E1C\u5317\u8001\u5927\u54E5", "lines": ["\u8001\u94C1\uFF0C\u6401\u8FD9\u513F\u5BFB\u601D\u5565\u5462\uFF1F\u8D70\u554A\uFF0C\u6574\u4E24\u53E3\u53BB\uFF01", "\u8FD9\u4E8B\u513F\u6574\u5F97\uFF0C\u7ED9\u6211\u90FD\u542C\u4E50\u4E86\u3002"] }, { "name": "\u6367\u8179\u5927\u7B11\u9F20", "lines": ["\u54C8\u54C8\u54C8\u54C8\uFF01\u7B49\u4F1A\u513F\uFF0C\u5148\u8BA9\u6211\u628A\u816E\u5E2E\u5B50\u7B11\u5300\u4E86\uFF01", "\u4F60\u5148\u8BF4\uFF0C\u6211\u8D1F\u8D23\u54C8\u54C8\u54C8\u54C8\uFF01"] }, { "name": "\u9634\u8C0B\u8BBA\u4FA6\u63A2", "lines": ["\u74DC\u5B50\u5C11\u4E86\u4E00\u9897\u3002\u8FD9\u80CC\u540E\uFF0C\u6050\u6015\u6709\u4E00\u5F20\u5634\u3002", "\u5148\u522B\u4E0B\u7ED3\u8BBA\uFF0C\u8BA9\u8BC1\u636E\u5728\u816E\u5E2E\u5B50\u91CC\u5F85\u4E00\u4F1A\u513F\u3002"] }, { "name": "\u5F00\u4F1A\u4E13\u4E1A\u6237", "lines": ["\u54B1\u4EEC\u5148\u5F00\u4E2A\u4F1A\uFF0C\u8BA8\u8BBA\u4ECA\u5929\u80FD\u4E0D\u80FD\u4E0D\u5F00\u4F1A\u3002", "\u6536\u5230\uFF0C\u8FD9\u4E2A\u4E8B\u6211\u8EBA\u7740\u8DDF\u8FDB\u3002"] }, { "name": "\u4F4E\u7535\u91CF\u6446\u70C2\u9F20", "lines": ["\u672C\u9F20\u7535\u91CF\u4E0D\u8DB3\uFF0C\u68A6\u60F3\u5DF2\u5207\u6362\u7701\u7535\u6A21\u5F0F\u3002", "\u542C\u61C2\u4E86\uFF0C\u4F46\u662F\u6211\u7684\u817F\u8FD8\u6CA1\u6709\u540C\u610F\u3002"] }, { "name": "\u6E05\u9192\u5730\u53D1\u75AF", "lines": ["\u6211\u672C\u6765\u662F\u6765\u529D\u67B6\u7684\uFF0C\u600E\u4E48\u5DF2\u7ECF\u5750\u4E0A\u4E3B\u684C\u4E86\uFF1F", "\u4F60\u4EEC\u51B7\u9759\u4E00\u70B9\uFF0C\u7ED9\u6211\u7559\u4E2A\u53D1\u75AF\u7684\u4F4D\u7F6E\u3002"] }];
+        const profiles3 = [{ "name": "\u65E0\u5398\u5934\u9F20", "lines": ["\u610F\u5927\u5229\u9762\uFF0C\u6DF7\u51DD\u571F\u4E5D\u6210\u719F\uFF0C\u62D6\u62C9\u673A\u5411\u5DE6\u62CC\u5300\uFF0C\u661F\u671F\u56DB\u6CA1\u6709\u819D\u76D6\u3002", "\u889C\u5B50\u6B63\u5728\u5B75\u5316\u5317\u6781\uFF0C\u7535\u996D\u9505\u5012\u7ACB\uFF0C\u4E09\u516C\u65A4\u665A\u5B89\uFF0C\u9999\u8549\u8BF7\u8D70\u4EBA\u5DE5\u901A\u9053\u3002"] }, { "name": "\u9876\u8C6A\u9F20", "lines": ["\u8FD9\u5F88\u8D35\u5417\uFF1F\u6211\u5BB6\u7BA1\u5BB6\u90FD\u62FFiv\u7684\u5C0F\u65B9\u5DFE\u64E6\u74DC\u5B50\u58F3\u3002", "guci\u8FD9\u5B63\u7684\u5C0F\u5305\uFF1F\u6211\u62FF\u6765\u88C5\u74DC\u5B50\u76AE\u7684\uFF0C\u6B63\u597D\u914D\u6211\u5BB6\u5783\u573E\u6876\u3002"] }, { "name": "\u4FBF\u4FBF\u95F9\u949F", "lines": ["\u4F60\u4ECA\u5929\u4FBF\u4FBF\u4E86\u5417\uFF1F\u8BB0\u5F97\u51B2\u6C34\uFF0C\u5927\u4FBF\u8D85\u4EBA\u4F1A\u67E5\u5C97\u3002", "\u522B\u7684\u4E8B\u5148\u653E\u653E\uFF0C\u51B2\u6C34\u8FD9\u4EF6\u4E8B\u4E0D\u80FD\u5FD8\u3002"] }, { "name": "\u9EDB\u7389\u5F0F\u5634\u66FF", "lines": ["\u65E9\u77E5\u4F60\u5E26\u4E86\u74DC\u5B50\u6765\uFF0C\u6211\u5C31\u4E0D\u5E26\u8FD9\u4EFD\u77DC\u6301\u4E86\u3002", "\u5012\u662F\u6211\u591A\u8651\u4E86\uFF0C\u539F\u6765\u4F60\u7684\u96F6\u98DF\u4E5F\u6709\u522B\u7684\u77E5\u5DF1\u3002"] }, { "name": "\u4E1C\u5317\u8001\u5927\u54E5", "lines": ["\u8001\u94C1\uFF0C\u6401\u8FD9\u513F\u5BFB\u601D\u5565\u5462\uFF1F\u8D70\u554A\uFF0C\u6574\u4E24\u53E3\u53BB\uFF01", "\u8FD9\u4E8B\u513F\u6574\u5F97\uFF0C\u7ED9\u6211\u90FD\u542C\u4E50\u4E86\u3002"] }, { "name": "\u6367\u8179\u5927\u7B11\u9F20", "lines": ["\u54C8\u54C8\u54C8\u54C8\uFF01\u7B49\u4F1A\u513F\uFF0C\u5148\u8BA9\u6211\u628A\u816E\u5E2E\u5B50\u7B11\u5300\u4E86\uFF01", "\u4F60\u5148\u8BF4\uFF0C\u6211\u8D1F\u8D23\u54C8\u54C8\u54C8\u54C8\uFF01"] }, { "name": "\u9634\u8C0B\u8BBA\u4FA6\u63A2", "lines": ["\u74DC\u5B50\u5C11\u4E86\u4E00\u9897\u3002\u8FD9\u80CC\u540E\uFF0C\u6050\u6015\u6709\u4E00\u5F20\u5634\u3002", "\u5148\u522B\u4E0B\u7ED3\u8BBA\uFF0C\u8BA9\u8BC1\u636E\u5728\u816E\u5E2E\u5B50\u91CC\u5F85\u4E00\u4F1A\u513F\u3002"] }, { "name": "\u5F00\u4F1A\u4E13\u4E1A\u6237", "lines": ["\u54B1\u4EEC\u5148\u5F00\u4E2A\u4F1A\uFF0C\u8BA8\u8BBA\u4ECA\u5929\u80FD\u4E0D\u80FD\u4E0D\u5F00\u4F1A\u3002", "\u6536\u5230\uFF0C\u8FD9\u4E2A\u4E8B\u6211\u8EBA\u7740\u8DDF\u8FDB\u3002"] }, { "name": "\u4F4E\u7535\u91CF\u6446\u70C2\u9F20", "lines": ["\u672C\u9F20\u7535\u91CF\u4E0D\u8DB3\uFF0C\u68A6\u60F3\u5DF2\u5207\u6362\u7701\u7535\u6A21\u5F0F\u3002", "\u542C\u61C2\u4E86\uFF0C\u4F46\u662F\u6211\u7684\u817F\u8FD8\u6CA1\u6709\u540C\u610F\u3002"] }, { "name": "\u6E05\u9192\u5730\u53D1\u75AF", "lines": ["\u6211\u672C\u6765\u662F\u6765\u529D\u67B6\u7684\uFF0C\u600E\u4E48\u5DF2\u7ECF\u5750\u4E0A\u4E3B\u684C\u4E86\uFF1F", "\u4F60\u4EEC\u51B7\u9759\u4E00\u70B9\uFF0C\u7ED9\u6211\u7559\u4E2A\u53D1\u75AF\u7684\u4F4D\u7F6E\u3002"] }];
         function index(id) {
           if (id === "main") return 9;
           const value = String(id || "resident"), original = /^npc-(\d+)$/.exec(value);
           if (original) return Number(original[1]) % 9;
-          let hash2 = 0;
-          for (const ch of value) hash2 = hash2 * 31 + ch.codePointAt(0) >>> 0;
-          return hash2 % 9;
+          let hash3 = 0;
+          for (const ch of value) hash3 = hash3 * 31 + ch.codePointAt(0) >>> 0;
+          return hash3 % 9;
         }
         function profile(id) {
-          return profiles2[index(id)];
+          return profiles3[index(id)];
         }
         root.TownPersonalities = { index, profile, line: (id, turn = 0) => profile(id).lines[Math.abs(turn) % 2] };
         if (typeof module === "object" && module.exports) module.exports = root.TownPersonalities;
@@ -7427,10 +7427,10 @@
       }
       output.object = object;
       return output;
-      function extractFromCache(cache) {
+      function extractFromCache(cache2) {
         const values = [];
-        for (const key2 in cache) {
-          const data = cache[key2];
+        for (const key2 in cache2) {
+          const data = cache2[key2];
           delete data.metadata;
           values.push(data);
         }
@@ -11812,10 +11812,10 @@
       if (this.toneMapped === false) data.toneMapped = false;
       if (this.fog === false) data.fog = false;
       if (Object.keys(this.userData).length > 0) data.userData = this.userData;
-      function extractFromCache(cache) {
+      function extractFromCache(cache2) {
         const values = [];
-        for (const key2 in cache) {
-          const data2 = cache[key2];
+        for (const key2 in cache2) {
+          const data2 = cache2[key2];
           delete data2.metadata;
           values.push(data2);
         }
@@ -15105,18 +15105,18 @@
         return this.cacheArcLengths;
       }
       this.needsUpdate = false;
-      const cache = [];
+      const cache2 = [];
       let current, last = this.getPoint(0);
       let sum = 0;
-      cache.push(0);
+      cache2.push(0);
       for (let p = 1; p <= divisions; p++) {
         current = this.getPoint(p / divisions);
         sum += current.distanceTo(last);
-        cache.push(sum);
+        cache2.push(sum);
         last = current;
       }
-      this.cacheArcLengths = cache;
-      return cache;
+      this.cacheArcLengths = cache2;
+      return cache2;
     }
     /**
      * Update the cumulative segment distance cache. The method must be called
@@ -24976,7 +24976,7 @@
       return false;
     }
     function saveCache(object, geometry, program, index) {
-      const cache = {};
+      const cache2 = {};
       const attributes2 = geometry.attributes;
       let attributesNum = 0;
       const programAttributes = program.getAttributes();
@@ -24993,11 +24993,11 @@
           if (attribute && attribute.data) {
             data.data = attribute.data;
           }
-          cache[name] = data;
+          cache2[name] = data;
           attributesNum++;
         }
       }
-      currentState.attributes = cache;
+      currentState.attributes = cache2;
       currentState.attributesNum = attributesNum;
       currentState.index = index;
     }
@@ -27077,213 +27077,213 @@
     return r;
   }
   function setValueV1f(gl, v) {
-    const cache = this.cache;
-    if (cache[0] === v) return;
+    const cache2 = this.cache;
+    if (cache2[0] === v) return;
     gl.uniform1f(this.addr, v);
-    cache[0] = v;
+    cache2[0] = v;
   }
   function setValueV2f(gl, v) {
-    const cache = this.cache;
+    const cache2 = this.cache;
     if (v.x !== void 0) {
-      if (cache[0] !== v.x || cache[1] !== v.y) {
+      if (cache2[0] !== v.x || cache2[1] !== v.y) {
         gl.uniform2f(this.addr, v.x, v.y);
-        cache[0] = v.x;
-        cache[1] = v.y;
+        cache2[0] = v.x;
+        cache2[1] = v.y;
       }
     } else {
-      if (arraysEqual(cache, v)) return;
+      if (arraysEqual(cache2, v)) return;
       gl.uniform2fv(this.addr, v);
-      copyArray(cache, v);
+      copyArray(cache2, v);
     }
   }
   function setValueV3f(gl, v) {
-    const cache = this.cache;
+    const cache2 = this.cache;
     if (v.x !== void 0) {
-      if (cache[0] !== v.x || cache[1] !== v.y || cache[2] !== v.z) {
+      if (cache2[0] !== v.x || cache2[1] !== v.y || cache2[2] !== v.z) {
         gl.uniform3f(this.addr, v.x, v.y, v.z);
-        cache[0] = v.x;
-        cache[1] = v.y;
-        cache[2] = v.z;
+        cache2[0] = v.x;
+        cache2[1] = v.y;
+        cache2[2] = v.z;
       }
     } else if (v.r !== void 0) {
-      if (cache[0] !== v.r || cache[1] !== v.g || cache[2] !== v.b) {
+      if (cache2[0] !== v.r || cache2[1] !== v.g || cache2[2] !== v.b) {
         gl.uniform3f(this.addr, v.r, v.g, v.b);
-        cache[0] = v.r;
-        cache[1] = v.g;
-        cache[2] = v.b;
+        cache2[0] = v.r;
+        cache2[1] = v.g;
+        cache2[2] = v.b;
       }
     } else {
-      if (arraysEqual(cache, v)) return;
+      if (arraysEqual(cache2, v)) return;
       gl.uniform3fv(this.addr, v);
-      copyArray(cache, v);
+      copyArray(cache2, v);
     }
   }
   function setValueV4f(gl, v) {
-    const cache = this.cache;
+    const cache2 = this.cache;
     if (v.x !== void 0) {
-      if (cache[0] !== v.x || cache[1] !== v.y || cache[2] !== v.z || cache[3] !== v.w) {
+      if (cache2[0] !== v.x || cache2[1] !== v.y || cache2[2] !== v.z || cache2[3] !== v.w) {
         gl.uniform4f(this.addr, v.x, v.y, v.z, v.w);
-        cache[0] = v.x;
-        cache[1] = v.y;
-        cache[2] = v.z;
-        cache[3] = v.w;
+        cache2[0] = v.x;
+        cache2[1] = v.y;
+        cache2[2] = v.z;
+        cache2[3] = v.w;
       }
     } else {
-      if (arraysEqual(cache, v)) return;
+      if (arraysEqual(cache2, v)) return;
       gl.uniform4fv(this.addr, v);
-      copyArray(cache, v);
+      copyArray(cache2, v);
     }
   }
   function setValueM2(gl, v) {
-    const cache = this.cache;
+    const cache2 = this.cache;
     const elements = v.elements;
     if (elements === void 0) {
-      if (arraysEqual(cache, v)) return;
+      if (arraysEqual(cache2, v)) return;
       gl.uniformMatrix2fv(this.addr, false, v);
-      copyArray(cache, v);
+      copyArray(cache2, v);
     } else {
-      if (arraysEqual(cache, elements)) return;
+      if (arraysEqual(cache2, elements)) return;
       mat2array.set(elements);
       gl.uniformMatrix2fv(this.addr, false, mat2array);
-      copyArray(cache, elements);
+      copyArray(cache2, elements);
     }
   }
   function setValueM3(gl, v) {
-    const cache = this.cache;
+    const cache2 = this.cache;
     const elements = v.elements;
     if (elements === void 0) {
-      if (arraysEqual(cache, v)) return;
+      if (arraysEqual(cache2, v)) return;
       gl.uniformMatrix3fv(this.addr, false, v);
-      copyArray(cache, v);
+      copyArray(cache2, v);
     } else {
-      if (arraysEqual(cache, elements)) return;
+      if (arraysEqual(cache2, elements)) return;
       mat3array.set(elements);
       gl.uniformMatrix3fv(this.addr, false, mat3array);
-      copyArray(cache, elements);
+      copyArray(cache2, elements);
     }
   }
   function setValueM4(gl, v) {
-    const cache = this.cache;
+    const cache2 = this.cache;
     const elements = v.elements;
     if (elements === void 0) {
-      if (arraysEqual(cache, v)) return;
+      if (arraysEqual(cache2, v)) return;
       gl.uniformMatrix4fv(this.addr, false, v);
-      copyArray(cache, v);
+      copyArray(cache2, v);
     } else {
-      if (arraysEqual(cache, elements)) return;
+      if (arraysEqual(cache2, elements)) return;
       mat4array.set(elements);
       gl.uniformMatrix4fv(this.addr, false, mat4array);
-      copyArray(cache, elements);
+      copyArray(cache2, elements);
     }
   }
   function setValueV1i(gl, v) {
-    const cache = this.cache;
-    if (cache[0] === v) return;
+    const cache2 = this.cache;
+    if (cache2[0] === v) return;
     gl.uniform1i(this.addr, v);
-    cache[0] = v;
+    cache2[0] = v;
   }
   function setValueV2i(gl, v) {
-    const cache = this.cache;
+    const cache2 = this.cache;
     if (v.x !== void 0) {
-      if (cache[0] !== v.x || cache[1] !== v.y) {
+      if (cache2[0] !== v.x || cache2[1] !== v.y) {
         gl.uniform2i(this.addr, v.x, v.y);
-        cache[0] = v.x;
-        cache[1] = v.y;
+        cache2[0] = v.x;
+        cache2[1] = v.y;
       }
     } else {
-      if (arraysEqual(cache, v)) return;
+      if (arraysEqual(cache2, v)) return;
       gl.uniform2iv(this.addr, v);
-      copyArray(cache, v);
+      copyArray(cache2, v);
     }
   }
   function setValueV3i(gl, v) {
-    const cache = this.cache;
+    const cache2 = this.cache;
     if (v.x !== void 0) {
-      if (cache[0] !== v.x || cache[1] !== v.y || cache[2] !== v.z) {
+      if (cache2[0] !== v.x || cache2[1] !== v.y || cache2[2] !== v.z) {
         gl.uniform3i(this.addr, v.x, v.y, v.z);
-        cache[0] = v.x;
-        cache[1] = v.y;
-        cache[2] = v.z;
+        cache2[0] = v.x;
+        cache2[1] = v.y;
+        cache2[2] = v.z;
       }
     } else {
-      if (arraysEqual(cache, v)) return;
+      if (arraysEqual(cache2, v)) return;
       gl.uniform3iv(this.addr, v);
-      copyArray(cache, v);
+      copyArray(cache2, v);
     }
   }
   function setValueV4i(gl, v) {
-    const cache = this.cache;
+    const cache2 = this.cache;
     if (v.x !== void 0) {
-      if (cache[0] !== v.x || cache[1] !== v.y || cache[2] !== v.z || cache[3] !== v.w) {
+      if (cache2[0] !== v.x || cache2[1] !== v.y || cache2[2] !== v.z || cache2[3] !== v.w) {
         gl.uniform4i(this.addr, v.x, v.y, v.z, v.w);
-        cache[0] = v.x;
-        cache[1] = v.y;
-        cache[2] = v.z;
-        cache[3] = v.w;
+        cache2[0] = v.x;
+        cache2[1] = v.y;
+        cache2[2] = v.z;
+        cache2[3] = v.w;
       }
     } else {
-      if (arraysEqual(cache, v)) return;
+      if (arraysEqual(cache2, v)) return;
       gl.uniform4iv(this.addr, v);
-      copyArray(cache, v);
+      copyArray(cache2, v);
     }
   }
   function setValueV1ui(gl, v) {
-    const cache = this.cache;
-    if (cache[0] === v) return;
+    const cache2 = this.cache;
+    if (cache2[0] === v) return;
     gl.uniform1ui(this.addr, v);
-    cache[0] = v;
+    cache2[0] = v;
   }
   function setValueV2ui(gl, v) {
-    const cache = this.cache;
+    const cache2 = this.cache;
     if (v.x !== void 0) {
-      if (cache[0] !== v.x || cache[1] !== v.y) {
+      if (cache2[0] !== v.x || cache2[1] !== v.y) {
         gl.uniform2ui(this.addr, v.x, v.y);
-        cache[0] = v.x;
-        cache[1] = v.y;
+        cache2[0] = v.x;
+        cache2[1] = v.y;
       }
     } else {
-      if (arraysEqual(cache, v)) return;
+      if (arraysEqual(cache2, v)) return;
       gl.uniform2uiv(this.addr, v);
-      copyArray(cache, v);
+      copyArray(cache2, v);
     }
   }
   function setValueV3ui(gl, v) {
-    const cache = this.cache;
+    const cache2 = this.cache;
     if (v.x !== void 0) {
-      if (cache[0] !== v.x || cache[1] !== v.y || cache[2] !== v.z) {
+      if (cache2[0] !== v.x || cache2[1] !== v.y || cache2[2] !== v.z) {
         gl.uniform3ui(this.addr, v.x, v.y, v.z);
-        cache[0] = v.x;
-        cache[1] = v.y;
-        cache[2] = v.z;
+        cache2[0] = v.x;
+        cache2[1] = v.y;
+        cache2[2] = v.z;
       }
     } else {
-      if (arraysEqual(cache, v)) return;
+      if (arraysEqual(cache2, v)) return;
       gl.uniform3uiv(this.addr, v);
-      copyArray(cache, v);
+      copyArray(cache2, v);
     }
   }
   function setValueV4ui(gl, v) {
-    const cache = this.cache;
+    const cache2 = this.cache;
     if (v.x !== void 0) {
-      if (cache[0] !== v.x || cache[1] !== v.y || cache[2] !== v.z || cache[3] !== v.w) {
+      if (cache2[0] !== v.x || cache2[1] !== v.y || cache2[2] !== v.z || cache2[3] !== v.w) {
         gl.uniform4ui(this.addr, v.x, v.y, v.z, v.w);
-        cache[0] = v.x;
-        cache[1] = v.y;
-        cache[2] = v.z;
-        cache[3] = v.w;
+        cache2[0] = v.x;
+        cache2[1] = v.y;
+        cache2[2] = v.z;
+        cache2[3] = v.w;
       }
     } else {
-      if (arraysEqual(cache, v)) return;
+      if (arraysEqual(cache2, v)) return;
       gl.uniform4uiv(this.addr, v);
-      copyArray(cache, v);
+      copyArray(cache2, v);
     }
   }
   function setValueT1(gl, v, textures2) {
-    const cache = this.cache;
+    const cache2 = this.cache;
     const unit = textures2.allocateTextureUnit();
-    if (cache[0] !== unit) {
+    if (cache2[0] !== unit) {
       gl.uniform1i(this.addr, unit);
-      cache[0] = unit;
+      cache2[0] = unit;
     }
     let emptyTexture2D;
     if (this.type === gl.SAMPLER_2D_SHADOW) {
@@ -27295,29 +27295,29 @@
     textures2.setTexture2D(v || emptyTexture2D, unit);
   }
   function setValueT3D1(gl, v, textures2) {
-    const cache = this.cache;
+    const cache2 = this.cache;
     const unit = textures2.allocateTextureUnit();
-    if (cache[0] !== unit) {
+    if (cache2[0] !== unit) {
       gl.uniform1i(this.addr, unit);
-      cache[0] = unit;
+      cache2[0] = unit;
     }
     textures2.setTexture3D(v || empty3dTexture, unit);
   }
   function setValueT6(gl, v, textures2) {
-    const cache = this.cache;
+    const cache2 = this.cache;
     const unit = textures2.allocateTextureUnit();
-    if (cache[0] !== unit) {
+    if (cache2[0] !== unit) {
       gl.uniform1i(this.addr, unit);
-      cache[0] = unit;
+      cache2[0] = unit;
     }
     textures2.setTextureCube(v || emptyCubeTexture, unit);
   }
   function setValueT2DArray1(gl, v, textures2) {
-    const cache = this.cache;
+    const cache2 = this.cache;
     const unit = textures2.allocateTextureUnit();
-    if (cache[0] !== unit) {
+    if (cache2[0] !== unit) {
       gl.uniform1i(this.addr, unit);
-      cache[0] = unit;
+      cache2[0] = unit;
     }
     textures2.setTexture2DArray(v || emptyArrayTexture, unit);
   }
@@ -27458,12 +27458,12 @@
     gl.uniform4uiv(this.addr, v);
   }
   function setValueT1Array(gl, v, textures2) {
-    const cache = this.cache;
+    const cache2 = this.cache;
     const n = v.length;
     const units = allocTexUnits(textures2, n);
-    if (!arraysEqual(cache, units)) {
+    if (!arraysEqual(cache2, units)) {
       gl.uniform1iv(this.addr, units);
-      copyArray(cache, units);
+      copyArray(cache2, units);
     }
     let emptyTexture2D;
     if (this.type === gl.SAMPLER_2D_SHADOW) {
@@ -27476,36 +27476,36 @@
     }
   }
   function setValueT3DArray(gl, v, textures2) {
-    const cache = this.cache;
+    const cache2 = this.cache;
     const n = v.length;
     const units = allocTexUnits(textures2, n);
-    if (!arraysEqual(cache, units)) {
+    if (!arraysEqual(cache2, units)) {
       gl.uniform1iv(this.addr, units);
-      copyArray(cache, units);
+      copyArray(cache2, units);
     }
     for (let i2 = 0; i2 !== n; ++i2) {
       textures2.setTexture3D(v[i2] || empty3dTexture, units[i2]);
     }
   }
   function setValueT6Array(gl, v, textures2) {
-    const cache = this.cache;
+    const cache2 = this.cache;
     const n = v.length;
     const units = allocTexUnits(textures2, n);
-    if (!arraysEqual(cache, units)) {
+    if (!arraysEqual(cache2, units)) {
       gl.uniform1iv(this.addr, units);
-      copyArray(cache, units);
+      copyArray(cache2, units);
     }
     for (let i2 = 0; i2 !== n; ++i2) {
       textures2.setTextureCube(v[i2] || emptyCubeTexture, units[i2]);
     }
   }
   function setValueT2DArrayArray(gl, v, textures2) {
-    const cache = this.cache;
+    const cache2 = this.cache;
     const n = v.length;
     const units = allocTexUnits(textures2, n);
-    if (!arraysEqual(cache, units)) {
+    if (!arraysEqual(cache2, units)) {
       gl.uniform1iv(this.addr, units);
-      copyArray(cache, units);
+      copyArray(cache2, units);
     }
     for (let i2 = 0; i2 !== n; ++i2) {
       textures2.setTexture2DArray(v[i2] || emptyArrayTexture, units[i2]);
@@ -28344,20 +28344,20 @@
       this.materialCache.clear();
     }
     _getShaderCacheForMaterial(material3) {
-      const cache = this.materialCache;
-      let set = cache.get(material3);
+      const cache2 = this.materialCache;
+      let set = cache2.get(material3);
       if (set === void 0) {
         set = /* @__PURE__ */ new Set();
-        cache.set(material3, set);
+        cache2.set(material3, set);
       }
       return set;
     }
     _getShaderStage(code) {
-      const cache = this.shaderCache;
-      let stage = cache.get(code);
+      const cache2 = this.shaderCache;
+      let stage = cache2.get(code);
       if (stage === void 0) {
         stage = new WebGLShaderStage(code);
-        cache.set(code, stage);
+        cache2.set(code, stage);
       }
       return stage;
     }
@@ -29131,7 +29131,7 @@
     return (lightB.castShadow ? 2 : 0) - (lightA.castShadow ? 2 : 0) + (lightB.map ? 1 : 0) - (lightA.map ? 1 : 0);
   }
   function WebGLLights(extensions) {
-    const cache = new UniformsCache();
+    const cache2 = new UniformsCache();
     const shadowCache = ShadowUniformsCache();
     const state = {
       version: 0,
@@ -29211,7 +29211,7 @@
           }
           numLightProbes++;
         } else if (light.isDirectionalLight) {
-          const uniforms = cache.get(light);
+          const uniforms = cache2.get(light);
           uniforms.color.copy(light.color).multiplyScalar(light.intensity);
           if (light.castShadow) {
             const shadow = light.shadow;
@@ -29229,7 +29229,7 @@
           state.directional[directionalLength] = uniforms;
           directionalLength++;
         } else if (light.isSpotLight) {
-          const uniforms = cache.get(light);
+          const uniforms = cache2.get(light);
           uniforms.position.setFromMatrixPosition(light.matrixWorld);
           uniforms.color.copy(color).multiplyScalar(intensity);
           uniforms.distance = distance3;
@@ -29258,14 +29258,14 @@
           }
           spotLength++;
         } else if (light.isRectAreaLight) {
-          const uniforms = cache.get(light);
+          const uniforms = cache2.get(light);
           uniforms.color.copy(color).multiplyScalar(intensity);
           uniforms.halfWidth.set(light.width * 0.5, 0, 0);
           uniforms.halfHeight.set(0, light.height * 0.5, 0);
           state.rectArea[rectAreaLength] = uniforms;
           rectAreaLength++;
         } else if (light.isPointLight) {
-          const uniforms = cache.get(light);
+          const uniforms = cache2.get(light);
           uniforms.color.copy(light.color).multiplyScalar(light.intensity);
           uniforms.distance = light.distance;
           uniforms.decay = light.decay;
@@ -29287,7 +29287,7 @@
           state.point[pointLength] = uniforms;
           pointLength++;
         } else if (light.isHemisphereLight) {
-          const uniforms = cache.get(light);
+          const uniforms = cache2.get(light);
           uniforms.skyColor.copy(light.color).multiplyScalar(intensity);
           uniforms.groundColor.copy(light.groundColor).multiplyScalar(intensity);
           state.hemi[hemiLength] = uniforms;
@@ -29306,8 +29306,8 @@
       state.ambient[0] = r;
       state.ambient[1] = g;
       state.ambient[2] = b;
-      const hash2 = state.hash;
-      if (hash2.directionalLength !== directionalLength || hash2.pointLength !== pointLength || hash2.spotLength !== spotLength || hash2.rectAreaLength !== rectAreaLength || hash2.hemiLength !== hemiLength || hash2.numDirectionalShadows !== numDirectionalShadows || hash2.numPointShadows !== numPointShadows || hash2.numSpotShadows !== numSpotShadows || hash2.numSpotMaps !== numSpotMaps || hash2.numLightProbes !== numLightProbes) {
+      const hash3 = state.hash;
+      if (hash3.directionalLength !== directionalLength || hash3.pointLength !== pointLength || hash3.spotLength !== spotLength || hash3.rectAreaLength !== rectAreaLength || hash3.hemiLength !== hemiLength || hash3.numDirectionalShadows !== numDirectionalShadows || hash3.numPointShadows !== numPointShadows || hash3.numSpotShadows !== numSpotShadows || hash3.numSpotMaps !== numSpotMaps || hash3.numLightProbes !== numLightProbes) {
         state.directional.length = directionalLength;
         state.spot.length = spotLength;
         state.rectArea.length = rectAreaLength;
@@ -29325,16 +29325,16 @@
         state.spotLightMap.length = numSpotMaps;
         state.numSpotLightShadowsWithMaps = numSpotShadowsWithMaps;
         state.numLightProbes = numLightProbes;
-        hash2.directionalLength = directionalLength;
-        hash2.pointLength = pointLength;
-        hash2.spotLength = spotLength;
-        hash2.rectAreaLength = rectAreaLength;
-        hash2.hemiLength = hemiLength;
-        hash2.numDirectionalShadows = numDirectionalShadows;
-        hash2.numPointShadows = numPointShadows;
-        hash2.numSpotShadows = numSpotShadows;
-        hash2.numSpotMaps = numSpotMaps;
-        hash2.numLightProbes = numLightProbes;
+        hash3.directionalLength = directionalLength;
+        hash3.pointLength = pointLength;
+        hash3.spotLength = spotLength;
+        hash3.rectAreaLength = rectAreaLength;
+        hash3.hemiLength = hemiLength;
+        hash3.numDirectionalShadows = numDirectionalShadows;
+        hash3.numPointShadows = numPointShadows;
+        hash3.numSpotShadows = numSpotShadows;
+        hash3.numSpotMaps = numSpotMaps;
+        hash3.numLightProbes = numLightProbes;
         state.version = nextVersion++;
       }
     }
@@ -29790,12 +29790,12 @@
       const material3 = event.target;
       material3.removeEventListener("dispose", onMaterialDispose);
       for (const id in _materialCache) {
-        const cache = _materialCache[id];
+        const cache2 = _materialCache[id];
         const uuid = event.target.uuid;
-        if (uuid in cache) {
-          const shadowMaterial = cache[uuid];
+        if (uuid in cache2) {
+          const shadowMaterial = cache2[uuid];
           shadowMaterial.dispose();
-          delete cache[uuid];
+          delete cache2[uuid];
         }
       }
     }
@@ -32952,22 +32952,22 @@ void main() {
     function updateBufferData(uniformsGroup) {
       const buffer = buffers[uniformsGroup.id];
       const uniforms = uniformsGroup.uniforms;
-      const cache = uniformsGroup.__cache;
+      const cache2 = uniformsGroup.__cache;
       gl.bindBuffer(gl.UNIFORM_BUFFER, buffer);
       for (let i2 = 0, il = uniforms.length; i2 < il; i2++) {
         const uniformItem = uniforms[i2];
         if (Array.isArray(uniformItem)) {
           for (let j = 0, jl = uniformItem.length; j < jl; j++) {
-            updateUniform(uniformItem[j], i2, j, cache);
+            updateUniform(uniformItem[j], i2, j, cache2);
           }
         } else {
-          updateUniform(uniformItem, i2, 0, cache);
+          updateUniform(uniformItem, i2, 0, cache2);
         }
       }
       gl.bindBuffer(gl.UNIFORM_BUFFER, null);
     }
-    function updateUniform(uniform, index, indexArray, cache) {
-      if (hasUniformChanged(uniform, index, indexArray, cache) === true) {
+    function updateUniform(uniform, index, indexArray, cache2) {
+      if (hasUniformChanged(uniform, index, indexArray, cache2) === true) {
         const offset = uniform.__offset;
         const value = uniform.value;
         if (Array.isArray(value)) {
@@ -33008,23 +33008,23 @@ void main() {
         value.toArray(data, offset);
       }
     }
-    function hasUniformChanged(uniform, index, indexArray, cache) {
+    function hasUniformChanged(uniform, index, indexArray, cache2) {
       const value = uniform.value;
       const indexString = index + "_" + indexArray;
-      if (cache[indexString] === void 0) {
+      if (cache2[indexString] === void 0) {
         if (typeof value === "number" || typeof value === "boolean") {
-          cache[indexString] = value;
+          cache2[indexString] = value;
         } else if (ArrayBuffer.isView(value)) {
-          cache[indexString] = value.slice();
+          cache2[indexString] = value.slice();
         } else {
-          cache[indexString] = value.clone();
+          cache2[indexString] = value.clone();
         }
         return true;
       } else {
-        const cachedObject = cache[indexString];
+        const cachedObject = cache2[indexString];
         if (typeof value === "number" || typeof value === "boolean") {
           if (cachedObject !== value) {
-            cache[indexString] = value;
+            cache2[indexString] = value;
             return true;
           }
         } else if (ArrayBuffer.isView(value)) {
@@ -35647,6 +35647,137 @@ void main() {
     });
   }
 
+  // src/forest-surfaces.js
+  var profiles2 = { grass: [2.4, 1, 0.5], soil: [1.4, 1, 0.75], gravel: [0.9, 0.96, 0.65], stone: [0.65, 0.86, 0.55], wood: [0.9, 0.68, 0.45], bark: [0.55, 0.97, 1.1], foliage: [1, 0.96, 0.25], roof: [0.8, 0.9, 0.6], enamel: [0.5, 0.32, 0.08], metal: [0.45, 0.45, 0.08], paint: [0.7, 0.8, 0.1] };
+  var cache = /* @__PURE__ */ new Map();
+  var hash2 = (x2, y) => {
+    let n = Math.imul(x2, 374761393) ^ Math.imul(y, 668265263);
+    n = Math.imul(n ^ n >>> 13, 1274126177);
+    return ((n ^ n >>> 16) >>> 0) / 4294967295;
+  };
+  function noise2(u, v, px2 = 16, py2 = px2) {
+    const x2 = Math.floor(u), y = Math.floor(v), a = u - x2, b = v - y, s = a * a * (3 - 2 * a), t = b * b * (3 - 2 * b), h = (dx, dy) => hash2(((x2 + dx) % px2 + px2) % px2, ((y + dy) % py2 + py2) % py2);
+    return MathUtils.lerp(MathUtils.lerp(h(0, 0), h(1, 0), s), MathUtils.lerp(h(0, 1), h(1, 1), s), t);
+  }
+  function maps2(kind) {
+    if (cache.has(kind)) return cache.get(kind);
+    const size = ["grass", "wood", "bark", "gravel"].includes(kind) ? 512 : 256, pixels = new Uint8Array(size * size * 4), height = new Float32Array(size * size);
+    for (let y = 0; y < size; y++) for (let x2 = 0; x2 < size; x2++) {
+      const u = x2 / size, v = y / size, broad = noise2(u * 8, v * 8, 8), fine = noise2(u * 64, v * 64, 64), grain = hash2(x2, y);
+      let h = 0.6 * broad + 0.25 * fine + 0.15 * grain, r = 0.87 + 0.13 * h, g = r, b = r;
+      if (kind === "grass") {
+        const blades = noise2(u * 128, v * 32, 128, 32), earth = Math.max(0, 0.34 - broad) * 0.8;
+        h = 0.45 * broad + 0.35 * blades + 0.2 * grain;
+        r = 0.74 + 0.18 * h + earth * 0.08;
+        g = 0.85 + 0.15 * h - earth * 0.06;
+        b = 0.64 + 0.18 * h - earth * 0.08;
+      } else if (kind === "soil") {
+        h = 0.38 * broad + 0.35 * fine + 0.27 * grain;
+        r = 0.65 + 0.32 * h;
+        g = 0.59 + 0.33 * h;
+        b = 0.49 + 0.34 * h;
+      } else if (kind === "wood" || kind === "bark") {
+        const warp = Math.sin(v * Math.PI * 2) * 0.7 + noise2(u * 8, v * 2, 8, 2) * 1.5, lines = noise2(u * 64 + warp, v * 4, 64, 4), groove = Math.pow(1 - lines, 5);
+        h = 0.65 * lines + 0.2 * broad + 0.15 * grain;
+        r = (kind === "bark" ? 0.57 : 0.75) + h * 0.25 - groove * 0.14;
+        g = r - (kind === "bark" ? 0.055 : 0.025);
+        b = r - 0.08;
+      } else if (kind === "gravel" || kind === "stone") {
+        const px2 = u * (kind === "gravel" ? 64 : 24), py2 = v * (kind === "gravel" ? 64 : 24), ix = Math.floor(px2), iy = Math.floor(py2);
+        let nearest = 10, shade = 0.5;
+        for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
+          const sx = ix + dx, sy = iy + dy, d = Math.hypot(px2 - sx - hash2(sx, sy) * 0.7, py2 - sy - hash2(sy, sx) * 0.7);
+          if (d < nearest) {
+            nearest = d;
+            shade = hash2(sx, sy);
+          }
+        }
+        h = 0.4 + shade * 0.35 - Math.max(0, nearest - 0.4) * 0.5;
+        r = 0.7 + shade * 0.22 + grain * 0.06;
+        g = r * 0.98;
+        b = r * 0.92;
+      } else if (kind === "foliage") {
+        const lx = (u * 48 + Math.floor(v * 40) % 2 * 0.5) % 1 - 0.5, ly = v * 40 % 1 - 0.5, leaf = Math.max(0, 1 - (lx * lx / 0.19 + ly * ly / 0.24)), vein = Math.max(0, 1 - Math.abs(lx) * 35) * leaf;
+        h = 0.25 + leaf * 0.4 + vein * 0.08 + fine * 0.12;
+        r = 0.76 + 0.15 * leaf + grain * 0.035;
+        g = 0.86 + 0.13 * leaf;
+        b = 0.66 + 0.17 * leaf;
+      } else if (kind === "roof") {
+        const seam = Math.min(u * 8 % 1, 1 - u * 8 % 1) < 0.045 || Math.min(v * 8 % 1, 1 - v * 8 % 1) < 0.055 ? 1 : 0;
+        h = 0.55 + 0.25 * fine - seam * 0.5;
+        r = 0.85 + 0.1 * fine - seam * 0.25;
+        g = r;
+        b = r * 0.97;
+      }
+      const i2 = (y * size + x2) * 4;
+      height[y * size + x2] = h;
+      pixels[i2] = Math.round(255 * MathUtils.clamp(r, 0, 1));
+      pixels[i2 + 1] = Math.round(255 * MathUtils.clamp(g, 0, 1));
+      pixels[i2 + 2] = Math.round(255 * MathUtils.clamp(b, 0, 1));
+      pixels[i2 + 3] = 255;
+    }
+    const normals = new Uint8Array(pixels.length);
+    for (let y = 0; y < size; y++) for (let x2 = 0; x2 < size; x2++) {
+      const h = (dx, dy) => height[(y + dy + size) % size * size + (x2 + dx + size) % size], nx = (h(-1, 0) - h(1, 0)) * 2, ny = (h(0, -1) - h(0, 1)) * 2, len = Math.hypot(nx, ny, 1), i2 = (y * size + x2) * 4;
+      normals[i2] = Math.round((nx / len * 0.5 + 0.5) * 255);
+      normals[i2 + 1] = Math.round((ny / len * 0.5 + 0.5) * 255);
+      normals[i2 + 2] = Math.round((1 / len * 0.5 + 0.5) * 255);
+      normals[i2 + 3] = 255;
+    }
+    const texture3 = (data, space) => {
+      const t = new DataTexture(data, size, size);
+      t.colorSpace = space;
+      t.wrapS = t.wrapT = RepeatWrapping;
+      t.minFilter = LinearMipmapLinearFilter;
+      t.magFilter = LinearFilter;
+      t.generateMipmaps = true;
+      t.anisotropy = 4;
+      t.needsUpdate = true;
+      return t;
+    };
+    const result = { map: texture3(pixels, SRGBColorSpace), normalMap: texture3(normals, NoColorSpace) };
+    cache.set(kind, result);
+    return result;
+  }
+  function forestMaterial(kind, color) {
+    if (kind === "water") {
+      if (!cache.has("water")) {
+        const size = 128, data = new Uint8Array(size * size * 4);
+        for (let y = 0; y < size; y++) for (let x2 = 0; x2 < size; x2++) {
+          const i2 = (y * size + x2) * 4;
+          data[i2] = 128 + Math.round(Math.sin((x2 * 3 + y) * Math.PI * 2 / size) * 24);
+          data[i2 + 1] = 128 + Math.round(Math.cos((y * 4 - x2) * Math.PI * 2 / size) * 24);
+          data[i2 + 2] = 251;
+          data[i2 + 3] = 255;
+        }
+        const normal = new DataTexture(data, size, size);
+        normal.wrapS = normal.wrapT = RepeatWrapping;
+        normal.minFilter = normal.magFilter = LinearFilter;
+        normal.needsUpdate = true;
+        cache.set("water", { normalMap: normal });
+      }
+      const m2 = new MeshPhysicalMaterial({ color, normalMap: cache.get("water").normalMap, normalScale: new Vector2(0.35, 0.35), roughness: 0.18, metalness: 0.08, transparent: true, opacity: 0.86, clearcoat: 1, clearcoatRoughness: 0.22, depthWrite: false });
+      m2.userData.forestWater = true;
+      return m2;
+    }
+    const p = profiles2[kind], m = new MeshStandardMaterial({ color, ...maps2(kind), roughness: p[1], normalScale: new Vector2(p[2], p[2]), metalness: kind === "metal" ? 0.45 : 0 });
+    m.userData.worldSurface = kind;
+    m.userData.forestSurface = kind;
+    return m;
+  }
+  function applyForestSurface(mesh, kind) {
+    if (kind === "water") return;
+    applyWorldSurface(mesh, kind);
+    if ((kind === "wood" || kind === "bark") && mesh.geometry.type === "BoxGeometry") {
+      const p = mesh.geometry.attributes.position, n = mesh.geometry.attributes.normal, uv = mesh.geometry.attributes.uv, dim = mesh.geometry.parameters, axis = dim.width >= dim.height && dim.width >= dim.depth ? 0 : dim.depth >= dim.height ? 2 : 1, span = profiles2[kind][0];
+      for (let i2 = 0; i2 < p.count; i2++) {
+        const q = [p.getX(i2), p.getY(i2), p.getZ(i2)], normal = [Math.abs(n.getX(i2)), Math.abs(n.getY(i2)), Math.abs(n.getZ(i2))], face = normal.indexOf(Math.max(...normal)), across = [0, 1, 2].find((a) => a !== axis && a !== face) ?? (axis + 1) % 3;
+        uv.setXY(i2, q[across] / span, q[axis] / span);
+      }
+      uv.needsUpdate = true;
+    }
+  }
+
   // src/knowledge-forest.js
   var copy = {
     title: ["\u77E5\u8BC6\u68EE\u6797", "Forest of Knowledge", "Bosque del conocimiento"],
@@ -35682,14 +35813,30 @@ void main() {
   var tr = (key2) => copy[key2][language()];
   var localized = (value) => value[language()];
   var key = "shushu.knowledge-forest.v1";
-  function createKnowledgeForestLandscape(compact = false) {
+  function disposeForestHamster(rig) {
+    rig.userData.forestDisposed = true;
+    const materials3 = /* @__PURE__ */ new Set();
+    rig.traverse((o) => {
+      o.skeleton?.dispose();
+      if (o.isMesh) {
+        for (const m of Array.isArray(o.material) ? o.material : [o.material]) if (m && !m.userData.hamsterFur) materials3.add(m);
+      }
+    });
+    materials3.forEach((m) => m.dispose());
+  }
+  function sharedHamsterNode(node) {
+    for (let p = node; p; p = p.parent) if (p.userData.sharedTownModel) return true;
+    return false;
+  }
+  function createKnowledgeForestLandscape(compact = false, models) {
     const scene = new Group(), colliders = [], markers = [], decorations = [];
     let treeCrown;
+    const waters = [];
     function mesh(geometry, color, x2, y, z, parent = scene) {
-      const kind = [7952445, 8545093].includes(color) ? "bark" : [9992526, 13216631, 10519381, 9595459, 11043411, 10977871, 8676164].includes(color) ? "wood" : color === 9149545 ? "grass" : color === 9138770 ? "soil" : [14271643, 13023885].includes(color) ? "gravel" : [5799500, 7311443, 4746828, 9021790, 11191162, 7510098].includes(color) ? "foliage" : null;
-      const material3 = kind ? worldMaterial(kind, color) : new MeshStandardMaterial({ color, roughness: 0.9 }), m = new Mesh(geometry, material3);
+      const kind = color === 7843237 ? "water" : glades.some((g) => g.color === color) ? "stone" : color === 10795936 ? "enamel" : color === 7700813 ? "roof" : color === 15124609 ? "metal" : [7952445, 8545093].includes(color) ? "bark" : [9992526, 13216631, 10519381, 9595459, 11043411, 10977871, 8676164].includes(color) ? "wood" : color === 9149545 ? "grass" : color === 9138770 ? "soil" : color === 14271643 ? "gravel" : color === 13023885 ? "stone" : [5799500, 7311443, 4746828, 9021790, 11191162, 7510098].includes(color) ? "foliage" : null;
+      const material3 = kind ? forestMaterial(kind, color) : new MeshStandardMaterial({ color, roughness: 0.9 }), m = new Mesh(geometry, material3);
       if (kind) {
-        applyWorldSurface(m, kind);
+        applyForestSurface(m, kind);
         if (m.geometry !== geometry) geometry.dispose();
       }
       m.position.set(x2, y, z);
@@ -35704,20 +35851,16 @@ void main() {
     function sphere(r, color, x2, y, z, parent) {
       return mesh(new IcosahedronGeometry(r, 1), color, x2, y, z, parent);
     }
-    function guide(x2, z, color) {
-      const g = new Group();
-      g.position.set(x2, 0, z);
-      scene.add(g);
-      sphere(0.42, color, 0, 0.5, 0, g).scale.set(0.85, 1, 0.72);
-      sphere(0.32, color, 0, 0.94, 0, g);
-      [-1, 1].forEach((s) => {
-        sphere(0.16, color, s * 0.23, 1.17, 0, g);
-        sphere(0.105, 15315875, s * 0.23, 1.17, 0.1, g);
-        sphere(0.047, 3352608, s * 0.12, 1, 0.26, g);
-        sphere(0.1, color, s * 0.19, 0.13, 0.1, g);
+    function guide(x2, z) {
+      const rig = models.create("three-line");
+      rig.userData.sharedTownModel = true;
+      rig.position.set(x2, 0, z);
+      scene.add(rig);
+      rig.userData.ready.then(() => {
+        if (rig.userData.forestDisposed) disposeForestHamster(rig);
+        else models.onReady?.(rig);
       });
-      sphere(0.045, 11956577, 0, 0.91, 0.31, g);
-      return g;
+      return rig;
     }
     function tree(x2, z, size = 1, color = 5799500) {
       box3(0.38 * size, 2 * size, 0.38 * size, 7952445, x2, size, z);
@@ -35733,8 +35876,11 @@ void main() {
       const v = curve.getPoint(i2 / 119);
       mesh(new CylinderGeometry(0.8, 0.8, 0.045, 12), 14271643, v.x, 0.03, v.z);
     }
+    const pondBed = mesh(new CylinderGeometry(2.27, 2.27, 0.035, 40), 13023885, 3, -5e-3, 7);
+    pondBed.scale.z = 0.6;
     const pond = mesh(new CylinderGeometry(2.3, 2.3, 0.035, 40), 7843237, 3, 0.035, 7);
     pond.scale.z = 0.6;
+    waters.push(pond.material);
     colliders.push({ x: 3, z: 7, r: 2.35 });
     for (let i2 = 0; i2 < 12; i2++) box3(0.32, 0.15, 1.5, 9992526, 1.05 + i2 * 0.36, 0.17, 7);
     for (const z of [6.25, 7.75]) {
@@ -35754,11 +35900,13 @@ void main() {
     const ring = mesh(new TorusGeometry(1.7, 0.12, 8, 40), 15124609, 0, 0.22, -1);
     ring.rotation.x = Math.PI / 2;
     glades.forEach((g, i2) => {
+      const campStart = scene.children.length;
       mesh(new CylinderGeometry(2.1, 2.2, 0.12, 28), 13023885, g.x, 0.06, g.z);
       const m = mesh(new CylinderGeometry(0.85, 0.95, 0.35, 24), g.color, g.x, 0.25, g.z);
       m.userData.station = i2;
       markers.push(m);
       const npc = guide(g.x, g.z, g.color);
+      npc.position.y = 0.43;
       decorations.push(npc);
       box3(1.45, 0.14, 0.58, 9595459, g.x - 1.1, 0.6, g.z - 0.8);
       box3(0.15, 0.7, 0.15, 7952445, g.x - 1.6, 0.3, g.z - 0.8);
@@ -35790,6 +35938,10 @@ void main() {
         box3(0.4, 0.1, 0.1, 16773847, g.x + 1, 0.85, g.z - 1);
         box3(0.1, 0.1, 0.4, 16773847, g.x + 1, 0.85, g.z - 1);
       }
+      scene.children.slice(campStart).forEach((o) => {
+        o.userData.station = i2;
+        if (!markers.includes(o)) markers.push(o);
+      });
     });
     const flowers = new InstancedMesh(new IcosahedronGeometry(0.09, 0), new MeshStandardMaterial({ color: 15783321 }), 120), dummy = new Object3D();
     for (let i2 = 0; i2 < 120; i2++) {
@@ -35804,10 +35956,12 @@ void main() {
     colliders.push({ x: 0, z: 8, r: 0.65 });
     const avatar = guide(0, 10, 14993310);
     if (compact) {
+      const actors = [...decorations, navigator2, avatar];
+      actors.forEach((rig) => scene.remove(rig));
       scene.updateMatrixWorld(true);
-      const batches = /* @__PURE__ */ new Map(), oldGeometry = /* @__PURE__ */ new Set(), oldMaterials = /* @__PURE__ */ new Set(), keep = [];
+      const batches = /* @__PURE__ */ new Map(), oldGeometry = /* @__PURE__ */ new Set(), oldMaterials = /* @__PURE__ */ new Set(), keep = [...actors];
       scene.traverse((o) => {
-        if (o.isInstancedMesh) {
+        if (o.isInstancedMesh || o.material?.transparent) {
           keep.push(o);
           return;
         }
@@ -35833,9 +35987,9 @@ void main() {
       oldGeometry.forEach((g) => g.dispose());
       oldMaterials.forEach((m) => m.dispose());
     }
-    return { root: scene, colliders, markers, decorations, treeCrown, avatar, navigator: navigator2, createVisitor: (x2, z, color) => guide(x2, z, color) };
+    return { root: scene, colliders, markers, decorations, treeCrown, avatar, navigator: navigator2, waters, createVisitor: (x2, z, color) => guide(x2, z, color) };
   }
-  function installKnowledgeForest() {
+  function installKnowledgeForest(models) {
     if (document.getElementById("knowledgeForest")) return;
     const overlay = document.createElement("section");
     overlay.id = "knowledgeForest";
@@ -35845,7 +35999,7 @@ void main() {
     overlay.setAttribute("aria-modal", "true");
     overlay.setAttribute("aria-label", tr("title"));
     overlay.tabIndex = -1;
-    overlay.innerHTML = '<canvas class="forest-canvas"></canvas><div class="forest-header"><div><small>FOREST FIELD NOTES / 01</small><h1></h1><p></p></div><button data-action="exit"></button></div><div class="forest-tools"><span class="forest-progress"></span><button data-action="view"></button></div><nav class="forest-stations"></nav><div class="forest-caption"></div><div class="forest-touch"><button data-move="forward">\u2191</button><button data-move="left">\u2190</button><button data-move="back">\u2193</button><button data-move="right">\u2192</button><button data-action="interact">E</button></div><section class="forest-card" hidden></section><div class="forest-toast" role="status"></div>';
+    overlay.innerHTML = '<canvas class="forest-canvas"></canvas><div class="forest-header"><div><small>FOREST FIELD NOTES / 01</small><h1></h1><p></p></div><button data-action="exit"></button></div><div class="forest-tools"><span class="forest-progress"></span><button data-action="view"></button></div><nav class="forest-stations"></nav><div class="forest-caption"></div><div class="forest-touch"><button data-move="forward">\u2191</button><button data-move="left">\u2190</button><button data-move="back">\u2193</button><button data-move="right">\u2192</button><button data-action="interact">E</button></div><section class="forest-card" hidden></section><div class="forest-toast" role="status"></div><div class="forest-hover" role="tooltip" hidden></div>';
     document.body.appendChild(overlay);
     const canvas = overlay.querySelector("canvas"), card = overlay.querySelector(".forest-card"), toast = overlay.querySelector(".forest-toast");
     let progress = cleanProgress(null);
@@ -35856,9 +36010,41 @@ void main() {
     let draw = null, scene = null, camera = null, frame = 0, resize = null, clock = 0, mode = "map", yaw = 0, drag = null, active = -1, question = null, answered = false, view = "map", lastFocus = null, toastTimer = 0;
     const keys = /* @__PURE__ */ new Set(), player = new Vector3(0, 0.1, 10), colliders = [], markers = [], decorations = [], look = new Vector3(), raycaster = new Raycaster();
     const targetCamera = new Vector3(20, 25, 29), targetLook = new Vector3(0, 0, -1);
-    let avatar = null, treeCrown = null, navigator2 = null, roster = [], rosterKey = "", ownerId = "main", welcomed = false, guideArrow = null, createVisitor = null, allResidents = [], mainResident = null;
+    let avatar = null, treeCrown = null, navigator2 = null, roster = [], rosterKey = "", ownerId = "main", welcomed = false, guideArrow = null, createVisitor = null, waterMaterials = [], allResidents = [], mainResident = null;
     const visitorRigs = /* @__PURE__ */ new Map();
     const nameLabels = [];
+    const hoverTip = overlay.querySelector(".forest-hover");
+    let hoverPointer = null, lastHoverAt = 0;
+    function pick(x2, y) {
+      const r = canvas.getBoundingClientRect();
+      raycaster.setFromCamera(new Vector2((x2 - r.left) / r.width * 2 - 1, -(y - r.top) / r.height * 2 + 1), camera);
+      const hit = raycaster.intersectObjects(markers, true).find((h) => {
+        for (let n = h.object; n; n = n.parent) if (!n.visible) return false;
+        return true;
+      });
+      let node = hit?.object;
+      while (node && !node.userData.forestGuide && !Number.isInteger(node.userData.station)) node = node.parent;
+      return node;
+    }
+    function updateHover() {
+      if (!hoverPointer || drag || !card.hidden) {
+        hoverTip.hidden = true;
+        canvas.style.cursor = "";
+        return;
+      }
+      const node = pick(hoverPointer.x, hoverPointer.y);
+      if (!node) {
+        hoverTip.hidden = true;
+        canvas.style.cursor = "";
+        return;
+      }
+      const i2 = node.userData.station;
+      hoverTip.textContent = node.userData.forestGuide ? residentName(roster[0]) + " \xB7 " + tr("guide") : localized(glades[i2].name) + (guideName(i2) ? " \xB7 " + guideName(i2) : "");
+      hoverTip.hidden = false;
+      hoverTip.style.left = Math.max(12, Math.min(hoverPointer.x + 16, overlay.clientWidth - hoverTip.offsetWidth - 12)) + "px";
+      hoverTip.style.top = Math.max(12, Math.min(hoverPointer.y + 18, overlay.clientHeight - hoverTip.offsetHeight - 12)) + "px";
+      canvas.style.cursor = "pointer";
+    }
     function residentName(n) {
       return n ? window.TownI18n?.t(n.name) || n.name : "";
     }
@@ -35874,10 +36060,10 @@ void main() {
     }
     function syncResidents(state) {
       const people = [...state.npcs || [], ...state.offspring || [], ...state.npcOffspring || []].filter((n) => n.id && n.name && n.alive !== false), seen = /* @__PURE__ */ new Set();
-      const selected = people.filter((n) => !seen.has(n.id) && seen.add(n.id)).slice(0, 6), signature = JSON.stringify([people.map((n) => [n.id, n.name, n.coat]), state.mainId, state.mainName, state.mainCoat]);
+      const selected = people.filter((n) => !seen.has(n.id) && seen.add(n.id)).slice(0, 6), signature = JSON.stringify([people.map((n) => [n.id, n.name, n.coat, n.ageYears]), state.mainId, state.mainName, state.mainCoat, state.ageYears]);
       ownerId = state.mainId || "main";
       allResidents = people;
-      mainResident = { id: ownerId, name: state.mainName || "\u9F20\u9F20", coat: state.mainCoat };
+      mainResident = { id: ownerId, name: state.mainName || "\u9F20\u9F20", coat: state.mainCoat, ageYears: state.ageYears };
       if (signature === rosterKey) return;
       rosterKey = signature;
       roster = selected;
@@ -35901,9 +36087,7 @@ void main() {
         if (!n) return;
         rig.userData.residentId = n.id;
         if (i2 < 6) rig.userData.station = i2 - 1;
-        rig.traverse((o) => {
-          if (o.isMesh && o.material?.color && o.material.color.getHex() !== 3352608 && o.material.color.getHex() !== 15315875 && o.material.color.getHex() !== 11956577) o.material.color.setHex({ silver: 15657696, pudding: 15389851, violet: 11906498, "three-line": 6708821 }[n.coat] || 9667956);
-        });
+        models.appearance(rig, n);
         const c = document.createElement("canvas");
         c.width = 512;
         c.height = 96;
@@ -35918,7 +36102,7 @@ void main() {
         ctx.fillText(residentName(n) + (i2 === 0 ? " \xB7 " + tr("guide") : ""), 256, 59, 490);
         const label = new Sprite(new SpriteMaterial({ map: new CanvasTexture(c), depthTest: true }));
         label.scale.set(i2 === 0 ? 3.2 : 2.2, 0.5, 1);
-        label.position.y = 1.52;
+        label.position.y = 0.8;
         rig.add(label);
         nameLabels.push(label);
       });
@@ -36132,7 +36316,9 @@ void main() {
       Object.assign(sun.shadow.camera, { left: -21, right: 21, top: 21, bottom: -21 });
       sun.shadow.normalBias = 0.04;
       scene.add(sun);
-      const forest = createKnowledgeForestLandscape();
+      const forest = createKnowledgeForestLandscape(false, { ...models, onReady: () => {
+        draw.shadowMap.needsUpdate = true;
+      } });
       scene.add(forest.root);
       colliders.push(...forest.colliders);
       markers.push(...forest.markers);
@@ -36141,10 +36327,11 @@ void main() {
       avatar = forest.avatar;
       navigator2 = forest.navigator;
       createVisitor = forest.createVisitor;
+      waterMaterials = forest.waters;
       markers.push(navigator2, ...decorations);
       guideArrow = new Mesh(new ConeGeometry(0.25, 0.65, 4), new MeshStandardMaterial({ color: 15054149, emissive: 9069834, emissiveIntensity: 0.3 }));
       guideArrow.rotation.z = Math.PI;
-      guideArrow.position.set(0, 2.7, 8);
+      guideArrow.position.set(0, 1.4, 8);
       scene.add(guideArrow);
       guideArrow.visible = !welcomed;
       for (const z of [11, 10, 9]) {
@@ -36177,6 +36364,7 @@ void main() {
       frame = requestAnimationFrame(tick);
       const dt = Math.min((now - clock) / 1e3, 0.04);
       clock = now;
+      for (const m of waterMaterials) m.normalMap.offset.set(now * 6e-6 % 1, now * 4e-6 % 1);
       const visitors = window.TownApp?.tickForest?.(dt) || [], present = /* @__PURE__ */ new Set();
       let added = false;
       for (const v of visitors) {
@@ -36194,6 +36382,7 @@ void main() {
         rig.visible = true;
         rig.position.set(v.x, v.moving ? Math.abs(Math.sin(now * 6e-3)) * 0.025 : 0, v.z);
         rig.rotation.y = v.heading;
+        models.animate(rig, now * 1e-3, v.moving);
       }
       for (const [id, rig] of visitorRigs) if (!present.has(id)) rig.visible = false;
       if (added) paintResidents();
@@ -36201,8 +36390,8 @@ void main() {
         const f = Number(keys.has("KeyW") || keys.has("ArrowUp") || keys.has("forward")) - Number(keys.has("KeyS") || keys.has("ArrowDown") || keys.has("back")), s = Number(keys.has("KeyD") || keys.has("ArrowRight") || keys.has("right")) - Number(keys.has("KeyA") || keys.has("ArrowLeft") || keys.has("left")), scale = dt * 3 / Math.max(1, Math.hypot(f, s)), dx = (-Math.sin(yaw) * f + Math.cos(yaw) * s) * scale, dz = (-Math.cos(yaw) * f - Math.sin(yaw) * s) * scale;
         if (canWalk2(player.x + dx, player.z)) player.x += dx;
         if (canWalk2(player.x, player.z + dz)) player.z += dz;
-        camera.position.set(player.x, 1.05, player.z);
-        camera.lookAt(player.x - Math.sin(yaw) * 4, 1, player.z - Math.cos(yaw) * 4);
+        camera.position.set(player.x, 0.52, player.z);
+        camera.lookAt(player.x - Math.sin(yaw) * 4, 0.52, player.z - Math.cos(yaw) * 4);
       } else if (mode === "map") {
         camera.position.lerp(targetCamera, 1 - Math.exp(-5 * dt));
         look.lerp(targetLook, 1 - Math.exp(-5 * dt));
@@ -36212,10 +36401,14 @@ void main() {
         const point2 = label.getWorldPosition(new Vector3()), height = Math.min(0.45, point2.distanceTo(camera.position) * 2 * Math.tan(43 * Math.PI / 360) * 36 / Math.max(1, canvas.clientHeight));
         label.scale.set(height * 512 / 96, height, 1);
       }
-      if (guideArrow?.visible) guideArrow.position.y = 2.7 + Math.sin(now * 4e-3) * 0.15;
+      if (guideArrow?.visible) guideArrow.position.y = 1.4 + Math.sin(now * 4e-3) * 0.15;
       avatar.visible = mode === "map";
       avatar.position.set(player.x, 0, player.z);
-      decorations.forEach((g, i2) => g.rotation.y = Math.sin(now * 5e-4 + i2) * 0.12);
+      models.animate(avatar, now * 1e-3, mode === "walk" && keys.size > 0);
+      if (hoverPointer && now - lastHoverAt > 80) {
+        lastHoverAt = now;
+        updateHover();
+      }
       draw.render(scene, camera);
     }
     function open(event) {
@@ -36249,6 +36442,9 @@ void main() {
       if (overlay.hidden) return;
       drag = null;
       overlay.hidden = true;
+      hoverPointer = null;
+      hoverTip.hidden = true;
+      canvas.style.cursor = "";
       delete document.body.dataset.forestOpen;
       cancelAnimationFrame(frame);
       keys.clear();
@@ -36257,8 +36453,10 @@ void main() {
       if (scene) {
         const geometry = /* @__PURE__ */ new Set(), materials3 = /* @__PURE__ */ new Set();
         scene.traverse((o) => {
+          if (o.userData.sharedTownModel) disposeForestHamster(o);
           if (o.isSprite && o.material?.map) o.material.map.dispose();
-          if (o.geometry) geometry.add(o.geometry);
+          if (sharedHamsterNode(o) && !o.isSprite) return;
+          if (o.geometry && !o.isSprite) geometry.add(o.geometry);
           if (o.material) (Array.isArray(o.material) ? o.material : [o.material]).forEach((m) => materials3.add(m));
           if (o.shadow?.map) o.shadow.map.dispose();
         });
@@ -36320,8 +36518,18 @@ void main() {
       drag = { x: e.clientX, y: e.clientY, startX: e.clientX, startY: e.clientY, button: e.button, moved: false };
       canvas.setPointerCapture(e.pointerId);
     };
+    canvas.onpointerleave = () => {
+      hoverPointer = null;
+      hoverTip.hidden = true;
+      canvas.style.cursor = "";
+    };
     canvas.onpointermove = (e) => {
-      if (!drag) return;
+      hoverPointer = { x: e.clientX, y: e.clientY };
+      hoverTip.hidden = true;
+      if (!drag) {
+        updateHover();
+        return;
+      }
       const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
       drag.moved ||= Math.hypot(e.clientX - drag.startX, e.clientY - drag.startY) > 4;
       if (mode === "walk" && card.hidden) yaw -= dx * 6e-3;
@@ -36344,15 +36552,8 @@ void main() {
     };
     canvas.onpointerup = (e) => {
       if (drag && drag.button === 0 && !drag.moved && mode === "map" && card.hidden) {
-        const r = canvas.getBoundingClientRect();
-        raycaster.setFromCamera(new Vector2((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1), camera);
-        const hit = raycaster.intersectObjects(markers, true).find((h) => {
-          for (let n = h.object; n; n = n.parent) if (!n.visible) return false;
-          return true;
-        });
-        if (hit) {
-          let node = hit.object;
-          while (node && !node.userData.forestGuide && !Number.isInteger(node.userData.station)) node = node.parent;
+        const node = pick(e.clientX, e.clientY);
+        if (node) {
           if (node?.userData.forestGuide) showGuide();
           else if (node) select(node.userData.station);
         }
@@ -36570,16 +36771,16 @@ void main() {
   }
 
   // src/town-surfaces.js
-  var maps2 = /* @__PURE__ */ new Map();
+  var maps3 = /* @__PURE__ */ new Map();
   var loader = new TextureLoader();
   function texture(kind, channel) {
     const key2 = kind + "-" + channel;
-    if (maps2.has(key2)) return maps2.get(key2);
+    if (maps3.has(key2)) return maps3.get(key2);
     const map = loader.load("../assets/town-materials/" + key2 + ".jpg");
     map.wrapS = map.wrapT = RepeatWrapping;
     map.anisotropy = 4;
     if (channel === "Color") map.colorSpace = SRGBColorSpace;
-    maps2.set(key2, map);
+    maps3.set(key2, map);
     return map;
   }
   var buildingSurfaceStyles = {
@@ -36594,34 +36795,34 @@ void main() {
     "\u6BA1\u4EEA\u9986": { floor: "slate", tint: 11647416, roughness: 0.85, wall: "paint", wallTint: 15067621 }
   };
   function surfaceTexture(kind) {
-    if (maps2.has(kind)) return maps2.get(kind);
+    if (maps3.has(kind)) return maps3.get(kind);
     const canvas = document.createElement("canvas");
     canvas.width = canvas.height = 256;
     const ctx = canvas.getContext("2d");
     ctx.fillStyle = kind === "wainscot" ? "#eee4d4" : "#f6f5f1";
     ctx.fillRect(0, 0, 256, 256);
-    const noise2 = (i2) => {
+    const noise3 = (i2) => {
       const n = Math.sin(i2 * 127.1 + 31.7) * 43758.5453;
       return n - Math.floor(n);
     };
     if (["plaster", "paint", "linoleum", "limestone", "slate", "terrazzo"].includes(kind)) {
       for (let i2 = 0; i2 < 1800; i2++) {
-        const value = Math.floor(185 + noise2(i2) * 60);
+        const value = Math.floor(185 + noise3(i2) * 60);
         ctx.fillStyle = "rgba(" + value + "," + value + "," + value + "," + (kind === "paint" ? 0.22 : 0.48) + ")";
-        const size = kind === "terrazzo" ? 2 + noise2(i2 + 9) * 5 : kind === "plaster" ? 1 + noise2(i2 + 9) * 2 : 1;
-        ctx.fillRect(noise2(i2 + 1) * 256, noise2(i2 + 2) * 256, size, size);
+        const size = kind === "terrazzo" ? 2 + noise3(i2 + 9) * 5 : kind === "plaster" ? 1 + noise3(i2 + 9) * 2 : 1;
+        ctx.fillRect(noise3(i2 + 1) * 256, noise3(i2 + 2) * 256, size, size);
       }
     }
     if (kind === "terrazzo") for (let i2 = 0; i2 < 260; i2++) {
       ctx.fillStyle = ["#c3b3a2", "#bcc5bc", "#d4bdb3", "#ddd4c2"][i2 % 4];
-      ctx.fillRect(noise2(i2 + 5) * 256, noise2(i2 + 6) * 256, 2 + noise2(i2 + 7) * 4, 2 + noise2(i2 + 8) * 3);
+      ctx.fillRect(noise3(i2 + 5) * 256, noise3(i2 + 6) * 256, 2 + noise3(i2 + 7) * 4, 2 + noise3(i2 + 8) * 3);
     }
     if (kind === "slate") for (let i2 = 0; i2 < 35; i2++) {
       ctx.strokeStyle = i2 % 2 ? "#dedfda" : "#eceee9";
       ctx.lineWidth = 0.5;
       ctx.beginPath();
       ctx.moveTo(0, i2 * 7.4);
-      ctx.lineTo(256, i2 * 7.4 + noise2(i2) * 4);
+      ctx.lineTo(256, i2 * 7.4 + noise3(i2) * 4);
       ctx.stroke();
     }
     ctx.strokeStyle = "#d9d9d2";
@@ -36663,7 +36864,7 @@ void main() {
     map.wrapS = map.wrapT = RepeatWrapping;
     map.colorSpace = SRGBColorSpace;
     map.anisotropy = 4;
-    maps2.set(kind, map);
+    maps3.set(kind, map);
     return map;
   }
   function applyBuildingSurface(mesh, name, role = "floor", units = 1) {
@@ -36677,13 +36878,13 @@ void main() {
     material3.map = kind === "wood" ? texture(kind, "Color") : surfaceTexture(kind);
     if (kind !== "wood") {
       const key2 = kind + "-height";
-      if (!maps2.has(key2)) {
+      if (!maps3.has(key2)) {
         const height = material3.map.clone();
         height.colorSpace = NoColorSpace;
         height.needsUpdate = true;
-        maps2.set(key2, height);
+        maps3.set(key2, height);
       }
-      material3.bumpMap = maps2.get(key2);
+      material3.bumpMap = maps3.get(key2);
       material3.bumpScale = ["ceramic", "terracotta", "subway", "brick", "slate", "limestone", "fluted", "wainscot"].includes(kind) ? 8e-3 : 3e-3;
     }
     if (kind === "wood") {
@@ -36726,7 +36927,7 @@ void main() {
   function createSpeechDirector() {
     const states = /* @__PURE__ */ new Map();
     let gaze = null, gazeSince = 0;
-    const hash2 = (id) => [...id].reduce((n, c) => n * 31 + c.charCodeAt(0) >>> 0, 0);
+    const hash3 = (id) => [...id].reduce((n, c) => n * 31 + c.charCodeAt(0) >>> 0, 0);
     const overlaps = (a, b) => a.left < b.right + 8 && a.right > b.left - 8 && a.top < b.bottom + 8 && a.bottom > b.top - 8;
     return { update(candidates, { now, firstPerson = false, limit = firstPerson ? 3 : 4, gazeId = null } = {}) {
       if (gazeId !== gaze) {
@@ -36738,17 +36939,17 @@ void main() {
       for (const c of candidates) {
         let s = states.get(c.id);
         if (!s) {
-          s = { text: c.text, until: 0, ready: now + hash2(c.id) % 1500 / 1e3, last: -Infinity };
+          s = { text: c.text, until: 0, ready: now + hash3(c.id) % 1500 / 1e3, last: -Infinity };
           states.set(c.id, s);
         }
         if (s.text !== c.text) {
           s.text = c.text;
           s.until = 0;
-          s.ready = now + hash2(c.id) % 700 / 1e3;
+          s.ready = now + hash3(c.id) % 700 / 1e3;
         }
       }
       const looking = gaze && now - gazeSince >= 0.45 ? gaze : null, rank = (c) => c.urgent ? 3 : c.id === looking ? 2 : states.get(c.id).until > now ? 1 : 0;
-      const ordered = [...candidates].sort((a, b) => rank(b) - rank(a) || states.get(a.id).last - states.get(b.id).last || a.distance - b.distance || hash2(a.id) - hash2(b.id));
+      const ordered = [...candidates].sort((a, b) => rank(b) - rank(a) || states.get(a.id).last - states.get(b.id).last || a.distance - b.distance || hash3(a.id) - hash3(b.id));
       const full = /* @__PURE__ */ new Set(), occupied = [], texts = /* @__PURE__ */ new Set();
       for (const c of ordered) {
         const s = states.get(c.id), priority = c.urgent || c.id === looking;
@@ -36760,7 +36961,7 @@ void main() {
         texts.add(c.text);
         if (s.until <= now) {
           s.until = now + 3.6;
-          s.ready = s.until + 6 + hash2(c.id) % 3e3 / 1e3;
+          s.ready = s.until + 6 + hash3(c.id) % 3e3 / 1e3;
           s.last = now;
         }
       }
@@ -38153,9 +38354,9 @@ void main() {
     MASK: "MASK",
     BLEND: "BLEND"
   };
-  function createDefaultMaterial(cache) {
-    if (cache["DefaultMaterial"] === void 0) {
-      cache["DefaultMaterial"] = new MeshStandardMaterial({
+  function createDefaultMaterial(cache2) {
+    if (cache2["DefaultMaterial"] === void 0) {
+      cache2["DefaultMaterial"] = new MeshStandardMaterial({
         color: 16777215,
         emissive: 0,
         metalness: 1,
@@ -38165,7 +38366,7 @@ void main() {
         side: FrontSide
       });
     }
-    return cache["DefaultMaterial"];
+    return cache2["DefaultMaterial"];
   }
   function addUnknownExtensionsToUserData(knownExtensions, object, objectDef) {
     for (const name in objectDef.extensions) {
@@ -38419,12 +38620,12 @@ void main() {
      * @param {Object} cache
      * @param {Object3D} index
      */
-    _addNodeRef(cache, index) {
+    _addNodeRef(cache2, index) {
       if (index === void 0) return;
-      if (cache.refs[index] === void 0) {
-        cache.refs[index] = cache.uses[index] = 0;
+      if (cache2.refs[index] === void 0) {
+        cache2.refs[index] = cache2.uses[index] = 0;
       }
-      cache.refs[index]++;
+      cache2.refs[index]++;
     }
     /**
      * Returns a reference to a shared resource, cloning it if necessary.
@@ -38435,8 +38636,8 @@ void main() {
      * @param {Object} object
      * @return {Object}
      */
-    _getNodeRef(cache, index, object) {
-      if (cache.refs[index] <= 1) return object;
+    _getNodeRef(cache2, index, object) {
+      if (cache2.refs[index] <= 1) return object;
       const ref = object.clone();
       const updateMappings = (original, clone2) => {
         const mappings = this.associations.get(original);
@@ -38448,7 +38649,7 @@ void main() {
         }
       };
       updateMappings(object, ref);
-      ref.name += "_instance_" + cache.uses[index]++;
+      ref.name += "_instance_" + cache2.uses[index]++;
       return ref;
     }
     _invokeOne(func) {
@@ -38988,7 +39189,7 @@ void main() {
     loadGeometries(primitives) {
       const parser = this;
       const extensions = this.extensions;
-      const cache = this.primitiveCache;
+      const cache2 = this.primitiveCache;
       function createDracoPrimitive(primitive) {
         return extensions[EXTENSIONS.KHR_DRACO_MESH_COMPRESSION].decodePrimitive(primitive, parser).then(function(geometry) {
           return addPrimitiveAttributes(geometry, primitive, parser);
@@ -38998,7 +39199,7 @@ void main() {
       for (let i2 = 0, il = primitives.length; i2 < il; i2++) {
         const primitive = primitives[i2];
         const cacheKey = createPrimitiveKey(primitive);
-        const cached = cache[cacheKey];
+        const cached = cache2[cacheKey];
         if (cached) {
           pending.push(cached.promise);
         } else {
@@ -39008,7 +39209,7 @@ void main() {
           } else {
             geometryPromise = addPrimitiveAttributes(new BufferGeometry(), primitive, parser);
           }
-          cache[cacheKey] = { primitive, promise: geometryPromise };
+          cache2[cacheKey] = { primitive, promise: geometryPromise };
           pending.push(geometryPromise);
         }
       }
@@ -46252,7 +46453,15 @@ void main() {
   }
   window.createTownResidentPortraits = residentPortraits;
   function init() {
-    const forestUI = installKnowledgeForest();
+    const forestModels = { create: hamster, appearance: (rig, n) => {
+      setHamsterCoat(rig, n.coat, n.ageYears);
+      rig.scale.setScalar(window.TownSimulation.growthScale(n.ageYears ?? 0.7));
+    }, animate: (rig, time, moving) => {
+      const { x: x2, y, z } = rig.position, heading = rig.rotation.y;
+      walk(rig, time, 0, x2, z, { moving, heading });
+      rig.position.y += y;
+    } };
+    const forestUI = installKnowledgeForest(forestModels);
     const host = document.querySelector("#townScene"), canvas = host?.querySelector("canvas");
     if (!host || !canvas) return;
     const scene = new Scene();
@@ -46445,7 +46654,7 @@ void main() {
       host.appendChild(button);
       return { button, point: new Vector3(x2, name === "\u4E2D\u5FC3\u5E7F\u573A" ? 1.85 : name === "\u9F20\u9F20\u5B66\u6821" ? 4.4 : 2.1, z) };
     });
-    const forestLandscape = createKnowledgeForestLandscape(true).root;
+    const forestLandscape = createKnowledgeForestLandscape(true, { ...forestModels, onReady: () => renderer.shadowMap.needsUpdate = true }).root;
     forestLandscape.position.set(0, 0, -47);
     forestLandscape.userData.townAction = "knowledge-forest";
     scene.add(forestLandscape);
