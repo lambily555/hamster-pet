@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import {createPetAnimal,animatePet} from './town-pet-home.js';
 import {cottagePetFurniture,freePetSlot} from './town-pet-layout.js';
 import {canWalk,movePlayer} from './town-player.js';
-import {facing} from './town-life.js';
+import {facing,entrance} from './town-life.js';
 import {localDoor} from './town-building-portals.js';
 
 const restPoints=[...cottagePetFurniture.beds,[-.65,-.5],[.1,1.6],[1.8,1.5],[.5,-1.1],[2.2,-.8]];
@@ -39,7 +39,7 @@ export function createPetCompanions({scene,rooms,models,clickable}){
  function tick(dt,leader,state,activePlace,firstPerson,actors=new Map()){
   let index=0,freeIndex=0;const freeCount=[...pets.values()].filter(a=>a.fostered).length;for(const actor of pets.values()){
    if(actor.fostered){const slot=freePetSlot(freeIndex++,freeCount);actor.inside='宠物之家';actor.position={x:slot.x,z:slot.z};actor.spawnNearOwner=false;actor.path=[];actor.goal=null;actor.exiting=null;actor.entering=null;actor.entryPortal=null;actor.moving=false;actor.rig.scale.setScalar(slot.size)}else{actor.rig.scale.setScalar(.25);
-   const owner=actor.ownerId?actors.get(actor.ownerId):leader;if(actor.spawnNearOwner&&owner){actor.inside=owner.inside;actor.position={...owner.position};prepare(actor,state);actor.position=followingPoint(actor,owner,0);actor.spawnNearOwner=false}prepare(actor,state);actor.moving=false;const follow=(actor.ownerId?!!owner&&state.petHome?.npcPets.find(p=>p.id===actor.id)?.follow!==false:state.petHome?.follow)&&(actor.ownerId||state.alive!==false)&&owner&&!owner.forcedSleep&&!owner.frozen,wanted=follow?(owner.inside||null):actor.fostered||actor.ownerId&&!owner?'宠物之家':'鼠鼠小屋';
+   const rawOwner=actor.ownerId?actors.get(actor.ownerId):leader,owner=rawOwner?.inside==='知识森林'?{...rawOwner,inside:null,position:entrance('知识森林')}:rawOwner;if(actor.spawnNearOwner&&owner){actor.inside=owner.inside;actor.position={...owner.position};prepare(actor,state);actor.position=followingPoint(actor,owner,0);actor.spawnNearOwner=false}prepare(actor,state);actor.moving=false;const follow=(actor.ownerId?!!owner&&state.petHome?.npcPets.find(p=>p.id===actor.id)?.follow!==false:state.petHome?.follow)&&(actor.ownerId||state.alive!==false)&&owner&&!owner.forcedSleep&&!owner.frozen,wanted=follow?(owner.inside||null):actor.fostered||actor.ownerId&&!owner?'宠物之家':'鼠鼠小屋';
    if(actor.exiting){const portal=actor.exiting,gate=localDoor(portal),p=worldPoint(portal.name,gate.x,petOutsideZ(portal));actor.entryPortal=portal;prepare(actor,state);const target={x:p.x,z:p.z};actor.path=[target];actor.goal=target;if(walkTo(actor,target,dt)){actor.exiting=null;actor.path=[];actor.goal=null}}
    else if(actor.inside!==wanted){
     if(actor.inside){const name=actor.inside,portal=models.get(name).userData.portal,gate=localDoor(portal);if(distance(actor.position,{x:gate.x,z:2.35})<1.1)portal.target=1;prepare(actor,state);if(walkTo(actor,{x:gate.x,z:portal.angle>1?4.1:2.35},dt)&&portal.angle>1){const p=worldPoint(name,actor.position.x,actor.position.z);actor.position={x:p.x,z:p.z};actor.inside=null;actor.exiting=portal;actor.path=[];actor.goal=null}}

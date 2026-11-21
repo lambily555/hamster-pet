@@ -35833,7 +35833,7 @@ void main() {
       oldGeometry.forEach((g) => g.dispose());
       oldMaterials.forEach((m) => m.dispose());
     }
-    return { root: scene, colliders, markers, decorations, treeCrown, avatar, navigator: navigator2 };
+    return { root: scene, colliders, markers, decorations, treeCrown, avatar, navigator: navigator2, createVisitor: (x2, z, color) => guide(x2, z, color) };
   }
   function installKnowledgeForest() {
     if (document.getElementById("knowledgeForest")) return;
@@ -35856,7 +35856,8 @@ void main() {
     let draw = null, scene = null, camera = null, frame = 0, resize = null, clock = 0, mode = "map", yaw = 0, drag = null, active = -1, question = null, answered = false, view = "map", lastFocus = null, toastTimer = 0;
     const keys = /* @__PURE__ */ new Set(), player = new Vector3(0, 0.1, 10), colliders = [], markers = [], decorations = [], look = new Vector3(), raycaster = new Raycaster();
     const targetCamera = new Vector3(20, 25, 29), targetLook = new Vector3(0, 0, -1);
-    let avatar = null, treeCrown = null, navigator2 = null, roster = [], rosterKey = "", ownerId = "main", welcomed = false, guideArrow = null;
+    let avatar = null, treeCrown = null, navigator2 = null, roster = [], rosterKey = "", ownerId = "main", welcomed = false, guideArrow = null, createVisitor = null, allResidents = [], mainResident = null;
+    const visitorRigs = /* @__PURE__ */ new Map();
     const nameLabels = [];
     function residentName(n) {
       return n ? window.TownI18n?.t(n.name) || n.name : "";
@@ -35873,8 +35874,10 @@ void main() {
     }
     function syncResidents(state) {
       const people = [...state.npcs || [], ...state.offspring || [], ...state.npcOffspring || []].filter((n) => n.id && n.name && n.alive !== false), seen = /* @__PURE__ */ new Set();
-      const selected = people.filter((n) => !seen.has(n.id) && seen.add(n.id)).slice(0, 6), signature = JSON.stringify(selected.map((n) => [n.id, n.name, n.coat]));
+      const selected = people.filter((n) => !seen.has(n.id) && seen.add(n.id)).slice(0, 6), signature = JSON.stringify([people.map((n) => [n.id, n.name, n.coat]), state.mainId, state.mainName, state.mainCoat]);
       ownerId = state.mainId || "main";
+      allResidents = people;
+      mainResident = { id: ownerId, name: state.mainName || "\u9F20\u9F20", coat: state.mainCoat };
       if (signature === rosterKey) return;
       rosterKey = signature;
       roster = selected;
@@ -35891,13 +35894,13 @@ void main() {
         label.material.dispose();
       }
       nameLabels.length = 0;
-      [navigator2, ...decorations].forEach((rig, i2) => {
-        const n = roster[i2];
+      [navigator2, ...decorations, ...visitorRigs.values(), avatar].forEach((rig, i2) => {
+        const n = i2 < 6 ? roster[i2] : rig === avatar ? mainResident : allResidents.find((n2) => n2.id === rig.userData.residentId);
         if (!rig) return;
         rig.visible = !!n;
         if (!n) return;
         rig.userData.residentId = n.id;
-        rig.userData.station = i2 - 1;
+        if (i2 < 6) rig.userData.station = i2 - 1;
         rig.traverse((o) => {
           if (o.isMesh && o.material?.color && o.material.color.getHex() !== 3352608 && o.material.color.getHex() !== 15315875 && o.material.color.getHex() !== 11956577) o.material.color.setHex({ silver: 15657696, pudding: 15389851, violet: 11906498, "three-line": 6708821 }[n.coat] || 9667956);
         });
@@ -36137,6 +36140,7 @@ void main() {
       treeCrown = forest.treeCrown;
       avatar = forest.avatar;
       navigator2 = forest.navigator;
+      createVisitor = forest.createVisitor;
       markers.push(navigator2, ...decorations);
       guideArrow = new Mesh(new ConeGeometry(0.25, 0.65, 4), new MeshStandardMaterial({ color: 15054149, emissive: 9069834, emissiveIntensity: 0.3 }));
       guideArrow.rotation.z = Math.PI;
@@ -36163,7 +36167,7 @@ void main() {
     }
     function canWalk2(x2, z) {
       if (Math.hypot(x2, z) > 13) return false;
-      return !colliders.some((c) => {
+      return ![...visitorRigs.values()].some((r) => r.visible && Math.hypot(x2 - r.position.x, z - r.position.z) < 0.55) && !colliders.some((c) => {
         if (c.x === 3 && c.z === 7 && x2 >= 0.8 && x2 <= 5.2 && z >= 6.55 && z <= 7.45) return false;
         return Math.hypot(x2 - c.x, z - c.z) < c.r + 0.22;
       });
@@ -36173,6 +36177,26 @@ void main() {
       frame = requestAnimationFrame(tick);
       const dt = Math.min((now - clock) / 1e3, 0.04);
       clock = now;
+      const visitors = window.TownApp?.tickForest?.(dt) || [], present = /* @__PURE__ */ new Set();
+      let added = false;
+      for (const v of visitors) {
+        if (roster.some((n2) => n2.id === v.id)) continue;
+        const n = allResidents.find((n2) => n2.id === v.id);
+        if (!n) continue;
+        present.add(v.id);
+        let rig = visitorRigs.get(v.id);
+        if (!rig) {
+          rig = createVisitor(v.x, v.z, 13021589);
+          rig.userData.residentId = v.id;
+          visitorRigs.set(v.id, rig);
+          added = true;
+        }
+        rig.visible = true;
+        rig.position.set(v.x, v.moving ? Math.abs(Math.sin(now * 6e-3)) * 0.025 : 0, v.z);
+        rig.rotation.y = v.heading;
+      }
+      for (const [id, rig] of visitorRigs) if (!present.has(id)) rig.visible = false;
+      if (added) paintResidents();
       if (mode === "walk" && card.hidden) {
         const f = Number(keys.has("KeyW") || keys.has("ArrowUp") || keys.has("forward")) - Number(keys.has("KeyS") || keys.has("ArrowDown") || keys.has("back")), s = Number(keys.has("KeyD") || keys.has("ArrowRight") || keys.has("right")) - Number(keys.has("KeyA") || keys.has("ArrowLeft") || keys.has("left")), scale = dt * 3 / Math.max(1, Math.hypot(f, s)), dx = (-Math.sin(yaw) * f + Math.cos(yaw) * s) * scale, dz = (-Math.cos(yaw) * f - Math.sin(yaw) * s) * scale;
         if (canWalk2(player.x + dx, player.z)) player.x += dx;
@@ -36194,16 +36218,17 @@ void main() {
       decorations.forEach((g, i2) => g.rotation.y = Math.sin(now * 5e-4 + i2) * 0.12);
       draw.render(scene, camera);
     }
-    function open() {
+    function open(event) {
       if (!overlay.hidden) return;
       lastFocus = document.activeElement;
       window.TownApp?.stopFirstPerson();
+      window.TownApp?.clearFocus?.(false);
       document.exitPointerLock?.();
       keys.clear();
       overlay.hidden = false;
       document.body.dataset.forestOpen = "true";
       welcomed = readWelcome();
-      mode = "map";
+      mode = event?.detail?.view === "walk" ? "walk" : "map";
       if (!welcomed) {
         player.set(0, 0.1, 12);
         yaw = 0;
@@ -36243,6 +36268,8 @@ void main() {
       draw?.renderLists.dispose();
       scene = null;
       treeCrown = null;
+      visitorRigs.clear();
+      nameLabels.length = 0;
       markers.length = colliders.length = decorations.length = 0;
       lastFocus?.focus({ preventScroll: true });
     }
@@ -39901,6 +39928,7 @@ void main() {
 
   // src/town-life.js
   var destinations = [
+    ["\u77E5\u8BC6\u68EE\u6797", 0, -18.9, true, "\u5B66\u4E60", [-4, 6]],
     ["\u5BA0\u7269\u4E4B\u5BB6", 15.65, -0.25, true, "\u966A\u4F34\u5BA0\u7269", [-0.75, 0.5]],
     ["\u8DD1\u8F6E\u516C\u56ED", -11, -7.5, false, "\u8DD1\u8F6E", [-1.9, -0.8]],
     ["\u8BCA\u6240", -4.5, -10, true, "\u68C0\u67E5", [0.4, -0.8]],
@@ -40028,7 +40056,7 @@ void main() {
         go(actor, entrance(actor.destination), "arrived");
         return;
       }
-      const choices = actor.child ? ["\u9F20\u9F20\u5C0F\u5C4B", "\u8DD1\u8F6E\u516C\u56ED", "\u4E2D\u5FC3\u5E7F\u573A", "\u5C0F\u83DC\u56ED", "\u9F20\u9F20\u5B66\u6821"] : ["\u5C0F\u83DC\u56ED", "\u96F6\u98DF\u94FA", "\u4E2D\u5FC3\u5E7F\u573A", actor.home, "\u8DD1\u8F6E\u516C\u56ED", "\u9F20\u9F20\u5C0F\u5C4B", "\u7EAA\u5FF5\u9986", "\u8BCA\u6240", "\u5893\u5730", "\u6BA1\u4EEA\u9986", "\u9F20\u9F20\u5B66\u6821", "\u9F20\u9F20\u996D\u9986", "Mariah Carey\u540D\u4EBA\u5802", "\u5BA0\u7269\u4E4B\u5BB6", "\u4E2D\u5FC3\u5E7F\u573A"];
+      const choices = actor.child ? ["\u9F20\u9F20\u5C0F\u5C4B", "\u8DD1\u8F6E\u516C\u56ED", "\u4E2D\u5FC3\u5E7F\u573A", "\u5C0F\u83DC\u56ED", "\u9F20\u9F20\u5B66\u6821", "\u77E5\u8BC6\u68EE\u6797"] : ["\u5C0F\u83DC\u56ED", "\u96F6\u98DF\u94FA", "\u4E2D\u5FC3\u5E7F\u573A", actor.home, "\u8DD1\u8F6E\u516C\u56ED", "\u9F20\u9F20\u5C0F\u5C4B", "\u7EAA\u5FF5\u9986", "\u8BCA\u6240", "\u5893\u5730", "\u6BA1\u4EEA\u9986", "\u9F20\u9F20\u5B66\u6821", "\u9F20\u9F20\u996D\u9986", "Mariah Carey\u540D\u4EBA\u5802", "\u5BA0\u7269\u4E4B\u5BB6", "\u4E2D\u5FC3\u5E7F\u573A", "\u77E5\u8BC6\u68EE\u6797"];
       const index = (actor.cycle - 1 + [...actors.keys()].indexOf(actor.id)) % choices.length;
       actor.destination = actor.child && actor.age < 0.18 ? "\u9F20\u9F20\u5C0F\u5C4B" : choices[index];
       const frailty = actor.aging?.frailty || 0, resting = frailty > 0 && (actor.cycle * 37 % 100 / 100 < frailty * 0.65 || actor.destination === "\u8DD1\u8F6E\u516C\u56ED" && actor.cycle * 19 % 100 / 100 < frailty * 0.9);
@@ -40307,12 +40335,13 @@ void main() {
         complete(actor);
       }
     }
-    function tick(dt, isDay = day) {
+    function tick(dt, isDay = day, pausedId = null) {
       day = isDay;
       dt = Math.max(0, Math.min(dt, 1));
       elapsed += dt;
       for (let i2 = restaurantQueue.length - 1; i2 >= 0; i2--) if (!actors.has(restaurantQueue[i2])) restaurantQueue.splice(i2, 1);
       for (const actor of actors.values()) {
+        if (actor.id === pausedId) continue;
         if (petVisit(actor, dt)) {
           actor.moving = false;
           actor.energySeconds = actor.id === "main" ? 0 : actor.energySeconds;
@@ -40369,8 +40398,8 @@ void main() {
             go(actor, point(Math.cos(a) * 2.15, -1.3 + Math.sin(a) * 1.2), "celebrating");
           } else if (d[3]) {
             actor.inside = actor.destination;
-            actor.position = point(0, 2.6);
-            const stations = actor.outing ? [actor.id === "main" ? -0.5 : 0.5, 2] : actor.familyPartner ? actor.familyStation : actor.action === "\u4F4F\u9662" ? [-1.15, -0.8] : actor.action === "\u7761\u89C9" ? cottageFurniture.bed : actor.action === "\u996E\u6C34" ? cottageFurniture.water : actor.action === "\u8FDB\u98DF" ? cottageFurniture.bowl : d[5];
+            actor.position = point(0, actor.destination === "\u77E5\u8BC6\u68EE\u6797" ? 12 : 2.6);
+            const stations = actor.destination === "\u77E5\u8BC6\u68EE\u6797" ? [-4 - [...actors.keys()].indexOf(actor.id) % 4 * 0.6, 6] : actor.outing ? [actor.id === "main" ? -0.5 : 0.5, 2] : actor.familyPartner ? actor.familyStation : actor.action === "\u4F4F\u9662" ? [-1.15, -0.8] : actor.action === "\u7761\u89C9" ? cottageFurniture.bed : actor.action === "\u996E\u6C34" ? cottageFurniture.water : actor.action === "\u8FDB\u98DF" ? cottageFurniture.bowl : d[5];
             go(actor, point(...stations), "using", true);
           } else if (actor.action === "\u793E\u4EA4") {
             actor.phase = "meeting";
@@ -40456,7 +40485,7 @@ void main() {
           go(actor, entrance(actor.place), "idle", actor.place !== "\u5893\u5730");
         } else if (actor.phase === "exit-room") {
           actor.speech = "";
-          go(actor, point(0, 2.6), "outside", true);
+          go(actor, point(0, actor.inside === "\u77E5\u8BC6\u68EE\u6797" ? 12 : 2.6), "outside", true);
         } else if (actor.phase === "outside") {
           actor.position = entrance(actor.inside);
           actor.inside = null;
@@ -41051,7 +41080,7 @@ void main() {
           actor.rig.scale.setScalar(slot.size);
         } else {
           actor.rig.scale.setScalar(0.25);
-          const owner = actor.ownerId ? actors.get(actor.ownerId) : leader;
+          const rawOwner = actor.ownerId ? actors.get(actor.ownerId) : leader, owner = rawOwner?.inside === "\u77E5\u8BC6\u68EE\u6797" ? { ...rawOwner, inside: null, position: entrance("\u77E5\u8BC6\u68EE\u6797") } : rawOwner;
           if (actor.spawnNearOwner && owner) {
             actor.inside = owner.inside;
             actor.position = { ...owner.position };
@@ -46570,11 +46599,12 @@ void main() {
         return;
       }
       const viewingInside = indoorNames.includes(activePlace);
-      rig.visible = actor.inside ? !!roomCache.get(actor.inside)?.visible && (!viewingInside || actor.inside === activePlace) : !viewingInside;
+      rig.visible = actor.inside === "\u77E5\u8BC6\u68EE\u6797" ? !viewingInside : actor.inside ? !!roomCache.get(actor.inside)?.visible && (!viewingInside || actor.inside === activePlace) : !viewingInside;
       if (firstPerson && actor.id === "main") rig.visible = false;
       if (rig.userData.model) rig.userData.model.visible = !(firstPerson && actor.id === "main");
       walk(rig, t, 0, actor.position.x, actor.position.z, actor);
       rig.rotation.x = rig.rotation.z = 0;
+      if (actor.inside === "\u77E5\u8BC6\u68EE\u6797") rig.position.z -= 47;
       let hat = rig.userData.birthdayHat;
       if (!hat) {
         hat = birthdayHat();
@@ -47107,6 +47137,10 @@ void main() {
       room.userData.labels = [...roomLabels];
     }
     function enterPlace(name, following = false) {
+      if (name === "\u77E5\u8BC6\u68EE\u6797") {
+        window.dispatchEvent(new CustomEvent("town-open-forest"));
+        return;
+      }
       clearFocus(false);
       if (activePlace) leavePlace(following);
       savedCamera = { yaw, pitch, distance: distance3, target: target.clone() };
@@ -47453,6 +47487,10 @@ void main() {
       if (firstPerson) return true;
       const actor = life.actors.get("main");
       if (!actor || actor.frozen) return false;
+      if (actor.inside === "\u77E5\u8BC6\u68EE\u6797") {
+        window.dispatchEvent(new CustomEvent("town-open-forest", { detail: { view: "walk" } }));
+        return true;
+      }
       clearFocus();
       if (activePlace) leavePlace();
       playerSavedCamera = { yaw, pitch, distance: distance3, target: target.clone() };
@@ -47648,6 +47686,11 @@ void main() {
         }
       }
       if (window.TownSimulation.mainSleeping({ ...worldState, currentActivity: worldState.activity })) return false;
+      const forestWalker = life.actors.get("main");
+      if (firstPerson && source === "keyboard" && forestWalker && !forestWalker.inside && Math.hypot(forestWalker.position.x, forestWalker.position.z + 17) < 1.6) {
+        window.dispatchEvent(new CustomEvent("town-open-forest", { detail: { view: "walk" } }));
+        return;
+      }
       if (source === "mouse") {
         const ray2 = new Raycaster();
         ray2.setFromCamera(new Vector2(0, 0), camera);
@@ -48618,7 +48661,10 @@ void main() {
         target2.dispose();
       }
     }
-    window.TownApp = { capturePlacePhoto, capturePhoto: () => {
+    window.TownApp = { tickForest: (dt) => {
+      life.tick(dt, worldState.part === "\u767D\u5929", "main");
+      return [...life.actors.values()].filter((a) => a.id !== "main" && a.inside === "\u77E5\u8BC6\u68EE\u6797").map((a) => ({ id: a.id, x: a.position.x, z: a.position.z, heading: a.heading, moving: a.moving }));
+    }, capturePlacePhoto, capturePhoto: () => {
       renderer.render(scene, camera);
       const shot = document.createElement("canvas");
       shot.width = 480;

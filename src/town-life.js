@@ -4,6 +4,7 @@ import {plazaSeats,plazaSeatBlocks} from './town-plaza-seats.js';
 import {cottageFurniture,cottageExpansion} from './town-cottage-interior.js';
 // Scene-time movement is separate from real-time needs and aging.
 export const destinations=[
+ ['知识森林',0,-18.9,true,'学习',[-4,6]],
  ['宠物之家',15.65,-.25,true,'陪伴宠物',[-.75,.5]],
  ['跑轮公园',-11,-7.5,false,'跑轮',[-1.9,-.8]],['诊所',-4.5,-10,true,'检查',[.4,-.8]],
  ['零食铺',9,-7,true,'购买粮食',[.5,1.9]],['中心广场',0,-1.3,false,'社交',[0,0]],
@@ -35,7 +36,7 @@ export function createTownLife(onEvent=()=>{}){
  function plan(actor){
   if(actor.outing&&!actor.forcedSleep){actor.destination=actor.outing.place;actor.action='结伴游玩';go(actor,entrance(actor.destination),'arrived');return}
   actor.cycle++;actor.speech='';actor.partner=null;if(actor.forcedSleep){actor.destination=actor.forcedHospital?'诊所':'鼠鼠小屋';actor.action=actor.forcedHospital?'住院':'睡觉';go(actor,entrance(actor.destination),'arrived');return}if(actor.familyPartner){actor.destination='鼠鼠小屋';actor.action='迎接幼鼠';go(actor,entrance(actor.destination),'arrived');return}if(celebration){actor.destination='中心广场';actor.action='庆祝';go(actor,entrance(actor.destination),'arrived');return}
-  const choices=actor.child?['鼠鼠小屋','跑轮公园','中心广场','小菜园','鼠鼠学校']:['小菜园','零食铺','中心广场',actor.home,'跑轮公园','鼠鼠小屋','纪念馆','诊所','墓地','殡仪馆','鼠鼠学校','鼠鼠饭馆','Mariah Carey名人堂','宠物之家','中心广场'];
+  const choices=actor.child?['鼠鼠小屋','跑轮公园','中心广场','小菜园','鼠鼠学校','知识森林']:['小菜园','零食铺','中心广场',actor.home,'跑轮公园','鼠鼠小屋','纪念馆','诊所','墓地','殡仪馆','鼠鼠学校','鼠鼠饭馆','Mariah Carey名人堂','宠物之家','中心广场','知识森林'];
   const index=(actor.cycle-1+[...actors.keys()].indexOf(actor.id))%choices.length;
   actor.destination=actor.child&&actor.age<.18?'鼠鼠小屋':choices[index];const frailty=actor.aging?.frailty||0,resting=frailty>0&&((actor.cycle*37%100)/100<frailty*.65||actor.destination==='跑轮公园'&&(actor.cycle*19%100)/100<frailty*.9);if(resting)actor.destination='鼠鼠小屋';if((actor.health??100)<55)actor.destination='诊所';if(actor.destination==='中心广场'&&actor.allowSocial===false)actor.destination='鼠鼠小屋';actor.action=byName.get(actor.destination)[4];
   if(actor.destination==='鼠鼠小屋')actor.action=actor.child&&actor.age<.18?'睡觉':actor.cycle%3===0?'饮水':day?'休息':'进食';
@@ -72,8 +73,9 @@ export function createTownLife(onEvent=()=>{}){
   if(actor.phase==='restaurant-payment-retry'){actor.wait-=dt;if(actor.wait<=0){if(!restaurantQueue.includes(actor.id))restaurantQueue.push(actor.id);go(actor,restaurantQueuePoint(restaurantQueue.indexOf(actor.id)),'restaurant-queue',true);actor.wait=1.2}return true}if(actor.phase==='restaurant-payment-wait')return true;return false;
  }
  function finishRestaurantPayment(id,ok,controlled=false){const actor=actors.get(id);if(!actor?.mealBill)return;if(!ok){const index=restaurantQueue.indexOf(id);if(index>=0)restaurantQueue.splice(index,1);actor.speech='瓜子不足，先让其他朋友付款';go(actor,point(-1.2,1.65),'restaurant-payment-retry',true);actor.wait=3;return}restaurantQueue.splice(restaurantQueue.indexOf(id),1);delete actor.mealBill;actor.speech='谢谢招待，支付完成！';actor.seated=false;delete actor.restaurantSeat;if(controlled){actor.controlled=true;actor.phase='controlled';actor.action='参观'}else{actor.controlled=false;complete(actor)}}
- function tick(dt,isDay=day){day=isDay;dt=Math.max(0,Math.min(dt,1));elapsed+=dt;for(let i=restaurantQueue.length-1;i>=0;i--)if(!actors.has(restaurantQueue[i]))restaurantQueue.splice(i,1);
+ function tick(dt,isDay=day,pausedId=null){day=isDay;dt=Math.max(0,Math.min(dt,1));elapsed+=dt;for(let i=restaurantQueue.length-1;i>=0;i--)if(!actors.has(restaurantQueue[i]))restaurantQueue.splice(i,1);
   for(const actor of actors.values()){
+   if(actor.id===pausedId)continue;
    if(petVisit(actor,dt)){actor.moving=false;actor.energySeconds=actor.id==='main'?0:actor.energySeconds;continue}if(!actor.frozen&&!actor.petInviteFree){actor.energySeconds=(actor.energySeconds||0)+dt;if(actor.energySeconds>=5){const seconds=actor.energySeconds;actor.energySeconds=0;onEvent({id:actor.id,type:'energy',seconds,moving:actor.moving||actor.phase==='moving',action:actor.phase==='activity'?actor.action:'行动',place:actor.place})}}actor.moving=false;if(actor.controlled&&actor.outing){const other=actors.get(actor.outing.npcId),d=byName.get(actor.outing.place),near=actor.inside?actor.inside===actor.outing.place:!d[3]&&distance(actor.position,point(d[1],d[2]))<2.7;if(near&&other?.place===actor.outing.place&&other.phase==='activity'&&!actor.outingReported){actor.outingReported=true;onEvent({id:'main',type:'outing-ready',outingId:actor.outing.id})}}if(restaurantStep(actor,dt))continue;if(actor.frozen||actor.controlled)continue;
    if(actor.phase==='moving'){
     let budget=dt*(actor.child?.48:.72)*(actor.aging?.movement??1)*(actor.energyMovement??1);while(budget>0&&actor.path.length){const target=actor.path[0],dist=distance(actor.position,target);if(dist>.001){actor.heading=Math.atan2(target.x-actor.position.x,target.z-actor.position.z);actor.moving=true}if(dist<=budget){actor.position={...target};actor.path.shift();budget-=dist}else{actor.position.x+=(target.x-actor.position.x)*budget/dist;actor.position.z+=(target.z-actor.position.z)*budget/dist;budget=0}}
@@ -83,7 +85,7 @@ export function createTownLife(onEvent=()=>{}){
    else if(actor.phase==='arrived'){
     actor.place=actor.destination;onEvent({id:actor.id,type:'status',action:actor.action==='睡觉'?'回家睡觉':actor.action,place:actor.destination});const d=byName.get(actor.destination);
     if(celebration&&!actor.outing&&actor.destination==='中心广场'){const index=[...actors.keys()].indexOf(actor.id),a=index/Math.max(actors.size,1)*Math.PI*2;go(actor,point(Math.cos(a)*2.15,-1.3+Math.sin(a)*1.2),'celebrating')}
-    else if(d[3]){actor.inside=actor.destination;actor.position=point(0,2.6);const stations=actor.outing?[actor.id==='main'?-.5:.5,2]:actor.familyPartner?actor.familyStation:actor.action==='住院'?[-1.15,-.8]:actor.action==='睡觉'?cottageFurniture.bed:actor.action==='饮水'?cottageFurniture.water:actor.action==='进食'?cottageFurniture.bowl:d[5];go(actor,point(...stations),'using',true)}
+    else if(d[3]){actor.inside=actor.destination;actor.position=point(0,actor.destination==='知识森林'?12:2.6);const stations=actor.destination==='知识森林'?[-4-([...actors.keys()].indexOf(actor.id)%4)*.6,6]:actor.outing?[actor.id==='main'?-.5:.5,2]:actor.familyPartner?actor.familyStation:actor.action==='住院'?[-1.15,-.8]:actor.action==='睡觉'?cottageFurniture.bed:actor.action==='饮水'?cottageFurniture.water:actor.action==='进食'?cottageFurniture.bowl:d[5];go(actor,point(...stations),'using',true)}
     else if(actor.action==='社交'){actor.phase='meeting';actor.wait=35;actor.speech='等朋友一起聊聊';go(actor,point(-1.9+(actors.size?([...actors.keys()].indexOf(actor.id)%4)*.85:0),.1),'meeting')}
     else{actor.wait=0;if(actor.destination==='墓地')go(actor,point(d[1],d[2]),'using');else if(actor.action==='跑轮')go(actor,point(d[1],d[2]+.2),'using',true);else{actor.phase='using'}}
    }
@@ -96,7 +98,7 @@ export function createTownLife(onEvent=()=>{}){
    else if(actor.phase==='family-wait'){const other=actors.get(actor.familyPartner);if(other?.inside===actor.inside)actor.heading=Math.atan2(other.position.x-actor.position.x,other.position.z-actor.position.z)}
    else if(actor.phase==='activity'){if(actor.outing&&!actor.forcedSleep){const other=actors.get(actor.id==='main'?actor.outing.npcId:'main');actor.speech='一起玩一会儿';if(other?.place===actor.outing.place&&other.phase==='activity'&&!actor.outingReported){actor.outingReported=true;onEvent({id:'main',type:'outing-ready',outingId:actor.outing.id})}continue}if(actor.forcedSleep&&['睡觉','住院'].includes(actor.action))continue;actor.wait-=dt;if(actor.wait<=0)complete(actor)}
    else if(actor.phase==='exit-yard'){actor.speech='';go(actor,entrance(actor.place),'idle',actor.place!=='墓地')}
-   else if(actor.phase==='exit-room'){actor.speech='';go(actor,point(0,2.6),'outside',true)}
+   else if(actor.phase==='exit-room'){actor.speech='';go(actor,point(0,actor.inside==='知识森林'?12:2.6),'outside',true)}
    else if(actor.phase==='outside'){actor.position=entrance(actor.inside);actor.inside=null;actor.phase='idle';actor.wait=1}
    else if(actor.phase==='meeting'){
     const friend=[...actors.values()].find(other=>other!==actor&&other.phase==='meeting'&&!other.partner&&other.allowSocial!==false);
