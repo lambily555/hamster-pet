@@ -23537,6 +23537,94 @@
       return diff;
     }
   };
+  var Spherical = class {
+    /**
+     * Constructs a new spherical.
+     *
+     * @param {number} [radius=1] - The radius, or the Euclidean distance (straight-line distance) from the point to the origin.
+     * @param {number} [phi=0] - The polar angle in radians from the y (up) axis.
+     * @param {number} [theta=0] - The equator/azimuthal angle in radians around the y (up) axis.
+     */
+    constructor(radius = 1, phi = 0, theta = 0) {
+      this.radius = radius;
+      this.phi = phi;
+      this.theta = theta;
+    }
+    /**
+     * Sets the spherical components by copying the given values.
+     *
+     * @param {number} radius - The radius.
+     * @param {number} phi - The polar angle.
+     * @param {number} theta - The azimuthal angle.
+     * @return {Spherical} A reference to this spherical.
+     */
+    set(radius, phi, theta) {
+      this.radius = radius;
+      this.phi = phi;
+      this.theta = theta;
+      return this;
+    }
+    /**
+     * Copies the values of the given spherical to this instance.
+     *
+     * @param {Spherical} other - The spherical to copy.
+     * @return {Spherical} A reference to this spherical.
+     */
+    copy(other) {
+      this.radius = other.radius;
+      this.phi = other.phi;
+      this.theta = other.theta;
+      return this;
+    }
+    /**
+     * Restricts the polar angle [page:.phi phi] to be between `0.000001` and pi -
+     * `0.000001`.
+     *
+     * @return {Spherical} A reference to this spherical.
+     */
+    makeSafe() {
+      const EPS = 1e-6;
+      this.phi = clamp(this.phi, EPS, Math.PI - EPS);
+      return this;
+    }
+    /**
+     * Sets the spherical components from the given vector which is assumed to hold
+     * Cartesian coordinates.
+     *
+     * @param {Vector3} v - The vector to set.
+     * @return {Spherical} A reference to this spherical.
+     */
+    setFromVector3(v) {
+      return this.setFromCartesianCoords(v.x, v.y, v.z);
+    }
+    /**
+     * Sets the spherical components from the given Cartesian coordinates.
+     *
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     * @param {number} z - The z value.
+     * @return {Spherical} A reference to this spherical.
+     */
+    setFromCartesianCoords(x2, y, z) {
+      this.radius = Math.sqrt(x2 * x2 + y * y + z * z);
+      if (this.radius === 0) {
+        this.theta = 0;
+        this.phi = 0;
+      } else {
+        this.theta = Math.atan2(x2, z);
+        this.phi = Math.acos(clamp(y / this.radius, -1, 1));
+      }
+      return this;
+    }
+    /**
+     * Returns a new spherical with copied values from this instance.
+     *
+     * @return {Spherical} A clone of this instance.
+     */
+    clone() {
+      return new this.constructor().copy(this);
+    }
+  };
   var Matrix2 = class _Matrix2 {
     static {
       _Matrix2.prototype.isMatrix2 = true;
@@ -35568,9 +35656,13 @@ void main() {
     back: ["\u8FD4\u56DE\u5C0F\u9547", "Back to town", "Volver al pueblo"],
     walk: ["\u7B2C\u4E00\u89C6\u89D2", "First person", "Primera persona"],
     map: ["\u4FEF\u77B0\u5730\u56FE", "Forest map", "Mapa del bosque"],
-    journal: ["\u77E5\u8BC6\u624B\u518C", "Field journal", "Cuaderno de campo"],
+    guide: ["\u68EE\u6797\u5411\u5BFC", "Forest guide", "Gu\xEDa del bosque"],
+    welcomeMap: ["\u5148\u70B9\u51FB\u7BAD\u5934\u4E0B\u7684\u5411\u5BFC\u9F20\uFF0C\u542C\u5B8C\u4ECB\u7ECD\u518D\u5F00\u59CB\u63A2\u7D22", "Click the guide beneath the arrow before exploring", "Pulsa el gu\xEDa bajo la flecha antes de explorar"],
+    welcome: ["\u5148\u6CBF\u7BAD\u5934\u627E\u5230\u5411\u5BFC\u9F20 \xB7 WASD / \u65B9\u5411\u952E\u884C\u8D70 \xB7 \u9760\u8FD1\u540E\u6309 E", "Follow the arrows to the guide \xB7 WASD / arrows to walk \xB7 E to talk", "Sigue las flechas hasta el gu\xEDa \xB7 WASD / flechas para caminar \xB7 E para hablar"],
+    introduction: ["\u6B22\u8FCE\u6765\u5230\u77E5\u8BC6\u68EE\u6797\uFF01\u5148\u8BA4\u4E2A\u8DEF\uFF1A\u4E94\u5904\u8425\u5730\u5404\u6709\u4E09\u9053\u5C0F\u95EE\u9898\uFF0C\u7B54\u5BF9\u4F1A\u6536\u4E0B\u4E00\u7247\u77E5\u8BC6\u53F6\u3002\u7B54\u9519\u4E5F\u522B\u614C\uFF0C\u542C\u5B8C\u89E3\u91CA\u8FD8\u80FD\u518D\u8BD5\u3002\u60F3\u590D\u4E60\u5C31\u6765\u627E\u6211\uFF0C\u6211\u628A\u4F60\u5B66\u8FC7\u7684\u77E5\u8BC6\u90FD\u8BB0\u7740\u3002", "Welcome to the forest! Each of the five camps has three questions. Correct answers earn knowledge leaves. Miss one? Read the explanation and try again. Come back to me whenever you want to review what you have learned.", "\xA1Bienvenido al bosque! Cada uno de los cinco campamentos tiene tres preguntas. Las respuestas correctas dan hojas de conocimiento. Si fallas, lee la explicaci\xF3n e int\xE9ntalo de nuevo. Vuelve a verme cuando quieras repasar lo aprendido."],
+    begin: ["\u660E\u767D\u5566\uFF0C\u5F00\u59CB\u63A2\u7D22", "Got it. Let\u2019s explore", "Entendido. A explorar"],
     leaves: ["\u77E5\u8BC6\u53F6\u7247", "Knowledge leaves", "Hojas de conocimiento"],
-    hint: ["\u70B9\u51FB\u6797\u95F4\u8425\u5730\u5F00\u59CB\u63A2\u7D22 \xB7 \u65B9\u5411\u952E\u4E5F\u53EF\u9009\u62E9\u8425\u5730", "Select a forest camp to explore \xB7 Arrow keys select a camp too", "Elige un campamento \xB7 Tambi\xE9n puedes usar las flechas"],
+    hint: ["\u5DE6\u952E\u62D6\u52A8\u65CB\u8F6C \xB7 \u53F3\u952E\u62D6\u52A8\u5E73\u79FB \xB7 \u6EDA\u8F6E\u7F29\u653E \xB7 \u70B9\u51FB\u8425\u5730\u7B54\u9898", "Drag to orbit \xB7 Right-drag to pan \xB7 Scroll to zoom \xB7 Click a camp", "Arrastra para girar \xB7 Bot\xF3n derecho para desplazar \xB7 Rueda para acercar \xB7 Pulsa un campamento"],
     walkHint: ["WASD / \u65B9\u5411\u952E\u884C\u8D70 \xB7 \u62D6\u52A8\u753B\u9762\u8F6C\u5411 \xB7 \u9760\u8FD1\u8425\u5730\u6309 E", "WASD / arrows to walk \xB7 Drag to look \xB7 E near a camp", "WASD / flechas para caminar \xB7 Arrastra para mirar \xB7 E junto a un campamento"],
     start: ["\u548C\u5411\u5BFC\u804A\u804A", "Talk to the guide", "Hablar con el gu\xEDa"],
     close: ["\u6536\u8D77", "Close", "Cerrar"],
@@ -35707,6 +35799,9 @@ void main() {
       flowers.setMatrixAt(i2, dummy.matrix);
     }
     scene.add(flowers);
+    const navigator2 = guide(0, 8, 14993310);
+    navigator2.userData.forestGuide = true;
+    colliders.push({ x: 0, z: 8, r: 0.65 });
     const avatar = guide(0, 10, 14993310);
     if (compact) {
       scene.updateMatrixWorld(true);
@@ -35738,7 +35833,7 @@ void main() {
       oldGeometry.forEach((g) => g.dispose());
       oldMaterials.forEach((m) => m.dispose());
     }
-    return { root: scene, colliders, markers, decorations, treeCrown, avatar };
+    return { root: scene, colliders, markers, decorations, treeCrown, avatar, navigator: navigator2 };
   }
   function installKnowledgeForest() {
     if (document.getElementById("knowledgeForest")) return;
@@ -35750,7 +35845,7 @@ void main() {
     overlay.setAttribute("aria-modal", "true");
     overlay.setAttribute("aria-label", tr("title"));
     overlay.tabIndex = -1;
-    overlay.innerHTML = '<canvas class="forest-canvas"></canvas><div class="forest-header"><div><small>FOREST FIELD NOTES / 01</small><h1></h1><p></p></div><button data-action="exit"></button></div><div class="forest-tools"><span class="forest-progress"></span><button data-action="view"></button><button data-action="journal"></button></div><nav class="forest-stations"></nav><div class="forest-caption"></div><div class="forest-touch"><button data-move="forward">\u2191</button><button data-move="left">\u2190</button><button data-move="back">\u2193</button><button data-move="right">\u2192</button><button data-action="interact">E</button></div><section class="forest-card" hidden></section><div class="forest-toast" role="status"></div>';
+    overlay.innerHTML = '<canvas class="forest-canvas"></canvas><div class="forest-header"><div><small>FOREST FIELD NOTES / 01</small><h1></h1><p></p></div><button data-action="exit"></button></div><div class="forest-tools"><span class="forest-progress"></span><button data-action="view"></button></div><nav class="forest-stations"></nav><div class="forest-caption"></div><div class="forest-touch"><button data-move="forward">\u2191</button><button data-move="left">\u2190</button><button data-move="back">\u2193</button><button data-move="right">\u2192</button><button data-action="interact">E</button></div><section class="forest-card" hidden></section><div class="forest-toast" role="status"></div>';
     document.body.appendChild(overlay);
     const canvas = overlay.querySelector("canvas"), card = overlay.querySelector(".forest-card"), toast = overlay.querySelector(".forest-toast");
     let progress = cleanProgress(null);
@@ -35761,7 +35856,70 @@ void main() {
     let draw = null, scene = null, camera = null, frame = 0, resize = null, clock = 0, mode = "map", yaw = 0, drag = null, active = -1, question = null, answered = false, view = "map", lastFocus = null, toastTimer = 0;
     const keys = /* @__PURE__ */ new Set(), player = new Vector3(0, 0.1, 10), colliders = [], markers = [], decorations = [], look = new Vector3(), raycaster = new Raycaster();
     const targetCamera = new Vector3(20, 25, 29), targetLook = new Vector3(0, 0, -1);
-    let avatar = null, treeCrown = null;
+    let avatar = null, treeCrown = null, navigator2 = null, roster = [], rosterKey = "", ownerId = "main", welcomed = false, guideArrow = null;
+    const nameLabels = [];
+    function residentName(n) {
+      return n ? window.TownI18n?.t(n.name) || n.name : "";
+    }
+    function guideName(i2) {
+      return residentName(roster[i2 + 1]);
+    }
+    function readWelcome() {
+      try {
+        return JSON.parse(localStorage.getItem("shushu.knowledge-forest.welcome.v1") || "{}")[ownerId] === true;
+      } catch {
+        return false;
+      }
+    }
+    function syncResidents(state) {
+      const people = [...state.npcs || [], ...state.offspring || [], ...state.npcOffspring || []].filter((n) => n.id && n.name && n.alive !== false), seen = /* @__PURE__ */ new Set();
+      const selected = people.filter((n) => !seen.has(n.id) && seen.add(n.id)).slice(0, 6), signature = JSON.stringify(selected.map((n) => [n.id, n.name, n.coat]));
+      ownerId = state.mainId || "main";
+      if (signature === rosterKey) return;
+      rosterKey = signature;
+      roster = selected;
+      if (scene) {
+        paintResidents();
+        refresh();
+        if (view === "welcome") showGuide();
+      }
+    }
+    function paintResidents() {
+      for (const label of nameLabels) {
+        label.parent?.remove(label);
+        label.material.map?.dispose();
+        label.material.dispose();
+      }
+      nameLabels.length = 0;
+      [navigator2, ...decorations].forEach((rig, i2) => {
+        const n = roster[i2];
+        if (!rig) return;
+        rig.visible = !!n;
+        if (!n) return;
+        rig.userData.residentId = n.id;
+        rig.userData.station = i2 - 1;
+        rig.traverse((o) => {
+          if (o.isMesh && o.material?.color && o.material.color.getHex() !== 3352608 && o.material.color.getHex() !== 15315875 && o.material.color.getHex() !== 11956577) o.material.color.setHex({ silver: 15657696, pudding: 15389851, violet: 11906498, "three-line": 6708821 }[n.coat] || 9667956);
+        });
+        const c = document.createElement("canvas");
+        c.width = 512;
+        c.height = 96;
+        const ctx = c.getContext("2d");
+        ctx.fillStyle = "#fff9e9ee";
+        ctx.beginPath();
+        ctx.roundRect(0, 0, 512, 96, 24);
+        ctx.fill();
+        ctx.fillStyle = "#344832";
+        ctx.font = "600 56px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText(residentName(n) + (i2 === 0 ? " \xB7 " + tr("guide") : ""), 256, 59, 490);
+        const label = new Sprite(new SpriteMaterial({ map: new CanvasTexture(c), depthTest: true }));
+        label.scale.set(i2 === 0 ? 3.2 : 2.2, 0.5, 1);
+        label.position.y = 1.52;
+        rig.add(label);
+        nameLabels.push(label);
+      });
+    }
     function notify(text) {
       toast.textContent = text;
       clearTimeout(toastTimer);
@@ -35793,14 +35951,14 @@ void main() {
       overlay.querySelector(".forest-header p").textContent = tr("subtitle");
       overlay.querySelector('[data-action="exit"]').textContent = "\u2190 " + tr("back");
       overlay.querySelector('[data-action="view"]').textContent = tr(mode === "map" ? "walk" : "map");
-      overlay.querySelector('[data-action="journal"]').textContent = tr("journal");
       overlay.querySelector(".forest-progress").textContent = `\u2726 ${progress.learned.length} / ${questions.length} \xB7 ${tr("leaves")}`;
-      overlay.querySelector(".forest-caption").textContent = progress.learned.length === questions.length ? tr("complete") : tr(mode === "map" ? "hint" : "walkHint");
+      overlay.querySelector(".forest-caption").textContent = !welcomed ? tr(mode === "walk" ? "welcome" : "welcomeMap") : progress.learned.length === questions.length ? tr("complete") : tr(mode === "map" ? "hint" : "walkHint");
       overlay.querySelector(".forest-touch").hidden = mode !== "walk";
       const nav = overlay.querySelector("nav");
       nav.replaceChildren();
       glades.forEach((g, i2) => {
         const b = button(`${String(i2 + 1).padStart(2, "0")}  ${localized(g.name)}  ${count(g)}/3`, () => select(i2));
+        b.disabled = !welcomed;
         b.classList.toggle("learned", count(g) === 3);
         b.classList.toggle("active", active === i2);
         nav.appendChild(b);
@@ -35837,6 +35995,10 @@ void main() {
       overlay.focus({ preventScroll: true });
     }
     function select(i2) {
+      if (!welcomed) {
+        notify(tr(mode === "walk" ? "welcome" : "welcomeMap"));
+        return;
+      }
       active = i2;
       refresh();
       const g = glades[i2];
@@ -35856,7 +36018,7 @@ void main() {
       view = "quiz";
       answered = false;
       const g = glades.find((g2) => g2.id === q.glade), group = questions.filter((item) => item.glade === g.id);
-      panel(localized(g.guide) + " \xB7 " + localized(g.name));
+      panel((guideName(glades.indexOf(g)) ? guideName(glades.indexOf(g)) + " \xB7 " : "") + localized(g.name));
       paragraph(`${group.indexOf(q) + 1} / ${group.length}`, "forest-eyebrow");
       paragraph(localized(q.q), "forest-question");
       const options = document.createElement("div");
@@ -35901,9 +36063,36 @@ void main() {
       card.append(next);
       next.focus({ preventScroll: true });
     }
-    function journal() {
-      view = "journal";
-      panel(tr("journal"));
+    function showGuide() {
+      clearTimeout(toastTimer);
+      toast.textContent = "";
+      if (mode === "map") {
+        targetLook.set(0, 0.7, 8);
+        targetCamera.set(5, 6, 15);
+      }
+      view = welcomed ? "guide" : "welcome";
+      panel((residentName(roster[0]) ? residentName(roster[0]) + " \xB7 " : "") + tr("guide"));
+      paragraph(tr("introduction"));
+      if (!welcomed) {
+        card.append(button(tr("begin"), () => {
+          let visits = {};
+          try {
+            visits = JSON.parse(localStorage.getItem("shushu.knowledge-forest.welcome.v1") || "{}") || {};
+          } catch {
+          }
+          welcomed = true;
+          try {
+            visits[ownerId] = true;
+            localStorage.setItem("shushu.knowledge-forest.welcome.v1", JSON.stringify(visits));
+          } catch {
+            notify(tr("storage"));
+          }
+          guideArrow.visible = false;
+          closeCard();
+          refresh();
+        }, "forest-primary"));
+        return;
+      }
       paragraph(tr("note"));
       if (!progress.learned.length) paragraph(tr("empty"));
       for (const q of questions.filter((q2) => progress.learned.includes(q2.id))) {
@@ -35947,6 +36136,20 @@ void main() {
       decorations.push(...forest.decorations);
       treeCrown = forest.treeCrown;
       avatar = forest.avatar;
+      navigator2 = forest.navigator;
+      markers.push(navigator2, ...decorations);
+      guideArrow = new Mesh(new ConeGeometry(0.25, 0.65, 4), new MeshStandardMaterial({ color: 15054149, emissive: 9069834, emissiveIntensity: 0.3 }));
+      guideArrow.rotation.z = Math.PI;
+      guideArrow.position.set(0, 2.7, 8);
+      scene.add(guideArrow);
+      guideArrow.visible = !welcomed;
+      for (const z of [11, 10, 9]) {
+        const arrow = new Mesh(new ConeGeometry(0.16, 0.4, 3), guideArrow.material);
+        arrow.rotation.x = -Math.PI / 2;
+        arrow.position.set(0, 0.08, z);
+        scene.add(arrow);
+      }
+      paintResidents();
       resize = () => {
         const w = overlay.clientWidth, h = overlay.clientHeight;
         if (!w || !h) return;
@@ -35981,6 +36184,11 @@ void main() {
         look.lerp(targetLook, 1 - Math.exp(-5 * dt));
         camera.lookAt(look);
       }
+      for (const label of nameLabels) {
+        const point2 = label.getWorldPosition(new Vector3()), height = Math.min(0.45, point2.distanceTo(camera.position) * 2 * Math.tan(43 * Math.PI / 360) * 36 / Math.max(1, canvas.clientHeight));
+        label.scale.set(height * 512 / 96, height, 1);
+      }
+      if (guideArrow?.visible) guideArrow.position.y = 2.7 + Math.sin(now * 4e-3) * 0.15;
       avatar.visible = mode === "map";
       avatar.position.set(player.x, 0, player.z);
       decorations.forEach((g, i2) => g.rotation.y = Math.sin(now * 5e-4 + i2) * 0.12);
@@ -35994,7 +36202,12 @@ void main() {
       keys.clear();
       overlay.hidden = false;
       document.body.dataset.forestOpen = "true";
+      welcomed = readWelcome();
       mode = "map";
+      if (!welcomed) {
+        player.set(0, 0.1, 12);
+        yaw = 0;
+      }
       targetCamera.set(20, 25, 29);
       targetLook.set(0, 0, -1);
       try {
@@ -36009,6 +36222,7 @@ void main() {
     }
     function exit() {
       if (overlay.hidden) return;
+      drag = null;
       overlay.hidden = true;
       delete document.body.dataset.forestOpen;
       cancelAnimationFrame(frame);
@@ -36018,6 +36232,7 @@ void main() {
       if (scene) {
         const geometry = /* @__PURE__ */ new Set(), materials3 = /* @__PURE__ */ new Set();
         scene.traverse((o) => {
+          if (o.isSprite && o.material?.map) o.material.map.dispose();
           if (o.geometry) geometry.add(o.geometry);
           if (o.material) (Array.isArray(o.material) ? o.material : [o.material]).forEach((m) => materials3.add(m));
           if (o.shadow?.map) o.shadow.map.dispose();
@@ -36032,6 +36247,14 @@ void main() {
       lastFocus?.focus({ preventScroll: true });
     }
     function interact() {
+      if (navigator2?.visible && Math.hypot(player.x, player.z - 8) < 3.5) {
+        showGuide();
+        return;
+      }
+      if (!welcomed) {
+        notify(tr("welcome"));
+        return;
+      }
       let i2 = -1, dist = 3.5;
       glades.forEach((g, index) => {
         const d = Math.hypot(player.x - g.x, player.z - g.z);
@@ -36045,7 +36268,6 @@ void main() {
     }
     window.addEventListener("town-open-forest", open);
     overlay.querySelector('[data-action="exit"]').onclick = exit;
-    overlay.querySelector('[data-action="journal"]').onclick = journal;
     overlay.querySelector('[data-action="view"]').onclick = () => {
       closeCard();
       mode = mode === "map" ? "walk" : "map";
@@ -36064,28 +36286,59 @@ void main() {
       };
       b.onpointerup = b.onpointercancel = b.onlostpointercapture = () => keys.delete(b.dataset.move);
     });
+    canvas.oncontextmenu = (e) => e.preventDefault();
     canvas.onpointerdown = (e) => {
-      drag = { x: e.clientX, y: e.clientY, moved: false };
+      if (!card.hidden) return;
+      e.preventDefault();
+      drag = { x: e.clientX, y: e.clientY, startX: e.clientX, startY: e.clientY, button: e.button, moved: false };
       canvas.setPointerCapture(e.pointerId);
     };
     canvas.onpointermove = (e) => {
       if (!drag) return;
-      const dx = e.clientX - drag.x;
-      drag.moved ||= Math.abs(dx) + Math.abs(e.clientY - drag.y) > 3;
+      const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      drag.moved ||= Math.hypot(e.clientX - drag.startX, e.clientY - drag.startY) > 4;
       if (mode === "walk" && card.hidden) yaw -= dx * 6e-3;
+      else if (mode === "map" && card.hidden && drag.moved) {
+        const offset = targetCamera.clone().sub(targetLook), spherical = new Spherical().setFromVector3(offset);
+        if (drag.button === 2 || drag.button === 1 || e.shiftKey) {
+          const scale = 2 * spherical.radius * Math.tan(43 * Math.PI / 360) / Math.max(1, canvas.clientHeight), right = new Vector3().setFromMatrixColumn(camera.matrixWorld, 0), forward = new Vector3().crossVectors(right, camera.up).normalize(), next = targetLook.clone().addScaledVector(right, -dx * scale).addScaledVector(forward, dy * scale);
+          next.x = MathUtils.clamp(next.x, -16, 16);
+          next.z = MathUtils.clamp(next.z, -16, 16);
+          targetCamera.add(next.clone().sub(targetLook));
+          targetLook.copy(next);
+        } else if (drag.button === 0) {
+          spherical.theta -= dx * 6e-3;
+          spherical.phi = MathUtils.clamp(spherical.phi - dy * 6e-3, 0.2, 1.25);
+          targetCamera.copy(targetLook).add(offset.setFromSpherical(spherical));
+        }
+      }
       drag.x = e.clientX;
       drag.y = e.clientY;
     };
     canvas.onpointerup = (e) => {
-      if (drag && !drag.moved && mode === "map" && card.hidden) {
+      if (drag && drag.button === 0 && !drag.moved && mode === "map" && card.hidden) {
         const r = canvas.getBoundingClientRect();
         raycaster.setFromCamera(new Vector2((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1), camera);
-        const hit = raycaster.intersectObjects(markers)[0];
-        if (hit) select(hit.object.userData.station);
+        const hit = raycaster.intersectObjects(markers, true).find((h) => {
+          for (let n = h.object; n; n = n.parent) if (!n.visible) return false;
+          return true;
+        });
+        if (hit) {
+          let node = hit.object;
+          while (node && !node.userData.forestGuide && !Number.isInteger(node.userData.station)) node = node.parent;
+          if (node?.userData.forestGuide) showGuide();
+          else if (node) select(node.userData.station);
+        }
       }
       drag = null;
     };
-    canvas.onpointercancel = () => drag = null;
+    canvas.onpointercancel = canvas.onlostpointercapture = () => drag = null;
+    canvas.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      if (mode !== "map" || !card.hidden) return;
+      const offset = targetCamera.clone().sub(targetLook), step = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? canvas.clientHeight : 1), distance3 = MathUtils.clamp(offset.length() * Math.exp(MathUtils.clamp(step, -1e3, 1e3) * 1e-3), 6, 48);
+      targetCamera.copy(targetLook).add(offset.setLength(distance3));
+    }, { passive: false });
     window.addEventListener("keydown", (e) => {
       if (overlay.hidden) return;
       e.stopImmediatePropagation();
@@ -36132,9 +36385,11 @@ void main() {
       shownLanguage = language();
       refresh();
       if (!overlay.hidden && view === "quiz" && question) showQuestion(question);
-      else if (!overlay.hidden && view === "journal") journal();
+      else if (!overlay.hidden && ["guide", "welcome"].includes(view)) showGuide();
+      if (!overlay.hidden) paintResidents();
     });
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
+    return { syncResidents };
   }
 
   // src/town-phone-model.js
@@ -45968,7 +46223,7 @@ void main() {
   }
   window.createTownResidentPortraits = residentPortraits;
   function init() {
-    installKnowledgeForest();
+    const forestUI = installKnowledgeForest();
     const host = document.querySelector("#townScene"), canvas = host?.querySelector("canvas");
     if (!host || !canvas) return;
     const scene = new Scene();
@@ -48248,6 +48503,7 @@ void main() {
       refreshRegionNames();
       const oldWeather = worldState.weather?.name, oldBoard = worldState.schoolBoard;
       worldState = next;
+      forestUI?.syncResidents(next);
       roomCache.get("\u5BA0\u7269\u4E4B\u5BB6")?.userData.syncPets(next.petHome);
       roomCache.get("\u9F20\u9F20\u5C0F\u5C4B")?.userData.syncPets(next.petHome);
       petCompanions.sync(next);

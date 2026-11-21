@@ -18,7 +18,7 @@ GitHub 的 **Code → Download ZIP** 是源代码，不是安装包。个人设�
 
 Download a setup or portable EXE from Releases; no developer tools are needed. Source ZIPs require the development setup below. Builds are currently unsigned. Personal saves are local and are not included in downloads.
 
-> Windows v1.6.2发行包包含截至2026-11-21的最新桌面功能与知识森林。新用户从初始资料和初始小镇开始，发行包不包含维护者个人数据。Android/iOS安装包尚未发布。
+> Windows v1.6.3发行包包含截至2026-11-21的最新桌面功能与知识森林。新用户从初始资料和初始小镇开始，发行包不包含维护者个人数据。Android/iOS安装包尚未发布。
 
 ## 当前功能
 
@@ -119,11 +119,11 @@ NPC日常动态也会按活动地点配小镇实景图；图片按需生成并�
 
 
 ## 便携版创建桌面快捷方式
-将 Release 中的 create-desktop-shortcut.cmd 与 hamster-pet-portable-1.6.2.exe 放在同一文件夹后，双击 create-desktop-shortcut.cmd。脚本只创建当前用户的桌面快捷方式，不启动程序；已有同名快捷方式时会提示，不会覆盖。请先把便携程序放到固定位置，移动文件夹后需删除旧快捷方式再重新创建。便携版是 Windows 免安装版，不是手机版。
+将 Release 中的 create-desktop-shortcut.cmd 与 hamster-pet-portable-1.6.3.exe 放在同一文件夹后，双击 create-desktop-shortcut.cmd。脚本只创建当前用户的桌面快捷方式，不启动程序；已有同名快捷方式时会提示，不会覆盖。请先把便携程序放到固定位置，移动文件夹后需删除旧快捷方式再重新创建。便携版是 Windows 免安装版，不是手机版。
 
 
 ## 知识森林 / Forest of Knowledge
-知识森林直接呈现在小镇外的大地图上；缩小地图后点击森林建模或地面“知识森林”字样，即可进入五处林间营地，不再增加工具栏按钮。15道仓鼠常识三选一问答提供中英西三语解释、知识手册和自动保存；收集全部叶片可点亮知识树。俯瞰点击营地，或切换第一视角使用WASD/方向键行走、拖动转向、靠近按E；手机横屏提供触摸方向按钮。Esc先关闭题目，再返回小镇。此地图是学习空间，森林进度独立保存，不扣主鼠体力，也不修改小镇居民位置。
+知识森林直接呈现在小镇外的大地图上；缩小地图后点击森林建模或地面“知识森林”字样，即可进入五处林间营地，不再增加工具栏按钮。首次到访需先与现有居民担任的向导交流：第一视角沿箭头走近按E，上帝视角点击向导并聚焦；完成后解锁营地。原有用户同样首次引导，保留知识叶片。15道仓鼠常识三选一问答提供中英西三语解释和自动保存；移除知识手册按钮，找向导复习已学内容和来源。收集全部叶片可点亮知识树。俯瞰左键拖动旋转、右键/中键或Shift拖动平移、滚轮缩放，点击营地答题；或切换第一视角使用WASD/方向键行走、拖动转向、靠近按E；手机横屏提供触摸方向按钮。Esc先关闭题目，再返回小镇。此地图是学习空间，森林进度独立保存，不扣主鼠体力，也不修改小镇居民位置。
 
 Explore five woodland camps with 15 hamster-care questions, explanations, a saved field journal and a glowing completion tree. Chinese, English and Spanish are included. This educational space keeps its own progress and does not move town residents or spend their energy.
 

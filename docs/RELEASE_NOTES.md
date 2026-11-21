@@ -1,7 +1,7 @@
-## 鼠鼠桌面小宠 1.6.2 / Hamster Pet 1.6.2
+## 鼠鼠桌面小宠 1.6.3 / Hamster Pet 1.6.3
 
-知识森林直接出现在小镇外地图，点击林地或地面标题进入；移除工具栏入口。地图与探索复用建模，桌面和移动端同步扩大地图缩放范围。
+修复知识森林鼠标旋转、平移和缩放；加入在世居民担任的向导与首次到访指引。第一视角走近按E，上帝视角点击聚焦；听完介绍解锁营地，保留旧知识叶片。删除知识手册按钮，向导提供复习与来源。
 
-The forest now appears directly on the world map. Select the forest or its ground label to explore; no extra toolbar button.
+Fix forest mouse orbit, pan and zoom. Living town residents now host the forest. First-time visitors meet the guide on foot or by clicking in map view before unlocking camps. Existing knowledge leaves are retained. Review learned answers with the guide.
 
-Windows安装版与便携版；Android/iOS安装包尚未发布，未进行人工安装测试。
+Windows安装版和便携版；Android/iOS共享功能同步，手机安装包尚未发布；未人工安装实测。
