@@ -35862,6 +35862,22 @@ void main() {
       });
       return rig;
     }
+    function statue(x2, z, color) {
+      const g = new Group();
+      g.position.set(x2, 0, z);
+      g.userData.forestStatue = true;
+      scene.add(g);
+      sphere(0.42, color, 0, 0.5, 0, g).scale.set(0.85, 1, 0.72);
+      sphere(0.32, color, 0, 0.94, 0, g);
+      [-1, 1].forEach((s) => {
+        sphere(0.16, color, s * 0.23, 1.17, 0, g);
+        sphere(0.105, 15315875, s * 0.23, 1.17, 0.1, g);
+        sphere(0.047, 3352608, s * 0.12, 1, 0.26, g);
+        sphere(0.1, color, s * 0.19, 0.13, 0.1, g);
+      });
+      sphere(0.045, 11956577, 0, 0.91, 0.31, g);
+      return g;
+    }
     function tree(x2, z, size = 1, color = 5799500) {
       box3(0.38 * size, 2 * size, 0.38 * size, 7952445, x2, size, z);
       sphere(1.35 * size, color, x2, 2.4 * size, z);
@@ -35905,7 +35921,7 @@ void main() {
       const m = mesh(new CylinderGeometry(0.85, 0.95, 0.35, 24), g.color, g.x, 0.25, g.z);
       m.userData.station = i2;
       markers.push(m);
-      const npc = guide(g.x, g.z, g.color);
+      const npc = statue(g.x, g.z, g.color);
       npc.position.y = 0.43;
       decorations.push(npc);
       box3(1.45, 0.14, 0.58, 9595459, g.x - 1.1, 0.6, g.z - 0.8);
@@ -35956,7 +35972,7 @@ void main() {
     colliders.push({ x: 0, z: 8, r: 0.65 });
     const avatar = guide(0, 10, 14993310);
     if (compact) {
-      const actors = [...decorations, navigator2, avatar];
+      const actors = [navigator2, avatar];
       actors.forEach((rig) => scene.remove(rig));
       scene.updateMatrixWorld(true);
       const batches = /* @__PURE__ */ new Map(), oldGeometry = /* @__PURE__ */ new Set(), oldMaterials = /* @__PURE__ */ new Set(), keep = [...actors];
@@ -36083,11 +36099,11 @@ void main() {
       [navigator2, ...decorations, ...visitorRigs.values(), avatar].forEach((rig, i2) => {
         const n = i2 < 6 ? roster[i2] : rig === avatar ? mainResident : allResidents.find((n2) => n2.id === rig.userData.residentId);
         if (!rig) return;
-        rig.visible = !!n;
+        rig.visible = rig.userData.forestStatue || !!n;
         if (!n) return;
         rig.userData.residentId = n.id;
         if (i2 < 6) rig.userData.station = i2 - 1;
-        models.appearance(rig, n);
+        if (!rig.userData.forestStatue) models.appearance(rig, n);
         const c = document.createElement("canvas");
         c.width = 512;
         c.height = 96;
@@ -36102,7 +36118,7 @@ void main() {
         ctx.fillText(residentName(n) + (i2 === 0 ? " \xB7 " + tr("guide") : ""), 256, 59, 490);
         const label = new Sprite(new SpriteMaterial({ map: new CanvasTexture(c), depthTest: true }));
         label.scale.set(i2 === 0 ? 3.2 : 2.2, 0.5, 1);
-        label.position.y = 0.8;
+        label.position.y = rig.userData.forestStatue ? 1.52 : 0.8;
         rig.add(label);
         nameLabels.push(label);
       });
